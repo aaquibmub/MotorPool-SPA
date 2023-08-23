@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <app-sidebar></app-sidebar>
+  <div class="content" (click)="hideSidebarSubMenu()">
+    <div class="header">
+      <app-navbar></app-navbar>
+    </div>
+    <div class="page-wrapper" [perfectScrollbar] (click)="hideTopBarMenus()">
+      <div class="page-content-wrapper">
+        <div class="page-content">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+      <div class="footer">
+        <app-footer></app-footer>
+      </div>
+    </div>
+  </div>
+</div>

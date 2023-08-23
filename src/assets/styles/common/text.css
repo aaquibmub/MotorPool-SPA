@@ -1,0 +1,75 @@
+.heading {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.font-size-24 {
+  font-size: 24px !important;
+}
+
+.label-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.orange {
+  background-color: #fba025;
+}
+
+.grey {
+  background-color: #f2f2f2;
+  color: #808b7d !important;
+}
+
+.label-field .field-label {
+  color: var(--text-color);
+  padding-bottom: 16px;
+}
+
+.label-field .value {
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.label-field-vertical {
+  display: flex;
+  flex-direction: row;
+}
+
+.label-field-vertical .field-label {
+  color: var(--text-color);
+  font-weight: normal;
+  padding-bottom: 24px;
+  min-width: 156px;
+}
+
+.label-field-vertical .value {
+  color: var(--text-color);
+  text-align: left;
+  font-weight: bold;
+}
+
+.light-green-color {
+  color: #20d1a8;
+}
+
+.blue-color {
+  color: #1b7cde;
+}
+
+.bg-blue {
+  background-color: rgb(0, 82, 204);
+}
+
+.pink-color {
+  color: #de1b8b;
+}
+
+.font-size-12 {
+  font-size: 12px !important;
+}
+
+.border-grey {
+  border: 1px solid rgb(210, 214, 226) !important;
+}

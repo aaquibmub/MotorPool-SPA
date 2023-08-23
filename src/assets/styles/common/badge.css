@@ -1,0 +1,102 @@
+.done-status {
+  background-color: rgb(29, 190, 91);
+  color: white;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.open-status {
+  background-color: rgba(97, 211, 163, 0.47);
+  color: #20a26c;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+.closed-status {
+  background-color: rgba(211, 97, 167, 0.17);
+  color: #d361a7;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.returned-status {
+  background-color: #d6d4f4;
+  color: #645faf;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.due-status {
+  background-color: #f7e3de;
+  color: #b5563e;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.complete-status {
+  background-color: #ebfff1;
+  color: #0f643a;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.failed-status {
+  background-color: #fa1f2a;
+  color: #fcfdfd;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.in-progress-status {
+  background-color: #3628ff;
+  color: #fcfdfd;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.pending-status {
+  background-color: #fcf3d0;
+  color: #f7ce7c;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.disabled-status {
+  background-color: rgb(210, 215, 255);
+  color: var(--text-color);
+  padding: 8px;
+  font-weight: bold;
+}
+
+.enabled-status {
+  background-color: #fcf3d0;
+  color: #c79530;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.active-status {
+  background-color: #fcf3d0;
+  color: #c79530;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.inactive-status {
+  background-color: #fcf3d0;
+  color: #c79530;
+  padding: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.menu-badge {
+  background-color: var(--red-color);
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 3px 6px;
+  margin-left: 4px;
+}

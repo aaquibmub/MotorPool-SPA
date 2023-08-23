@@ -1,0 +1,98 @@
+<div class="sidebar">
+  <div style="position: relative; height: 100%" [perfectScrollbar]>
+    <ul class="navigation">
+      <li
+        *ngFor="let menuItem of menuItems"
+        [ngClass]="[menuItem.class]"
+        [ngClass]="{ active: selectedMenu?.path === menuItem.path }"
+      >
+        <a
+          [routerLink]="menuItem.class === '' ? [menuItem.path] : null"
+          (click)="setSelectedMenu(menuItem)"
+        >
+          <span class="menu-icon-container">
+            <i class="menu-icon" [ngClass]="[menuItem.icon]"></i>
+          </span>
+          <span class="menu-title">{{ menuItem.title | translate }}</span>
+          <span
+            *ngIf="menuItem.badge != ''"
+            [ngClass]="[menuItem.badgeClass]"
+            >{{ menuItem.badge }}</span
+          >
+        </a>
+        <ng-template #externalLinkBlock>
+          <a [href]="[menuItem.path]" target="_blank">
+            <i [ngClass]="[menuItem.icon]"></i>
+            <span class="menu-title">{{ menuItem.title }}</span>
+            <span
+              *ngIf="menuItem.badge != ''"
+              [ngClass]="[menuItem.badgeClass]"
+              >{{ menuItem.badge }}</span
+            >
+          </a>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Second level menu -->
+<div
+  class="sub-menu"
+  [perfectScrollbar]
+  [@slideInOut]
+  *ngIf="showSubMenu && selectedMenu && selectedMenu?.submenu.length > 0"
+>
+  <div
+    class="menu-section"
+    *ngFor="let menuSectionItem of selectedMenu.submenu"
+  >
+    <div class="section-heading">
+      <a
+        [routerLink]="[menuSectionItem.path]"
+        *ngIf="!menuSectionItem.isExternalLink"
+        (click)="showHideSubMenu(false)"
+      >
+        <i [ngClass]="[menuSectionItem.icon]"></i>
+        <span class="sub-menu-title">{{ menuSectionItem.title }}</span>
+        <span
+          *ngIf="menuSectionItem.badge != ''"
+          [ngClass]="[menuSectionItem.badgeClass]"
+          >{{ menuSectionItem.badge }}</span
+        >
+      </a>
+    </div>
+    <ul>
+      <li
+        *ngFor="let menuSubItem of menuSectionItem.submenu"
+        [routerLinkActive]="menuSubItem.submenu.length > 0 ? '' : 'active'"
+        [ngClass]="[menuSubItem.class]"
+      >
+        <a
+          [routerLink]="[menuSubItem.path]"
+          *ngIf="!menuSubItem.isExternalLink; else externalSubLinkBlock"
+          (click)="showHideSubMenu(false)"
+        >
+          <i [ngClass]="[menuSubItem.icon]"></i>
+          <span class="sub-menu-title">{{ menuSubItem.title }}</span>
+          <span
+            *ngIf="menuSubItem.badge != ''"
+            [ngClass]="[menuSubItem.badgeClass]"
+            >{{ menuSubItem.badge }}</span
+          >
+        </a>
+        <ng-template #externalSubLinkBlock>
+          <a [href]="[menuSubItem.path]" target="_blank">
+            <i [ngClass]="[menuSubItem.icon]"></i>
+            <span class="sub-menu-title">{{ menuSubItem.title }}</span>
+            <span
+              *ngIf="menuSubItem.badge != ''"
+              [ngClass]="[menuSubItem.badgeClass]"
+              >{{ menuSubItem.badge }}</span
+            >
+          </a>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</div>

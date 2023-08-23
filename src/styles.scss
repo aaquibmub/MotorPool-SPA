@@ -1,1 +1,178 @@
 /* You can add global styles to this file, and also import other style files */
+// Set the variables here.
+
+@import "./assets/styles/common/variables.css";
+@import "bootstrap/scss/bootstrap.scss";
+// @import "@progress/kendo-theme-bootstrap/dist/all.scss";
+
+@import "./kendo-custom.css";
+@import "./assets/styles/plugins/_perfect-scrollbar.scss";
+@import "perfect-scrollbar/css/perfect-scrollbar.css";
+
+@import "./assets/styles/auth/common.css";
+
+@import "./assets/styles/common/media-queries/small.css";
+@import "./assets/styles/common/media-queries/medium.css";
+@import "./assets/styles/common/media-queries/large.css";
+@import "./assets/styles/common/badge.css";
+@import "./assets/styles/common/button.css";
+@import "./assets/styles/common/card.css";
+@import "./assets/styles/common/common.css";
+@import "./assets/styles/common/display-flex.css";
+@import "./assets/styles/common/form.css";
+@import "./assets/styles/common/grid.css";
+@import "./assets/styles/common/icon.css";
+@import "./assets/styles/common/margin-padding.css";
+@import "./assets/styles/common/page.css";
+@import "./assets/styles/common/tab.css";
+@import "./assets/styles/common/table.css";
+@import "./assets/styles/common/text.css";
+
+@import "./assets/styles/sales/styles.css";
+@import "./assets/styles/reports/styles.css";
+
+body {
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: #172b4d;
+  letter-spacing: 0.5px;
+  line-height: 16px;
+  // overflow-x: hidden;
+  /* background-color: #f8f9fe; */
+}
+
+.overlay {
+  z-index: 2;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 30px;
+}
+
+.overlay-wrapper {
+  height: 100%;
+  margin: 20px auto;
+  width: 50%;
+  position: relative;
+  left: 0;
+}
+
+.overlay-content {
+  box-shadow: 0 3px 6px rgb(179 179 208 / 65%);
+  border-radius: 5px;
+}
+
+.wrapper {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sidebar {
+  background-color: var(--primary-color);
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+}
+
+.content {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  left: 80px;
+  width: calc(100% - 80px);
+  flex-direction: column;
+}
+
+.header {
+  padding: 8px 42px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  background-color: white;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.page-footer p {
+  text-align: center;
+}
+
+input {
+  background-color: rgb(33, 33, 33);
+  color: white;
+}
+
+.bg-light {
+  background-color: rgb(65, 65, 65) !important;
+}
+.card {
+  border-radius: 3px;
+}
+
+input:focus {
+  outline: none;
+}
+.invalid-feedback {
+  display: block;
+  color: #ff4136;
+}
+
+.k-dialog-content {
+  min-width: 450px;
+  max-width: 500px;
+  overflow: hidden;
+}
+
+// .fa {
+//   color: var(--text-color);
+// }
+.k-checkbox:checked,
+.k-checkbox.k-checked {
+  background-color: var(--primary-color) !important;
+}
+
+.display-none {
+  display: none !important;
+}
+
+.et-dropdown-menu ul {
+  border: 1px solid rgb(210, 214, 226);
+  border-radius: 3px;
+  padding: 16px;
+  background-color: white;
+  box-shadow: 0px 3px 6px rgb(0 0 0 / 16%);
+}
+
+.et-dropdown-menu ul li {
+  list-style: none;
+  padding: 8px;
+}
+.et-dropdown-menu ul li a {
+  text-decoration: none;
+  color: var(--text-color) !important;
+  display: flex;
+}
+
+.et-dropdown-menu ul li:hover {
+  background-color: rgb(244, 246, 250);
+}
+a {
+  text-decoration: none;
+}
+.check-box-column {
+  width: 50px !important;
+}
+.popup-grid {
+  min-height: 100px !important;
+  max-height: 300px !important;
+}

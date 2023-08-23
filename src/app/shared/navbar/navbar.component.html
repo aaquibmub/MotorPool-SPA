@@ -1,0 +1,85 @@
+<header>
+  <div class="topbar">
+    <div class="d-flex"></div>
+    <div class="right">
+      <span
+        class="nav-bar-icon"
+        *ngIf="showHideExpiryIcon"
+        (click)="showExpiryPopup()"
+        >Expires in {{ remainingDays }}</span
+      >
+      <span class="nav-bar-icon" (click)="toggleNotificationTicker()">
+        <i class="topbar-icon notification-icon"></i>
+        <span *ngIf="notifications?.length > 0" class="has-notification"></span>
+      </span>
+      <span class="nav-bar-icon" (click)="toggleSettingsMenu()">
+        <i class="topbar-icon setting-icon"></i
+      ></span>
+      <div class="settings-menu et-dropdown-menu" *ngIf="showSettingsMenu">
+        <ul>
+          <li>
+            <a
+              routerLink="/config/cash-register"
+              (click)="showHideSettingsMenu(false)"
+              >Cash Register</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/config/data-import"
+              (click)="showHideSettingsMenu(false)"
+              >Data Imported</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/setting/global"
+              (click)="showHideSettingsMenu(false)"
+              >Settings</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/inventory/promotion/list"
+              (click)="showHideSettingsMenu(false)"
+              >Discounts and Promotions</a
+            >
+          </li>
+        </ul>
+      </div>
+      <span class="user-initials" (click)="toggleUserMenu()">FH</span>
+      <div class="user-menu et-dropdown-menu" *ngIf="showUserMenu">
+        <ul>
+          <li>
+            <a [routerLink]="'home'" (click)="showHideUserMenu(false)"
+              >Profile Settings</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="'home'" (click)="showHideUserMenu(false)"
+              >Accounts</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="'home'" (click)="showHideUserMenu(false)"
+              >Subscriptions</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="'home'" (click)="showHideUserMenu(false)"
+              >Lock Screen</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="'home'" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+      <!-- <span>Logout</span> -->
+    </div>
+  </div>
+  <app-notification-ticker
+    *ngIf="toggleTicker === true"
+    [notifications]="notifications"
+  ></app-notification-ticker>
+</header>

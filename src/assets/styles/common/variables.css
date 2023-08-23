@@ -1,0 +1,17 @@
+:root {
+  --primary-color: rgb(0, 82, 204);
+  --primary-color-hover: rgb(16, 102, 229);
+  --orange-color: #f7931e;
+  --red-color: rgb(255, 78, 78);
+  --green-color: rgb(29, 190, 91);
+  --text-color: rgb(23, 43, 77);
+  --text-light-color: rgb(107, 119, 137);
+  --light-grey-color: rgb(242, 243, 246);
+
+  --background-light-color: rgb(249, 250, 252);
+
+  --border-color: rgb(201, 217, 232);
+  --border-color-1: rgb(210, 215, 224);
+
+  --font-family: "Helvetica Neue";
+}

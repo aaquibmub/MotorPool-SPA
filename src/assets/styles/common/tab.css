@@ -1,0 +1,133 @@
+.tab {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.tab-items {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.tab-item {
+  padding: 10px;
+  border-bottom: 1px solid;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.tab .active {
+  background-color: #fafafa;
+}
+
+.tab-content {
+  padding-top: 0px;
+}
+
+.tab-left {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.tab-left-items {
+  display: flex;
+  justify-content: left;
+  border-bottom: 1px solid rgba(223, 227, 239, 100);
+}
+
+.tab-left-item {
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.tab-left-items a {
+  text-decoration: none;
+  color: var(--text-color) !important;
+}
+
+.tab-left .active {
+  border-bottom: 4px solid var(--primary-color);
+}
+
+.tab-vertical {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  flex-direction: row;
+}
+
+.tab-vertical-items {
+  display: flex;
+  justify-content: left;
+  /* border-bottom: 1px solid rgba(223, 227, 239, 100); */
+  flex-direction: column;
+  flex: 1;
+}
+
+.tab-vertical-item {
+  padding: 16px 40px 16px 0px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tab-vertical-items a {
+  text-decoration: none;
+  color: var(--text-color) !important;
+}
+
+.tab-vertical .active {
+  font-weight: bold;
+  color: var(--primary-color) !important;
+  /* border-bottom: 4px solid var(--primary-color); */
+}
+
+.tab-vertical-content {
+  flex: 4;
+}
+
+.steps {
+  margin-left: 25%;
+}
+
+.step {
+  float: left;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+}
+
+.step .circle {
+  float: left;
+  border-radius: 50%;
+  height: 20px;
+  color: white;
+  width: 20px;
+  padding-left: 6px;
+  font-size: 12px;
+}
+
+.step .line {
+  float: left;
+  width: 30px;
+}
+
+.step .line-15 {
+  float: left;
+  width: 15px;
+}
+
+.step-line {
+  float: left;
+  width: 200px;
+}

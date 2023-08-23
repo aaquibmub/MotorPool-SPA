@@ -1,0 +1,155 @@
+.btn {
+  padding: 11px 24px !important;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.btn-check:focus + .btn,
+.btn:focus {
+  box-shadow: none !important;
+}
+
+.btn.btn-primary {
+  background-color: var(--primary-color);
+  border: 1px solid rgb(112, 112, 112);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color-hover) !important;
+}
+
+.btn-primary:active {
+  border: none !important;
+  border-color: transparent;
+}
+
+.btn.btn-default {
+  border: none;
+  background: rgb(242, 243, 246);
+  color: var(--text-color) !important;
+  border-radius: 3px !important;
+}
+
+.btn-default:active {
+  border: none !important;
+  border-color: transparent;
+}
+
+.btn.btn-light {
+  border: 1px solid rgb(210, 215, 224);
+  background-color: rgb(244, 246, 250);
+  color: var(--text-color) !important;
+  border-radius: 5px !important;
+}
+
+.btn-light:active {
+  border: none !important;
+  border-color: transparent;
+}
+.btn-light:hover {
+  border: none !important;
+  border-color: transparent;
+}
+
+.btn-green {
+  background-color: rgb(0, 215, 100);
+  border: 1px solid rgb(194, 197, 206);
+  border-radius: 5px;
+  color: rgba(49, 48, 48, 1);
+}
+
+.btn-transparent {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  color: white;
+}
+.btn-transparent:hover {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  color: white;
+}
+
+a {
+  color: rgb(0, 82, 204) !important;
+  cursor: pointer;
+}
+
+.btn.btn-green {
+  background-color: var(--green-color);
+  color: white !important;
+  border: none;
+}
+
+.btn-green:hover {
+  background-color: var(--green-color);
+  color: white !important;
+  border: none;
+}
+
+.btn.btn-blue-transparent {
+  border: none;
+  background: transparent;
+  color: rgb(16, 102, 229) !important;
+}
+
+.btn.btn-blue-transparent:hover {
+  border: none;
+}
+
+.btn.btn-blue-transparent:active {
+  border: none;
+}
+
+.btn-orange {
+  color: #f7931e !important;
+  background-color: white !important;
+}
+
+.btn-orange:hover {
+  background-color: white !important;
+  color: #f7931e !important;
+}
+
+.btn-orange:active {
+  background-color: white !important;
+  color: #f7931e !important;
+}
+
+.btn-bg-orange {
+  color: #fff !important;
+  background-color: #f7931e !important;
+}
+
+.btn-bg-orange:hover {
+  background-color: #f7931e !important;
+  color: #fff !important;
+}
+
+.btn-bg-orange:active {
+  background-color: #f7931e !important;
+  color: #fff !important;
+}
+
+.btn-add-new-item {
+  background-image: url("./../../icons/btn-add-new-item.png");
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 136px;
+  display: block;
+}
+
+.btn-ship-this-order {
+  background-image: url("./../../icons/btn-ship-this-order.png");
+  background-repeat: no-repeat;
+  height: 20px;
+  width: 152px;
+  display: block;
+}
+
+.grey-link {
+  color: rgb(107, 119, 137) !important;
+}

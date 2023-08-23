@@ -1,0 +1,14 @@
+@media (max-width: 786px) {
+  .toggle-icon {
+    display: block !important;
+  }
+
+  .sm-hide {
+    display: none !important;
+  }
+
+  .grid-template-dropdown {
+    width: 300px !important;
+    overflow: auto;
+  }
+}

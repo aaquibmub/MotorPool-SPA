@@ -1,0 +1,117 @@
+/******************** margin - top **********************/
+
+.mt-24 {
+  margin-top: 24px !important;
+}
+
+.mt-40 {
+  margin-top: 40px !important;
+}
+
+.mt-72 {
+  margin-top: 72px !important;
+}
+.mt-90 {
+  margin-top: 90px !important;
+}
+
+.mt-80 {
+  margin-top: 80px !important;
+}
+
+/******************** margin - bottom **********************/
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mb-4 {
+  margin-bottom: 4px !important;
+}
+
+.mb-8 {
+  margin-bottom: 8px !important;
+}
+
+.mb-16 {
+  margin-bottom: 16px !important;
+}
+
+.mb-32 {
+  margin-bottom: 32px !important;
+}
+
+.mb-40 {
+  margin-bottom: 40px !important;
+}
+
+.mb-56 {
+  margin-bottom: 56px !important;
+}
+
+.mb-72 {
+  margin-bottom: 72px !important;
+}
+
+.mb-80 {
+  margin-bottom: 80px !important;
+}
+
+.mb-90 {
+  margin-bottom: 90px !important;
+}
+
+/******************** margin - left **********************/
+
+.ml-8 {
+  margin-left: 8px !important;
+}
+
+.ml-16 {
+  margin-left: 16px !important;
+}
+
+/******************** margin - right **********************/
+
+.mr-16 {
+  margin-right: 16px !important;
+}
+
+/****************** padding **********************/
+@media (max-width: 786px) {
+  .sm-padding-10 {
+    padding: 10px !important;
+  }
+}
+
+.p-24 {
+  padding: 24px !important;
+}
+
+/******************* padding-top ********************/
+
+.pt-16 {
+  padding-top: 16px !important;
+}
+
+/******************* padding-bottom ********************/
+
+.pb-16 {
+  padding-bottom: 16px !important;
+}
+
+/******************* padding-left ********************/
+
+.pl-16 {
+  padding-left: 16px !important;
+}
+
+/******************* padding-right ********************/
+
+.pr-16 {
+  padding-right: 16px !important;
+}
+
+.pr-24 {
+  padding-right: 24px !important;
+}

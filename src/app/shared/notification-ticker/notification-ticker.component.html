@@ -1,0 +1,31 @@
+<div class="notification-panel" *ngIf="notifications">
+  <div class="notification-header">
+    <h2>Notifications</h2>
+    <a>Mark all as read</a>
+  </div>
+  <div class="notification-body scrollable">
+    <div
+      class="notification-item clearfix"
+      *ngFor="let activity of notifications"
+      [ngClass]="{ unread: !activity.seen }"
+    >
+      <div class="left">
+        <div class="message">
+          {{ activity.message }}
+        </div>
+        <div class="activity-by">
+          {{ activity.activityBy }}
+        </div>
+      </div>
+      <div class="right">
+        {{ activity.timeSince }}
+      </div>
+    </div>
+  </div>
+  <div class="notification-footer text-center">
+    <a href="/reports/logs/activity" class="">View all notifications</a>
+    <a class="portlet-refresh text-black pull-right" href="#">
+      <i class="pg-refresh_new"></i>
+    </a>
+  </div>
+</div>

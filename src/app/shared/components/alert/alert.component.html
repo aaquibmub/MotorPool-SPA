@@ -1,0 +1,19 @@
+<kendo-dialog (close)="close()">
+  <div class="title" *ngIf="settings.title">{{ settings.title }}</div>
+  <div class="icon">
+    <i
+      class="fa"
+      [ngClass]="{
+        'fa-success': type === 'success',
+        'fa-ban': type === 'error',
+        'fa-warning': type === 'warning'
+      }"
+    ></i>
+  </div>
+  <div style="text-align: center; margin: 30px">
+    <h4>{{ settings.content }}</h4>
+  </div>
+  <div style="text-align: center; margin: 15px">
+    <button class="btn btn-primary" (click)="confirm()">Ok</button>
+  </div>
+</kendo-dialog>

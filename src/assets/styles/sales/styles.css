@@ -1,0 +1,243 @@
+.searched-product-list {
+  position: absolute;
+  z-index: 1000;
+  width: 500px;
+  height: 300px;
+  overflow: auto;
+}
+
+.search-product-item {
+  cursor: pointer;
+}
+
+.totals {
+  float: right;
+  width: 250px;
+}
+.bottom-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.grand-total {
+  font-size: 16px;
+}
+
+.container-center {
+  margin: auto;
+  width: 50%;
+}
+
+.container-90 {
+  margin: auto;
+  width: 90%;
+}
+
+.total-payable-container {
+  padding: 0px 0px 20px 0px;
+}
+
+.total-payable-container .label {
+  text-align: left;
+  padding: 10px 0px;
+  font-size: 14px;
+  background-color: transparent;
+  font-weight: normal;
+}
+
+.total-payable-container .value {
+  text-align: center;
+  background-color: rgb(253, 253, 253);
+  font-size: 37px;
+  border: 1px solid rgb(181, 184, 195);
+}
+
+.checkout-dropdown {
+  height: 50px;
+}
+
+.checkout-dropdown .k-dropdown-wrap {
+  height: 50px !important;
+  background-color: rgb(236, 238, 247) !important;
+}
+
+.checkout-dropdown .k-icon {
+  font-size: 26px;
+}
+
+.checkout-dropdown .k-input {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(79, 86, 116);
+  padding: 5px 15px;
+}
+
+.checkout-dropdown .k-select {
+  padding: 0 15px;
+}
+
+.checkout-dropdown-popup .k-list .k-item {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.card-pay {
+  border-radius: 0 0px 5px 5px;
+  border: 1px solid rgb(194, 197, 206);
+}
+
+.card-pay .card-block {
+  padding: 20px !important;
+}
+
+.field .label {
+  text-align: left;
+  padding: 10px 0px;
+  font-size: 12px;
+  background-color: transparent;
+}
+
+.field .value {
+  text-align: center;
+  background-color: rgb(253, 253, 253);
+  font-size: 32px;
+  border: 1px solid rgb(181, 184, 195);
+}
+
+.field .input {
+  font-size: 32px;
+  text-align: center;
+  width: 100%;
+  height: 60px;
+  padding: 5px;
+  background-color: rgb(253, 253, 253);
+  border: 1px solid rgb(181, 184, 195);
+  color: rgb(79, 86, 116);
+}
+
+.field .input:read-only {
+  background-color: rgb(244, 245, 252);
+}
+
+.card-split .card-header {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.card-split .field .label {
+  font-size: 10px;
+}
+
+.card-split .field .value {
+  font-size: 18px;
+}
+
+.card-split .field .input {
+  font-size: 18px;
+  height: 45px;
+}
+
+.single-button .btn {
+  font-size: 29px;
+  font-weight: bold;
+  width: 100%;
+  margin: 25px 0px 0 0;
+  padding: 15px;
+}
+
+.bottom-button .btn {
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  margin: 5px 0px 0px 0px;
+}
+
+/*.bottom-button .btn:hover {
+      color: white !important;
+  }*/
+
+.payment-container {
+  padding: 20px 0 0 0;
+}
+
+.payment-content {
+  background-color: rgb(49, 48, 48);
+  max-height: 220px;
+  overflow: auto;
+}
+
+.field .input::placeholder {
+  color: rgb(130, 133, 145);
+  font-weight: normal;
+}
+
+.card-dark {
+  background-color: rgb(65, 65, 65);
+  margin: 15px 25px;
+  color: white;
+}
+
+.card-dark .card-header {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.card-dark .field .input {
+  background-color: rgb(49, 48, 48);
+}
+
+.card-print-receipt {
+  background-color: rgb(49, 48, 48);
+  color: white;
+}
+
+.container-60 {
+  margin: auto;
+  width: 60%;
+}
+
+.btn-send-receipt {
+  width: 100%;
+  margin: 40px 0px;
+  height: 50px;
+  background-color: rgb(33, 33, 33);
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.btn-send-receipt i {
+  float: left;
+  margin: 5px;
+}
+
+.btn-print-receipt {
+  width: 100%;
+  height: 50px;
+  margin: 40px 0;
+  color: white;
+  background-color: rgb(49, 48, 48);
+  border: 1px solid rgb(130, 133, 145);
+  font-size: 14px;
+}
+
+.btn-print-receipt i {
+  margin-right: 5px;
+}
+
+.btn-close {
+  color: white;
+  width: 100%;
+  background-color: rgb(108, 108, 108);
+  font-size: 24px;
+  font-weight: bold;
+  height: 55px;
+  text-transform: uppercase;
+  margin: 15px 0;
+}

@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+  .center-content {
+    width: 320px !important;
+  }
+}
+
+.center-content {
+  height: 100%;
+  margin: 10px auto;
+  width: 400px;
+}

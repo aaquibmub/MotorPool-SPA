@@ -1,0 +1,190 @@
+.fa {
+  margin-right: 8px !important;
+}
+
+.topbar-icon {
+  display: block;
+  height: 24px;
+  width: 24px;
+}
+
+.notification-icon {
+  background-image: url("./../../icons/navbar/notifications.png");
+  background-repeat: no-repeat;
+}
+
+.setting-icon {
+  background-image: url("./../../icons/navbar/setting.png");
+  background-repeat: no-repeat;
+}
+
+.menu-icon {
+  display: block;
+  height: 32px;
+  width: 48px;
+}
+
+.home-icon {
+  background-image: url("./../../icons/menu/home-white.png");
+  background-repeat: no-repeat;
+}
+
+.navigation li.active .home-icon {
+  background-image: url("./../../../assets/icons/menu/home-blue.png");
+}
+
+.dashboard-icon {
+  background-image: url("./../../icons/menu/dsahboard-white.png");
+  background-repeat: no-repeat;
+}
+
+.navigation li.active .dashboard-icon {
+  background-image: url("./../../../assets/icons/menu/dashboard-blue.png");
+}
+
+.sales-icon {
+  background-image: url("./../../icons/menu/sales-white.png");
+  background-repeat: no-repeat;
+}
+
+.navigation li.active .sales-icon {
+  background-image: url("./../../../assets/icons/menu/sales-blue.png");
+}
+
+.purchases-icon {
+  background-image: url("./../../icons/menu/purchases-white.png");
+  background-repeat: no-repeat;
+}
+
+.navigation li.active .purchases-icon {
+  background-image: url("./../../../assets/icons/menu/purchases-blue.png");
+}
+
+.inventory-icon {
+  background-image: url("./../../icons/menu/inventory-white.png");
+  background-repeat: no-repeat;
+}
+
+.navigation li.active .inventory-icon {
+  background-image: url("./../../../assets/icons/menu/inventory-blue.png");
+}
+
+.shipments-icon {
+  background-image: url("./../../icons/menu/shipments-white.png");
+  background-repeat: no-repeat;
+}
+
+.navigation li.active .shipments-icon {
+  background-image: url("./../../../assets/icons/menu/shipments-blue.png");
+}
+
+.finance-icon {
+  background-image: url("./../../icons/menu/finance-white.png");
+  background-repeat: no-repeat;
+}
+
+.navigation li.active .finance-icon {
+  background-image: url("./../../../assets/icons/menu/finance-blue.png");
+}
+
+.reports-icon {
+  background-image: url("./../../icons/menu/reports-white.png");
+  background-repeat: no-repeat;
+}
+
+.navigation li.active .reports-icon {
+  background-image: url("./../../../assets/icons/menu/reports-blue.png");
+}
+
+.quick-add-icon {
+  margin-left: 10px;
+  font-size: 22px;
+  margin-top: 9px;
+  cursor: pointer;
+  position: absolute;
+}
+
+.k-dropdown-wrap .quick-add-icon {
+  display: none;
+}
+
+.k-list-optionlabel .quick-add-icon {
+  margin-top: 2px !important;
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  font-size: inherit;
+}
+
+.k-selected .quick-add-icon {
+  color: white !important;
+}
+
+.action-column-icon {
+  display: block;
+  height: 14px;
+  width: 10px;
+  background-image: url("./../../icons/grid/ico-action-table.png");
+  background-repeat: no-repeat;
+  padding-bottom: 20px;
+}
+
+.action-icon {
+  display: block;
+  height: 24px;
+  width: 8px;
+  background-image: url("./../../icons/grid/ico-action.png");
+  background-repeat: no-repeat;
+}
+
+.download-icon {
+  display: block;
+  height: 17px;
+  width: 17px;
+  background-image: url("./../../icons/grid/ico-download.png");
+  background-repeat: no-repeat;
+}
+
+.grid-column-layout-icon {
+  display: block;
+  height: 24px;
+  width: 24px;
+  background-image: url("./../../icons/grid/ico-layout.png");
+  background-repeat: no-repeat;
+}
+
+.delete-icon {
+  cursor: pointer;
+}
+
+.delete-icon .fa-trash {
+  color: rgb(107, 119, 137);
+  font-size: 16px;
+  padding: 16px 0;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.bin-icon {
+  background-image: url("./../../icons/bin.png");
+  background-repeat: no-repeat;
+  height: 16px;
+  width: 16px;
+  display: block;
+}
+
+.square-logo {
+  width: 100px;
+  height: 25px;
+  background-image: url("./../../images/settings/integrations/logo-square.png");
+  background-repeat: no-repeat;
+}
+
+.smartpay-logo {
+  width: 115px;
+  height: 25px;
+  background-image: url("./../../images/settings/integrations/logo-smartpay.png");
+  background-repeat: no-repeat;
+}

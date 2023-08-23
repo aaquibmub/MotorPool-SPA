@@ -1,0 +1,36 @@
+.table-responsive {
+  width: 100%;
+}
+
+.table-grey {
+  background-color: rgb(244, 246, 250);
+  border: 1px solid rgb(242, 243, 246);
+  border-radius: 5px;
+}
+
+.table > th,
+tr {
+  border-style: hidden !important;
+}
+
+.table th {
+  padding-top: 16px !important;
+  padding-left: 16px !important;
+}
+
+.table td {
+  padding-top: 16px !important;
+  padding-left: 16px !important;
+}
+
+.table tr .plain-label {
+  padding: 16px !important;
+}
+
+.table .form-group {
+  margin-bottom: 0px !important;
+}
+
+.table .form-group .control {
+  min-width: 150px !important;
+}

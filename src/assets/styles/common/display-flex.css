@@ -1,0 +1,45 @@
+.display-flex {
+  display: flex;
+}
+
+.display-flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-4 {
+  flex: 4;
+}
+
+.flex-5 {
+  flex: 5;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.justify-space-between {
+  justify-content: space-between !important;
+}
+
+.justify-right {
+  justify-content: right !important;
+}

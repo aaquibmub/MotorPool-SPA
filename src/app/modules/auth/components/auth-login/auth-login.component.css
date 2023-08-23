@@ -1,0 +1,32 @@
+@media (max-width: 1024px) {
+  .sign-in-content {
+    flex-direction: column !important;
+  }
+
+  .left {
+    display: none !important;
+  }
+}
+
+.sign-in-content {
+  display: flex;
+  height: 100%;
+}
+
+.left {
+  flex-grow: 2;
+  background-image: url(/assets/images/auth/side-image.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.right {
+  flex: 1;
+  background: white;
+  overflow: auto;
+}
+
+p {
+  margin-bottom: 16px;
+  font-size: 14px;
+}

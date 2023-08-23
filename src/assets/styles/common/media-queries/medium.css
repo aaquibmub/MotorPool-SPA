@@ -1,0 +1,14 @@
+@media (min-width: 1024px) {
+  .toggle-icon {
+    display: block !important;
+  }
+
+  /* .form-group .control {
+    min-width: 120px !important;
+  } */
+
+  .grid-template-dropdown {
+    width: 500px !important;
+    overflow: auto;
+  }
+}

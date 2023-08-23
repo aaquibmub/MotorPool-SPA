@@ -1,0 +1,62 @@
+.toggle-icon {
+  margin: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+.logo {
+  margin: 5px;
+}
+
+.nav-bar-icon {
+  margin-right: 16px;
+  margin-top: 8px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.user-initials {
+  border: 3px solid var(--primary-color);
+  background-color: #e8f1ff;
+  border-radius: 50%;
+  color: var(--primary-color);
+  font-weight: bold;
+  height: 36px;
+  width: 36px;
+  padding: 8px 3px 6.16px 5.16px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.right {
+  display: flex;
+}
+
+.user-menu {
+  position: absolute;
+  height: 198px;
+  width: 200px;
+  right: 50px;
+  top: 60px;
+  z-index: 2;
+}
+
+.settings-menu {
+  position: absolute;
+  height: 198px;
+  width: 200px;
+  right: 100px;
+  top: 55px;
+  z-index: 2;
+}
+
+.has-notification {
+  position: absolute;
+  background: rgb(247, 22, 22);
+  display: block;
+  border-radius: 50%;
+  top: 20px;
+  right: 132px;
+  padding: 5px;
+}

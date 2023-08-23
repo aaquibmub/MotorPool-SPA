@@ -1,0 +1,242 @@
+.form-wrapper {
+  display: flex;
+}
+
+.form-wrapper .form-main {
+  flex: 3;
+}
+
+.form-wrapper .form-helper {
+  flex: 2;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-section {
+  display: block;
+  padding-bottom: 32px;
+}
+
+.form-section .section-header {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.form-section .section-body {
+  padding-top: 16px;
+  display: flex;
+}
+
+.form-section .section-body .description {
+  flex: 3;
+  font-size: 12px;
+  color: var(--text-light-color);
+  padding-right: 15%;
+}
+
+.form-section .section-body .fields {
+  flex: 5;
+}
+
+.form-section .section-body .fields .form-group {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.fields .helper {
+  text-align: right;
+  font-size: 12px;
+  color: var(--text-light-color);
+  padding: 0;
+  max-width: 460px;
+}
+.fields .helper label {
+  margin: 0;
+}
+
+.form-group .label {
+  flex: 1;
+  padding: 8px;
+  min-width: 170px;
+  padding-top: 16px;
+}
+
+.form-group .control {
+  flex: 8;
+  padding: 5px 0px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  font: var(--font-family) !important;
+  font-size: 14px !important;
+  /* max-width: 260px; */
+}
+
+.form-group .control .control-helper {
+  color: rgb(62, 70, 82);
+  padding-top: 8px;
+  max-width: 400px;
+}
+
+.form-group .control .control-helper-light {
+  color: rgb(107, 119, 137);
+  padding-top: 8px;
+  max-width: 400px;
+}
+
+.form-group .control .split-input {
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px;
+}
+
+.form-group .icon {
+  flex: 1;
+  min-width: 40px;
+  padding-top: 16px;
+  padding-left: 8px;
+  text-align: right;
+  color: var(--primary-color);
+}
+
+.form-group .value {
+  flex: 2;
+  padding: 5px 0px;
+  padding-top: 16px;
+}
+
+.form-group .control > label {
+  padding: 5px 0px;
+  padding-top: 12px;
+}
+
+.form-group .control .with-icon {
+  display: flex;
+  flex: 1;
+}
+
+.with-icon .icon {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  background-color: var(--background-light-color);
+  border: 1px solid var(--border-color-1);
+  padding-top: 10px;
+}
+.with-icon .field {
+  flex: 3;
+}
+
+.with-icon .form-control {
+  min-width: 100px !important;
+}
+
+.form-group .control .form-control {
+  height: 38px;
+  float: right;
+  background-color: var(--background-light-color);
+  border: 1px solid var(--border-color-1);
+  border-radius: 3px;
+  max-width: 300px;
+}
+
+.form-group .control .form-control .k-input-button {
+  background-color: var(--background-light-color) !important;
+  border: none;
+}
+
+.form-group .control .form-text-area {
+  height: 100px !important;
+}
+
+.form-control {
+  background-color: white;
+  border: none;
+  height: 48px;
+  border-radius: 5px;
+  border: 2px solid #e0e0e0;
+  font: var(--font-family) !important;
+  font-size: 14px !important;
+}
+.form-control:focus {
+  background-color: white;
+  border: none;
+  height: 48px;
+  border-radius: 5px;
+  border: 2px solid #e0e0e0;
+  box-shadow: none !important;
+  outline: none;
+}
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: white;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+  opacity: 0.7;
+}
+
+.form-control::placeholder {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.form-control .k-input-spinner {
+  display: none !important;
+}
+
+/* input[type="number"] {
+  text-align: right;
+  padding: 0px;
+} */
+
+.form-group .checkbox-control {
+  padding: 16px;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.k-chip-solid-base {
+  border-color: transparent !important;
+  color: white !important;
+  background-color: var(--primary-color) !important;
+  font-size: 14px !important;
+  font-weight: bold;
+}
+
+.regular-radiobutton {
+  transform: scale(1) !important;
+}
+
+.regular-radiobutton:checked {
+  border-color: var(--primary-color);
+}
+
+.k-radio:checked,
+.k-radio.k-checked {
+  border-color: var(--primary-color) !important;
+  background-color: var(--primary-color) !important;
+}
+
+.radio-block {
+  display: block;
+  margin-top: 15px;
+  min-height: 20px;
+}
+.radio-block .radio-control {
+  display: block;
+  float: left;
+  width: 15%;
+}
+
+.radio-block .radio-label {
+  display: block;
+  float: right;
+  width: 85%;
+}
+
+.overlay-content .form-group .control {
+  max-width: none !important;
+}
