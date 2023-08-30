@@ -11,12 +11,12 @@
 .navigation li {
   position: relative;
   display: block;
-  height: 80px;
+  height: 65px;
   padding: 8px;
 }
 
 .navigation li.active {
-  background-color: white;
+  background-color: var(--primary-color-hover);
 }
 
 .navigation li > a {
@@ -29,13 +29,14 @@
   cursor: pointer;
 }
 
-.navigation li > a:hover {
+.navigation li:hover {
   text-decoration: none;
+  background-color: var(--primary-color-hover);
 }
 
 .navigation li.active > a {
-  background-color: white;
-  color: var(--primary-color) !important;
+  background-color: var(--primary-color-hover);
+  color: white !important;
 }
 
 .navigation .menu-icon-container {
@@ -85,4 +86,5 @@
 
 .menu-section a {
   text-decoration: none;
+  color: var(--primary-color) !important;
 }

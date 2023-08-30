@@ -1,6 +1,6 @@
 :root {
-  --primary-color: rgb(0, 82, 204);
-  --primary-color-hover: rgb(16, 102, 229);
+  --primary-color: #ff6926;
+  --primary-color-hover: #dd481c;
   --orange-color: #f7931e;
   --red-color: rgb(255, 78, 78);
   --green-color: rgb(29, 190, 91);

@@ -25,75 +25,23 @@
 }
 
 .home-icon {
-  background-image: url("./../../icons/menu/home-white.png");
+  background-image: url("./../../icons/menu/ico-dashboard.png");
   background-repeat: no-repeat;
 }
 
-.navigation li.active .home-icon {
-  background-image: url("./../../../assets/icons/menu/home-blue.png");
-}
-
-.dashboard-icon {
-  background-image: url("./../../icons/menu/dsahboard-white.png");
+.vehicle-icon {
+  background-image: url("./../../icons/menu/ico-vehicle.png");
   background-repeat: no-repeat;
 }
 
-.navigation li.active .dashboard-icon {
-  background-image: url("./../../../assets/icons/menu/dashboard-blue.png");
-}
-
-.sales-icon {
-  background-image: url("./../../icons/menu/sales-white.png");
+.trip-icon {
+  background-image: url("./../../icons/menu/ico-.png");
   background-repeat: no-repeat;
 }
 
-.navigation li.active .sales-icon {
-  background-image: url("./../../../assets/icons/menu/sales-blue.png");
-}
-
-.purchases-icon {
-  background-image: url("./../../icons/menu/purchases-white.png");
+.driver-icon {
+  background-image: url("./../../icons/menu/ico-driver.png");
   background-repeat: no-repeat;
-}
-
-.navigation li.active .purchases-icon {
-  background-image: url("./../../../assets/icons/menu/purchases-blue.png");
-}
-
-.inventory-icon {
-  background-image: url("./../../icons/menu/inventory-white.png");
-  background-repeat: no-repeat;
-}
-
-.navigation li.active .inventory-icon {
-  background-image: url("./../../../assets/icons/menu/inventory-blue.png");
-}
-
-.shipments-icon {
-  background-image: url("./../../icons/menu/shipments-white.png");
-  background-repeat: no-repeat;
-}
-
-.navigation li.active .shipments-icon {
-  background-image: url("./../../../assets/icons/menu/shipments-blue.png");
-}
-
-.finance-icon {
-  background-image: url("./../../icons/menu/finance-white.png");
-  background-repeat: no-repeat;
-}
-
-.navigation li.active .finance-icon {
-  background-image: url("./../../../assets/icons/menu/finance-blue.png");
-}
-
-.reports-icon {
-  background-image: url("./../../icons/menu/reports-white.png");
-  background-repeat: no-repeat;
-}
-
-.navigation li.active .reports-icon {
-  background-image: url("./../../../assets/icons/menu/reports-blue.png");
 }
 
 .quick-add-icon {
