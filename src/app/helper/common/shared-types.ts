@@ -5,6 +5,23 @@ export enum UserRoleType {
   Maintainance = 30
 }
 
+export enum Gender {
+  Male = 10,
+  Female = 20
+}
+
+export enum OPM {
+
+}
+
+export enum TripRoute {
+
+}
+
+export enum TripDestination {
+
+}
+
 export enum ResponseAction {
 
 }

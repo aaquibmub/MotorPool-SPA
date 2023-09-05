@@ -1,0 +1,38 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>{{ pageTitle }}</span>
+    </div>
+    <div class="page-breadcrum">
+      <span>Trip Bookings </span> / <span> {{ pageTitle }}</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="tab-left">
+      <div class="tab-left-items">
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/trips/bookings/all"
+          >All Trip Bookings</a
+        >
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/trips/bookings/scheduled"
+          >Scheduled Bookings</a
+        >
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/trips/bookings/start-now"
+          >Start Now Bookings</a
+        >
+      </div>
+      <div class="tab-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

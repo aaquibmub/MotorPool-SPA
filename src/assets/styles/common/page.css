@@ -12,6 +12,8 @@
 
 .page-content-wrapper {
   height: 100%;
+  margin: auto;
+  width: 1024px;
 }
 
 .page-actions {

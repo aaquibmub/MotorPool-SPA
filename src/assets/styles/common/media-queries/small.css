@@ -7,6 +7,10 @@
     display: none !important;
   }
 
+  .page-content-wrapper {
+    width: 768px !important;
+  }
+
   .grid-template-dropdown {
     width: 300px !important;
     overflow: auto;

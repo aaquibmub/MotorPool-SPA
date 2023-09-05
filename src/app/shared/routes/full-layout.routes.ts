@@ -17,4 +17,10 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => import('../../modules/home/home.module')
       .then(m => m.HomeModule)
   },
+  {
+    path: 'trips',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../modules/trip/trip.module')
+      .then(m => m.TripModule)
+  },
 ];

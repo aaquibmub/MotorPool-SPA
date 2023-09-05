@@ -56,4 +56,26 @@ export class AlertService {
       content: msg
     });
   }
+
+  getConfirmDialougeConfig(
+    title: string, message: string, primaryAction?: string): DialogSettings {
+    return {
+      title,
+      content: message,
+      actions: [{ text: primaryAction, primary: true }, { text: 'Cancel' }],
+      width: 450,
+      height: 200,
+      minWidth: 250,
+    };
+  }
+  getAlertDialougeConfig(title: string, message: string): DialogSettings {
+    return {
+      title,
+      content: message,
+      actions: [{ text: 'OK', primary: true }],
+      width: 450,
+      height: 200,
+      minWidth: 250,
+    };
+  }
 }

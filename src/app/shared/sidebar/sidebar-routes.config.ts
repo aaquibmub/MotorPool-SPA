@@ -162,11 +162,55 @@ export const ROUTES: RouteInfo[] = [
     path: '/trips',
     title: 'Trips',
     icon: 'trip-icon',
-    class: '',
+    class: 'sub',
     badge: '',
     badgeClass: '',
     isExternalLink: false,
-    submenu: []
+    submenu: [
+
+      // trip booking
+      {
+        path: '/trips/bookings/',
+        title: 'Trip Booking',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            path: '/trips/booking/new-scheduled',
+            title: 'New Scheduled Booking',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/trips/bookings/scheduled',
+            title: 'Scheduled Bookings',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/trips/bookings/start-now',
+            title: 'Start Now Bookings',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
+    ]
   },
 
   // driver

@@ -1,0 +1,153 @@
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <div class="page-actions">
+    <!-- <button type="button" (click)="reset()">Clear</button> -->
+    <!-- <div class="help">
+      <span class="need-help">Need Help?</span>
+      <div class="icon">?</div>
+    </div> -->
+  </div>
+  <div class="page-area">
+    <div class="page-header">
+      <div class="page-title">
+        <span>{{ utilityService.language.scheduledTrip | translate }}</span>
+      </div>
+    </div>
+    <div class="page-body">
+      <!-- Booking Info -->
+      <div class="form-section">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputBookedBy">{{
+                  utilityService.language.bookedBy | translate
+                }}</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="bookedBy"
+                  [value]="model.bookedBy?.text"
+                  readonly
+                  id=""
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputApprovedBy">Approved By</label>
+              </div>
+              <div class="control">
+                <kendo-dropdownlist
+                  class="form-control"
+                  textField="text"
+                  valueField="value"
+                  [filterable]="true"
+                  [defaultItem]="utilityService.dropdownDefaultItem"
+                  (filterChange)="handleApproverFilter($event)"
+                  [data]="approverList"
+                  formControlName="approvedBy"
+                >
+                  <ng-template kendoDropDownListItemTemplate let-dataItem>
+                    <span>{{ dataItem.text }}</span>
+                  </ng-template>
+                </kendo-dropdownlist>
+                <div
+                  *ngIf="
+                    !form.get('approvedBy').valid &&
+                    form.get('approvedBy').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Approver is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Requester -->
+      <div class="form-section">
+        <div class="section-header">Requester</div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRequester">Requester</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [filterable]="true"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (filterChange)="handlePassengerFilter($event)"
+                    [data]="requesterList"
+                    formControlName="requester"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text }}</span
+                      ><span
+                        *ngIf="dataItem.value == ''"
+                        class="fa fa-plus-square quick-add-icon"
+                        (click)="openPassengerQuickAddPopup(true)"
+                      ></span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <div
+                    *ngIf="
+                      !form.get('requester').valid &&
+                      form.get('requester').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    Requester is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRequestPhone">Reqester Phone</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterPhone"
+                    [value]="requesterDetail?.phoneNumber"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRequestOpm">OPM</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterOpm"
+                    [value]="requesterDetail?.opm?.text"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

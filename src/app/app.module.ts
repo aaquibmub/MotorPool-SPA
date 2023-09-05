@@ -16,6 +16,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ErrorInterceptorProvider } from './helper/intercepters/error.interceptor';
 
 
 export function tokenGetter(): string {
@@ -47,17 +48,19 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     DialogsModule,
     PerfectScrollbarModule,
+    IntlModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
-      defaultLanguage: 'en'
-    }),
-    IntlModule
+      defaultLanguage: 'ar'
+    })
   ],
-  providers: [],
+  providers: [
+    ErrorInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

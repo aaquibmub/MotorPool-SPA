@@ -3,4 +3,7 @@
     width: 800px !important;
     overflow: auto;
   }
+  .page-content-wrapper {
+    width: 1300px !important;
+  }
 }

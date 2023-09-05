@@ -3,7 +3,7 @@
 
 @import "./assets/styles/common/variables.css";
 @import "bootstrap/scss/bootstrap.scss";
-// @import "@progress/kendo-theme-bootstrap/dist/all.scss";
+@import "@progress/kendo-theme-bootstrap/dist/all.css";
 
 @import "./kendo-custom.css";
 @import "./assets/styles/plugins/_perfect-scrollbar.scss";
@@ -84,10 +84,12 @@ body {
   left: 80px;
   width: calc(100% - 80px);
   flex-direction: column;
+  background-color: lightgrey;
 }
 
 .header {
   padding: 8px 42px;
+  background-color: white;
 }
 
 .topbar {
