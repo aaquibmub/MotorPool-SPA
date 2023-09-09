@@ -86,7 +86,7 @@ export class TripBookingService {
   // Form Groups
   createPassengerFormGroup(model: TripBookingPassengerModel): UntypedFormGroup {
     return new UntypedFormGroup({
-      id: new UntypedFormControl(model.id ? model.id : guid()),
+      id: new UntypedFormControl(model && model.id ? model.id : guid()),
       passenger: new UntypedFormControl(
         model ? model.passenger : null, [UtilityRix.dropdownRequired as ValidatorFn]),
       gender: new UntypedFormControl(

@@ -1,3 +1,9 @@
+
+export enum DropdownType {
+  Gender = 10
+}
+
+
 export enum UserRoleType {
   Admin = 5,
   Dispatcher = 10,
@@ -9,6 +15,7 @@ export enum Gender {
   Male = 10,
   Female = 20
 }
+
 
 export enum OPM {
 

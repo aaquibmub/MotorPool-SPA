@@ -10,13 +10,13 @@ import { SharedModule } from './shared/shared.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import * as $ from 'jquery';
-import { IntlModule } from '@progress/kendo-angular-intl';
-import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ErrorInterceptorProvider } from './helper/intercepters/error.interceptor';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { IntlModule } from '@progress/kendo-angular-intl';
 
 
 export function tokenGetter(): string {
@@ -55,7 +55,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
-      defaultLanguage: 'ar'
+      defaultLanguage: 'en'
     })
   ],
   providers: [

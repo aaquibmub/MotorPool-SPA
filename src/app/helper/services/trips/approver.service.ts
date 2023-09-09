@@ -15,6 +15,6 @@ export class ApproverService {
 
   getDropdownList(text: string): Observable<DropdownItem<string>[]> {
     return this.http.get<DropdownItem<string>[]>(
-      this.baseUrl + 'getdropdownlist?text=' + text);
+      this.baseUrl + 'get-dropdown-list?text=' + text);
   }
 }

@@ -1,3 +1,4 @@
+import { CommonService } from './../../../../../helper/services/common/common.service';
 import { ApproverService } from './../../../../../helper/services/trips/approver.service';
 import { ResponseModel } from './../../../../../helper/models/common/response-model';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
@@ -13,8 +14,9 @@ import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Va
 import { TripBookingScheduledModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-scheduled-model';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Gender, TripDestination, TripRoute } from 'src/app/helper/common/shared-types';
+import { DropdownType, Gender, TripDestination, TripRoute } from 'src/app/helper/common/shared-types';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { AgeGroupService } from 'src/app/helper/services/utilities/age-group.service';
 
 @Component({
   selector: 'app-trip-booking-scheduled-edit',
@@ -31,6 +33,8 @@ export class TripBookingScheduledEditComponent implements OnInit {
 
   requesterList: DropdownItem<string>[];
   requesterDetail: PassengerModel;
+  genderList: DropdownItem<number>[];
+  ageGroupList: DropdownItem<string>[];
 
   constructor(
     private renderer: Renderer2,
@@ -39,8 +43,10 @@ export class TripBookingScheduledEditComponent implements OnInit {
     private overlayService: OverlayService,
     private dialogService: DialogService,
     public utilityService: UtilityService,
+    private commonService: CommonService,
     private tripBookingService: TripBookingService,
     private approverService: ApproverService,
+    private ageGroupService: AgeGroupService,
     private passengerService: PassengerService,
     private router: Router,
     private route: ActivatedRoute,
@@ -72,6 +78,11 @@ export class TripBookingScheduledEditComponent implements OnInit {
         }
       });
 
+    this.commonService.getDropdownList(DropdownType.Gender, '')
+      .subscribe((list: DropdownItem<number>[]) => {
+        this.genderList = list;
+      });
+
     this.approverService.getDropdownList('')
       .subscribe((list: DropdownItem<string>[]) => {
         this.approverList = list;
@@ -80,6 +91,11 @@ export class TripBookingScheduledEditComponent implements OnInit {
     this.passengerService.getDropdownList('')
       .subscribe((list: DropdownItem<string>[]) => {
         this.requesterList = list;
+      });
+
+    this.ageGroupService.getDropdownList('')
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.ageGroupList = list;
       });
 
     // this.passengerService.getSelectedPassengerModel().subscribe(
@@ -112,6 +128,11 @@ export class TripBookingScheduledEditComponent implements OnInit {
 
     let isSpecialServicesRequired = false;
     let specialSevices: UntypedFormGroup[] = [];
+
+    let startDate = null;
+    let endDate = null;
+
+    let pickupTime = null;
 
     let tripRoute: DropdownItem<TripRoute> = null;
     let tripDestination: DropdownItem<TripDestination> = null;
@@ -149,6 +170,10 @@ export class TripBookingScheduledEditComponent implements OnInit {
         });
       }
 
+      startDate = this.model.startDate;
+      endDate = this.model.endDate;
+      pickupTime = this.model.pickupTime;
+
       tripRoute = this.model.tripRoute;
       tripDestination = this.model.tripDestination;
 
@@ -180,8 +205,14 @@ export class TripBookingScheduledEditComponent implements OnInit {
           requesterAddress, [UtilityRix.dropdownRequired as ValidatorFn]),
         isRequesterTraveling: new UntypedFormControl(isRequesterTraveling),
         passengers: new UntypedFormArray(passengers),
+
         isSpecialServicesRequired: new UntypedFormControl(isSpecialServicesRequired),
         specialSevices: new UntypedFormArray(specialSevices),
+
+        startDate: new UntypedFormControl(startDate ? new Date(startDate) : null, [Validators.required]),
+        endDate: new UntypedFormControl(endDate ? new Date(endDate) : null, [Validators.required]),
+        pickupTime: new UntypedFormControl(pickupTime ? new Date(pickupTime) : null, [Validators.required]),
+
         tripRoute: new UntypedFormControl(
           tripRoute, [UtilityRix.dropdownRequired as ValidatorFn]),
         tripDestination: new UntypedFormControl(
@@ -196,34 +227,6 @@ export class TripBookingScheduledEditComponent implements OnInit {
       });
     }
 
-  }
-
-  handleApproverFilter(text: string): void {
-    this.approverService.getDropdownList(text)
-      .subscribe((list: DropdownItem<string>[]) => {
-        this.approverList = list;
-      });
-  }
-
-  handlePassengerFilter(text: string): void {
-    this.passengerService.getDropdownList(text)
-      .subscribe((list: DropdownItem<string>[]) => {
-        this.requesterList = list;
-      });
-  }
-
-  handlePassengerValueChange(value: DropdownItem<string>): void {
-    if (value == null || value.value === '') {
-      this.requesterDetail = null;
-    }
-    this.passengerService.get(value.value)
-      .subscribe((requester: PassengerModel) => {
-        this.requesterDetail = requester;
-      });
-  }
-
-  openPassengerQuickAddPopup(flag: boolean): void {
-    // this.passengerService.setPassengerQuickAddPopup(true);
   }
 
   cancel(): void {
@@ -270,5 +273,45 @@ export class TripBookingScheduledEditComponent implements OnInit {
           );
       }
     });
+  }
+
+
+  handleApproverFilter(text: string): void {
+    this.approverService.getDropdownList(text)
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.approverList = list;
+      });
+  }
+
+  handlePassengerFilter(text: string): void {
+    this.passengerService.getDropdownList(text)
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.requesterList = list;
+      });
+  }
+
+  handlePassengerValueChange(value: DropdownItem<string>): void {
+    if (value == null || value.value === '') {
+      this.requesterDetail = null;
+    }
+    this.passengerService.get(value.value)
+      .subscribe((requester: PassengerModel) => {
+        this.requesterDetail = requester;
+      });
+  }
+
+  openPassengerQuickAddPopup(flag: boolean): void {
+    // this.passengerService.setPassengerQuickAddPopup(true);
+  }
+
+  handleNumberOfPassengerChange(control: any): void {
+    const value = +control.srcElement.value;
+    var passengersFormArray = (this.form?.get('passengers') as UntypedFormArray);
+    passengersFormArray.clear();
+    let count = 0;
+    while (value > count) {
+      passengersFormArray.push(this.tripBookingService.createPassengerFormGroup(null));
+      count++;
+    }
   }
 }

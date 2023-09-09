@@ -2,7 +2,7 @@
 // Set the variables here.
 
 @import "./assets/styles/common/variables.css";
-@import "bootstrap/scss/bootstrap.scss";
+@import "bootstrap/dist/css/bootstrap.css";
 @import "@progress/kendo-theme-bootstrap/dist/all.css";
 
 @import "./kendo-custom.css";
@@ -34,7 +34,7 @@
 body {
   font-family: var(--font-family);
   font-size: 14px;
-  color: #172b4d;
+  color: #445153;
   letter-spacing: 0.5px;
   line-height: 16px;
   // overflow-x: hidden;
@@ -84,7 +84,7 @@ body {
   left: 80px;
   width: calc(100% - 80px);
   flex-direction: column;
-  background-color: lightgrey;
+  background-color: #e6ebeb;
 }
 
 .header {

@@ -69,10 +69,11 @@
           </div>
         </div>
       </div>
-      <!-- Requester -->
+      <!-- Trip Requester -->
       <div class="form-section">
-        <div class="section-header">Requester</div>
+        <div class="section-header">Trip Requester</div>
         <div class="section-body">
+          <!-- Requester Info -->
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
@@ -142,6 +143,440 @@
                     readonly
                     id=""
                   />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Is Requester Traveling -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="control">
+                  <div class="display-flex">
+                    <div class="checkbox-control">
+                      <kendo-switch
+                        [size]="'small'"
+                        id="inputRequesterTraveling"
+                        formControlName="isRequesterTraveling"
+                      ></kendo-switch>
+                    </div>
+                    <div class="label">
+                      <label for="inputRequesterTraveling"
+                        >is requester travelling</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Passengers -->
+      <div class="form-section">
+        <div class="section-header">Passengers</div>
+        <div class="section-body">
+          <!-- Requester as Passenger -->
+          <div
+            class="form-section blue-section"
+            *ngIf="form.get('isRequesterTraveling').value"
+          >
+            <div class="section-header">Passenger 1 (The Requester)</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label [for]="'inputPassengerName'">Passenger Name</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="requesterPhone"
+                        [value]="requesterDetail?.name"
+                        readonly
+                        id=""
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label [for]="'inputPassengerGender'">Gender</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="requesterPhone"
+                        [value]="requesterDetail?.gender?.text"
+                        readonly
+                        id=""
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label [for]="'inputPassengerAgeGroup'">Age Group</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="requesterPhone"
+                        [value]="requesterDetail?.ageGroup?.text"
+                        readonly
+                        id=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Number of Extra Passengers -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputNumberOfPassengers"
+                    >Number of
+                    {{ form.get("isRequesterTraveling").value ? "Extra" : "" }}
+                    Passengers</label
+                  >
+                </div>
+                <div class="control">
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="inputNumberOfPassengers"
+                    [value]="0"
+                    min="0"
+                    (change)="handleNumberOfPassengerChange($event)"
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Passengers -->
+          <div formArrayName="passengers">
+            <div
+              class="form-section blue-section"
+              *ngFor="
+                let passenger of form.get('passengers').controls;
+                let j = index
+              "
+              [formGroupName]="j"
+            >
+              <div class="section-header">
+                Passenger
+                {{ j + (form.get("isRequesterTraveling").value ? 2 : 1) }}
+              </div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputPassengerName' + j"
+                          >Passenger Name</label
+                        >
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [filterable]="true"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          (filterChange)="handlePassengerFilter($event)"
+                          [data]="requesterList"
+                          formControlName="passenger"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text }}</span
+                            ><span
+                              *ngIf="dataItem.value == ''"
+                              class="fa fa-plus-square quick-add-icon"
+                              (click)="openPassengerQuickAddPopup(true)"
+                            ></span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !passenger.get('passenger').valid &&
+                            passenger.get('passenger').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          Passenger is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputPassengerGender' + j">Gender</label>
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          [data]="genderList"
+                          formControlName="gender"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text | translate }}</span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !passenger.get('gender').valid &&
+                            passenger.get('gender').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          Gender is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputPassengerAgeGroup' + j"
+                          >Age Group</label
+                        >
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          [data]="ageGroupList"
+                          formControlName="ageGroup"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text | translate }}</span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !passenger.get('ageGroup').valid &&
+                            passenger.get('ageGroup').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          Age group is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="section-header">Special Services</div>
+        <div class="section-body">
+          <!-- Is Special Service Required -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="control">
+                  <div class="display-flex">
+                    <div class="checkbox-control">
+                      <kendo-switch
+                        [size]="'small'"
+                        id="inputSpecialServiceRequired"
+                        formControlName="isSpecialServicesRequired"
+                      ></kendo-switch>
+                    </div>
+                    <div class="label">
+                      <label for="inputRequesterTraveling"
+                        >is special service required</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Special Services -->
+          <div
+            class="row"
+            formArrayName="specialSevices"
+            *ngIf="form.get('isSpecialServicesRequired').value"
+          >
+            <div
+              class="col-md-3"
+              *ngFor="
+                let specialService of form.get('specialSevices').controls;
+                let j = index
+              "
+              [formGroupName]="j"
+            >
+              <div class="form-group">
+                <div class="control" style="border: 1px solid; padding: 5px">
+                  <div class="display-flex">
+                    <div class="checkbox-control">
+                      <kendo-switch
+                        [size]="'small'"
+                        [id]="'inputSpecialServiceRequired' + j"
+                        formControlName="required"
+                      ></kendo-switch>
+                    </div>
+                    <div class="label">
+                      <label for="inputRequesterTraveling">{{
+                        specialService.get("specialService").value?.text
+                      }}</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="number"
+                        class="form-control"
+                        name=""
+                        id=""
+                        formControlName="qty"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Scheduling -->
+      <div class="form-section">
+        <div class="section-header">Scheduling</div>
+        <div class="section-body">
+          <!-- Range -->
+          <div class="form-section blue-section">
+            <div class="section-header">Range</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputStartDate">Start Date</label>
+                    </div>
+                    <div class="control">
+                      <kendo-datepicker
+                        class="form-control"
+                        id="inputStartDate"
+                        formControlName="startDate"
+                      >
+                      </kendo-datepicker>
+                      <div
+                        *ngIf="
+                          !form.get('startDate').valid &&
+                          form.get('startDate').touched
+                        "
+                        class="invalid-feedback"
+                      >
+                        Start Date is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputEndDate">End Date</label>
+                    </div>
+                    <div class="control">
+                      <kendo-datepicker
+                        class="form-control"
+                        id="inputEndDate"
+                        formControlName="endDate"
+                      >
+                      </kendo-datepicker>
+                      <div
+                        *ngIf="
+                          !form.get('endDate').valid &&
+                          form.get('endDate').touched
+                        "
+                        class="invalid-feedback"
+                      >
+                        End Date is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Pickup Time -->
+          <div class="form-section blue-section">
+            <div class="section-header">Pickup Time</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputPickupTime">Pickup Time</label>
+                    </div>
+                    <div class="control">
+                      <kendo-timepicker
+                        class="form-control"
+                        id="inputPickupTime"
+                        formControlName="pickupTime"
+                      >
+                      </kendo-timepicker>
+                      <div
+                        *ngIf="
+                          !form.get('pickupTime').valid &&
+                          form.get('pickupTime').touched
+                        "
+                        class="invalid-feedback"
+                      >
+                        Pickup time is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Reaccurence -->
+          <div class="form-section blue-section">
+            <div class="section-header">Recurence</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <div class="checkbox-control">
+                      <input
+                        type="checkbox"
+                        id="inputAlloDiscount"
+                        formControlName="enableDiscount"
+                        kendoCheckBox
+                      />
+                    </div>
+                    <div class="label">
+                      <label for="inputAlloDiscount">Sunday</label>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -40,8 +40,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     const user = this.authService.getCurrentUser();
     if (user) {
-      (this.intlService as CldrIntlService).localeId = 'ar-SA';
-      // (this.intlService as CldrIntlService).localeId = 'en-US';
+      // (this.intlService as CldrIntlService).localeId = 'ar-SA';
+      (this.intlService as CldrIntlService).localeId = 'en-US';
     }
 
     // this.signalRService.connect();

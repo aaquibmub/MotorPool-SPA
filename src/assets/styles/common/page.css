@@ -54,7 +54,7 @@
 }
 
 .page-area {
-  padding-top: 48px;
+  padding-top: 28px;
 }
 
 .page-title {
@@ -63,6 +63,7 @@
   height: 36px;
   display: flex;
   justify-content: space-between;
+  font-weight: bold;
 }
 
 .page-breadcrum {
@@ -71,5 +72,5 @@
 }
 
 .page-body {
-  margin-top: 56px;
+  margin-top: 36px;
 }

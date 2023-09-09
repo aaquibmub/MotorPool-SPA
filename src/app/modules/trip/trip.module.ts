@@ -11,8 +11,9 @@ import { TripBookingScheduledEditComponent } from './components/trip-booking/tri
 import { TripBookingStartNowListComponent } from './components/trip-bookings/trip-booking-start-now-list/trip-booking-start-now-list.component';
 import { TripBookingsComponent } from './components/trip-bookings/trip-bookings.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { TranslateModule } from '@ngx-translate/core';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     DropDownsModule,
     DateInputsModule,
+    InputsModule,
     TripRoutingModule,
     TranslateModule.forChild()
   ],
