@@ -53,9 +53,20 @@
   border-color: transparent;
 }
 
+.btn-wide {
+  width: 100%;
+}
+
 .btn-green {
   background-color: rgb(0, 215, 100);
   border: 1px solid rgb(194, 197, 206);
+  border-radius: 5px;
+  color: rgba(49, 48, 48, 1);
+}
+
+.btn-orange {
+  background-color: #fff8d1;
+  border: 1px solid #f0dd72;
   border-radius: 5px;
   color: rgba(49, 48, 48, 1);
 }

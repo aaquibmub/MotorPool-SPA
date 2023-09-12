@@ -108,7 +108,7 @@ export class TripBookingService {
 
   createStopFormGroup(model: TripStopModel): UntypedFormGroup {
     return new UntypedFormGroup({
-      id: new UntypedFormControl(model.id ? model.id : guid()),
+      id: new UntypedFormControl(model && model.id ? model.id : guid()),
       sequence: new UntypedFormControl(model ? model.sequence : false),
       stopAddress: new UntypedFormControl(
         model ? model.stopAddress : null, [UtilityRix.dropdownRequired as ValidatorFn]),

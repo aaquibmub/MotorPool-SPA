@@ -10,7 +10,7 @@ import { OverlayService } from './../../../../../helper/services/common/overlay.
 import { NotificationService } from './../../../../../helper/services/common/notification.service';
 import { PassengerModel } from './../../../../../helper/models/passengers/passenger-model';
 import { DropdownItem } from '../../../../../helper/models/common/dropdown/dropdown-item.model';
-import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormArray, FormControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { TripBookingScheduledModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-scheduled-model';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -35,6 +35,9 @@ export class TripBookingScheduledEditComponent implements OnInit {
   requesterDetail: PassengerModel;
   genderList: DropdownItem<number>[];
   ageGroupList: DropdownItem<string>[];
+
+  tripTypeList: DropdownItem<number>[];
+  tripDestinationList: DropdownItem<number>[];
 
   constructor(
     private renderer: Renderer2,
@@ -81,6 +84,16 @@ export class TripBookingScheduledEditComponent implements OnInit {
     this.commonService.getDropdownList(DropdownType.Gender, '')
       .subscribe((list: DropdownItem<number>[]) => {
         this.genderList = list;
+      });
+
+    this.commonService.getDropdownList(DropdownType.TripType, '')
+      .subscribe((list: DropdownItem<number>[]) => {
+        this.tripTypeList = list;
+      });
+
+    this.commonService.getDropdownList(DropdownType.TripDestination, '')
+      .subscribe((list: DropdownItem<number>[]) => {
+        this.tripDestinationList = list;
       });
 
     this.approverService.getDropdownList('')
@@ -134,12 +147,14 @@ export class TripBookingScheduledEditComponent implements OnInit {
 
     let pickupTime = null;
 
+    let schedulingDays = null;
+
     let tripRoute: DropdownItem<TripRoute> = null;
     let tripDestination: DropdownItem<TripDestination> = null;
 
     let startingPoint: DropdownItem<string> = null;
     let pickupAddress: DropdownItem<string> = null;
-    let stops: UntypedFormGroup[] = [];
+    let stops: UntypedFormGroup[] = [this.tripBookingService.createStopFormGroup(null)];
     let dropoffAddress: DropdownItem<string> = null;
 
     let driver: DropdownItem<string> = null;
@@ -179,6 +194,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
 
       startingPoint = this.model.startingPoint;
       pickupAddress = this.model.pickupAddress;
+      schedulingDays = this.model.scheduledDays;
 
       if (this.model.stops && this.model.stops.length > 0) {
         this.model.stops.forEach(f => {
@@ -212,6 +228,15 @@ export class TripBookingScheduledEditComponent implements OnInit {
         startDate: new UntypedFormControl(startDate ? new Date(startDate) : null, [Validators.required]),
         endDate: new UntypedFormControl(endDate ? new Date(endDate) : null, [Validators.required]),
         pickupTime: new UntypedFormControl(pickupTime ? new Date(pickupTime) : null, [Validators.required]),
+        scheduledDays: new UntypedFormGroup({
+          sunday: new FormControl(schedulingDays ? schedulingDays.sunday : true),
+          monday: new FormControl(schedulingDays ? schedulingDays.monday : true),
+          tuesday: new FormControl(schedulingDays ? schedulingDays.tuesday : true),
+          wednesday: new FormControl(schedulingDays ? schedulingDays.wednesday : true),
+          thursday: new FormControl(schedulingDays ? schedulingDays.thursday : true),
+          friday: new FormControl(schedulingDays ? schedulingDays.friday : true),
+          saturday: new FormControl(schedulingDays ? schedulingDays.saturday : true),
+        }),
 
         tripRoute: new UntypedFormControl(
           tripRoute, [UtilityRix.dropdownRequired as ValidatorFn]),
@@ -313,5 +338,10 @@ export class TripBookingScheduledEditComponent implements OnInit {
       passengersFormArray.push(this.tripBookingService.createPassengerFormGroup(null));
       count++;
     }
+  }
+
+  addNewStop(): void {
+    var stopFormArray = this.form.get('stops') as FormArray;
+    stopFormArray.push(this.tripBookingService.createStopFormGroup(null));
   }
 }

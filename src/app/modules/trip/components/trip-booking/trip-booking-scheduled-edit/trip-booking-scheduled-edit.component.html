@@ -395,6 +395,7 @@
           </div>
         </div>
       </div>
+      <!-- Special Services -->
       <div class="form-section">
         <div class="section-header">Special Services</div>
         <div class="section-body">
@@ -439,14 +440,14 @@
                 <div class="control" style="border: 1px solid; padding: 5px">
                   <div class="display-flex">
                     <div class="checkbox-control">
-                      <kendo-switch
-                        [size]="'small'"
-                        [id]="'inputSpecialServiceRequired' + j"
+                      <input
+                        type="checkbox"
+                        id="inputAlloDiscount"
                         formControlName="required"
-                      ></kendo-switch>
-                    </div>
-                    <div class="label">
-                      <label for="inputRequesterTraveling">{{
+                        [id]="'inputSpecialServiceRequired' + j"
+                        kendoCheckBox
+                      />
+                      <label for="inputAlloDiscount">{{
                         specialService.get("specialService").value?.text
                       }}</label>
                     </div>
@@ -558,27 +559,427 @@
               </div>
             </div>
           </div>
-          <!-- Reaccurence -->
+          <!-- Scheduled Days -->
           <div class="form-section blue-section">
-            <div class="section-header">Recurence</div>
+            <div class="section-header">Scheduled Days</div>
             <div class="section-body">
               <div class="row">
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <div class="checkbox-control">
-                      <input
-                        type="checkbox"
-                        id="inputAlloDiscount"
-                        formControlName="enableDiscount"
-                        kendoCheckBox
-                      />
+                <div class="col-6">
+                  <div class="row" formGroupName="scheduledDays">
+                    <!-- Sunday -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <div class="checkbox-control">
+                          <input
+                            type="checkbox"
+                            id="inputAlloDiscount"
+                            formControlName="sunday"
+                            kendoCheckBox
+                          />
+                          <label for="inputAlloDiscount">Sunday</label>
+                        </div>
+                      </div>
                     </div>
-                    <div class="label">
-                      <label for="inputAlloDiscount">Sunday</label>
+                    <!-- Monday -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <div class="checkbox-control">
+                          <input
+                            type="checkbox"
+                            id="inputMonday"
+                            formControlName="monday"
+                            kendoCheckBox
+                          />
+                          <label for="inputMonday">Monday</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Tuesday -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <div class="checkbox-control">
+                          <input
+                            type="checkbox"
+                            id="inputTuesday"
+                            formControlName="tuesday"
+                            kendoCheckBox
+                          />
+                          <label for="inputTuesday">Tuesday</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Wednesday -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <div class="checkbox-control">
+                          <input
+                            type="checkbox"
+                            id="inputWednesday"
+                            formControlName="wednesday"
+                            kendoCheckBox
+                          />
+                          <label for="inputWednesday">Wednesday</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Thursday -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <div class="checkbox-control">
+                          <input
+                            type="checkbox"
+                            id="inputThursday"
+                            formControlName="thursday"
+                            kendoCheckBox
+                          />
+                          <label for="inputThursday">Thursday</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Friday -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <div class="checkbox-control">
+                          <input
+                            type="checkbox"
+                            id="inputFriday"
+                            formControlName="friday"
+                            kendoCheckBox
+                          />
+                          <label for="inputFriday">Friday</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Saturday -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <div class="checkbox-control">
+                          <input
+                            type="checkbox"
+                            id="inputSaturday"
+                            formControlName="saturday"
+                            kendoCheckBox
+                          />
+                          <label for="inputSaturday">Saturday</label>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Trip Destination -->
+      <div class="form-section">
+        <div class="section-header">Trip Destination</div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputTripType">Trip</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    [data]="tripTypeList"
+                    formControlName="tripRoute"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <div
+                    *ngIf="
+                      !form.get('tripRoute').valid &&
+                      form.get('tripRoute').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    Trip is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputTripDestination">Trip Destination</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    [data]="tripDestinationList"
+                    formControlName="tripDestination"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <div
+                    *ngIf="
+                      !form.get('tripDestination').valid &&
+                      form.get('tripDestination').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    Trip destination is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Starting Point -->
+          <div class="form-section green-section">
+            <div class="section-header">Default Starting Point</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputStartingPointAddress">Address</label>
+                    </div>
+                    <div class="control">
+                      <kendo-dropdownlist
+                        class="form-control"
+                        textField="text"
+                        valueField="value"
+                        [defaultItem]="utilityService.dropdownDefaultItem"
+                        [data]="addressList"
+                        formControlName="startingPoint"
+                      >
+                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                          <span>{{ dataItem.text | translate }}</span>
+                        </ng-template>
+                      </kendo-dropdownlist>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Pickup Address -->
+          <div class="form-section blue-section">
+            <div class="section-header">Pickup Address</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputPickupAddress">Address</label>
+                    </div>
+                    <div class="control">
+                      <kendo-dropdownlist
+                        class="form-control"
+                        textField="text"
+                        valueField="value"
+                        [defaultItem]="utilityService.dropdownDefaultItem"
+                        [data]="addressList"
+                        formControlName="pickupAddress"
+                      >
+                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                          <span>{{ dataItem.text | translate }}</span>
+                        </ng-template>
+                      </kendo-dropdownlist>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Stops -->
+          <div formArrayName="stops">
+            <div
+              class="form-section orange-section"
+              *ngFor="let stop of form.get('stops').controls; let j = index"
+              [formGroupName]="j"
+            >
+              <div class="section-header">Stop {{ j + 1 }}</div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputStopAddress' + j">Address</label>
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          [data]="addressList"
+                          formControlName="stopAddress"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text | translate }}</span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="display-flex justify-content-center">
+                <button
+                  type="button"
+                  (click)="addNewStop()"
+                  class="btn btn-orange btn-wide"
+                >
+                  Add Stop
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Dropoff Address -->
+          <div class="form-section blue-section">
+            <div class="section-header">Dropoff Address</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputDropoffAddress">Address</label>
+                    </div>
+                    <div class="control">
+                      <kendo-dropdownlist
+                        class="form-control"
+                        textField="text"
+                        valueField="value"
+                        [defaultItem]="utilityService.dropdownDefaultItem"
+                        [data]="addressList"
+                        formControlName="dropoffAddress"
+                      >
+                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                          <span>{{ dataItem.text | translate }}</span>
+                        </ng-template>
+                      </kendo-dropdownlist>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Driver and Transportation -->
+      <div class="form-section">
+        <div class="section-header">Driver & Transportation</div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputDriver">Driver</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    [data]="driverList"
+                    formControlName="driver"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputVehical">Vehical</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    [data]="vehicalList"
+                    formControlName="vehical"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRegistrationPlate">Registration Plate</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="inputRegistrationPlate"
+                    [value]="vehicalDetail?.plateNumber"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Notes -->
+      <div class="form-section">
+        <div class="section-header">Notes</div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <div class="control">
+                  <textarea
+                    class="form-control form-text-area"
+                    name=""
+                    formControlName="notes"
+                    id=""
+                    cols="30"
+                    rows="10"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="form-section transparent-section">
+        <div class="section-body">
+          <div class="description sm-hide"></div>
+          <div class="fields">
+            <div class="form-group">
+              <button
+                class="btn btn-default mr-16"
+                type="button"
+                (click)="cancel()"
+              >
+                Cancel
+              </button>
+              <button class="btn btn-primary" type="submit">Create</button>
             </div>
           </div>
         </div>
