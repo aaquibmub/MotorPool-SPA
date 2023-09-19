@@ -1,7 +1,7 @@
 
 export enum DropdownType {
   Gender = 10,
-  TripType = 20,
+  TripRoute = 20,
   TripDestination = 30
 }
 

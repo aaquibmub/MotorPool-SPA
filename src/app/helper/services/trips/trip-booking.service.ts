@@ -33,7 +33,7 @@ export class TripBookingService {
   }
 
   addUpdateScheduled(model: any): Observable<ResponseModel<string>> {
-    return this.http.post<ResponseModel<string>>(this.baseUrl + 'scheduled', model);
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'schedule', model);
   }
 
   prepareSaveTripBookingScheduled(

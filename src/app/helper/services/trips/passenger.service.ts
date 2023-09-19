@@ -1,15 +1,19 @@
 import { environment } from './../../../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
 import { HttpClient } from '@angular/common/http';
 import { PassengerModel } from '../../models/passengers/passenger-model';
+import { ResponseModel } from '../../models/common/response-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PassengerService {
   baseUrl = environment.apiUrl + 'passenger/';
+
+  private showQuickAddPopup = new Subject<boolean>();
+  private selectedModel = new Subject<PassengerModel>();
 
   constructor(
     private http: HttpClient) { }
@@ -21,6 +25,25 @@ export class PassengerService {
 
   get(id: string): Observable<PassengerModel> {
     return this.http.get<PassengerModel>(this.baseUrl + id);
+  }
+
+  addUpdate(model: PassengerModel): Observable<ResponseModel<PassengerModel>> {
+    return this.http.post<ResponseModel<PassengerModel>>(this.baseUrl, model);
+  }
+
+  getSelectedModel(): Observable<PassengerModel> {
+    return this.selectedModel.asObservable();
+  }
+  setSelectedModel(model: PassengerModel): void {
+    this.selectedModel.next(model);
+  }
+
+
+  getQuickAddPopup(): Observable<boolean> {
+    return this.showQuickAddPopup.asObservable();
+  }
+  setQuickAddPopup(flag: boolean): void {
+    this.showQuickAddPopup.next(flag);
   }
 
 }

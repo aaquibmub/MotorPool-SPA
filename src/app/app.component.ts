@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from './helper/services/common/alert.service';
 import { CldrIntlService, IntlService } from '@progress/kendo-angular-intl';
 import { OverlayService } from './helper/services/common/overlay.service';
+import { PassengerService } from './helper/services/trips/passenger.service';
 
 @Component({
   selector: 'app-root',
@@ -26,13 +27,17 @@ export class AppComponent implements OnInit {
   // loader ui
   showLoader = false;
 
+  // passenger
+  showPassengerQuickAddPopup = false;
+
   constructor(
     private authService: AuthService,
     translate: TranslateService,
     private overlayService: OverlayService,
     public intlService: IntlService,
     // private signalRService: SignalRService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private passengerService: PassengerService) {
     translate.setDefaultLang('en');
     translate.use('en');
   }
@@ -91,6 +96,14 @@ export class AppComponent implements OnInit {
     this.overlayService.getShowHideLoader().subscribe({
       next: (flag) => {
         this.showLoader = flag;
+      }
+    }
+    );
+
+
+    this.passengerService.getQuickAddPopup().subscribe({
+      next: (flag) => {
+        this.showPassengerQuickAddPopup = flag;
       }
     }
     );

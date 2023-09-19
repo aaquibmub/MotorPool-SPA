@@ -88,6 +88,7 @@
                     [filterable]="true"
                     [defaultItem]="utilityService.dropdownDefaultItem"
                     (filterChange)="handlePassengerFilter($event)"
+                    (valueChange)="handleRequesterValueChange($event)"
                     [data]="requesterList"
                     formControlName="requester"
                   >
@@ -294,6 +295,7 @@
                           [filterable]="true"
                           [defaultItem]="utilityService.dropdownDefaultItem"
                           (filterChange)="handlePassengerFilter($event)"
+                          (valueChange)="handlePassengerValueChange($event, j)"
                           [data]="requesterList"
                           formControlName="passenger"
                         >
@@ -752,7 +754,9 @@
                         class="form-control"
                         textField="text"
                         valueField="value"
+                        [filterable]="true"
                         [defaultItem]="utilityService.dropdownDefaultItem"
+                        (filterChange)="handleAddressFilter($event)"
                         [data]="addressList"
                         formControlName="startingPoint"
                       >
@@ -781,7 +785,9 @@
                         class="form-control"
                         textField="text"
                         valueField="value"
+                        [filterable]="true"
                         [defaultItem]="utilityService.dropdownDefaultItem"
+                        (filterChange)="handleAddressFilter($event)"
                         [data]="addressList"
                         formControlName="pickupAddress"
                       >
@@ -815,7 +821,9 @@
                           class="form-control"
                           textField="text"
                           valueField="value"
+                          [filterable]="true"
                           [defaultItem]="utilityService.dropdownDefaultItem"
+                          (filterChange)="handleAddressFilter($event)"
                           [data]="addressList"
                           formControlName="stopAddress"
                         >
@@ -861,7 +869,9 @@
                         class="form-control"
                         textField="text"
                         valueField="value"
+                        [filterable]="true"
                         [defaultItem]="utilityService.dropdownDefaultItem"
+                        (filterChange)="handleAddressFilter($event)"
                         [data]="addressList"
                         formControlName="dropoffAddress"
                       >

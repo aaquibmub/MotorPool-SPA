@@ -1,4 +1,5 @@
 <router-outlet></router-outlet>
+<div kendoDialogContainer></div>
 
 <app-alert
   *ngIf="opened"
@@ -7,3 +8,9 @@
   [action]="action"
   [arg]="arg"
 ></app-alert>
+
+<app-loader-block-ui *ngIf="showLoader"></app-loader-block-ui>
+
+<app-passenger-quick-add-popup
+  *ngIf="showPassengerQuickAddPopup"
+></app-passenger-quick-add-popup>

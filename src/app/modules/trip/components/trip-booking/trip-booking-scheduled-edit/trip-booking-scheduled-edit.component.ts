@@ -1,3 +1,6 @@
+import { VehicalService } from './../../../../../helper/services/vehicals/vehical.service';
+import { DriverService } from './../../../../../helper/services/drivers/driver.service';
+import { AddressService } from './../../../../../helper/services/utilities/address.service';
 import { CommonService } from './../../../../../helper/services/common/common.service';
 import { ApproverService } from './../../../../../helper/services/trips/approver.service';
 import { ResponseModel } from './../../../../../helper/models/common/response-model';
@@ -33,11 +36,17 @@ export class TripBookingScheduledEditComponent implements OnInit {
 
   requesterList: DropdownItem<string>[];
   requesterDetail: PassengerModel;
+  passengerDetail: PassengerModel[];
   genderList: DropdownItem<number>[];
   ageGroupList: DropdownItem<string>[];
 
   tripTypeList: DropdownItem<number>[];
   tripDestinationList: DropdownItem<number>[];
+
+  addressList: DropdownItem<string>[];
+
+  driverList: DropdownItem<string>[];
+  vehicalList: DropdownItem<string>[];
 
   constructor(
     private renderer: Renderer2,
@@ -51,6 +60,9 @@ export class TripBookingScheduledEditComponent implements OnInit {
     private approverService: ApproverService,
     private ageGroupService: AgeGroupService,
     private passengerService: PassengerService,
+    private addressService: AddressService,
+    private driverService: DriverService,
+    private vehicalService: VehicalService,
     private router: Router,
     private route: ActivatedRoute,
     private alertService: AlertService
@@ -86,7 +98,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
         this.genderList = list;
       });
 
-    this.commonService.getDropdownList(DropdownType.TripType, '')
+    this.commonService.getDropdownList(DropdownType.TripRoute, '')
       .subscribe((list: DropdownItem<number>[]) => {
         this.tripTypeList = list;
       });
@@ -111,21 +123,36 @@ export class TripBookingScheduledEditComponent implements OnInit {
         this.ageGroupList = list;
       });
 
-    // this.passengerService.getSelectedPassengerModel().subscribe(
-    //   (requester: DropdownItem<string>) => {
-    //     if (requester) {
-    //       this.passengerService.getDropdownList('')
-    //         .subscribe((list: DropdownItem<string>[]) => {
-    //           this.requesterList = list;
+    this.passengerService.getSelectedModel().subscribe(
+      (requester: PassengerModel) => {
+        if (requester) {
+          this.passengerService.getDropdownList('')
+            .subscribe((list: DropdownItem<string>[]) => {
+              this.requesterList = list;
 
-    //           this.form.get('requester').setValue({
-    //             value: requester.value,
-    //             text: requester.text
-    //           });
-    //         });
-    //     }
-    //   }
-    // );
+              this.form.get('requester').setValue({
+                value: requester.id,
+                text: requester.name
+              });
+            });
+        }
+      }
+    );
+
+    this.addressService.getDropdownList('')
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.addressList = list;
+      });
+
+    this.driverService.getDropdownList('')
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.driverList = list;
+      });
+
+    this.vehicalService.getDropdownList('')
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.vehicalList = list;
+      });
 
   }
 
@@ -215,27 +242,25 @@ export class TripBookingScheduledEditComponent implements OnInit {
           approvedBy, [UtilityRix.dropdownRequired as ValidatorFn]),
         requester: new UntypedFormControl(
           requester, [UtilityRix.dropdownRequired as ValidatorFn]),
-        requesterGender: new UntypedFormControl(
-          requesterGender, [UtilityRix.dropdownRequired as ValidatorFn]),
-        requesterAddress: new UntypedFormControl(
-          requesterAddress, [UtilityRix.dropdownRequired as ValidatorFn]),
+        requesterGender: new UntypedFormControl(requesterGender),
+        requesterAddress: new UntypedFormControl(requesterAddress),
         isRequesterTraveling: new UntypedFormControl(isRequesterTraveling),
         passengers: new UntypedFormArray(passengers),
 
         isSpecialServicesRequired: new UntypedFormControl(isSpecialServicesRequired),
         specialSevices: new UntypedFormArray(specialSevices),
 
-        startDate: new UntypedFormControl(startDate ? new Date(startDate) : null, [Validators.required]),
-        endDate: new UntypedFormControl(endDate ? new Date(endDate) : null, [Validators.required]),
-        pickupTime: new UntypedFormControl(pickupTime ? new Date(pickupTime) : null, [Validators.required]),
+        startDate: new UntypedFormControl(startDate ? new Date(startDate) : new Date(), [Validators.required]),
+        endDate: new UntypedFormControl(endDate ? new Date(endDate) : new Date(), [Validators.required]),
+        pickupTime: new UntypedFormControl(pickupTime ? new Date(pickupTime) : new Date(), [Validators.required]),
         scheduledDays: new UntypedFormGroup({
-          sunday: new FormControl(schedulingDays ? schedulingDays.sunday : true),
-          monday: new FormControl(schedulingDays ? schedulingDays.monday : true),
-          tuesday: new FormControl(schedulingDays ? schedulingDays.tuesday : true),
-          wednesday: new FormControl(schedulingDays ? schedulingDays.wednesday : true),
-          thursday: new FormControl(schedulingDays ? schedulingDays.thursday : true),
-          friday: new FormControl(schedulingDays ? schedulingDays.friday : true),
-          saturday: new FormControl(schedulingDays ? schedulingDays.saturday : true),
+          sunday: new FormControl(schedulingDays ? schedulingDays.sunday : false),
+          monday: new FormControl(schedulingDays ? schedulingDays.monday : false),
+          tuesday: new FormControl(schedulingDays ? schedulingDays.tuesday : false),
+          wednesday: new FormControl(schedulingDays ? schedulingDays.wednesday : false),
+          thursday: new FormControl(schedulingDays ? schedulingDays.thursday : false),
+          friday: new FormControl(schedulingDays ? schedulingDays.friday : false),
+          saturday: new FormControl(schedulingDays ? schedulingDays.saturday : false),
         }),
 
         tripRoute: new UntypedFormControl(
@@ -259,6 +284,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
   }
 
   submit(): void {
+    debugger;
     if (!this.form.valid) {
       this.utilityService.scrollToFirstInvalidControl(this.el, '.page-wrapper');
       return;
@@ -282,6 +308,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
             formValue))
           .subscribe(
             (response: ResponseModel<string>) => {
+              debugger
               if (response.hasError) {
                 this.alertService.setErrorAlert(response.msg);
                 return;
@@ -300,7 +327,6 @@ export class TripBookingScheduledEditComponent implements OnInit {
     });
   }
 
-
   handleApproverFilter(text: string): void {
     this.approverService.getDropdownList(text)
       .subscribe((list: DropdownItem<string>[]) => {
@@ -315,7 +341,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
       });
   }
 
-  handlePassengerValueChange(value: DropdownItem<string>): void {
+  handleRequesterValueChange(value: DropdownItem<string>): void {
     if (value == null || value.value === '') {
       this.requesterDetail = null;
     }
@@ -325,8 +351,23 @@ export class TripBookingScheduledEditComponent implements OnInit {
       });
   }
 
+  handlePassengerValueChange(value: DropdownItem<string>, index: number): void {
+    var passengerFormArray = this.form.get('passengers') as FormArray;
+    if (value == null || value.value === '') {
+      passengerFormArray.controls[index].setValue(
+        this.tripBookingService.createPassengerFormGroup(null)
+      );
+    }
+
+    this.passengerService.get(value.value)
+      .subscribe((requester: PassengerModel) => {
+        passengerFormArray.controls[index].get('gender').setValue(requester.gender);
+        passengerFormArray.controls[index].get('ageGroup').setValue(requester.ageGroup);
+      });
+  }
+
   openPassengerQuickAddPopup(flag: boolean): void {
-    // this.passengerService.setPassengerQuickAddPopup(true);
+    this.passengerService.setQuickAddPopup(true);
   }
 
   handleNumberOfPassengerChange(control: any): void {
@@ -344,4 +385,12 @@ export class TripBookingScheduledEditComponent implements OnInit {
     var stopFormArray = this.form.get('stops') as FormArray;
     stopFormArray.push(this.tripBookingService.createStopFormGroup(null));
   }
+
+  handleAddressFilter(text: string): void {
+    this.addressService.getDropdownList(text)
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.addressList = list;
+      });
+  }
+
 }
