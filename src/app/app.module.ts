@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { LoaderBlockUiComponent } from './shared/components/loader-block-ui/loader-block-ui.component';
 import { HttpInterceptorService } from './helper/intercepters/http.interceptor';
+import { GridModule } from '@progress/kendo-angular-grid';
 
 
 export function tokenGetter(): string {
@@ -59,6 +60,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       }
     }),
     DialogsModule,
+    GridModule,
     IndicatorsModule,
     PerfectScrollbarModule,
     IntlModule,

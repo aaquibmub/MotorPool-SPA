@@ -23,6 +23,11 @@ export enum OPM {
 
 }
 
+export enum TripType {
+  Scheduled = 10,
+  StartsNow = 20
+}
+
 export enum TripRoute {
 
 }

@@ -1,3 +1,4 @@
+import { ActionButton } from './../../../../helper/models/common/grid/action-button';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -9,6 +10,16 @@ import { Location } from '@angular/common';
 })
 export class TripBookingsComponent implements OnInit {
   pageTitle: string;
+
+  buttons: ActionButton[] = [
+    {
+      handle: () => {
+        this.router.navigate(['/trips/booking/new-scheduled']);
+      },
+      icon: '',
+      label: 'New Scheduled'
+    }
+  ];
 
   constructor(
     private location: Location,
@@ -25,6 +36,11 @@ export class TripBookingsComponent implements OnInit {
         this.pageTitle = 'Start Now Bookings';
       }
     });
+  }
+
+  handleCreateItemButtonClick(item: ActionButton): void {
+    const index = this.buttons.findIndex(f => f === item);
+    this.buttons[index].handle();
   }
 
   ngOnInit(): void {

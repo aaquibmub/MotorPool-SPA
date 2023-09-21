@@ -1,0 +1,100 @@
+<div class="grid-toolbar">
+  <div class="left">
+    <!-- <span class="number-of-records-label"
+      >{{ numberOfRecords }} {{ entity }} records</span
+    > -->
+    <!-- <div *ngIf="!hidePagingDropdown">
+      <span class="records-per-page-label">Records per page</span>
+      <kendo-dropdownlist
+        [data]="pageDropdownData"
+        [value]="10"
+        [popupSettings]="{ popupClass: 'page-dropdown' }"
+        (valueChange)="handlePageDropdownValueChange($event)"
+      >
+      </kendo-dropdownlist>
+    </div> -->
+    <!-- <div class="export-dropdown" *ngIf="!hideExportDropdown">
+      <span class="k-cursor-pointer" (click)="toggleExportDropdownMenu()">
+        <i class="download-icon"></i
+      ></span>
+      <div class="export-menu et-dropdown-menu" *ngIf="showExportMenu">
+        <ul>
+          <li>
+            <a class="k-cursor-pointer" (click)="exportToExcel()"
+              ><span class="fa fa-file-excel-o"></span> Excel</a
+            >
+          </li>
+          <li>
+            <a class="k-cursor-pointer" (click)="exportToPdf()"
+              ><span class="fa fa-file-pdf-o"></span> PDF
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+    <!-- <kendo-dropdownbutton
+      *ngIf="buttons && buttons.length > 0"
+      [data]="buttons"
+      class="btn btn-default"
+      style="margin-left: 8px"
+      [popupSettings]="{
+        popupClass: 'grid-toolbar-options-dropdown-button et-dropdown-menu'
+      }"
+    >
+      Options<i class="k-button-icon k-icon k-i-arrow-s"></i>
+      <ng-template kendoDropDownButtonItemTemplate let-dataItem>
+        <span class="{{ dataItem.icon }}" *ngIf="dataItem.icon"></span>
+        <span (click)="handleButtonClick(dataItem)">{{ dataItem.label }}</span>
+      </ng-template>
+    </kendo-dropdownbutton> -->
+    <!-- <button
+      *ngIf="createBtn && !createBtn.buttons"
+      type="button"
+      class="btn btn-green"
+      (click)="handleCreateBtnClick()"
+      style="margin-left: 24px"
+    >
+      <span class="{{ createBtn.icon }}" *ngIf="createBtn.icon"></span>
+      {{ createBtn.label }}
+    </button> -->
+    <!-- <kendo-dropdownbutton
+      *ngIf="createBtn && createBtn.buttons && createBtn.buttons.length > 0"
+      [data]="createBtn.buttons"
+      class="btn btn-green"
+      style="margin-left: 8px"
+      [popupSettings]="{
+        popupClass: 'grid-toolbar-options-dropdown-button et-dropdown-menu'
+      }"
+    >
+      {{ createBtn.label }}<i class="k-button-icon k-icon k-i-arrow-s"></i>
+      <ng-template kendoDropDownButtonItemTemplate let-dataItem>
+        <div
+          style="width: 100%"
+          (click)="handleCreateItemButtonClick(dataItem)"
+        >
+          <span class="{{ dataItem.icon }}" *ngIf="dataItem.icon"></span>
+          <span>{{ dataItem.label }}</span>
+        </div>
+      </ng-template>
+    </kendo-dropdownbutton> -->
+  </div>
+  <div class="right">
+    <!-- <button
+      *ngIf="deleteBtn"
+      type="button"
+      class="btn btn-light"
+      (click)="handleDeleteBtnClick()"
+      style="margin-left: 24px"
+    >
+      <span class="{{ deleteBtn.icon }}" *ngIf="deleteBtn.icon"></span>
+      {{ deleteBtn.label }}
+    </button> -->
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Search"
+      *ngIf="!hideSearchField"
+      (keyup)="onSearch($event)"
+    />
+  </div>
+</div>

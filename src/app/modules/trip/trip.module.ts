@@ -14,6 +14,8 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { TranslateModule } from '@ngx-translate/core';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
 
 @NgModule({
   imports: [
@@ -24,6 +26,8 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
     DropDownsModule,
     DateInputsModule,
     InputsModule,
+    GridModule,
+    ButtonsModule,
     TripRoutingModule,
     TranslateModule.forChild()
   ],

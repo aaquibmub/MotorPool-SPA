@@ -92,4 +92,8 @@ export class UtilityService {
       this.router.navigate([uri]));
   }
 
+  matches(el, selector): any {
+    return (el.matches || el.msMatchesSelector).call(el, selector);
+  }
+
 }
