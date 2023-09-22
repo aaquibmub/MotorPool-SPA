@@ -1,0 +1,74 @@
+<div class="card card-grey p-24">
+  <div class="card-header display-flex justify-space-between">
+    <div class="card-title">Notifications</div>
+    <div class="card-action"></div>
+  </div>
+  <div class="card-body">
+    <div class="grid-content">
+      <app-grid-toolbar
+        [grid]="notificationConfigsGrid"
+        [numberOfRecords]="gridData?.total"
+        entity="Rule"
+        [createBtn]="createButton"
+        [hidePagingDropdown]="true"
+        [hideExportDropdown]="true"
+      ></app-grid-toolbar>
+      <kendo-grid
+        id="notificationConfigsGrid"
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [sortable]="true"
+        [pageable]="pageable"
+        scrollable="none"
+        (dataStateChange)="dataStateChange($event)"
+      >
+        <kendo-grid-column field="name" title="Rule Name">
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <a (click)="onEdit(dataItem)">{{ dataItem.name }}</a>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="features" title="Features">
+        </kendo-grid-column>
+        <kendo-grid-column title="Notification Type">
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span *ngIf="dataItem.onSystem == true && dataItem.onEmail == false"
+              >Push</span
+            >
+            <span *ngIf="dataItem.onEmail == true && dataItem.onSystem == false"
+              >Email</span
+            >
+            <span *ngIf="dataItem.onEmail == true && dataItem.onSystem == true"
+              >Push & Email</span
+            >
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column headerClass="action-column">
+          <ng-template kendoGridHeaderTemplate>
+            <span><i class="action-column-icon"></i></span>
+          </ng-template>
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <app-grid-action-dropdown
+              [actions]="getGridActions(dataItem)"
+              [index]="rowIndex"
+              [states]="getGridActionMenuState()"
+            ></app-grid-action-dropdown>
+          </ng-template>
+        </kendo-grid-column>
+      </kendo-grid>
+    </div>
+  </div>
+</div>

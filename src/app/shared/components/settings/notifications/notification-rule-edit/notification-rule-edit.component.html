@@ -1,0 +1,213 @@
+<div class="overlay" [perfectScrollbar]>
+  <div class="overlay-wrapper" style="width: 80%">
+    <div class="overlay-content bg-white p-24 sm-padding-10">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-transparent">
+            <div class="card-header">
+              <div class="card-title">Notification Rule</div>
+            </div>
+            <div class="card-block">
+              <form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-section">
+                      <div class="section-body">
+                        <div class="fields">
+                          <div class="form-group">
+                            <label for="inputName" class="label"
+                              >Rule Name</label
+                            >
+                            <div class="control">
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="inputName"
+                                formControlName="name"
+                              />
+                              <div
+                                *ngIf="
+                                  !form.get('name').valid &&
+                                  form.get('name').touched
+                                "
+                                class="invalid-feedback"
+                              >
+                                Name is required
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputOnSystem" class="label"
+                              >Notification Type</label
+                            >
+                            <div class="control">
+                              <div class="display-flex">
+                                <div class="checkbox-control">
+                                  <kendo-switch
+                                    [size]="'small'"
+                                    id="inputOnSystem"
+                                    formControlName="onSystem"
+                                  ></kendo-switch>
+                                </div>
+                                <div class="label">
+                                  <label for="inputOnSystem">Push</label>
+                                </div>
+                              </div>
+                              <div class="display-flex">
+                                <div class="checkbox-control">
+                                  <kendo-switch
+                                    [size]="'small'"
+                                    id="inputOnEmail"
+                                    formControlName="onEmail"
+                                  ></kendo-switch>
+                                </div>
+                                <div class="label">
+                                  <label for="inputOnEmail">Email</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputUserRole" class="label"
+                              >User Role</label
+                            >
+                            <div class="control">
+                              <kendo-dropdownlist
+                                class="form-control"
+                                textField="text"
+                                valueField="value"
+                                [data]="userRoleList"
+                                formControlName="userRole"
+                                (valueChange)="
+                                  handleUserRoleValueChange($event)
+                                "
+                              >
+                              </kendo-dropdownlist>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputUsers" class="label">Users</label>
+                            <div class="control">
+                              <kendo-grid
+                                class="popup-grid"
+                                [grid]="userGrid"
+                                [data]="userGridList"
+                                [selectable]="{
+                                  enabled: true,
+                                  checkboxOnly: true
+                                }"
+                                kendoGridSelectBy="id"
+                                [(selectedKeys)]="myUserSelection"
+                              >
+                                <kendo-grid-checkbox-column
+                                  class="check-box-column"
+                                  [showSelectAll]="true"
+                                >
+                                </kendo-grid-checkbox-column>
+                                <kendo-grid-column field="user" title="User">
+                                  <ng-template
+                                    kendoGridCellTemplate
+                                    let-dataItem
+                                    let-rowIndex="rowIndex"
+                                  >
+                                    {{ dataItem.user.text }}
+                                  </ng-template>
+                                </kendo-grid-column>
+                                <kendo-grid-column field="role" title="Role">
+                                  <ng-template
+                                    kendoGridCellTemplate
+                                    let-dataItem
+                                    let-rowIndex="rowIndex"
+                                  >
+                                    {{ dataItem.role.text }}
+                                  </ng-template>
+                                </kendo-grid-column>
+                              </kendo-grid>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-section">
+                      <div class="section-body">
+                        <div class="fields">
+                          <div class="form-group"></div>
+                          <div class="form-group"></div>
+                          <div class="form-group">
+                            <label for="inputOnSystem" class="label"
+                              >Event Category</label
+                            >
+                            <div class="control">
+                              <kendo-dropdownlist
+                                class="form-control"
+                                textField="text"
+                                valueField="value"
+                                [data]="eventCategoryList"
+                                formControlName="eventCategory"
+                                (valueChange)="
+                                  handleEventCategoryValueChange($event)
+                                "
+                              >
+                              </kendo-dropdownlist>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEvents" class="label"
+                              >Events</label
+                            >
+                            <div class="control">
+                              <kendo-grid
+                                class="popup-grid"
+                                [data]="eventGridList"
+                                [selectable]="{
+                                  enabled: true,
+                                  checkboxOnly: true
+                                }"
+                                kendoGridSelectBy="id"
+                                [(selectedKeys)]="myEventSelection"
+                              >
+                                <kendo-grid-checkbox-column
+                                  class="check-box-column"
+                                  [showSelectAll]="true"
+                                >
+                                </kendo-grid-checkbox-column>
+                                <kendo-grid-column field="name" title="Event">
+                                </kendo-grid-column>
+                              </kendo-grid>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="form-section">
+                  <div class="section-body">
+                    <div class="fields">
+                      <div class="form-group">
+                        <button
+                          class="btn btn-default mr-16"
+                          type="button"
+                          (click)="close()"
+                        >
+                          Cancel
+                        </button>
+                        <button class="btn btn-primary" type="submit">
+                          Save
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

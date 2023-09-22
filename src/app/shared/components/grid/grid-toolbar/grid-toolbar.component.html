@@ -47,7 +47,7 @@
         <span (click)="handleButtonClick(dataItem)">{{ dataItem.label }}</span>
       </ng-template>
     </kendo-dropdownbutton> -->
-    <!-- <button
+    <button
       *ngIf="createBtn && !createBtn.buttons"
       type="button"
       class="btn btn-green"
@@ -56,7 +56,7 @@
     >
       <span class="{{ createBtn.icon }}" *ngIf="createBtn.icon"></span>
       {{ createBtn.label }}
-    </button> -->
+    </button>
     <!-- <kendo-dropdownbutton
       *ngIf="createBtn && createBtn.buttons && createBtn.buttons.length > 0"
       [data]="createBtn.buttons"

@@ -14,3 +14,8 @@
 <app-passenger-quick-add-popup
   *ngIf="showPassengerQuickAddPopup"
 ></app-passenger-quick-add-popup>
+
+<app-notification-rule-edit
+  *ngIf="showNotificationRulePopupPopup"
+  [ruleId]="ruleId"
+></app-notification-rule-edit>

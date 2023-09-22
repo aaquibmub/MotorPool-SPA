@@ -1,0 +1,31 @@
+.template-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.template-list .template-item {
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid #e0e0e0;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.template-image img {
+  height: 170px;
+  width: 130px;
+}
+
+.template-list .selected {
+  background-color: rgb(240, 246, 255);
+  border-color: rgb(0, 82, 204);
+}
+
+.template-preview {
+  display: flex;
+  justify-content: center;
+}

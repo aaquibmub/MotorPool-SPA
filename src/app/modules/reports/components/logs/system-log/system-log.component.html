@@ -1,0 +1,30 @@
+<div class="grid-content">
+    <app-grid-toolbar
+    [numberOfRecords]="gridData?.total"
+    entity="System Log"
+  ></app-grid-toolbar>
+  <kendo-grid
+    [data]="gridData"
+    [pageSize]="state.take"
+    [skip]="state.skip"
+    [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="pageable"
+    scrollable="none"
+    (dataStateChange)="dataStateChange($event)"
+  >
+    <kendo-grid-column field="logTime" title="Log Time">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        {{ dataItem.date | dateformat: "g" }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="message" title="Message"> </kendo-grid-column>
+    <kendo-grid-column field="type" title="Type">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span class="open-status">{{ getCashTypeFor(dataItem.type) }}</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="logBy" title="Log By"> </kendo-grid-column>
+
+  </kendo-grid>
+</div>

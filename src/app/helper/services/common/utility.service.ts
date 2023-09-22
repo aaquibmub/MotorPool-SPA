@@ -1,6 +1,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LanguageKeys } from '../../common/language-keys';
+import { SystemLogType } from '../../common/shared-types';
 
 @Injectable({
   providedIn: 'root'
@@ -94,6 +95,23 @@ export class UtilityService {
 
   matches(el, selector): any {
     return (el.matches || el.msMatchesSelector).call(el, selector);
+  }
+
+  getSystemLogTypeLabel(type: SystemLogType): string {
+    if (type === SystemLogType.Error) {
+      return 'Error';
+    }
+    if (type === SystemLogType.Exception) {
+      return 'Exception';
+    }
+    if (type === SystemLogType.Success) {
+      return 'Success';
+    }
+    if (type === SystemLogType.Warning) {
+      return 'Warning';
+    }
+    return '';
+
   }
 
 }

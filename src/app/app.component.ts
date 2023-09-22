@@ -7,6 +7,8 @@ import { AlertService } from './helper/services/common/alert.service';
 import { CldrIntlService, IntlService } from '@progress/kendo-angular-intl';
 import { OverlayService } from './helper/services/common/overlay.service';
 import { PassengerService } from './helper/services/trips/passenger.service';
+import { PopupConfigModel } from './helper/models/common/popup-config-model';
+import { NotificationConfigService } from './helper/services/utilities/notification-config.service';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +32,11 @@ export class AppComponent implements OnInit {
   // passenger
   showPassengerQuickAddPopup = false;
 
+  // notification rule
+  showNotificationRulePopupPopup: boolean;
+  ruleId: string;
+
+
   constructor(
     private authService: AuthService,
     translate: TranslateService,
@@ -37,6 +44,7 @@ export class AppComponent implements OnInit {
     public intlService: IntlService,
     // private signalRService: SignalRService,
     private alertService: AlertService,
+    private notificationConfigService: NotificationConfigService,
     private passengerService: PassengerService) {
     translate.setDefaultLang('en');
     translate.use('en');
@@ -107,5 +115,15 @@ export class AppComponent implements OnInit {
       }
     }
     );
+
+    this.notificationConfigService.getNotificationConfigQuickAddPopup()
+      .subscribe({
+        next: (flag: PopupConfigModel) => {
+          this.showNotificationRulePopupPopup = flag.show;
+          this.ruleId = flag.arg;
+        }
+      }
+      );
+
   }
 }

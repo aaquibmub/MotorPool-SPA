@@ -23,4 +23,16 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => import('../../modules/trip/trip.module')
       .then(m => m.TripModule)
   },
+  {
+    path: 'setting',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../modules/setting/setting.module')
+      .then(m => m.SettingModule)
+  },
+  {
+    path: 'reports',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../modules/reports/reports.module')
+      .then(m => m.ReportsModule)
+  },
 ];

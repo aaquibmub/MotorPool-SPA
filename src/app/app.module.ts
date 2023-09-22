@@ -1,3 +1,4 @@
+import { InputsModule } from '@progress/kendo-angular-inputs';
 import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +25,8 @@ import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { LoaderBlockUiComponent } from './shared/components/loader-block-ui/loader-block-ui.component';
 import { HttpInterceptorService } from './helper/intercepters/http.interceptor';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { NotificationRuleEditComponent } from './shared/components/settings/notifications/notification-rule-edit/notification-rule-edit.component';
+import { NotificationModule } from '@progress/kendo-angular-notification';
 
 
 export function tokenGetter(): string {
@@ -41,7 +44,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ContentLayoutComponent,
     LoaderBlockUiComponent,
 
-    PassengerQuickAddPopupComponent
+    PassengerQuickAddPopupComponent,
+    NotificationRuleEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +65,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     DialogsModule,
     GridModule,
+    InputsModule,
+    NotificationModule,
     IndicatorsModule,
     PerfectScrollbarModule,
     IntlModule,

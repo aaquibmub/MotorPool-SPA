@@ -1,0 +1,97 @@
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <div class="card card-grey p-24">
+    <div class="card-header display-flex justify-space-between">
+      <div class="card-title">Culture and Time Zone</div>
+      <div class="card-action">
+        <button type="submit" class="btn btn-green">Save</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="form-section">
+        <div class="section-body">
+          <div class="form-section">
+            <div class="section-body">
+              <div class="fields">
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputCulture">Culture</label>
+                  </div>
+                  <div class="control">
+                    <kendo-dropdownlist
+                      class="form-control"
+                      textField="text"
+                      valueField="value"
+                      [data]="cultureList"
+                      formControlName="culture"
+                    >
+                    </kendo-dropdownlist>
+                    <div
+                      *ngIf="
+                        !form.get('culture').valid &&
+                        form.get('culture').touched
+                      "
+                      class="invalid-feedback"
+                    >
+                      Culture is required
+                    </div>
+                    <span class="control-helper"> </span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputLanguage">Language</label>
+                  </div>
+                  <div class="control">
+                    <kendo-dropdownlist
+                      class="form-control"
+                      textField="text"
+                      valueField="value"
+                      [data]="languageList"
+                      formControlName="language"
+                    >
+                    </kendo-dropdownlist>
+                    <div
+                      *ngIf="
+                        !form.get('language').valid &&
+                        form.get('language').touched
+                      "
+                      class="invalid-feedback"
+                    >
+                      Language is required
+                    </div>
+                    <span class="control-helper"> </span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputTimeZone">Time Zone</label>
+                  </div>
+                  <div class="control">
+                    <kendo-dropdownlist
+                      class="form-control"
+                      textField="text"
+                      valueField="value"
+                      [data]="timeZoneList"
+                      formControlName="timeZone"
+                    >
+                    </kendo-dropdownlist>
+                    <div
+                      *ngIf="
+                        !form.get('timeZone').valid &&
+                        form.get('timeZone').touched
+                      "
+                      class="invalid-feedback"
+                    >
+                      Time Zone is required
+                    </div>
+                    <span class="control-helper"> </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

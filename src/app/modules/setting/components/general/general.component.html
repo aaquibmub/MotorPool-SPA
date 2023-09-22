@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-grey">
+      <div class="card-body">
+        <div class="display-flex">
+          <div class="display-flex-center flex-column flex-1">
+            <span> Select the desired store to modify the settings </span>
+          </div>
+          <div class="display-flex-center flex-column flex-1">
+            <div class="form-section" style="padding-bottom: 8px">
+              <div class="section-body">
+                <div class="fields">
+                  <div class="form-group mb-0">
+                    <div class="label">
+                      <label for="inputStoreDropdown"> My Stores</label>
+                    </div>
+                    <div class="control">
+                      <kendo-dropdownlist
+                        class="form-control"
+                        textField="text"
+                        valueField="value"
+                        [(ngModel)]="selectedLocation"
+                        (valueChange)="handleLocationValueChange($event)"
+                        [data]="locationList"
+                      >
+                      </kendo-dropdownlist>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <app-store-detail-config></app-store-detail-config>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <app-culture-and-timezone></app-culture-and-timezone>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <app-sale-target-config></app-sale-target-config>
+  </div>
+</div>

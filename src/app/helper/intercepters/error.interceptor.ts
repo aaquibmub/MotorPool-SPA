@@ -19,6 +19,10 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.router.navigate(['/auth/sign-in']);
           return throwError(error.statusText);
         }
+        if (error.status === 403) {
+          this.alertService.setErrorAlert('You do not have permission to perform this action');
+          return throwError(error.statusText);
+        }
         if (error instanceof HttpErrorResponse) {
           const appError = error.headers.get('Application-Error');
           if (appError) {

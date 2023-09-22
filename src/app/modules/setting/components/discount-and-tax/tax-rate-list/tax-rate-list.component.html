@@ -1,0 +1,111 @@
+<form
+  (ngSubmit)="submit()"
+  *ngIf="form"
+  [formGroup]="form"
+  (keydown.enter)="$event.preventDefault()"
+>
+  <div class="card card-grey p-24">
+    <div class="card-header display-flex justify-space-between">
+      <div class="card-title">Tax Rates</div>
+      <div class="card-action">
+        <button type="submit" class="btn btn-green">Save</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="form-section">
+        <div class="section-header">
+          <span>Define and manage default tax rates</span>
+        </div>
+        <div class="section-body">
+          <div class="fields">
+            <div class="form-group">
+              <div class="control">
+                <span class="control-helper"
+                  >Define tax rates that will be utilized for sale and
+                  purchases.
+                </span>
+                <span class="control-helper-light"
+                  >Note only “Administrator” has amendment permissions
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="section-body">
+          <div class="fields">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <table class="table table-responsive">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Tax Rate (%)</th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="taxRates">
+                      <tr
+                        *ngFor="
+                          let t of form.get('taxRates').controls;
+                          let j = index
+                        "
+                        [formGroupName]="j"
+                      >
+                        <td>
+                          <div class="form-group">
+                            <div class="control">
+                              <input
+                                type="text"
+                                class="form-control"
+                                formControlName="name"
+                              />
+                              <div
+                                *ngIf="
+                                  !t.get('name').valid && t.get('name').touched
+                                "
+                                class="invalid-feedback"
+                              >
+                                Title is required
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="form-group">
+                            <div class="control">
+                              <input
+                                type="number"
+                                class="form-control"
+                                formControlName="taxRate"
+                              />
+                              <div
+                                *ngIf="
+                                  !t.get('taxRate').valid &&
+                                  t.get('taxRate').touched
+                                "
+                                class="invalid-feedback"
+                              >
+                                Tax rate is required
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="form-group mt-40">
+                  <span class="clickable" (click)="addNewTaxRate()"
+                    ><i class="btn-add-new-item"></i
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
