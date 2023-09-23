@@ -1,0 +1,50 @@
+<div class="grid-content">
+  <app-grid-toolbar
+    [grid]="usersGrid"
+    [numberOfRecords]="gridData?.total"
+    entity="Rule"
+    [createBtn]="createButton"
+    [hidePagingDropdown]="true"
+    [hideExportDropdown]="true"
+  ></app-grid-toolbar>
+  <kendo-grid
+    id="usersGrid"
+    [data]="gridData"
+    [pageSize]="state.take"
+    [skip]="state.skip"
+    [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="pageable"
+    scrollable="none"
+    (dataStateChange)="dataStateChange($event)"
+  >
+    <kendo-grid-column field="createdDate" title="Date Created">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        {{ dataItem.createdDate | dateformat }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="firstName" title="First Name">
+    </kendo-grid-column>
+    <kendo-grid-column field="lastName" title="Last Name"> </kendo-grid-column>
+    <kendo-grid-column field="login" title="Login"> </kendo-grid-column>
+    <kendo-grid-column field="roleType" title="Role"> </kendo-grid-column>
+    <kendo-grid-column title="Status">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span *ngIf="dataItem.active == true">Enabled</span>
+        <span *ngIf="dataItem.active == false">Disabled</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column headerClass="action-column">
+      <ng-template kendoGridHeaderTemplate>
+        <span><i class="action-column-icon"></i></span>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <app-grid-action-dropdown
+          [actions]="getGridActions(dataItem)"
+          [index]="rowIndex"
+          [states]="getGridActionMenuState()"
+        ></app-grid-action-dropdown>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>

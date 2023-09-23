@@ -1,0 +1,10 @@
+<span style="cursor: pointer" (click)="toggleActionMenu()"
+  ><i class="action-icon"></i
+></span>
+<div class="action-menu et-dropdown-menu" *ngIf="showActionMenu && actions">
+  <ul>
+    <li *ngFor="let action of actions">
+      <a (click)="handleButtonClick(action)">{{ action.label }}</a>
+    </li>
+  </ul>
+</div>

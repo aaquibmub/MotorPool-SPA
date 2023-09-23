@@ -1,0 +1,9 @@
+.action-menu {
+  position: absolute;
+  right: 35px;
+  z-index: 3;
+}
+
+.action-menu a {
+  cursor: pointer;
+}

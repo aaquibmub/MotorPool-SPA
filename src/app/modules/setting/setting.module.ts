@@ -1,3 +1,4 @@
+import { UserManagmentComponent } from './components/user-managment/user-managment.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SettingRoutingModule } from './setting-routing.module';
@@ -9,6 +10,10 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingComponent } from './setting.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { UsersComponent } from './components/user-managment/users/users.component';
+import { RolesComponent } from './components/user-managment/roles/roles.component';
+import { UserComponent } from './components/user-managment/user/user.component';
+import { UserEditComponent } from './components/user-managment/user/user-edit/user-edit.component';
 
 @NgModule({
   imports: [
@@ -24,7 +29,14 @@ import { NotificationsComponent } from './components/notifications/notifications
   ],
   declarations: [
     SettingComponent,
-    NotificationsComponent
+    NotificationsComponent,
+
+    UserManagmentComponent,
+    UsersComponent,
+    UserComponent,
+    UserEditComponent,
+
+    RolesComponent
   ]
 })
 export class SettingModule { }

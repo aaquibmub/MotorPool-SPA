@@ -3,6 +3,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
 import { SettingComponent } from './setting.component';
+import { UserManagmentComponent } from './components/user-managment/user-managment.component';
+import { UsersComponent } from './components/user-managment/users/users.component';
+import { RolesComponent } from './components/user-managment/roles/roles.component';
+import { UserComponent } from './components/user-managment/user/user.component';
+import { UserEditComponent } from './components/user-managment/user/user-edit/user-edit.component';
 
 const routes: Routes = [
   {
@@ -15,6 +20,32 @@ const routes: Routes = [
       {
         path: 'notifications',
         component: NotificationsComponent
+      },
+
+      // user management
+      {
+        path: 'user-management',
+        component: UserManagmentComponent,
+        children: [
+          { path: '', redirectTo: 'users', pathMatch: 'full' },
+          { path: 'users', component: UsersComponent },
+          { path: 'roles', component: RolesComponent }
+        ]
+      },
+
+      // user
+      {
+        path: 'user',
+        component: UserComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: '/setting/user-management',
+            pathMatch: 'full'
+          },
+          { path: 'new', component: UserEditComponent },
+          { path: ':id/edit', component: UserEditComponent },
+        ]
       },
 
     ]

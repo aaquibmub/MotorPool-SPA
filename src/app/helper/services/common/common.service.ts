@@ -21,4 +21,9 @@ export class CommonService {
     return this.http.get<DropdownItem<number>[]>(url);
   }
 
+  getCountryDropdownList(text: string): Observable<DropdownItem<string>[]> {
+    return this.http.get<DropdownItem<string>[]>(
+      this.baseUrl + 'get-country-dropdown-list?text=' + text);
+  }
+
 }

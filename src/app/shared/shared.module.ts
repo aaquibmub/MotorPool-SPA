@@ -13,6 +13,7 @@ import { NotificationTickerComponent } from './notification-ticker/notification-
 import { AlertComponent } from './components/alert/alert.component';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { GridToolbarComponent } from './components/grid/grid-toolbar/grid-toolbar.component';
+import { GridActionDropdownComponent } from './components/grid/grid-action-dropdown/grid-action-dropdown.component';
 
 @NgModule({
   exports: [
@@ -22,6 +23,7 @@ import { GridToolbarComponent } from './components/grid/grid-toolbar/grid-toolba
     SidebarComponent,
     NumericFormatPipe,
     GridToolbarComponent,
+    GridActionDropdownComponent,
     DateFormatPipe,
     AlertComponent,
     NotificationTickerComponent
@@ -39,6 +41,7 @@ import { GridToolbarComponent } from './components/grid/grid-toolbar/grid-toolba
     SidebarComponent,
     NumericFormatPipe,
     GridToolbarComponent,
+    GridActionDropdownComponent,
     DateFormatPipe,
     AlertComponent,
     NotificationTickerComponent
