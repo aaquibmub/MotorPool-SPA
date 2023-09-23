@@ -13,6 +13,9 @@ import { UserModel } from '../../models/settings/user-management/users/user-mode
 import { RoleModel } from '../../models/settings/user-management/roles/role-model';
 import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
 import { ResponseModel } from '../../models/common/response-model';
+import { PermissionModel } from '../../models/settings/user-management/roles/permission-model';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { guid } from '@progress/kendo-angular-common';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +63,11 @@ export class UserService {
       this.userUrl + 'get-role-dropdown-list?text=' + text);
   }
 
+  getPermissionByType(type: UserRoleType): Observable<PermissionModel[]> {
+    return this.http.get<PermissionModel[]>(
+      this.userUrl + 'get-permission-by-type?type=' + type);
+  }
+
   getRole(id: string): Observable<RoleModel> {
     return this.http.get<RoleModel>(this.userUrl + 'role/' + id);
   }
@@ -82,6 +90,18 @@ export class UserService {
 
   addUpdateRole(model: any): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.userUrl + 'role', model);
+  }
+
+
+  createPermissionFormGroup(model: PermissionModel): UntypedFormGroup {
+    return new UntypedFormGroup({
+      id: new UntypedFormControl(model.id ? model.id : guid()),
+      name: new UntypedFormControl(model ? model.name : null),
+      canView: new UntypedFormControl(model ? model.canView : false),
+      canCreate: new UntypedFormControl(model ? model.canCreate : false),
+      canUpdate: new UntypedFormControl(model ? model.canUpdate : false),
+      canDelete: new UntypedFormControl(model ? model.canDelete : false),
+    });
   }
 
 }

@@ -8,6 +8,8 @@ import { UsersComponent } from './components/user-managment/users/users.componen
 import { RolesComponent } from './components/user-managment/roles/roles.component';
 import { UserComponent } from './components/user-managment/user/user.component';
 import { UserEditComponent } from './components/user-managment/user/user-edit/user-edit.component';
+import { RoleComponent } from './components/user-managment/role/role.component';
+import { RoleEditComponent } from './components/user-managment/role/role-edit/role-edit.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,21 @@ const routes: Routes = [
           },
           { path: 'new', component: UserEditComponent },
           { path: ':id/edit', component: UserEditComponent },
+        ]
+      },
+
+      // role
+      {
+        path: 'role',
+        component: RoleComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: '/setting/user-management',
+            pathMatch: 'full'
+          },
+          { path: 'new', component: RoleEditComponent },
+          { path: ':id/edit', component: RoleEditComponent },
         ]
       },
 

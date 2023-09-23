@@ -14,6 +14,8 @@ import { UsersComponent } from './components/user-managment/users/users.componen
 import { RolesComponent } from './components/user-managment/roles/roles.component';
 import { UserComponent } from './components/user-managment/user/user.component';
 import { UserEditComponent } from './components/user-managment/user/user-edit/user-edit.component';
+import { RoleComponent } from './components/user-managment/role/role.component';
+import { RoleEditComponent } from './components/user-managment/role/role-edit/role-edit.component';
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import { UserEditComponent } from './components/user-managment/user/user-edit/us
     UserComponent,
     UserEditComponent,
 
-    RolesComponent
+    RolesComponent,
+    RoleComponent,
+    RoleEditComponent
   ]
 })
 export class SettingModule { }

@@ -1,0 +1,147 @@
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <div class="page-actions"></div>
+  <div class="page-area">
+    <div class="page-header">
+      <div class="page-title">
+        <span>Role</span>
+      </div>
+    </div>
+    <div class="page-body">
+      <!-- Role Info -->
+      <div class="form-section">
+        <div class="row">
+          <!-- Name -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputName">Name</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputName"
+                  formControlName="name"
+                  id="inputName"
+                />
+                <div
+                  *ngIf="!form.get('name').valid && form.get('name').touched"
+                  class="invalid-feedback"
+                >
+                  Name is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Type -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputRole">Type</label>
+              </div>
+              <div class="control">
+                <kendo-dropdownlist
+                  class="form-control"
+                  textField="text"
+                  valueField="value"
+                  [defaultItem]="utilityService.dropdownDefaultItem"
+                  (valueChange)="handleTypeValueChange($event)"
+                  [data]="roleTypeList"
+                  formControlName="type"
+                >
+                  <ng-template kendoDropDownListItemTemplate let-dataItem>
+                    <span>{{ dataItem.text }}</span>
+                  </ng-template>
+                </kendo-dropdownlist>
+                <div
+                  *ngIf="!form.get('type').valid && form.get('type').touched"
+                  class="invalid-feedback"
+                >
+                  Type is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Role Info -->
+      <div class="form-section">
+        <div class="row">
+          <!-- Name -->
+          <div class="col-md-4" formArrayName="permissions">
+            <div
+              class="form-group"
+              *ngFor="let p of form.get('permissions').controls; let j = index"
+              [formGroupName]="j"
+            >
+              <div class="label">
+                <label>{{ p.get("name").value }}</label>
+              </div>
+              <div class="control">
+                <div class="checkbox-control">
+                  <input
+                    type="checkbox"
+                    [id]="'inputCanView' + j"
+                    formControlName="canView"
+                    kendoCheckBox
+                  />
+                  <label [for]="'inputCanView' + j">Can View</label>
+                </div>
+                <div class="checkbox-control">
+                  <input
+                    type="checkbox"
+                    [id]="'inputCanCreate' + j"
+                    formControlName="canCreate"
+                    kendoCheckBox
+                  />
+                  <label [for]="'inputCanCreate' + j">Can Create</label>
+                </div>
+                <div class="checkbox-control">
+                  <input
+                    type="checkbox"
+                    [id]="'inputCanUpdate' + j"
+                    formControlName="canUpdate"
+                    kendoCheckBox
+                  />
+                  <label [for]="'inputCanUpdate' + j">Can Update</label>
+                </div>
+                <div class="checkbox-control">
+                  <input
+                    type="checkbox"
+                    [id]="'inputCanDelete' + j"
+                    formControlName="canDelete"
+                    kendoCheckBox
+                  />
+                  <label [for]="'inputCanDelete' + j">Can Delete</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="form-section transparent-section">
+        <div class="section-body">
+          <div class="description sm-hide"></div>
+          <div class="fields">
+            <div class="form-group">
+              <button
+                class="btn btn-default mr-16"
+                type="button"
+                (click)="cancel()"
+              >
+                Cancel
+              </button>
+              <button *ngIf="!editMode" class="btn btn-primary" type="submit">
+                Create
+              </button>
+              <button *ngIf="editMode" class="btn btn-primary" type="submit">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
