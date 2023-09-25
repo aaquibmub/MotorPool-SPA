@@ -2,10 +2,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from './../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { CurrentUserModel } from '../../models/auth/current-user-model';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { OverlayService } from '../common/overlay.service';
 import { LoginModel } from '../../models/auth/login-model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

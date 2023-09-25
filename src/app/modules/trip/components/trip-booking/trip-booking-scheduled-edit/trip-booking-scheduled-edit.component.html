@@ -770,34 +770,65 @@
               </div>
             </div>
           </div>
-          <!-- Pickup Address -->
-          <div class="form-section blue-section">
-            <div class="section-header">Pickup Address</div>
-            <div class="section-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="form-group">
-                    <div class="label">
-                      <label for="inputPickupAddress">Address</label>
-                    </div>
-                    <div class="control">
-                      <kendo-dropdownlist
-                        class="form-control"
-                        textField="text"
-                        valueField="value"
-                        [filterable]="true"
-                        [defaultItem]="utilityService.dropdownDefaultItem"
-                        (filterChange)="handleAddressFilter($event)"
-                        [data]="addressList"
-                        formControlName="pickupAddress"
-                      >
-                        <ng-template kendoDropDownListItemTemplate let-dataItem>
-                          <span>{{ dataItem.text | translate }}</span>
-                        </ng-template>
-                      </kendo-dropdownlist>
+          <!-- Pickups -->
+          <div formArrayName="pickups">
+            <div
+              class="form-section blue-section"
+              *ngFor="let pickup of form.get('pickups').controls; let j = index"
+              [formGroupName]="j"
+            >
+              <div class="section-header">Pickup {{ j + 1 }}</div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputPickupAddress' + j">Address</label>
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [filterable]="true"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          (filterChange)="handleAddressFilter($event)"
+                          [data]="addressList"
+                          formControlName="pickupAddress"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text | translate }}</span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !pickup.get('pickupAddress').valid &&
+                            pickup.get('pickupAddress').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          Address is required.
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="display-flex justify-content-center">
+                <button
+                  type="button"
+                  (click)="addNewPickup()"
+                  class="btn btn-blue btn-wide"
+                >
+                  Add Pickup
+                </button>
               </div>
             </div>
           </div>
@@ -834,6 +865,15 @@
                             <span>{{ dataItem.text | translate }}</span>
                           </ng-template>
                         </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !stop.get('stopAddress').valid &&
+                            stop.get('stopAddress').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          Address is required.
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -854,34 +894,68 @@
               </div>
             </div>
           </div>
-          <!-- Dropoff Address -->
-          <div class="form-section blue-section">
-            <div class="section-header">Dropoff Address</div>
-            <div class="section-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="form-group">
-                    <div class="label">
-                      <label for="inputDropoffAddress">Address</label>
-                    </div>
-                    <div class="control">
-                      <kendo-dropdownlist
-                        class="form-control"
-                        textField="text"
-                        valueField="value"
-                        [filterable]="true"
-                        [defaultItem]="utilityService.dropdownDefaultItem"
-                        (filterChange)="handleAddressFilter($event)"
-                        [data]="addressList"
-                        formControlName="dropoffAddress"
-                      >
-                        <ng-template kendoDropDownListItemTemplate let-dataItem>
-                          <span>{{ dataItem.text | translate }}</span>
-                        </ng-template>
-                      </kendo-dropdownlist>
+          <!-- Dropoffs -->
+          <div formArrayName="dropoffs">
+            <div
+              class="form-section blue-section"
+              *ngFor="
+                let dropoff of form.get('dropoffs').controls;
+                let j = index
+              "
+              [formGroupName]="j"
+            >
+              <div class="section-header">Dropoff {{ j + 1 }}</div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputDropoffAddress' + j">Address</label>
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [filterable]="true"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          (filterChange)="handleAddressFilter($event)"
+                          [data]="addressList"
+                          formControlName="dropoffAddress"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text | translate }}</span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !dropoff.get('dropoffAddress').valid &&
+                            dropoff.get('dropoffAddress').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          Address is required.
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="display-flex justify-content-center">
+                <button
+                  type="button"
+                  (click)="addNewDropoff()"
+                  class="btn btn-blue btn-wide"
+                >
+                  Add Dropoff
+                </button>
               </div>
             </div>
           </div>

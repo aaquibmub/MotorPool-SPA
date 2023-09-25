@@ -9,6 +9,7 @@ import { OverlayService } from './helper/services/common/overlay.service';
 import { PassengerService } from './helper/services/trips/passenger.service';
 import { PopupConfigModel } from './helper/models/common/popup-config-model';
 import { NotificationConfigService } from './helper/services/utilities/notification-config.service';
+import { SignalRService } from './helper/services/common/signal-r.service';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +43,7 @@ export class AppComponent implements OnInit {
     translate: TranslateService,
     private overlayService: OverlayService,
     public intlService: IntlService,
-    // private signalRService: SignalRService,
+    private signalRService: SignalRService,
     private alertService: AlertService,
     private notificationConfigService: NotificationConfigService,
     private passengerService: PassengerService) {
@@ -57,7 +58,7 @@ export class AppComponent implements OnInit {
       (this.intlService as CldrIntlService).localeId = 'en-US';
     }
 
-    // this.signalRService.connect();
+    this.signalRService.connect();
 
     this.overlayService.getShowHideAlert().subscribe(
       (showAlert: boolean) => {

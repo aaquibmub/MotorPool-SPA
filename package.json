@@ -21,7 +21,7 @@
     "@angular/router": "~14.2.10",
     "@auth0/angular-jwt": "^5.0.2",
     "@ericblade/quagga2": "^1.7.5",
-    "@microsoft/signalr": "^6.0.1",
+    "@microsoft/signalr": "^6.0.22",
     "@ngrx/effects": "^13.0.2",
     "@ngrx/store": "^13.0.2",
     "@ngx-translate/core": "^14.0.0",

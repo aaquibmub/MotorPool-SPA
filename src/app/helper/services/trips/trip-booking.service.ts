@@ -11,6 +11,8 @@ import { TripBookingSpecialServiceModel } from '../../models/trips/trip-bookings
 import { TripStopModel } from '../../models/trips/enroute/trip-stop-model';
 import { ResponseModel } from '../../models/common/response-model';
 import { UtilityService } from '../common/utility.service';
+import { TripPickupModel } from '../../models/trips/enroute/trip-pickup-model';
+import { TripDropoffModel } from '../../models/trips/enroute/trip-dropoff-model';
 
 @Injectable({
   providedIn: 'root'
@@ -106,12 +108,32 @@ export class TripBookingService {
     });
   }
 
+  createPickupFormGroup(model: TripPickupModel): UntypedFormGroup {
+    return new UntypedFormGroup({
+      id: new UntypedFormControl(model && model.id ? model.id : guid()),
+      sequence: new UntypedFormControl(model ? model.sequence : false),
+      pickupAddress: new UntypedFormControl(
+        model ? model.pickupAddress : null, [UtilityRix.dropdownRequired as ValidatorFn]),
+
+    });
+  }
+
   createStopFormGroup(model: TripStopModel): UntypedFormGroup {
     return new UntypedFormGroup({
       id: new UntypedFormControl(model && model.id ? model.id : guid()),
       sequence: new UntypedFormControl(model ? model.sequence : false),
       stopAddress: new UntypedFormControl(
         model ? model.stopAddress : null, [UtilityRix.dropdownRequired as ValidatorFn]),
+
+    });
+  }
+
+  createDropoffFormGroup(model: TripDropoffModel): UntypedFormGroup {
+    return new UntypedFormGroup({
+      id: new UntypedFormControl(model && model.id ? model.id : guid()),
+      sequence: new UntypedFormControl(model ? model.sequence : false),
+      dropoffAddress: new UntypedFormControl(
+        model ? model.dropoffAddress : null, [UtilityRix.dropdownRequired as ValidatorFn]),
 
     });
   }

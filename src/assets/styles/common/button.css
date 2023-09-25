@@ -71,6 +71,13 @@
   color: rgba(49, 48, 48, 1);
 }
 
+.btn-blue {
+  background-color: #fff8d1;
+  border: 1px solid #cbdafc;
+  border-radius: 5px;
+  color: rgba(49, 48, 48, 1);
+}
+
 .btn-transparent {
   background-color: transparent;
   border: none;
@@ -143,6 +150,21 @@ a {
 .btn-bg-orange:active {
   background-color: #f7931e !important;
   color: #fff !important;
+}
+
+.btn-blue {
+  color: #cbdafc !important;
+  background-color: white !important;
+}
+
+.btn-blue:hover {
+  background-color: white !important;
+  color: #cbdafc !important;
+}
+
+.btn-blue:active {
+  background-color: white !important;
+  color: #cbdafc !important;
 }
 
 .btn-add-new-item {

@@ -20,6 +20,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DropdownType, Gender, TripDestination, TripRoute } from 'src/app/helper/common/shared-types';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { AgeGroupService } from 'src/app/helper/services/utilities/age-group.service';
+import { SignalRService } from 'src/app/helper/services/common/signal-r.service';
 
 @Component({
   selector: 'app-trip-booking-scheduled-edit',
@@ -53,6 +54,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
     private el: ElementRef,
     private notificationService: NotificationService,
     private overlayService: OverlayService,
+    private signalRService: SignalRService,
     private dialogService: DialogService,
     public utilityService: UtilityService,
     private commonService: CommonService,
@@ -180,9 +182,9 @@ export class TripBookingScheduledEditComponent implements OnInit {
     let tripDestination: DropdownItem<TripDestination> = null;
 
     let startingPoint: DropdownItem<string> = null;
-    let pickupAddress: DropdownItem<string> = null;
-    let stops: UntypedFormGroup[] = [this.tripBookingService.createStopFormGroup(null)];
-    let dropoffAddress: DropdownItem<string> = null;
+    let pickups: UntypedFormGroup[] = [];
+    let stops: UntypedFormGroup[] = [];
+    let dropoffs: UntypedFormGroup[] = [];
 
     let driver: DropdownItem<string> = null;
     let vehical: DropdownItem<string> = null;
@@ -219,9 +221,15 @@ export class TripBookingScheduledEditComponent implements OnInit {
       tripRoute = this.model.tripRoute;
       tripDestination = this.model.tripDestination;
 
-      startingPoint = this.model.startingPoint;
-      pickupAddress = this.model.pickupAddress;
       schedulingDays = this.model.scheduledDays;
+
+      startingPoint = this.model.startingPoint;
+
+      if (this.model.pickups && this.model.pickups.length > 0) {
+        this.model.pickups.forEach(f => {
+          pickups.push(this.tripBookingService.createPickupFormGroup(f));
+        });
+      }
 
       if (this.model.stops && this.model.stops.length > 0) {
         this.model.stops.forEach(f => {
@@ -229,7 +237,11 @@ export class TripBookingScheduledEditComponent implements OnInit {
         });
       }
 
-      dropoffAddress = this.model.dropoffAddress;
+      if (this.model.dropoffs && this.model.dropoffs.length > 0) {
+        this.model.dropoffs.forEach(f => {
+          dropoffs.push(this.tripBookingService.createDropoffFormGroup(f));
+        });
+      }
 
       driver = this.model.driver;
       vehical = this.model.vehical;
@@ -268,9 +280,9 @@ export class TripBookingScheduledEditComponent implements OnInit {
         tripDestination: new UntypedFormControl(
           tripDestination, [UtilityRix.dropdownRequired as ValidatorFn]),
         startingPoint: new UntypedFormControl(startingPoint),
-        pickupAddress: new UntypedFormControl(pickupAddress),
+        pickups: new UntypedFormArray(pickups),
         stops: new UntypedFormArray(stops),
-        dropoffAddress: new UntypedFormControl(dropoffAddress),
+        dropoffs: new UntypedFormArray(dropoffs),
         driver: new UntypedFormControl(driver),
         vehical: new UntypedFormControl(vehical),
         notes: new UntypedFormControl(notes)
@@ -318,6 +330,8 @@ export class TripBookingScheduledEditComponent implements OnInit {
                 'Trip booking is '
                 + successAction
                 + ' successfully');
+
+              this.signalRService.updateNotificationList();
 
               this.utilityService.redirectToUrl('/trips');
 
@@ -381,9 +395,19 @@ export class TripBookingScheduledEditComponent implements OnInit {
     }
   }
 
+  addNewPickup(): void {
+    var pickupFormArray = this.form.get('pickups') as FormArray;
+    pickupFormArray.push(this.tripBookingService.createPickupFormGroup(null));
+  }
+
   addNewStop(): void {
     var stopFormArray = this.form.get('stops') as FormArray;
     stopFormArray.push(this.tripBookingService.createStopFormGroup(null));
+  }
+
+  addNewDropoff(): void {
+    var dropoffFormArray = this.form.get('dropoffs') as FormArray;
+    dropoffFormArray.push(this.tripBookingService.createDropoffFormGroup(null));
   }
 
   handleAddressFilter(text: string): void {
