@@ -1,36 +1,37 @@
+import { ResponseModel } from './../../../../../helper/models/common/response-model';
+import { UtilityRix } from './../../../../../helper/common/utility-rix';
+import { Gender, TripDestination, TripRoute } from './../../../../../helper/common/shared-types';
+import { AlertService } from './../../../../../helper/services/common/alert.service';
 import { VehicalService } from './../../../../../helper/services/vehicals/vehical.service';
 import { DriverService } from './../../../../../helper/services/drivers/driver.service';
 import { AddressService } from './../../../../../helper/services/utilities/address.service';
-import { CommonService } from './../../../../../helper/services/common/common.service';
-import { ApproverService } from './../../../../../helper/services/trips/approver.service';
-import { ResponseModel } from './../../../../../helper/models/common/response-model';
-import { UtilityRix } from './../../../../../helper/common/utility-rix';
 import { PassengerService } from './../../../../../helper/services/trips/passenger.service';
+import { AgeGroupService } from './../../../../../helper/services/utilities/age-group.service';
+import { ApproverService } from './../../../../../helper/services/trips/approver.service';
 import { TripBookingService } from './../../../../../helper/services/trips/trip-booking.service';
+import { CommonService } from './../../../../../helper/services/common/common.service';
 import { UtilityService } from './../../../../../helper/services/common/utility.service';
-import { AlertService } from './../../../../../helper/services/common/alert.service';
+import { SignalRService } from './../../../../../helper/services/common/signal-r.service';
 import { OverlayService } from './../../../../../helper/services/common/overlay.service';
-import { NotificationService } from './../../../../../helper/services/common/notification.service';
 import { PassengerModel } from './../../../../../helper/models/passengers/passenger-model';
-import { DropdownItem } from '../../../../../helper/models/common/dropdown/dropdown-item.model';
-import { FormArray, FormControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { TripBookingScheduledModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-scheduled-model';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DropdownType, Gender, TripDestination, TripRoute } from 'src/app/helper/common/shared-types';
+import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
+import { TripBookingStartNowModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-start-now-model';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { NotificationService } from '@progress/kendo-angular-notification';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
-import { AgeGroupService } from 'src/app/helper/services/utilities/age-group.service';
-import { SignalRService } from 'src/app/helper/services/common/signal-r.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DropdownType } from 'src/app/helper/common/shared-types';
 
 @Component({
-  selector: 'app-trip-booking-scheduled-edit',
-  templateUrl: './trip-booking-scheduled-edit.component.html',
-  styleUrls: ['./trip-booking-scheduled-edit.component.css']
+  selector: 'app-trip-booking-start-now-edit',
+  templateUrl: './trip-booking-start-now-edit.component.html',
+  styleUrls: ['./trip-booking-start-now-edit.component.css']
 })
-export class TripBookingScheduledEditComponent implements OnInit {
+export class TripBookingStartNowEditComponent implements OnInit {
 
   editMode = false;
-  model: TripBookingScheduledModel;
+  model: TripBookingStartNowModel;
   form: UntypedFormGroup;
 
   approverList: DropdownItem<string>[];
@@ -75,17 +76,17 @@ export class TripBookingScheduledEditComponent implements OnInit {
     this.route.params
       .subscribe((params: Params) => {
         if (params.id != null) {
-          this.tripBookingService.getScheduledBooking(params.id)
-            .subscribe((model: TripBookingScheduledModel) => {
+          this.tripBookingService.getStartNowBooking(params.id)
+            .subscribe((model: TripBookingStartNowModel) => {
               this.model = model;
               this.editMode = true;
               this.initForm();
             });
         } else {
 
-          this.tripBookingService.getDefaultScheduledBookingModel()
+          this.tripBookingService.getDefaultStartNowBookingModel()
             .subscribe(
-              (model: TripBookingScheduledModel) => {
+              (model: TripBookingStartNowModel) => {
                 this.model = model;
 
                 this.initForm();
@@ -171,17 +172,14 @@ export class TripBookingScheduledEditComponent implements OnInit {
     let isSpecialServicesRequired = false;
     let specialSevices: UntypedFormGroup[] = [];
 
-    let startDate = null;
-    let endDate = null;
-
+    let pickupDate = null;
     let pickupTime = null;
-
-    let schedulingDays = null;
 
     let tripRoute: DropdownItem<TripRoute> = null;
     let tripDestination: DropdownItem<TripDestination> = null;
 
     let startingPoint: DropdownItem<string> = null;
+
     let pickups: UntypedFormGroup[] = [
       this.tripBookingService.createPickupFormGroup(null)
     ];
@@ -218,14 +216,11 @@ export class TripBookingScheduledEditComponent implements OnInit {
         });
       }
 
-      startDate = this.model.startDate;
-      endDate = this.model.endDate;
+      pickupDate = this.model.pickupDate;
       pickupTime = this.model.pickupTime;
 
       tripRoute = this.model.tripRoute;
       tripDestination = this.model.tripDestination;
-
-      schedulingDays = this.model.scheduledDays;
 
       startingPoint = this.model.startingPoint;
 
@@ -266,18 +261,10 @@ export class TripBookingScheduledEditComponent implements OnInit {
         isSpecialServicesRequired: new UntypedFormControl(isSpecialServicesRequired),
         specialSevices: new UntypedFormArray(specialSevices),
 
-        startDate: new UntypedFormControl(startDate ? new Date(startDate) : new Date(), [Validators.required]),
-        endDate: new UntypedFormControl(endDate ? new Date(endDate) : new Date(), [Validators.required]),
-        pickupTime: new UntypedFormControl(pickupTime ? new Date(pickupTime) : new Date(), [Validators.required]),
-        scheduledDays: new UntypedFormGroup({
-          sunday: new FormControl(schedulingDays ? schedulingDays.sunday : false),
-          monday: new FormControl(schedulingDays ? schedulingDays.monday : false),
-          tuesday: new FormControl(schedulingDays ? schedulingDays.tuesday : false),
-          wednesday: new FormControl(schedulingDays ? schedulingDays.wednesday : false),
-          thursday: new FormControl(schedulingDays ? schedulingDays.thursday : false),
-          friday: new FormControl(schedulingDays ? schedulingDays.friday : false),
-          saturday: new FormControl(schedulingDays ? schedulingDays.saturday : false),
-        }),
+        pickupDate: new UntypedFormControl(
+          pickupDate ? new Date(pickupDate) : new Date(), [Validators.required]),
+        pickupTime: new UntypedFormControl(
+          pickupTime ? new Date(pickupTime) : new Date(), [Validators.required]),
 
         tripRoute: new UntypedFormControl(
           tripRoute, [UtilityRix.dropdownRequired as ValidatorFn]),
@@ -296,17 +283,17 @@ export class TripBookingScheduledEditComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(['/trips/bookings/scheduled']);
+    this.router.navigate(['/trips/bookings/start-now']);
   }
 
   submit(): void {
-    debugger;
+
     if (!this.form.valid) {
       this.utilityService.scrollToFirstInvalidControl(this.el, '.page-wrapper');
       return;
     }
 
-    const formValue = this.form.value as TripBookingScheduledModel;
+    const formValue = this.form.value as TripBookingStartNowModel;
 
     const primaryAction = 'Create';
     const successAction = 'Created';
@@ -318,8 +305,8 @@ export class TripBookingScheduledEditComponent implements OnInit {
 
     dialog.result.subscribe((result: any) => {
       if (result.text === primaryAction) {
-        this.tripBookingService.addUpdateScheduled(
-          this.tripBookingService.prepareSaveTripBookingScheduled(
+        this.tripBookingService.addUpdateStartNow(
+          this.tripBookingService.prepareSaveTripBookingStartNow(
             this.model?.id ?? '',
             formValue))
           .subscribe(
@@ -370,7 +357,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
   }
 
   handlePassengerValueChange(value: DropdownItem<string>, index: number): void {
-    var passengerFormArray = this.form.get('passengers') as FormArray;
+    var passengerFormArray = this.form.get('passengers') as UntypedFormArray;
     if (value == null || value.value === '') {
       passengerFormArray.controls[index].setValue(
         this.tripBookingService.createPassengerFormGroup(null)
@@ -400,53 +387,53 @@ export class TripBookingScheduledEditComponent implements OnInit {
   }
 
   addNewPickup(): void {
-    var pickupFormArray = this.form.get('pickups') as FormArray;
+    var pickupFormArray = this.form.get('pickups') as UntypedFormArray;
     pickupFormArray.push(this.tripBookingService.createPickupFormGroup(null));
   }
 
   removePickup(index: number): void {
-    const len = (this.form?.get('pickups') as FormArray).controls.length;
+    const len = (this.form?.get('pickups') as UntypedFormArray).controls.length;
 
     if (len <= 1) {
       this.alertService.setErrorAlert('There should b one pickup')
       return;
     }
 
-    const pickup = (this.form?.get('pickups') as FormArray).controls[index];
+    const pickup = (this.form?.get('pickups') as UntypedFormArray).controls[index];
     if (pickup) {
-      (this.form?.get('pickups') as FormArray).removeAt(index);
+      (this.form?.get('pickups') as UntypedFormArray).removeAt(index);
     }
   }
 
   addNewStop(): void {
-    var stopFormArray = this.form.get('stops') as FormArray;
+    var stopFormArray = this.form.get('stops') as UntypedFormArray;
     stopFormArray.push(this.tripBookingService.createStopFormGroup(null));
   }
 
   removeStop(index: number): void {
 
-    const stop = (this.form?.get('stops') as FormArray).controls[index];
+    const stop = (this.form?.get('stops') as UntypedFormArray).controls[index];
     if (stop) {
-      (this.form?.get('stops') as FormArray).removeAt(index);
+      (this.form?.get('stops') as UntypedFormArray).removeAt(index);
     }
   }
 
   addNewDropoff(): void {
-    var dropoffFormArray = this.form.get('dropoffs') as FormArray;
+    var dropoffFormArray = this.form.get('dropoffs') as UntypedFormArray;
     dropoffFormArray.push(this.tripBookingService.createDropoffFormGroup(null));
   }
 
   removeDropoff(index: number): void {
-    const len = (this.form?.get('dropoffs') as FormArray).controls.length;
+    const len = (this.form?.get('dropoffs') as UntypedFormArray).controls.length;
 
     if (len <= 1) {
       this.alertService.setErrorAlert('There should b one dropoff')
       return;
     }
 
-    const dropoff = (this.form?.get('dropoffs') as FormArray).controls[index];
+    const dropoff = (this.form?.get('dropoffs') as UntypedFormArray).controls[index];
     if (dropoff) {
-      (this.form?.get('dropoffs') as FormArray).removeAt(index);
+      (this.form?.get('dropoffs') as UntypedFormArray).removeAt(index);
     }
   }
 

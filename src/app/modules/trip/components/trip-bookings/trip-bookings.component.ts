@@ -18,6 +18,13 @@ export class TripBookingsComponent implements OnInit {
       },
       icon: '',
       label: 'New Scheduled'
+    },
+    {
+      handle: () => {
+        this.router.navigate(['/trips/booking/new-start-now']);
+      },
+      icon: '',
+      label: 'New Start Now'
     }
   ];
 

@@ -189,6 +189,16 @@ export const ROUTES: RouteInfo[] = [
             submenu: []
           },
           {
+            path: '/trips/bookings/all',
+            title: 'All Trip Bookings',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
             path: '/trips/bookings/scheduled',
             title: 'Scheduled Bookings',
             icon: 'bx bx-right-arrow-alt',

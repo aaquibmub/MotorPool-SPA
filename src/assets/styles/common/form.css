@@ -47,6 +47,8 @@
   /* border-bottom: 1px solid var(--border-color); */
   padding-bottom: 8px;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
 }
 
 .form-section .section-body {

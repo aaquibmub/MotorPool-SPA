@@ -1,5 +1,5 @@
 <div class="grid-content">
-    <app-grid-toolbar
+  <app-grid-toolbar
     [numberOfRecords]="gridData?.total"
     entity="System Log"
   ></app-grid-toolbar>
@@ -13,18 +13,19 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="logTime" title="Log Time">
+    <kendo-grid-column field="createdTime" title="Log Time">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        {{ dataItem.date | dateformat: "g" }}
+        {{ dataItem.createdTime | dateformat : "g" }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="message" title="Message"> </kendo-grid-column>
     <kendo-grid-column field="type" title="Type">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <span class="open-status">{{ getCashTypeFor(dataItem.type) }}</span>
+        <span class="open-status">{{
+          getSystemLogTypeFor(dataItem.type)
+        }}</span>
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="logBy" title="Log By"> </kendo-grid-column>
-
   </kendo-grid>
 </div>

@@ -13,6 +13,7 @@ import { ResponseModel } from '../../models/common/response-model';
 import { UtilityService } from '../common/utility.service';
 import { TripPickupModel } from '../../models/trips/enroute/trip-pickup-model';
 import { TripDropoffModel } from '../../models/trips/enroute/trip-dropoff-model';
+import { TripBookingStartNowModel } from '../../models/trips/trip-bookings/trip-booking-start-now-model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +27,11 @@ export class TripBookingService {
   }
 
   getScheduledBooking(id: string): Observable<TripBookingScheduledModel> {
-    return this.http.get<TripBookingScheduledModel>(this.baseUrl + id);
+    return this.http.get<TripBookingScheduledModel>(this.baseUrl + 'get-scheduled' + id);
   }
 
   getDefaultScheduledBookingModel(): Observable<TripBookingScheduledModel> {
-    const url = this.baseUrl;
+    const url = this.baseUrl + 'get-default-scheduled';
     return this.http.get<TripBookingScheduledModel>(url);
   }
 
@@ -78,6 +79,35 @@ export class TripBookingService {
     //   this.utilityService.buildFormData(formData, f, 'specialRequests[' + index + ']');
     //   index++;
     // });
+
+    return formData;
+
+  }
+
+  getStartNowBooking(id: string): Observable<TripBookingStartNowModel> {
+    return this.http.get<TripBookingStartNowModel>(this.baseUrl + 'get-start-now' + id);
+  }
+
+  getDefaultStartNowBookingModel(): Observable<TripBookingStartNowModel> {
+    const url = this.baseUrl + 'get-default-start-now';
+    return this.http.get<TripBookingStartNowModel>(url);
+  }
+
+  addUpdateStartNow(model: any): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'start-now', model);
+  }
+
+  prepareSaveTripBookingStartNow(
+    id: string,
+    formValue: TripBookingStartNowModel
+  ): FormData {
+
+    const formData = new FormData();
+    if (id) {
+      formData.append('id', id);
+    }
+
+    this.utilityService.buildFormData(formData, formValue);
 
     return formData;
 

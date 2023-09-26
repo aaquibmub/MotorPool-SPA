@@ -1,15 +1,9 @@
 <form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
-  <div class="page-actions">
-    <!-- <button type="button" (click)="reset()">Clear</button> -->
-    <!-- <div class="help">
-      <span class="need-help">Need Help?</span>
-      <div class="icon">?</div>
-    </div> -->
-  </div>
+  <div class="page-actions"></div>
   <div class="page-area">
     <div class="page-header">
       <div class="page-title">
-        <span>{{ utilityService.language.scheduledTrip | translate }}</span>
+        <span>Start Now Trip</span>
       </div>
     </div>
     <div class="page-body">
@@ -470,70 +464,40 @@
           </div>
         </div>
       </div>
-      <!-- Scheduling -->
+      <!-- Booking -->
       <div class="form-section">
-        <div class="section-header">Scheduling</div>
+        <div class="section-header">Booking</div>
         <div class="section-body">
-          <!-- Range -->
+          <!-- Pickup Time -->
           <div class="form-section blue-section">
-            <div class="section-header">Range</div>
+            <div class="section-header">Pickup Date & Time</div>
             <div class="section-body">
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="label">
-                      <label for="inputStartDate">Start Date</label>
+                      <label for="inputPickupDate">Pickup Date</label>
                     </div>
                     <div class="control">
                       <kendo-datepicker
                         class="form-control"
-                        id="inputStartDate"
-                        formControlName="startDate"
+                        id="inputPickupDate"
+                        formControlName="pickupDate"
                       >
                       </kendo-datepicker>
                       <div
                         *ngIf="
-                          !form.get('startDate').valid &&
-                          form.get('startDate').touched
+                          !form.get('pickupDate').valid &&
+                          form.get('pickupDate').touched
                         "
                         class="invalid-feedback"
                       >
-                        Start Date is required.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <div class="label">
-                      <label for="inputEndDate">End Date</label>
-                    </div>
-                    <div class="control">
-                      <kendo-datepicker
-                        class="form-control"
-                        id="inputEndDate"
-                        formControlName="endDate"
-                      >
-                      </kendo-datepicker>
-                      <div
-                        *ngIf="
-                          !form.get('endDate').valid &&
-                          form.get('endDate').touched
-                        "
-                        class="invalid-feedback"
-                      >
-                        End Date is required.
+                        Pickup date is required.
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <!-- Pickup Time -->
-          <div class="form-section blue-section">
-            <div class="section-header">Pickup Time</div>
-            <div class="section-body">
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
@@ -555,116 +519,6 @@
                         class="invalid-feedback"
                       >
                         Pickup time is required.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Scheduled Days -->
-          <div class="form-section blue-section">
-            <div class="section-header">Scheduled Days</div>
-            <div class="section-body">
-              <div class="row">
-                <div class="col-6">
-                  <div class="row" formGroupName="scheduledDays">
-                    <!-- Sunday -->
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <div class="checkbox-control">
-                          <input
-                            type="checkbox"
-                            id="inputAlloDiscount"
-                            formControlName="sunday"
-                            kendoCheckBox
-                          />
-                          <label for="inputAlloDiscount">Sunday</label>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Monday -->
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <div class="checkbox-control">
-                          <input
-                            type="checkbox"
-                            id="inputMonday"
-                            formControlName="monday"
-                            kendoCheckBox
-                          />
-                          <label for="inputMonday">Monday</label>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Tuesday -->
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <div class="checkbox-control">
-                          <input
-                            type="checkbox"
-                            id="inputTuesday"
-                            formControlName="tuesday"
-                            kendoCheckBox
-                          />
-                          <label for="inputTuesday">Tuesday</label>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Wednesday -->
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <div class="checkbox-control">
-                          <input
-                            type="checkbox"
-                            id="inputWednesday"
-                            formControlName="wednesday"
-                            kendoCheckBox
-                          />
-                          <label for="inputWednesday">Wednesday</label>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Thursday -->
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <div class="checkbox-control">
-                          <input
-                            type="checkbox"
-                            id="inputThursday"
-                            formControlName="thursday"
-                            kendoCheckBox
-                          />
-                          <label for="inputThursday">Thursday</label>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Friday -->
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <div class="checkbox-control">
-                          <input
-                            type="checkbox"
-                            id="inputFriday"
-                            formControlName="friday"
-                            kendoCheckBox
-                          />
-                          <label for="inputFriday">Friday</label>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Saturday -->
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <div class="checkbox-control">
-                          <input
-                            type="checkbox"
-                            id="inputSaturday"
-                            formControlName="saturday"
-                            kendoCheckBox
-                          />
-                          <label for="inputSaturday">Saturday</label>
-                        </div>
                       </div>
                     </div>
                   </div>

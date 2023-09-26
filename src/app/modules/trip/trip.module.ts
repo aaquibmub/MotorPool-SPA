@@ -16,6 +16,7 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { TripBookingStartNowEditComponent } from './components/trip-booking/trip-booking-start-now-edit/trip-booking-start-now-edit.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
     TripBookingScheduledEditComponent,
     TripBookingScheduledListComponent,
 
-    TripBookingStartNowListComponent
+    TripBookingStartNowListComponent,
+    TripBookingStartNowEditComponent
   ]
 })
 export class TripModule { }
