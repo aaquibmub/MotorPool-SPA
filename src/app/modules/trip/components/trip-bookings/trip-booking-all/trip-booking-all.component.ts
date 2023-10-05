@@ -73,10 +73,10 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
 
     actions.push({
       handle: () => {
-        this.router.navigate(['/sales/sale-invoice/' + item.id + '/packing-list']);
+        this.tripService.setTripExecutePopup(true, item.id);
       },
       icon: '',
-      label: 'Packing List'
+      label: 'Execute'
     });
 
     return actions;

@@ -51,23 +51,23 @@ export class TripBookingService {
 
     this.utilityService.buildFormData(formData, formValue);
 
-    // let index = 0;
-    // formValue.educationHistory.forEach(f => {
-    //   this.utilityService.buildFormData(formData, f, 'educationHistory[' + index + ']');
-    //   index++;
-    // });
+    let index = 0;
+    formValue.pickups.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'pickups[' + index + ']');
+      index++;
+    });
 
-    // index = 0;
-    // formValue.experienceHistory.forEach(f => {
-    //   this.utilityService.buildFormData(formData, f, 'experienceHistory[' + index + ']');
-    //   index++;
-    // });
+    index = 0;
+    formValue.stops.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'stops[' + index + ']');
+      index++;
+    });
 
-    // index = 0;
-    // formValue.priorTests.forEach(f => {
-    //   this.utilityService.buildFormData(formData, f, 'priorTests[' + index + ']');
-    //   index++;
-    // });
+    index = 0;
+    formValue.dropoffs.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'dropoffs[' + index + ']');
+      index++;
+    });
 
     // index = 0;
     // formValue.programPriorities.forEach(f => {

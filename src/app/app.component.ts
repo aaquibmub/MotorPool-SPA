@@ -10,6 +10,7 @@ import { PassengerService } from './helper/services/trips/passenger.service';
 import { PopupConfigModel } from './helper/models/common/popup-config-model';
 import { NotificationConfigService } from './helper/services/utilities/notification-config.service';
 import { SignalRService } from './helper/services/common/signal-r.service';
+import { TripService } from './helper/services/trips/trip.service';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,10 @@ export class AppComponent implements OnInit {
   showNotificationRulePopupPopup: boolean;
   ruleId: string;
 
+  // trip execute
+  showTripExecutePopup: boolean;
+  tripId: string;
+
 
   constructor(
     private authService: AuthService,
@@ -46,6 +51,7 @@ export class AppComponent implements OnInit {
     private signalRService: SignalRService,
     private alertService: AlertService,
     private notificationConfigService: NotificationConfigService,
+    private tripService: TripService,
     private passengerService: PassengerService) {
     translate.setDefaultLang('en');
     translate.use('en');
@@ -122,6 +128,15 @@ export class AppComponent implements OnInit {
         next: (flag: PopupConfigModel) => {
           this.showNotificationRulePopupPopup = flag.show;
           this.ruleId = flag.arg;
+        }
+      }
+      );
+
+    this.tripService.getTripExecutePopup()
+      .subscribe({
+        next: (flag: PopupConfigModel) => {
+          this.showTripExecutePopup = flag.show;
+          this.tripId = flag.arg;
         }
       }
       );
