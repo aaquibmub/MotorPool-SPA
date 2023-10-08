@@ -28,6 +28,7 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { NotificationRuleEditComponent } from './shared/components/settings/notifications/notification-rule-edit/notification-rule-edit.component';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { TripExecutePopupComponent } from './shared/components/trips/trip-execute-popup/trip-execute-popup.component';
+import { AllocateVehicalPopupComponent } from './shared/popups/drivers/allocate-vehical-popup/allocate-vehical-popup.component';
 
 
 export function tokenGetter(): string {
@@ -49,6 +50,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     NotificationRuleEditComponent,
 
     TripExecutePopupComponent,
+
+    AllocateVehicalPopupComponent,
   ],
   imports: [
     BrowserModule,

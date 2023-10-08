@@ -5,6 +5,7 @@ import { TripBookingSpecialServiceModel } from './trip-booking-special-service-m
 import { TripStopModel } from '../enroute/trip-stop-model';
 import { TripPickupModel } from '../enroute/trip-pickup-model';
 import { TripDropoffModel } from '../enroute/trip-dropoff-model';
+import { TripDestinationModel } from '../enroute/trip-destination-model';
 
 export class TripBookingModel {
   id: string;
@@ -25,11 +26,7 @@ export class TripBookingModel {
   tripDestination: DropdownItem<TripDestination>;
 
   startingPoint: DropdownItem<string>;
-  pickups: TripPickupModel[];
-
-  stops: TripStopModel[];
-
-  dropoffs: TripDropoffModel[];
+  destinations: TripDestinationModel[];
 
   driver: DropdownItem<string>;
   vehical: DropdownItem<string>;

@@ -1,6 +1,6 @@
 import { ResponseModel } from './../../../../../helper/models/common/response-model';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
-import { Gender, TripDestination, TripRoute } from './../../../../../helper/common/shared-types';
+import { DestinationType, Gender, TripDestination, TripRoute } from './../../../../../helper/common/shared-types';
 import { AlertService } from './../../../../../helper/services/common/alert.service';
 import { VehicalService } from './../../../../../helper/services/vehicals/vehical.service';
 import { DriverService } from './../../../../../helper/services/drivers/driver.service';
@@ -22,6 +22,7 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DropdownType } from 'src/app/helper/common/shared-types';
+import { guid } from '@progress/kendo-angular-common';
 
 @Component({
   selector: 'app-trip-booking-start-now-edit',
@@ -179,13 +180,19 @@ export class TripBookingStartNowEditComponent implements OnInit {
     let tripDestination: DropdownItem<TripDestination> = null;
 
     let startingPoint: DropdownItem<string> = null;
-
-    let pickups: UntypedFormGroup[] = [
-      this.tripBookingService.createPickupFormGroup(null)
-    ];
-    let stops: UntypedFormGroup[] = [];
-    let dropoffs: UntypedFormGroup[] = [
-      this.tripBookingService.createDropoffFormGroup(null)
+    let destinations: UntypedFormGroup[] = [
+      this.tripBookingService.createDestinationFormGroup({
+        id: guid(),
+        sequence: 0,
+        type: { value: DestinationType.Pickup, text: 'Pickup' },
+        address: null
+      }),
+      this.tripBookingService.createDestinationFormGroup({
+        id: guid(),
+        sequence: 1,
+        type: { value: DestinationType.Dropoff, text: 'Dropoff' },
+        address: null
+      })
     ];
 
     let driver: DropdownItem<string> = null;
@@ -224,21 +231,9 @@ export class TripBookingStartNowEditComponent implements OnInit {
 
       startingPoint = this.model.startingPoint;
 
-      if (this.model.pickups && this.model.pickups.length > 0) {
-        this.model.pickups.forEach(f => {
-          pickups.push(this.tripBookingService.createPickupFormGroup(f));
-        });
-      }
-
-      if (this.model.stops && this.model.stops.length > 0) {
-        this.model.stops.forEach(f => {
-          stops.push(this.tripBookingService.createStopFormGroup(f));
-        });
-      }
-
-      if (this.model.dropoffs && this.model.dropoffs.length > 0) {
-        this.model.dropoffs.forEach(f => {
-          dropoffs.push(this.tripBookingService.createDropoffFormGroup(f));
+      if (this.model.destinations && this.model.destinations.length > 0) {
+        this.model.destinations.forEach(f => {
+          destinations.push(this.tripBookingService.createDestinationFormGroup(f));
         });
       }
 
@@ -271,9 +266,9 @@ export class TripBookingStartNowEditComponent implements OnInit {
         tripDestination: new UntypedFormControl(
           tripDestination, [UtilityRix.dropdownRequired as ValidatorFn]),
         startingPoint: new UntypedFormControl(startingPoint),
-        pickups: new UntypedFormArray(pickups),
-        stops: new UntypedFormArray(stops),
-        dropoffs: new UntypedFormArray(dropoffs),
+
+        destinations: new UntypedFormArray(destinations),
+
         driver: new UntypedFormControl(driver),
         vehical: new UntypedFormControl(vehical),
         notes: new UntypedFormControl(notes)

@@ -102,3 +102,27 @@ export function GetNotificationForDropdownList():
     },
   ];
 }
+
+export enum DestinationType {
+  Pickup = 10,
+  Stop = 20,
+  Dropoff = 30
+}
+
+export function GetDestinationTypeForDropdownList():
+  DropdownItem<DestinationType>[] {
+  return [
+    {
+      value: DestinationType.Pickup,
+      text: 'Pickup'
+    },
+    {
+      value: DestinationType.Stop,
+      text: 'Stop'
+    },
+    {
+      value: DestinationType.Dropoff,
+      text: 'Dropoff'
+    },
+  ];
+}

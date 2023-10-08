@@ -24,6 +24,12 @@ export const Full_ROUTES: Routes = [
       .then(m => m.TripModule)
   },
   {
+    path: 'drivers',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../modules/driver/driver.module')
+      .then(m => m.DriverModule)
+  },
+  {
     path: 'setting',
     canActivate: [AuthGuard],
     loadChildren: () => import('../../modules/setting/setting.module')

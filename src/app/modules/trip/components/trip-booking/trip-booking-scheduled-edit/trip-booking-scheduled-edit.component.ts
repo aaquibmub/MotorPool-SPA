@@ -17,10 +17,13 @@ import { FormArray, FormControl, UntypedFormArray, UntypedFormControl, UntypedFo
 import { TripBookingScheduledModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-scheduled-model';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DropdownType, Gender, TripDestination, TripRoute } from 'src/app/helper/common/shared-types';
+import { DestinationType, DropdownType, Gender, GetDestinationTypeForDropdownList, TripDestination, TripRoute } from 'src/app/helper/common/shared-types';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { AgeGroupService } from 'src/app/helper/services/utilities/age-group.service';
 import { SignalRService } from 'src/app/helper/services/common/signal-r.service';
+import { guid } from '@progress/kendo-angular-common';
+import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
+import { TripDestinationModel } from 'src/app/helper/models/trips/enroute/trip-destination-model';
 
 @Component({
   selector: 'app-trip-booking-scheduled-edit',
@@ -45,6 +48,8 @@ export class TripBookingScheduledEditComponent implements OnInit {
   tripDestinationList: DropdownItem<number>[];
 
   addressList: DropdownItem<string>[];
+
+  destinationButtons: ActionButton[][] = [];
 
   driverList: DropdownItem<string>[];
   vehicalList: DropdownItem<string>[];
@@ -182,13 +187,48 @@ export class TripBookingScheduledEditComponent implements OnInit {
     let tripDestination: DropdownItem<TripDestination> = null;
 
     let startingPoint: DropdownItem<string> = null;
-    let pickups: UntypedFormGroup[] = [
-      this.tripBookingService.createPickupFormGroup(null)
+    let destinations: UntypedFormGroup[] = [
+      this.tripBookingService.createDestinationFormGroup({
+        id: guid(),
+        sequence: 0,
+        type: { value: DestinationType.Pickup, text: 'Pickup' },
+        address: null
+      }),
+      this.tripBookingService.createDestinationFormGroup({
+        id: guid(),
+        sequence: 1,
+        type: { value: DestinationType.Dropoff, text: 'Dropoff' },
+        address: null
+      })
     ];
-    let stops: UntypedFormGroup[] = [];
-    let dropoffs: UntypedFormGroup[] = [
-      this.tripBookingService.createDropoffFormGroup(null)
-    ];
+
+    let dIndex = 0;
+    destinations.forEach(d => {
+      this.destinationButtons[dIndex] = [
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Pickup);
+          },
+          icon: '',
+          label: 'Add Pickup'
+        },
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Stop);
+          },
+          icon: '',
+          label: 'Add Stop'
+        },
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Dropoff);
+          },
+          icon: '',
+          label: 'Add Dropoff'
+        }
+      ];
+      dIndex++;
+    });
 
     let driver: DropdownItem<string> = null;
     let vehical: DropdownItem<string> = null;
@@ -229,21 +269,36 @@ export class TripBookingScheduledEditComponent implements OnInit {
 
       startingPoint = this.model.startingPoint;
 
-      if (this.model.pickups && this.model.pickups.length > 0) {
-        this.model.pickups.forEach(f => {
-          pickups.push(this.tripBookingService.createPickupFormGroup(f));
-        });
-      }
-
-      if (this.model.stops && this.model.stops.length > 0) {
-        this.model.stops.forEach(f => {
-          stops.push(this.tripBookingService.createStopFormGroup(f));
-        });
-      }
-
-      if (this.model.dropoffs && this.model.dropoffs.length > 0) {
-        this.model.dropoffs.forEach(f => {
-          dropoffs.push(this.tripBookingService.createDropoffFormGroup(f));
+      if (this.model.destinations && this.model.destinations.length > 0) {
+        let index = 0;
+        // const destinationTypes = GetDestinationTypeForDropdownList();
+        this.model.destinations.forEach(f => {
+          // const type = destinationTypes.find(d => d.value == f.type.value);
+          this.destinationButtons[index] = [
+            {
+              handle: () => {
+                this.addNewDestination(index, DestinationType.Pickup);
+              },
+              icon: '',
+              label: 'Add Pickup'
+            },
+            {
+              handle: () => {
+                this.addNewDestination(index, DestinationType.Stop);
+              },
+              icon: '',
+              label: 'Add Stop'
+            },
+            {
+              handle: () => {
+                this.addNewDestination(index, DestinationType.Dropoff);
+              },
+              icon: '',
+              label: 'Add Dropoff'
+            }
+          ]
+          destinations.push(this.tripBookingService.createDestinationFormGroup(f));
+          index++;
         });
       }
 
@@ -283,10 +338,11 @@ export class TripBookingScheduledEditComponent implements OnInit {
           tripRoute, [UtilityRix.dropdownRequired as ValidatorFn]),
         tripDestination: new UntypedFormControl(
           tripDestination, [UtilityRix.dropdownRequired as ValidatorFn]),
+
         startingPoint: new UntypedFormControl(startingPoint),
-        pickups: new UntypedFormArray(pickups),
-        stops: new UntypedFormArray(stops),
-        dropoffs: new UntypedFormArray(dropoffs),
+
+        destinations: new UntypedFormArray(destinations),
+
         driver: new UntypedFormControl(driver),
         vehical: new UntypedFormControl(vehical),
         notes: new UntypedFormControl(notes)
@@ -397,6 +453,98 @@ export class TripBookingScheduledEditComponent implements OnInit {
       passengersFormArray.push(this.tripBookingService.createPassengerFormGroup(null));
       count++;
     }
+  }
+
+  removeDestination(index: number): void {
+
+    const destinationsFormArray = (this.form?.get('destinations') as FormArray);
+    let pickups = 0;
+    let stops = 0;
+    let dropoffs = 0;
+    destinationsFormArray.controls.forEach(f => {
+      const type = f.get('type').value;
+      if (type == DestinationType.Pickup) {
+        pickups++;
+      }
+      if (type == DestinationType.Stop) {
+        stops++;
+      }
+      if (type == DestinationType.Dropoff) {
+        dropoffs++;
+      }
+    });
+
+    const destination = (this.form?.get('destinations') as FormArray).controls[index];
+    if (destination) {
+
+      const destinationType = destination.get('type').value as DropdownItem<DestinationType>;
+      if (destinationType.value == DestinationType.Pickup && pickups <= 1) {
+        this.alertService.setErrorAlert('There should b one pickup')
+        return;
+      }
+
+      if (destinationType.value == DestinationType.Dropoff && dropoffs <= 1) {
+        this.alertService.setErrorAlert('There should b one dropoff')
+        return;
+      }
+
+      (this.form?.get('destinations') as FormArray).removeAt(index);
+    }
+  }
+
+  handleAddDestinationButtonClick(index: number, item: ActionButton): void {
+    const btnIndex = this.destinationButtons[index].findIndex(f => f === item);
+    this.destinationButtons[index][btnIndex].handle(index);
+  }
+
+  addNewDestination(index: number, type: DestinationType): void {
+    const destinationTypes = GetDestinationTypeForDropdownList();
+    const destinationType = destinationTypes.find(f => f.value == type);
+
+    var destinationFormArray = this.form.get('destinations') as FormArray;
+
+    const destinationFormGroup = destinationFormArray.value as TripDestinationModel[];
+
+    destinationFormGroup.splice(index + 1, 0, {
+      id: guid(),
+      sequence: index + 1,
+      type: destinationType,
+      address: null
+    });
+
+    destinationFormArray.clear();
+    let count = 0;
+    destinationFormGroup.forEach(f => {
+      if (count >= index) {
+        f.sequence = count;
+      }
+      destinationFormArray.push(this.tripBookingService.createDestinationFormGroup(f));
+      this.destinationButtons[count] = [
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Pickup);
+          },
+          icon: '',
+          label: 'Add Pickup'
+        },
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Stop);
+          },
+          icon: '',
+          label: 'Add Stop'
+        },
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Dropoff);
+          },
+          icon: '',
+          label: 'Add Dropoff'
+        }
+      ];
+      count++;
+    });
+
   }
 
   addNewPickup(): void {

@@ -1,0 +1,59 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>{{ pageTitle }}</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="grid-toolbar">
+      <div class="left"></div>
+      <div class="right">
+        <kendo-dropdownbutton
+          [data]="buttons"
+          class="btn btn-green"
+          style="margin-left: 8px"
+          [popupSettings]="{
+            popupClass: 'et-dropdown-menu'
+          }"
+        >
+          Create New Driver<i class="k-button-icon k-icon k-i-arrow-s"></i>
+          <ng-template kendoDropDownButtonItemTemplate let-dataItem>
+            <div
+              style="width: 100%"
+              (click)="handleCreateItemButtonClick(dataItem)"
+            >
+              <span class="{{ dataItem.icon }}" *ngIf="dataItem.icon"></span>
+              <span>{{ dataItem.label }}</span>
+            </div>
+          </ng-template>
+        </kendo-dropdownbutton>
+      </div>
+    </div>
+    <div class="tab-left">
+      <div class="tab-left-items">
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/drivers/pool/all"
+          >All Drivers</a
+        >
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/drivers/pool/active"
+          >Active Drivers</a
+        >
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/drivers/pool/inactive"
+          >Inactive Drivers</a
+        >
+      </div>
+      <div class="tab-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

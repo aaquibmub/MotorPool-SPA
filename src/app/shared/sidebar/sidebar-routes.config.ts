@@ -26,7 +26,7 @@ export const ROUTES: RouteInfo[] = [
     isExternalLink: false,
     submenu: [
 
-      // sale order
+      // vehicals
       {
         path: '/vehicles/all-vehicles',
         title: 'Vehicles',
@@ -228,11 +228,45 @@ export const ROUTES: RouteInfo[] = [
     path: '/drivers',
     title: 'Drivers',
     icon: 'driver-icon',
-    class: '',
+    class: 'sub',
     badge: '',
     badgeClass: '',
     isExternalLink: false,
-    submenu: []
+    submenu: [
+
+      // vehicals
+      {
+        path: '/drivers/pool/all',
+        title: 'Drivers',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            path: '/drivers/driver/new',
+            title: 'Add New Driver',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/drivers/pool/all',
+            title: 'All Drivers',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
+    ]
   },
 
 ];

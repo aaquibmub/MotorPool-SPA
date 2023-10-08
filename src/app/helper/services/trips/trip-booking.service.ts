@@ -14,6 +14,7 @@ import { UtilityService } from '../common/utility.service';
 import { TripPickupModel } from '../../models/trips/enroute/trip-pickup-model';
 import { TripDropoffModel } from '../../models/trips/enroute/trip-dropoff-model';
 import { TripBookingStartNowModel } from '../../models/trips/trip-bookings/trip-booking-start-now-model';
+import { TripDestinationModel } from '../../models/trips/enroute/trip-destination-model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,20 +53,8 @@ export class TripBookingService {
     this.utilityService.buildFormData(formData, formValue);
 
     let index = 0;
-    formValue.pickups.forEach(f => {
-      this.utilityService.buildFormData(formData, f, 'pickups[' + index + ']');
-      index++;
-    });
-
-    index = 0;
-    formValue.stops.forEach(f => {
-      this.utilityService.buildFormData(formData, f, 'stops[' + index + ']');
-      index++;
-    });
-
-    index = 0;
-    formValue.dropoffs.forEach(f => {
-      this.utilityService.buildFormData(formData, f, 'dropoffs[' + index + ']');
+    formValue.destinations.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'destinations[' + index + ']');
       index++;
     });
 
@@ -144,6 +133,18 @@ export class TripBookingService {
       sequence: new UntypedFormControl(model ? model.sequence : false),
       pickupAddress: new UntypedFormControl(
         model ? model.pickupAddress : null, [UtilityRix.dropdownRequired as ValidatorFn]),
+
+    });
+  }
+
+  createDestinationFormGroup(model: TripDestinationModel): UntypedFormGroup {
+    return new UntypedFormGroup({
+      id: new UntypedFormControl(model && model.id ? model.id : guid()),
+      sequence: new UntypedFormControl(model ? model.sequence : 0),
+      type: new UntypedFormControl(
+        model ? model.type : null, [UtilityRix.dropdownRequired as ValidatorFn]),
+      address: new UntypedFormControl(
+        model ? model.address : null, [UtilityRix.dropdownRequired as ValidatorFn]),
 
     });
   }
