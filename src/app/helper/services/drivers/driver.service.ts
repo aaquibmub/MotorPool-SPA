@@ -18,6 +18,7 @@ export class DriverService {
 
   private gridData = new Subject<GridList<DriverGridModel>>();
   private showAllocateVehicalPopup = new Subject<PopupConfigModel>();
+  private showDeallocateVehicalPopup = new Subject<PopupConfigModel>();
 
   constructor(
     private http: HttpClient) { }
@@ -53,6 +54,13 @@ export class DriverService {
     this.showAllocateVehicalPopup.next({ show, arg });
   }
 
+  getDeallocateVehicalPopup(): Observable<PopupConfigModel> {
+    return this.showDeallocateVehicalPopup.asObservable();
+  }
+  setDeallocateVehicalPopup(show: boolean, arg?: any): void {
+    this.showDeallocateVehicalPopup.next({ show, arg });
+  }
+
   getAllocateVehicalModel(id: string): Observable<AllocateVehicalModel> {
     return this.http.get<AllocateVehicalModel>(
       this.baseUrl + 'get-allocate-vehical-model?id=' + id);
@@ -60,6 +68,10 @@ export class DriverService {
 
   allocateVehical(model: AllocateVehicalModel): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'allocate-vehical', model);
+  }
+
+  deallocateVehical(model: AllocateVehicalModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'deallocate-vehical', model);
   }
 
 }

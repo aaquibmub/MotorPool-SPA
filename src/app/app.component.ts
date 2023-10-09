@@ -11,6 +11,7 @@ import { PopupConfigModel } from './helper/models/common/popup-config-model';
 import { NotificationConfigService } from './helper/services/utilities/notification-config.service';
 import { SignalRService } from './helper/services/common/signal-r.service';
 import { TripService } from './helper/services/trips/trip.service';
+import { DriverService } from './helper/services/drivers/driver.service';
 
 @Component({
   selector: 'app-root',
@@ -42,6 +43,11 @@ export class AppComponent implements OnInit {
   showTripExecutePopup: boolean;
   tripId: string;
 
+  // allocate vehical
+  showAllocateVehicalPopup: boolean;
+  showDeallocateVehicalPopup: boolean;
+  driverId: string;
+
 
   constructor(
     private authService: AuthService,
@@ -52,6 +58,7 @@ export class AppComponent implements OnInit {
     private alertService: AlertService,
     private notificationConfigService: NotificationConfigService,
     private tripService: TripService,
+    private driverService: DriverService,
     private passengerService: PassengerService) {
     translate.setDefaultLang('en');
     translate.use('en');
@@ -137,6 +144,24 @@ export class AppComponent implements OnInit {
         next: (flag: PopupConfigModel) => {
           this.showTripExecutePopup = flag.show;
           this.tripId = flag.arg;
+        }
+      }
+      );
+
+    this.driverService.getAllocateVehicalPopup()
+      .subscribe({
+        next: (flag: PopupConfigModel) => {
+          this.showAllocateVehicalPopup = flag.show;
+          this.driverId = flag.arg;
+        }
+      }
+      );
+
+    this.driverService.getDeallocateVehicalPopup()
+      .subscribe({
+        next: (flag: PopupConfigModel) => {
+          this.showDeallocateVehicalPopup = flag.show;
+          this.driverId = flag.arg;
         }
       }
       );

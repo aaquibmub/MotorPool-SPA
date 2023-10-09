@@ -24,3 +24,13 @@
   *ngIf="showTripExecutePopup"
   [tripId]="tripId"
 ></app-trip-execute-popup>
+
+<app-allocate-vehical-popup
+  *ngIf="showAllocateVehicalPopup"
+  [driverId]="driverId"
+></app-allocate-vehical-popup>
+
+<app-deallocate-vehical-popup
+  *ngIf="showDeallocateVehicalPopup"
+  [driverId]="driverId"
+></app-deallocate-vehical-popup>

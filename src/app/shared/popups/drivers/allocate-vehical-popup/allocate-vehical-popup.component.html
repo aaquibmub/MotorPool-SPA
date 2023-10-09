@@ -1,5 +1,5 @@
 <div class="overlay" [perfectScrollbar]>
-  <div class="overlay-wrapper" style="width: 30%">
+  <div class="overlay-wrapper" style="width: 50%">
     <div class="overlay-content bg-white p-24 sm-padding-10">
       <div class="row">
         <div class="col-md-12">
@@ -74,7 +74,7 @@
                   <div class="section-header">Select Vehical</div>
                   <div class="section-body">
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                         <div class="form-group">
                           <div class="label">
                             <label for="inputVehical">Vehical</label>
@@ -82,17 +82,81 @@
                           <div class="control">
                             <kendo-dropdownlist
                               class="form-control"
-                              textField="text"
-                              valueField="value"
-                              [defaultItem]="utilityService.dropdownDefaultItem"
+                              textField="make"
+                              valueField="id"
+                              [defaultItem]="{
+                                id: null,
+                                make: 'Please select'
+                              }"
                               [data]="vehicalList"
                               formControlName="vehical"
                             >
                               <ng-template
+                                kendoDropDownListValueTemplate
+                                let-dataItem
+                              >
+                                {{ dataItem ? dataItem.make : "None" }}
+                              </ng-template>
+                              <ng-template kendoDropDownListHeaderTemplate>
+                                <div
+                                  class="display-flex dropdown-header-padding"
+                                >
+                                  <div class="flex-1 k-font-weight-bold">
+                                    Make
+                                  </div>
+                                  <div class="flex-1 k-font-weight-bold">
+                                    Model
+                                  </div>
+                                  <div class="flex-1 k-font-weight-bold">
+                                    Model Year
+                                  </div>
+                                  <div class="flex-1 k-font-weight-bold">
+                                    Armoured
+                                  </div>
+                                  <div class="flex-1 k-font-weight-bold">
+                                    Registration Plate
+                                  </div>
+                                  <div class="flex-1 k-font-weight-bold">
+                                    Status
+                                  </div>
+                                </div>
+                              </ng-template>
+                              <ng-template
                                 kendoDropDownListItemTemplate
                                 let-dataItem
                               >
-                                <span>{{ dataItem.text | translate }}</span>
+                                <div class="flex-1 display-flex">
+                                  <div class="flex-1">
+                                    {{ dataItem.make }}
+                                  </div>
+                                  <div class="flex-1">
+                                    {{ dataItem.model }}
+                                  </div>
+                                  <div class="flex-1">
+                                    {{ dataItem.modelYear }}
+                                  </div>
+                                  <div class="flex-1">
+                                    {{
+                                      dataItem.armoured
+                                        ? dataItem.armoured === true
+                                          ? "Yes"
+                                          : "No"
+                                        : ""
+                                    }}
+                                  </div>
+                                  <div class="flex-1">
+                                    {{ dataItem.registrationPlate }}
+                                  </div>
+                                  <div class="flex-1">
+                                    {{
+                                      dataItem.active
+                                        ? dataItem.active === true
+                                          ? "Yes"
+                                          : "No"
+                                        : ""
+                                    }}
+                                  </div>
+                                </div>
                               </ng-template>
                             </kendo-dropdownlist>
                             <div
@@ -119,8 +183,8 @@
                     >
                       Cancel
                     </button>
-                    <button type="submit" class="btn btn-primary ml-8">
-                      Execute
+                    <button type="submit" class="btn btn-green ml-8">
+                      Allocate Vehical
                     </button>
                   </div>
                 </div>

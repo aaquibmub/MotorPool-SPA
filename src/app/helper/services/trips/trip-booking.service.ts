@@ -98,6 +98,12 @@ export class TripBookingService {
 
     this.utilityService.buildFormData(formData, formValue);
 
+    let index = 0;
+    formValue.destinations.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'destinations[' + index + ']');
+      index++;
+    });
+
     return formData;
 
   }

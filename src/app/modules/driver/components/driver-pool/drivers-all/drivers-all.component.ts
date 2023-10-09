@@ -9,6 +9,7 @@ import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-gr
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 
 @Component({
   selector: 'app-drivers-all',
@@ -37,6 +38,20 @@ export class DriversAllComponent implements OnInit, OnDestroy {
           this.driverService.fetchGridData(this.state, this.searchQuery);
         }
       );
+    this.driverService.getAllocateVehicalPopup().subscribe(
+      (config: PopupConfigModel) => {
+        if (!config.show) {
+          this.driverService.fetchGridData(this.state, this.searchQuery);
+        }
+      }
+    );
+    this.driverService.getDeallocateVehicalPopup().subscribe(
+      (config: PopupConfigModel) => {
+        if (!config.show) {
+          this.driverService.fetchGridData(this.state, this.searchQuery);
+        }
+      }
+    );
     this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
@@ -70,14 +85,25 @@ export class DriversAllComponent implements OnInit, OnDestroy {
 
   getGridActions(item: DriverGridModel): ActionButton[] {
     const actions: ActionButton[] = [];
+    if (item.vehicalAllocated) {
+      actions.push({
+        handle: () => {
+          this.driverService.setDeallocateVehicalPopup(true, item.id);
+        },
+        icon: '',
+        label: 'Deallocate Vehical'
+      });
 
-    actions.push({
-      handle: () => {
-        this.driverService.setAllocateVehicalPopup(true, item.id);
-      },
-      icon: '',
-      label: 'Allocate Vehical'
-    });
+    } else {
+      actions.push({
+        handle: () => {
+          this.driverService.setAllocateVehicalPopup(true, item.id);
+        },
+        icon: '',
+        label: 'Allocate Vehical'
+      });
+
+    }
 
     return actions;
   }

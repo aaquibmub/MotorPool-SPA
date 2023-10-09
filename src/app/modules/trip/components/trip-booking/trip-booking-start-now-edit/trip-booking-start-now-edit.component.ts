@@ -1,6 +1,7 @@
+import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { ResponseModel } from './../../../../../helper/models/common/response-model';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
-import { DestinationType, Gender, TripDestination, TripRoute } from './../../../../../helper/common/shared-types';
+import { DestinationType, Gender, GetDestinationTypeForDropdownList, TripDestination, TripRoute } from './../../../../../helper/common/shared-types';
 import { AlertService } from './../../../../../helper/services/common/alert.service';
 import { VehicalService } from './../../../../../helper/services/vehicals/vehical.service';
 import { DriverService } from './../../../../../helper/services/drivers/driver.service';
@@ -17,12 +18,13 @@ import { PassengerModel } from './../../../../../helper/models/passengers/passen
 import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
 import { TripBookingStartNowModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-start-now-model';
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
-import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormArray, UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DropdownType } from 'src/app/helper/common/shared-types';
 import { guid } from '@progress/kendo-angular-common';
+import { TripDestinationModel } from 'src/app/helper/models/trips/enroute/trip-destination-model';
 
 @Component({
   selector: 'app-trip-booking-start-now-edit',
@@ -47,6 +49,8 @@ export class TripBookingStartNowEditComponent implements OnInit {
   tripDestinationList: DropdownItem<number>[];
 
   addressList: DropdownItem<string>[];
+
+  destinationButtons: ActionButton[][] = [];
 
   driverList: DropdownItem<string>[];
   vehicalList: DropdownItem<string>[];
@@ -194,6 +198,34 @@ export class TripBookingStartNowEditComponent implements OnInit {
         address: null
       })
     ];
+
+    let dIndex = 0;
+    destinations.forEach(d => {
+      this.destinationButtons[dIndex] = [
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Pickup);
+          },
+          icon: '',
+          label: 'Add Pickup'
+        },
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Stop);
+          },
+          icon: '',
+          label: 'Add Stop'
+        },
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Dropoff);
+          },
+          icon: '',
+          label: 'Add Dropoff'
+        }
+      ];
+      dIndex++;
+    });
 
     let driver: DropdownItem<string> = null;
     let vehical: DropdownItem<string> = null;
@@ -379,6 +411,98 @@ export class TripBookingStartNowEditComponent implements OnInit {
       passengersFormArray.push(this.tripBookingService.createPassengerFormGroup(null));
       count++;
     }
+  }
+
+  removeDestination(index: number): void {
+
+    const destinationsFormArray = (this.form?.get('destinations') as FormArray);
+    let pickups = 0;
+    let stops = 0;
+    let dropoffs = 0;
+    destinationsFormArray.controls.forEach(f => {
+      const type = f.get('type').value;
+      if (type == DestinationType.Pickup) {
+        pickups++;
+      }
+      if (type == DestinationType.Stop) {
+        stops++;
+      }
+      if (type == DestinationType.Dropoff) {
+        dropoffs++;
+      }
+    });
+
+    const destination = (this.form?.get('destinations') as FormArray).controls[index];
+    if (destination) {
+
+      const destinationType = destination.get('type').value as DropdownItem<DestinationType>;
+      if (destinationType.value == DestinationType.Pickup && pickups <= 1) {
+        this.alertService.setErrorAlert('There should b one pickup')
+        return;
+      }
+
+      if (destinationType.value == DestinationType.Dropoff && dropoffs <= 1) {
+        this.alertService.setErrorAlert('There should b one dropoff')
+        return;
+      }
+
+      (this.form?.get('destinations') as FormArray).removeAt(index);
+    }
+  }
+
+  handleAddDestinationButtonClick(index: number, item: ActionButton): void {
+    const btnIndex = this.destinationButtons[index].findIndex(f => f === item);
+    this.destinationButtons[index][btnIndex].handle(index);
+  }
+
+  addNewDestination(index: number, type: DestinationType): void {
+    const destinationTypes = GetDestinationTypeForDropdownList();
+    const destinationType = destinationTypes.find(f => f.value == type);
+
+    var destinationFormArray = this.form.get('destinations') as FormArray;
+
+    const destinationFormGroup = destinationFormArray.value as TripDestinationModel[];
+
+    destinationFormGroup.splice(index + 1, 0, {
+      id: guid(),
+      sequence: index + 1,
+      type: destinationType,
+      address: null
+    });
+
+    destinationFormArray.clear();
+    let count = 0;
+    destinationFormGroup.forEach(f => {
+      if (count >= index) {
+        f.sequence = count;
+      }
+      destinationFormArray.push(this.tripBookingService.createDestinationFormGroup(f));
+      this.destinationButtons[count] = [
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Pickup);
+          },
+          icon: '',
+          label: 'Add Pickup'
+        },
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Stop);
+          },
+          icon: '',
+          label: 'Add Stop'
+        },
+        {
+          handle: (index) => {
+            this.addNewDestination(index, DestinationType.Dropoff);
+          },
+          icon: '',
+          label: 'Add Dropoff'
+        }
+      ];
+      count++;
+    });
+
   }
 
   addNewPickup(): void {
