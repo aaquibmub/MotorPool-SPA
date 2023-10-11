@@ -1,0 +1,248 @@
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <div class="page-actions"></div>
+  <div class="page-area">
+    <div class="page-header">
+      <div class="page-title">
+        <span>Vehical</span>
+      </div>
+    </div>
+    <div class="page-body">
+      <!-- Vehical Info -->
+      <div class="form-section">
+        <div class="row">
+          <!-- Vehical ID -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputVehicalId">Vehical ID</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputFirstName"
+                  formControlName="vehicalIdStr"
+                  id="inputVehicalId"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+          <!-- Registration Plate -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputRegistrationPlate">Registration Plate</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputRegistrationPlate"
+                  formControlName="registrationPlate"
+                  id="inputRegistrationPlate"
+                />
+                <div
+                  *ngIf="
+                    !form.get('registrationPlate').valid &&
+                    form.get('registrationPlate').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Registration plate is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Active -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="control">
+                <div class="display-flex">
+                  <div class="checkbox-control">
+                    <kendo-switch
+                      [size]="'small'"
+                      id="inputActive"
+                      formControlName="active"
+                    ></kendo-switch>
+                  </div>
+                  <div class="label">
+                    <label for="inputActive">is active</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Make -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputMake">Make</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputMake"
+                  formControlName="make"
+                  id="inputMake"
+                />
+                <div
+                  *ngIf="!form.get('make').valid && form.get('make').touched"
+                  class="invalid-feedback"
+                >
+                  Make is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Model -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputModel">Model</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputModel"
+                  formControlName="model"
+                  id="inputModel"
+                />
+                <div
+                  *ngIf="!form.get('model').valid && form.get('model').touched"
+                  class="invalid-feedback"
+                >
+                  Model is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Model -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputModelYear">Model Year</label>
+              </div>
+              <div class="control">
+                <input
+                  type="number"
+                  class="form-control"
+                  name="inputModelYear"
+                  formControlName="modelYear"
+                  id="inputModelYear"
+                />
+                <div
+                  *ngIf="
+                    !form.get('modelYear').valid &&
+                    form.get('modelYear').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Model Year is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Type -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputType">Type</label>
+              </div>
+              <div class="control">
+                <kendo-dropdownlist
+                  class="form-control"
+                  textField="text"
+                  valueField="value"
+                  [defaultItem]="utilityService.dropdownDefaultItem"
+                  [data]="typeList"
+                  formControlName="type"
+                >
+                  <ng-template kendoDropDownListItemTemplate let-dataItem>
+                    <span>{{ dataItem.text }}</span>
+                  </ng-template>
+                </kendo-dropdownlist>
+                <div
+                  *ngIf="!form.get('type').valid && form.get('type').touched"
+                  class="invalid-feedback"
+                >
+                  Type is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputColor">Color</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputColor"
+                  formControlName="color"
+                  id="inputColor"
+                />
+                <div
+                  *ngIf="!form.get('color').valid && form.get('color').touched"
+                  class="invalid-feedback"
+                >
+                  Color is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Armoued -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="control">
+                <div class="display-flex">
+                  <div class="checkbox-control">
+                    <kendo-switch
+                      [size]="'small'"
+                      id="inputArmoured"
+                      formControlName="armoured"
+                    ></kendo-switch>
+                  </div>
+                  <div class="label">
+                    <label for="inputArmoured">is armoured</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="form-section transparent-section">
+        <div class="section-body">
+          <div class="description sm-hide"></div>
+          <div class="fields">
+            <div class="form-group">
+              <button
+                class="btn btn-default mr-16"
+                type="button"
+                (click)="cancel()"
+              >
+                Cancel
+              </button>
+              <button *ngIf="!editMode" class="btn btn-primary" type="submit">
+                Create
+              </button>
+              <button *ngIf="editMode" class="btn btn-primary" type="submit">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

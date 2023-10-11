@@ -17,7 +17,7 @@ export const ROUTES: RouteInfo[] = [
 
   // vehical
   {
-    path: '/vehicles',
+    path: '/vehicals',
     title: 'Vehicles',
     icon: 'vehicle-icon',
     class: 'sub',
@@ -28,7 +28,7 @@ export const ROUTES: RouteInfo[] = [
 
       // vehicals
       {
-        path: '/vehicles/all-vehicles',
+        path: '/vehicles/all',
         title: 'Vehicles',
         icon: 'bx bx-right-arrow-alt',
         class: '',
@@ -37,7 +37,7 @@ export const ROUTES: RouteInfo[] = [
         isExternalLink: false,
         submenu: [
           {
-            path: '/vehicles/new',
+            path: '/vehicals/vehical/new',
             title: 'Add New Vehicle',
             icon: 'bx bx-right-arrow-alt',
             class: '',
@@ -47,7 +47,7 @@ export const ROUTES: RouteInfo[] = [
             submenu: []
           },
           {
-            path: '/vehicles/all-vehicles',
+            path: '/vehicals/pool/all',
             title: 'All Vehicles',
             icon: 'bx bx-right-arrow-alt',
             class: '',

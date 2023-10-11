@@ -30,6 +30,12 @@ export const Full_ROUTES: Routes = [
       .then(m => m.DriverModule)
   },
   {
+    path: 'vehicals',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../modules/vehical/vehical.module')
+      .then(m => m.VehicalModule)
+  },
+  {
     path: 'setting',
     canActivate: [AuthGuard],
     loadChildren: () => import('../../modules/setting/setting.module')

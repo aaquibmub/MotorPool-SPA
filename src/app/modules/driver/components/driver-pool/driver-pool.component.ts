@@ -12,16 +12,6 @@ import { Router } from '@angular/router';
 export class DriverPoolComponent implements OnInit {
   pageTitle: string;
 
-  buttons: ActionButton[] = [
-    {
-      handle: () => {
-        this.router.navigate(['/drivers/driver/new']);
-      },
-      icon: '',
-      label: 'New Driver'
-    }
-  ];
-
   constructor(
     private location: Location,
     private router: Router) {
@@ -39,9 +29,8 @@ export class DriverPoolComponent implements OnInit {
     });
   }
 
-  handleCreateItemButtonClick(item: ActionButton): void {
-    const index = this.buttons.findIndex(f => f === item);
-    this.buttons[index].handle();
+  handleCreateNewButtonClick(): void {
+    this.router.navigate(['/drivers/driver/new']);
   }
 
   ngOnInit(): void {
