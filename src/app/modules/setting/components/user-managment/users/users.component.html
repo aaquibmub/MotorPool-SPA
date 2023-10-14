@@ -15,10 +15,12 @@
     [sort]="state.sort"
     [sortable]="true"
     [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="createdDate" title="Date Created">
+    <kendo-grid-column field="createdDate" title="Date Created" filter="date">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         {{ dataItem.createdDate | dateformat }}
       </ng-template>

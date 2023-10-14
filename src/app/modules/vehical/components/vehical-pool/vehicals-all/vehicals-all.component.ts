@@ -1,4 +1,3 @@
-import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { VehicalGridModel } from './../../../../../helper/models/vehicals/vehical-grid-model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,6 +18,7 @@ export class VehicalsAllComponent implements OnInit, OnDestroy {
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
+  filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
 
   pageSizeSubscription: Subscription;

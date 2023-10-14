@@ -10,10 +10,12 @@
     [sort]="state.sort"
     [sortable]="true"
     [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="userId" title="ID">
+    <kendo-grid-column field="userId" title="ID" filter="numeric">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <a routerLink="/drivers/driver/{{ dataItem.id }}/view">{{
           dataItem.userIdStr
@@ -25,12 +27,12 @@
     </kendo-grid-column>
     <kendo-grid-column field="mobileNumber" title="Mobile #">
     </kendo-grid-column>
-    <kendo-grid-column field="createdDate" title="Date Created">
+    <kendo-grid-column field="createdDate" title="Date Created" filter="date">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         {{ dataItem.createdDate | dateformat : "g" }}
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="status" title="Status">
+    <kendo-grid-column field="status" title="Status" filter="boolean">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <span *ngIf="dataItem.status">Active</span>
         <span *ngIf="!dataItem.status">Iactive</span>

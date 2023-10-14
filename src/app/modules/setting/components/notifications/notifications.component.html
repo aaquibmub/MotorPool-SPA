@@ -23,6 +23,8 @@
         [sort]="state.sort"
         [sortable]="true"
         [pageable]="pageable"
+        [filter]="state.filter"
+        [filterable]="filterable"
         scrollable="none"
         (dataStateChange)="dataStateChange($event)"
       >

@@ -19,6 +19,7 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
+  filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
 
   pageSizeSubscription: Subscription;

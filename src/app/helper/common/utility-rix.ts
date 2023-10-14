@@ -10,14 +10,16 @@ export class UtilityRix {
     },
     state: {
       take: 10,
-      skip: 0
+      skip: 0,
+      filter: null
     },
     pageable: {
       alwaysVisible: false,
       buttonCount: 3,
       responsive: true,
       info: false
-    }
+    },
+    filterable: 'menu'
   };
 
   static dropdownRequired(control: UntypedFormControl): { [s: string]: boolean } {

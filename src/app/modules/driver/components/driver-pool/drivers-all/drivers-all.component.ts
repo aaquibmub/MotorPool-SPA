@@ -20,6 +20,7 @@ export class DriversAllComponent implements OnInit, OnDestroy {
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
+  filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
 
   pageSizeSubscription: Subscription;
@@ -71,6 +72,7 @@ export class DriversAllComponent implements OnInit, OnDestroy {
   }
 
   dataStateChange(state: DataStateChangeEvent): void {
+    debugger;
     this.state = state;
     this.driverService.fetchGridData(state, this.searchQuery);
   }

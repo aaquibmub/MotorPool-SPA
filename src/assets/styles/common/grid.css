@@ -106,7 +106,7 @@
 
 .k-grid-header .k-header {
   background-color: var(--primary-color);
-  padding: 12px !important;
+  /* padding: 12px !important; */
   font-size: 14px;
   color: white;
   font-weight: bold;
@@ -131,6 +131,17 @@
 
 .k-grid-header .action-column {
   width: 48px;
+}
+
+.k-grid-header .k-grid-filter.k-state-active,
+.k-grid-header .k-header-column-menu.k-state-active,
+.k-grid-header .k-hierarchy-cell .k-icon.k-state-active {
+  background-color: transparent;
+  border: 1px solid;
+}
+
+.k-i-filter {
+  color: white;
 }
 
 .k-grid tr {

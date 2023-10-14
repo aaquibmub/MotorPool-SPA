@@ -1,4 +1,3 @@
-import { GridList } from './../../../../../helper/models/common/grid/grid-list';
 import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
 import { TripService } from './../../../../../helper/services/trips/trip.service';
 import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
@@ -19,6 +18,7 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
+  filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
 
   pageSizeSubscription: Subscription;
