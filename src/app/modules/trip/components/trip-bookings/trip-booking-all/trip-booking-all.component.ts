@@ -1,13 +1,13 @@
-import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
-import { TripService } from './../../../../../helper/services/trips/trip.service';
-import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
-import { Router } from '@angular/router';
 import { TripGridModel } from 'src/app/helper/models/trips/enroute/trip-grid-model';
+import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
+import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
+import { TripService } from './../../../../../helper/services/trips/trip.service';
 
 @Component({
   selector: 'app-trip-booking-all',
@@ -71,13 +71,15 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
   getGridActions(item: TripGridModel): ActionButton[] {
     const actions: ActionButton[] = [];
 
-    actions.push({
-      handle: () => {
-        this.tripService.setTripExecutePopup(true, item.id);
-      },
-      icon: '',
-      label: 'Execute'
-    });
+    if (!item.onGoing) {
+      actions.push({
+        handle: () => {
+          this.tripService.setTripExecutePopup(true, item.id);
+        },
+        icon: '',
+        label: 'Execute'
+      });
+    }
 
     return actions;
   }

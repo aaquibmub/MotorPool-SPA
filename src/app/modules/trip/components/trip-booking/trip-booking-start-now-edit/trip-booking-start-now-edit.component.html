@@ -741,6 +741,7 @@
                     textField="text"
                     valueField="value"
                     [defaultItem]="utilityService.dropdownDefaultItem"
+                    (valueChange)="handleDriverValueChange($event)"
                     [data]="driverList"
                     formControlName="driver"
                   >
@@ -757,18 +758,14 @@
                   <label for="inputVehical">Vehical</label>
                 </div>
                 <div class="control">
-                  <kendo-dropdownlist
+                  <input
+                    type="text"
                     class="form-control"
-                    textField="text"
-                    valueField="value"
-                    [defaultItem]="utilityService.dropdownDefaultItem"
-                    [data]="vehicalList"
-                    formControlName="vehical"
-                  >
-                    <ng-template kendoDropDownListItemTemplate let-dataItem>
-                      <span>{{ dataItem.text | translate }}</span>
-                    </ng-template>
-                  </kendo-dropdownlist>
+                    name="inputVehical"
+                    [value]="form.get('vehical').value?.text"
+                    readonly
+                    id=""
+                  />
                 </div>
               </div>
             </div>
@@ -782,7 +779,7 @@
                     type="text"
                     class="form-control"
                     name="inputRegistrationPlate"
-                    [value]="vehicalDetail?.plateNumber"
+                    formControlName="registrationPlate"
                     readonly
                     id=""
                   />

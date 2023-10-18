@@ -12,4 +12,8 @@ export class VehicalModel {
   type: DropdownItem<string>;
   color: string;
   armoured: boolean;
+
+  get getFullName() {
+    return this.make + ' ' + this.model + ' ' + this.modelYear.toString();
+  }
 }

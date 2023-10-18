@@ -1,30 +1,31 @@
-import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
-import { ResponseModel } from './../../../../../helper/models/common/response-model';
-import { UtilityRix } from './../../../../../helper/common/utility-rix';
-import { DestinationType, Gender, GetDestinationTypeForDropdownList, TripDestination, TripRoute } from './../../../../../helper/common/shared-types';
-import { AlertService } from './../../../../../helper/services/common/alert.service';
-import { VehicalService } from './../../../../../helper/services/vehicals/vehical.service';
-import { DriverService } from './../../../../../helper/services/drivers/driver.service';
-import { AddressService } from './../../../../../helper/services/utilities/address.service';
-import { PassengerService } from './../../../../../helper/services/trips/passenger.service';
-import { AgeGroupService } from './../../../../../helper/services/utilities/age-group.service';
-import { ApproverService } from './../../../../../helper/services/trips/approver.service';
-import { TripBookingService } from './../../../../../helper/services/trips/trip-booking.service';
-import { CommonService } from './../../../../../helper/services/common/common.service';
-import { UtilityService } from './../../../../../helper/services/common/utility.service';
-import { SignalRService } from './../../../../../helper/services/common/signal-r.service';
-import { OverlayService } from './../../../../../helper/services/common/overlay.service';
-import { PassengerModel } from './../../../../../helper/models/passengers/passenger-model';
-import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
-import { TripBookingStartNowModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-start-now-model';
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormArray, UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { NotificationService } from '@progress/kendo-angular-notification';
-import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DropdownType } from 'src/app/helper/common/shared-types';
 import { guid } from '@progress/kendo-angular-common';
+import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { NotificationService } from '@progress/kendo-angular-notification';
+import { DropdownType } from 'src/app/helper/common/shared-types';
+import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { TripDestinationModel } from 'src/app/helper/models/trips/enroute/trip-destination-model';
+import { VehicalModel } from 'src/app/helper/models/vehicals/vehical-model';
+import { DestinationType, Gender, GetDestinationTypeForDropdownList, TripDestination, TripRoute } from './../../../../../helper/common/shared-types';
+import { UtilityRix } from './../../../../../helper/common/utility-rix';
+import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
+import { ResponseModel } from './../../../../../helper/models/common/response-model';
+import { PassengerModel } from './../../../../../helper/models/passengers/passenger-model';
+import { TripBookingStartNowModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-start-now-model';
+import { AlertService } from './../../../../../helper/services/common/alert.service';
+import { CommonService } from './../../../../../helper/services/common/common.service';
+import { OverlayService } from './../../../../../helper/services/common/overlay.service';
+import { SignalRService } from './../../../../../helper/services/common/signal-r.service';
+import { UtilityService } from './../../../../../helper/services/common/utility.service';
+import { DriverService } from './../../../../../helper/services/drivers/driver.service';
+import { ApproverService } from './../../../../../helper/services/trips/approver.service';
+import { PassengerService } from './../../../../../helper/services/trips/passenger.service';
+import { TripBookingService } from './../../../../../helper/services/trips/trip-booking.service';
+import { AddressService } from './../../../../../helper/services/utilities/address.service';
+import { AgeGroupService } from './../../../../../helper/services/utilities/age-group.service';
+import { VehicalService } from './../../../../../helper/services/vehicals/vehical.service';
 
 @Component({
   selector: 'app-trip-booking-start-now-edit',
@@ -229,6 +230,7 @@ export class TripBookingStartNowEditComponent implements OnInit {
 
     let driver: DropdownItem<string> = null;
     let vehical: DropdownItem<string> = null;
+    let registrationPlate = '';
 
     let notes: string = '';
 
@@ -271,6 +273,7 @@ export class TripBookingStartNowEditComponent implements OnInit {
 
       driver = this.model.driver;
       vehical = this.model.vehical;
+      registrationPlate = this.model.registrationPlate;
       notes = this.model.notes;
 
       this.form = new UntypedFormGroup({
@@ -303,6 +306,7 @@ export class TripBookingStartNowEditComponent implements OnInit {
 
         driver: new UntypedFormControl(driver),
         vehical: new UntypedFormControl(vehical),
+        registrationPlate: new UntypedFormControl(registrationPlate),
         notes: new UntypedFormControl(notes)
       });
     }
@@ -561,6 +565,34 @@ export class TripBookingStartNowEditComponent implements OnInit {
       .subscribe((list: DropdownItem<string>[]) => {
         this.addressList = list;
       });
+  }
+
+  handleDriverValueChange(value: DropdownItem<string>): void {
+    if (!value) {
+      return;
+    }
+
+    this.vehicalService.getVehicalByDriverId(value.value)
+      .subscribe(
+        (response: ResponseModel<VehicalModel>) => {
+          if (response.hasError) {
+            return;
+          }
+
+
+          const vehcial = response.result as VehicalModel;
+
+          this.form.get('vehical').setValue({
+            text: vehcial.make + ' '
+              + vehcial.model + ' '
+              + vehcial.modelYear.toString(),
+            value: vehcial.id
+          });
+
+          this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
+
+        }
+      );
   }
 
 }

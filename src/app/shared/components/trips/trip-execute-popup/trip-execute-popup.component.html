@@ -87,6 +87,7 @@
                               textField="text"
                               valueField="value"
                               [defaultItem]="utilityService.dropdownDefaultItem"
+                              (valueChange)="handleDriverValueChange($event)"
                               [data]="driverList"
                               formControlName="driver"
                             >
@@ -119,7 +120,7 @@
                               type="text"
                               class="form-control"
                               id="inputTripId"
-                              [value]="model.vehical?.text"
+                              [value]="form.get('vehical').value?.text"
                             />
                           </div>
                         </div>

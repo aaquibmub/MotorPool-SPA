@@ -1,11 +1,8 @@
-import { Gender, TripDestination, TripRoute } from './../../../common/shared-types';
 import { DropdownItem } from '../../common/dropdown/dropdown-item.model';
+import { TripDestinationModel } from '../enroute/trip-destination-model';
+import { Gender, TripDestination, TripRoute } from './../../../common/shared-types';
 import { TripBookingPassengerModel } from './trip-booking-passenger-model';
 import { TripBookingSpecialServiceModel } from './trip-booking-special-service-model';
-import { TripStopModel } from '../enroute/trip-stop-model';
-import { TripPickupModel } from '../enroute/trip-pickup-model';
-import { TripDropoffModel } from '../enroute/trip-dropoff-model';
-import { TripDestinationModel } from '../enroute/trip-destination-model';
 
 export class TripBookingModel {
   id: string;
@@ -30,6 +27,7 @@ export class TripBookingModel {
 
   driver: DropdownItem<string>;
   vehical: DropdownItem<string>;
+  registrationPlate: string;
 
   notes: string;
 

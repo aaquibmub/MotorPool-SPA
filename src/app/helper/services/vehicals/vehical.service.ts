@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { environment } from './../../../../environments/environment';
 import { Injectable } from '@angular/core';
+import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Observable, Subject } from 'rxjs';
 import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
-import { VehicalModel } from '../../models/vehicals/vehical-model';
 import { GridList } from '../../models/common/grid/grid-list';
-import { VehicalGridModel } from '../../models/vehicals/vehical-grid-model';
-import { GridDataResult } from '@progress/kendo-angular-grid';
 import { ResponseModel } from '../../models/common/response-model';
+import { VehicalGridModel } from '../../models/vehicals/vehical-grid-model';
+import { VehicalModel } from '../../models/vehicals/vehical-model';
+import { environment } from './../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,10 @@ export class VehicalService {
 
   get(id: string): Observable<VehicalModel> {
     return this.http.get<VehicalModel>(this.baseUrl + id);
+  }
+
+  getVehicalByDriverId(id: string): Observable<ResponseModel<VehicalModel>> {
+    return this.http.get<ResponseModel<VehicalModel>>(this.baseUrl + 'get-vehical-by-driver-id/' + id);
   }
 
   addUpdate(model: any): Observable<ResponseModel<string>> {

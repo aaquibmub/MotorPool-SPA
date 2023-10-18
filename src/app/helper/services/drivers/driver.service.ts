@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
 import { GridDataResult } from '@progress/kendo-angular-grid';
+import { Observable, Subject } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
 import { GridList } from '../../models/common/grid/grid-list';
-import { DriverGridModel } from '../../models/drivers/driver-grid-model';
 import { PopupConfigModel } from '../../models/common/popup-config-model';
 import { ResponseModel } from '../../models/common/response-model';
 import { AllocateVehicalModel } from '../../models/drivers/allocate-vehical-model';
+import { DriverGridModel } from '../../models/drivers/driver-grid-model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,10 @@ export class DriverService {
   getDropdownList(text: string): Observable<DropdownItem<string>[]> {
     return this.http.get<DropdownItem<string>[]>(
       this.baseUrl + 'get-dropdown-list?text=' + text);
+  }
+  getDropdownListForTrip(text: string): Observable<DropdownItem<string>[]> {
+    return this.http.get<DropdownItem<string>[]>(
+      this.baseUrl + 'get-dropdown-list-for-trip?text=' + text);
   }
 
   getGridData(): Observable<GridDataResult> {

@@ -1,14 +1,14 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
+import { State } from '@progress/kendo-data-query';
+import { Subscription } from 'rxjs';
+import { TripType } from 'src/app/helper/common/shared-types';
+import { UtilityRix } from './../../../../../helper/common/utility-rix';
 import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
 import { TripGridModel } from './../../../../../helper/models/trips/enroute/trip-grid-model';
 import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
 import { TripService } from './../../../../../helper/services/trips/trip.service';
-import { UtilityRix } from './../../../../../helper/common/utility-rix';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
-import { State } from '@progress/kendo-data-query';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-import { TripType } from 'src/app/helper/common/shared-types';
 
 @Component({
   selector: 'app-trip-booking-scheduled-list',
@@ -74,13 +74,15 @@ export class TripBookingScheduledListComponent implements OnInit, OnDestroy {
   getGridActions(item: TripGridModel): ActionButton[] {
     const actions: ActionButton[] = [];
 
-    actions.push({
-      handle: () => {
-        this.router.navigate(['/sales/sale-invoice/' + item.id + '/packing-list']);
-      },
-      icon: '',
-      label: 'Packing List'
-    });
+    if (!item.onGoing) {
+      actions.push({
+        handle: () => {
+          this.tripService.setTripExecutePopup(true, item.id);
+        },
+        icon: '',
+        label: 'Execute'
+      });
+    }
 
     return actions;
   }

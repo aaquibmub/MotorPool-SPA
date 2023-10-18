@@ -1,14 +1,15 @@
-import { ResponseModel } from './../../../../helper/models/common/response-model';
-import { UtilityRix } from 'src/app/helper/common/utility-rix';
-import { DriverService } from './../../../../helper/services/drivers/driver.service';
-import { AlertService } from './../../../../helper/services/common/alert.service';
-import { CommonService } from './../../../../helper/services/common/common.service';
-import { TripService } from './../../../../helper/services/trips/trip.service';
-import { UtilityService } from './../../../../helper/services/common/utility.service';
-import { DropdownItem } from './../../../../helper/models/common/dropdown/dropdown-item.model';
-import { TripExecuteModel } from './../../../../helper/models/trips/enroute/trip-execute-model';
 import { Component, Input, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
+import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { VehicalModel } from 'src/app/helper/models/vehicals/vehical-model';
+import { VehicalService } from 'src/app/helper/services/vehicals/vehical.service';
+import { DropdownItem } from './../../../../helper/models/common/dropdown/dropdown-item.model';
+import { ResponseModel } from './../../../../helper/models/common/response-model';
+import { TripExecuteModel } from './../../../../helper/models/trips/enroute/trip-execute-model';
+import { AlertService } from './../../../../helper/services/common/alert.service';
+import { UtilityService } from './../../../../helper/services/common/utility.service';
+import { DriverService } from './../../../../helper/services/drivers/driver.service';
+import { TripService } from './../../../../helper/services/trips/trip.service';
 
 @Component({
   selector: 'app-trip-execute-popup',
@@ -26,7 +27,7 @@ export class TripExecutePopupComponent implements OnInit {
     public utilityService: UtilityService,
     private tripService: TripService,
     private driverService: DriverService,
-    private commonService: CommonService,
+    private vehicalService: VehicalService,
     private alertService: AlertService
   ) { }
 
@@ -57,6 +58,33 @@ export class TripExecutePopupComponent implements OnInit {
       ),
       notes: new UntypedFormControl(null)
     });
+  }
+
+  handleDriverValueChange(value: DropdownItem<string>): void {
+    if (!value) {
+      return;
+    }
+
+    this.vehicalService.getVehicalByDriverId(value.value)
+      .subscribe(
+        (response: ResponseModel<VehicalModel>) => {
+          if (response.hasError) {
+            return;
+          }
+
+          const vehcial = response.result as VehicalModel;
+
+          this.form.get('vehical').setValue({
+            text: vehcial.make + ' '
+              + vehcial.model + ' '
+              + vehcial.modelYear.toString(),
+            value: vehcial.id
+          });
+
+          this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
+
+        }
+      );
   }
 
   submit(): void {

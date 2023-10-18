@@ -1,29 +1,30 @@
-import { VehicalService } from './../../../../../helper/services/vehicals/vehical.service';
-import { DriverService } from './../../../../../helper/services/drivers/driver.service';
-import { AddressService } from './../../../../../helper/services/utilities/address.service';
-import { CommonService } from './../../../../../helper/services/common/common.service';
-import { ApproverService } from './../../../../../helper/services/trips/approver.service';
-import { ResponseModel } from './../../../../../helper/models/common/response-model';
-import { UtilityRix } from './../../../../../helper/common/utility-rix';
-import { PassengerService } from './../../../../../helper/services/trips/passenger.service';
-import { TripBookingService } from './../../../../../helper/services/trips/trip-booking.service';
-import { UtilityService } from './../../../../../helper/services/common/utility.service';
-import { AlertService } from './../../../../../helper/services/common/alert.service';
-import { OverlayService } from './../../../../../helper/services/common/overlay.service';
-import { NotificationService } from './../../../../../helper/services/common/notification.service';
-import { PassengerModel } from './../../../../../helper/models/passengers/passenger-model';
-import { DropdownItem } from '../../../../../helper/models/common/dropdown/dropdown-item.model';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormArray, FormControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { TripBookingScheduledModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-scheduled-model';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DestinationType, DropdownType, Gender, GetDestinationTypeForDropdownList, TripDestination, TripRoute } from 'src/app/helper/common/shared-types';
-import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
-import { AgeGroupService } from 'src/app/helper/services/utilities/age-group.service';
-import { SignalRService } from 'src/app/helper/services/common/signal-r.service';
 import { guid } from '@progress/kendo-angular-common';
+import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { DestinationType, DropdownType, Gender, GetDestinationTypeForDropdownList, TripDestination, TripRoute } from 'src/app/helper/common/shared-types';
+import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
 import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { TripDestinationModel } from 'src/app/helper/models/trips/enroute/trip-destination-model';
+import { VehicalModel } from 'src/app/helper/models/vehicals/vehical-model';
+import { SignalRService } from 'src/app/helper/services/common/signal-r.service';
+import { AgeGroupService } from 'src/app/helper/services/utilities/age-group.service';
+import { UtilityRix } from './../../../../../helper/common/utility-rix';
+import { ResponseModel } from './../../../../../helper/models/common/response-model';
+import { PassengerModel } from './../../../../../helper/models/passengers/passenger-model';
+import { TripBookingScheduledModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-scheduled-model';
+import { AlertService } from './../../../../../helper/services/common/alert.service';
+import { CommonService } from './../../../../../helper/services/common/common.service';
+import { NotificationService } from './../../../../../helper/services/common/notification.service';
+import { OverlayService } from './../../../../../helper/services/common/overlay.service';
+import { UtilityService } from './../../../../../helper/services/common/utility.service';
+import { DriverService } from './../../../../../helper/services/drivers/driver.service';
+import { ApproverService } from './../../../../../helper/services/trips/approver.service';
+import { PassengerService } from './../../../../../helper/services/trips/passenger.service';
+import { TripBookingService } from './../../../../../helper/services/trips/trip-booking.service';
+import { AddressService } from './../../../../../helper/services/utilities/address.service';
+import { VehicalService } from './../../../../../helper/services/vehicals/vehical.service';
 
 @Component({
   selector: 'app-trip-booking-scheduled-edit',
@@ -151,7 +152,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
         this.addressList = list;
       });
 
-    this.driverService.getDropdownList('')
+    this.driverService.getDropdownListForTrip('')
       .subscribe((list: DropdownItem<string>[]) => {
         this.driverList = list;
       });
@@ -232,6 +233,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
 
     let driver: DropdownItem<string> = null;
     let vehical: DropdownItem<string> = null;
+    let registrationPlate: string = '';
 
     let notes: string = '';
 
@@ -304,6 +306,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
 
       driver = this.model.driver;
       vehical = this.model.vehical;
+      registrationPlate = this.model.registrationPlate;
       notes = this.model.notes;
 
       this.form = new UntypedFormGroup({
@@ -345,6 +348,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
 
         driver: new UntypedFormControl(driver),
         vehical: new UntypedFormControl(vehical),
+        registrationPlate: new UntypedFormControl(registrationPlate),
         notes: new UntypedFormControl(notes)
       });
     }
@@ -603,6 +607,32 @@ export class TripBookingScheduledEditComponent implements OnInit {
       .subscribe((list: DropdownItem<string>[]) => {
         this.addressList = list;
       });
+  }
+
+  handleDriverValueChange(value: DropdownItem<string>): void {
+    if (!value) {
+      return;
+    }
+
+    this.vehicalService.getVehicalByDriverId(value.value)
+      .subscribe(
+        (response: ResponseModel<VehicalModel>) => {
+          if (response.hasError) {
+            return;
+          }
+
+          const vehcial = response.result as VehicalModel;
+
+          this.form.get('vehical').setValue({
+            text: vehcial.make + ' '
+              + vehcial.model + ' '
+              + vehcial.modelYear.toString(),
+            value: vehcial.id
+          });
+          this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
+
+        }
+      );
   }
 
 }
