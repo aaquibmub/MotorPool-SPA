@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { environment } from './../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
@@ -72,6 +72,10 @@ export class DriverService {
 
   deallocateVehical(model: AllocateVehicalModel): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'deallocate-vehical', model);
+  }
+
+  addUpdate(model: any): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl, model);
   }
 
 }

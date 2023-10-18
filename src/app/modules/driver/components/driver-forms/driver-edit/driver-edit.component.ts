@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { DriverModel } from 'src/app/helper/models/drivers/driver-model';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import {DropdownItem} from "../../../../../helper/models/common/dropdown/dropdown-item.model";
+import { DropdownItem } from "../../../../../helper/models/common/dropdown/dropdown-item.model";
 import { VehicalTypeService } from 'src/app/helper/services/vehicals/vehical-type.service';
+import { DriverService } from 'src/app/helper/services/drivers/driver.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {CommonService} from "../../../../../helper/services/common/common.service";
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { AlertService } from 'src/app/helper/services/common/alert.service';
+import { ResponseModel } from 'src/app/helper/models/common/response-model';
 
 @Component({
   selector: 'app-driver-edit',
@@ -21,9 +26,14 @@ export class DriverEditComponent implements OnInit {
   editMode = false;
   constructor(
     private driverNationalityService: VehicalTypeService,
+    private driverService: DriverService,
     private route: ActivatedRoute,
     private commonService: CommonService,
-    private router: Router
+    private router: Router,
+    public utilityService: UtilityService,
+    private el: ElementRef,
+    private dialogService: DialogService,
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -46,39 +56,47 @@ export class DriverEditComponent implements OnInit {
 
   private initForm(): void {
 
-    let driverFirstName: string = '';
-    let driverMiddleName: string = '';
-    let driverLastName: string = '';
-    let driverIdNumber: string = '';
-    let driverNationality: DropdownItem<string>;
-    let driverMobileNumber: string = '';
-    let driverEmailAddress: string = '';
+    let firstName: string = '';
+    let middleName: string = '';
+    let lastName: string = '';
+    let idNumber: string = '';
+    let nationality: DropdownItem<string>;
+    let mobileNumber: string = '';
+    let emailAddress: string = '';
+    let userId: string = '';
+    let password: string = '';
 
     if (this.model) {
-      driverFirstName = this.model.firstName;
-      driverMiddleName = this.model.middleName;
-      driverLastName = this.model.lastName;
-      driverNationality = this.model.nationality;
-      driverIdNumber = this.model.idNumber;
-      driverMobileNumber = this.model.mobileNumber;
-      driverEmailAddress = this.model.emailAddress;
+      firstName = this.model.firstName;
+      middleName = this.model.middleName;
+      lastName = this.model.lastName;
+      nationality = this.model.nationality;
+      idNumber = this.model.idNumber;
+      mobileNumber = this.model.mobileNumber;
+      emailAddress = this.model.emailAddress;
+      userId = this.model.userId;
+      password = this.model.password;
     }
 
     this.form = new UntypedFormGroup({
-      driverFirstName: new UntypedFormControl(
-        driverFirstName, [Validators.required]),
-      driverMiddleName: new UntypedFormControl(
-        driverMiddleName, [Validators.required]),
-      driverLastName: new UntypedFormControl(
-        driverLastName, [Validators.required]),
-      driverNationality: new UntypedFormControl(
-        driverNationality, [Validators.required]),
-      driverIdNumber: new UntypedFormControl(
-        driverIdNumber, [Validators.required]),
-      driverMobileNumber: new UntypedFormControl(
-        driverMobileNumber, [Validators.required]),
-      driverEmailAddress: new UntypedFormControl(
-        driverEmailAddress, [Validators.required]),
+      firstName: new UntypedFormControl(
+        firstName, [Validators.required]),
+      middleName: new UntypedFormControl(
+        middleName, [Validators.required]),
+      lastName: new UntypedFormControl(
+        lastName, [Validators.required]),
+      nationality: new UntypedFormControl(
+        nationality, [Validators.required]),
+      idNumber: new UntypedFormControl(
+        idNumber, [Validators.required]),
+      mobileNumber: new UntypedFormControl(
+        mobileNumber, [Validators.required]),
+      emailAddress: new UntypedFormControl(
+        emailAddress, [Validators.required]),
+      userId: new UntypedFormControl(
+        userId, [Validators.required]),
+      password: new UntypedFormControl(
+        password, [Validators.required]),
     });
 
   }
@@ -88,6 +106,42 @@ export class DriverEditComponent implements OnInit {
   }
 
   submit(): void {
+    if (!this.form.valid) {
+      this.utilityService.scrollToFirstInvalidControl(this.el, '.page-wrapper');
+      return;
+    }
+
+    const formValue = this.form.value as DriverModel;
+    const primaryAction = this.editMode ? 'Update' : 'Create';
+    const successAction = this.editMode ? 'Updated' : 'Created';
+    const primaryMsg = 'Do you want to ' + primaryAction + ' vehical?';
+
+    const dialog: DialogRef = this.dialogService
+      .open(this.alertService.getConfirmDialougeConfig(
+        'Confirm ' + primaryAction, primaryMsg, primaryAction));
+
+    dialog.result.subscribe((result: any) => {
+      if (result.text === primaryAction) {
+        this.driverService.addUpdate(formValue)
+          .subscribe(
+            (response: ResponseModel<string>) => {
+
+              if (response.hasError) {
+                this.alertService.setErrorAlert(response.msg);
+                return;
+              }
+
+              this.alertService.setSuccessAlert(
+                'Vehical is '
+                + successAction
+                + ' successfully');
+
+              this.utilityService.redirectToUrl('/vehicals/pool/all');
+
+            }
+          );
+      }
+    });
   }
 
 

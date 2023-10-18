@@ -8,5 +8,6 @@ export class DriverModel {
   idNumber: string;
   mobileNumber: string;
   emailAddress: string;
-
+  userId: string;
+  password: string;
 }

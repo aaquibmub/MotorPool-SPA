@@ -14,24 +14,24 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="driverFirstName">Last Name</label>
+                <label for="driverFirstName">First Name</label>
               </div>
               <div class="control">
                 <input
                   type="text"
                   class="form-control"
                   name="driverFirstName"
-                  formControlName="driverFirstName"
+                  formControlName="firstName"
                   id="driverFirstName"
                 />
                 <div
                   *ngIf="
-                    !form.get('driverFirstName').valid &&
-                    form.get('driverFirstName').touched
+                    !form.get('firstName').valid &&
+                    form.get('firstName').touched
                   "
                   class="invalid-feedback"
                 >
-                  Last Name is required
+                  First Name is required
                 </div>
               </div>
             </div>
@@ -47,13 +47,13 @@
                   type="text"
                   class="form-control"
                   name="driverMiddleName"
-                  formControlName="driverMiddleName"
+                  formControlName="middleName"
                   id="driverMiddleName"
                 />
                 <div
                   *ngIf="
-                    !form.get('driverMiddleName').valid &&
-                    form.get('driverMiddleName').touched
+                    !form.get('middleName').valid &&
+                    form.get('middleName').touched
                   "
                   class="invalid-feedback"
                 >
@@ -73,13 +73,13 @@
                   type="text"
                   class="form-control"
                   name="driverLastName"
-                  formControlName="driverLastName"
+                  formControlName="lastName"
                   id="driverLastName"
                 />
                 <div
                   *ngIf="
-                    !form.get('driverLastName').valid &&
-                    form.get('driverLastName').touched
+                    !form.get('lastName').valid &&
+                    form.get('lastName').touched
                   "
                   class="invalid-feedback"
                 >
@@ -120,13 +120,13 @@
                   type="text"
                   class="form-control"
                   name="driverIDNumber"
-                  formControlName="driverIDNumber"
+                  formControlName="idNumber"
                   id="driverIDNumber"
                 />
                 <div
                   *ngIf="
-                    !form.get('driverLastName').valid &&
-                    form.get('driverLastName').touched
+                    !form.get('idNumber').valid &&
+                    form.get('idNumber').touched
                   "
                   class="invalid-feedback"
                 >
@@ -168,13 +168,13 @@
                   type="text"
                   class="form-control"
                   name="driverMobileNumber"
-                  formControlName="driverMobileNumber"
+                  formControlName="mobileNumber"
                   id="driverMobileNumber"
                 />
                 <div
                   *ngIf="
-                    !form.get('driverLastName').valid &&
-                    form.get('driverLastName').touched
+                    !form.get('mobileNumber').valid &&
+                    form.get('mobileNumber').touched
                   "
                   class="invalid-feedback"
                 >
@@ -194,17 +194,17 @@
                   type="text"
                   class="form-control"
                   name="driverEmail"
-                  formControlName="driverEmail"
+                  formControlName="emailAddress"
                   id="driverEmail"
                 />
                 <div
                   *ngIf="
-                    !form.get('driverFirstName').valid &&
-                    form.get('driverLastName').touched
+                    !form.get('emailAddress').valid &&
+                    form.get('emailAddress').touched
                   "
                   class="invalid-feedback"
                 >
-                  ID Number is required
+                  Email Address is required
                 </div>
               </div>
             </div>
@@ -392,13 +392,13 @@
                     type="text"
                     class="form-control"
                     name="driverUserID"
-                    formControlName="driverUserID"
+                    formControlName="userId"
                     id="driverUserID"
                   />
                   <div
                     *ngIf="
-                    !form.get('driverFirstName').valid &&
-                    form.get('driverFirstName').touched
+                    !form.get('userId').valid &&
+                    form.get('userId').touched
                   "
                     class="invalid-feedback"
                   >
@@ -418,13 +418,13 @@
                     type="password"
                     class="form-control"
                     name="driverPassword"
-                    formControlName="driverPassword"
+                    formControlName="password"
                     id="driverPassword"
                   />
                   <div
                     *ngIf="
-                    !form.get('driverFirstName').valid &&
-                    form.get('driverFirstName').touched
+                    !form.get('password').valid &&
+                    form.get('password').touched
                   "
                     class="invalid-feedback"
                   >
