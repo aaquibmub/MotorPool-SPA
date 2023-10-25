@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { DialogSettings } from '@progress/kendo-angular-dialog';
-import { ResponseAction } from './helper/common/shared-types';
-import { AuthService } from './helper/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertService } from './helper/services/common/alert.service';
+import { DialogSettings } from '@progress/kendo-angular-dialog';
 import { CldrIntlService, IntlService } from '@progress/kendo-angular-intl';
-import { OverlayService } from './helper/services/common/overlay.service';
-import { PassengerService } from './helper/services/trips/passenger.service';
+import { ResponseAction } from './helper/common/shared-types';
 import { PopupConfigModel } from './helper/models/common/popup-config-model';
-import { NotificationConfigService } from './helper/services/utilities/notification-config.service';
+import { AuthService } from './helper/services/auth/auth.service';
+import { AlertService } from './helper/services/common/alert.service';
+import { OverlayService } from './helper/services/common/overlay.service';
 import { SignalRService } from './helper/services/common/signal-r.service';
-import { TripService } from './helper/services/trips/trip.service';
 import { DriverService } from './helper/services/drivers/driver.service';
+import { PassengerService } from './helper/services/trips/passenger.service';
+import { TripService } from './helper/services/trips/trip.service';
+import { NotificationConfigService } from './helper/services/utilities/notification-config.service';
 
 @Component({
   selector: 'app-root',
@@ -39,8 +39,9 @@ export class AppComponent implements OnInit {
   showNotificationRulePopupPopup: boolean;
   ruleId: string;
 
-  // trip execute
+  // trip execute/cancel
   showTripExecutePopup: boolean;
+  showTripCancelPopup: boolean;
   tripId: string;
 
   // allocate vehical
@@ -143,6 +144,15 @@ export class AppComponent implements OnInit {
       .subscribe({
         next: (flag: PopupConfigModel) => {
           this.showTripExecutePopup = flag.show;
+          this.tripId = flag.arg;
+        }
+      }
+      );
+
+    this.tripService.getTripCancelPopup()
+      .subscribe({
+        next: (flag: PopupConfigModel) => {
+          this.showTripCancelPopup = flag.show;
           this.tripId = flag.arg;
         }
       }

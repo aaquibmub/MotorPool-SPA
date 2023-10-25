@@ -1,0 +1,118 @@
+<div class="overlay" [perfectScrollbar]>
+  <div class="overlay-wrapper" style="width: 30%">
+    <div class="overlay-content bg-white p-24 sm-padding-10">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-transparent">
+            <div class="card-header">
+              <div class="card-title">Trip Cancel</div>
+            </div>
+            <div class="card-block">
+              <form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+                <div class="form-section">
+                  <div class="section-header">Trip Information</div>
+                  <div class="section-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="label">
+                            <label for="inputTripIdLabel">Trip ID</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="label">
+                            <label for="inputTripIdValue">{{
+                              model.tripIdStr
+                            }}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="label">
+                            <label for="inputTripBookedByLabel"
+                              >Trip Booked By</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="label">
+                            <label for="inputTripBookedByValue">{{
+                              model.bookedBy
+                            }}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="label">
+                            <label for="inputTripRequesterLabel"
+                              >Trip Requester</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="label">
+                            <label for="inputRequesterValue">{{
+                              model.requester
+                            }}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Remarks -->
+                <div class="form-section">
+                  <div class="section-header">Remarks</div>
+                  <div class="section-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="control">
+                            <textarea
+                              class="form-control form-text-area"
+                              name=""
+                              formControlName="remarks"
+                              id=""
+                              cols="30"
+                              rows="10"
+                            ></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="pull-right">
+                    <button
+                      type="button"
+                      (click)="close()"
+                      class="btn btn-default custombtn"
+                    >
+                      Close
+                    </button>
+                    <button type="submit" class="btn btn-danger ml-8">
+                      Cancel Trip
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

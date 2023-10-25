@@ -126,3 +126,18 @@ export function GetDestinationTypeForDropdownList():
     },
   ];
 }
+
+
+export enum TripStatus {
+  Created = 10,
+  AssignedToDriver = 20,
+  TripStarted = 30,
+  VehicalDispatched = 40,
+  ArrivedAtPickupLocation = 50,
+  WaitingForPassenger = 52,
+  PassengerOnboarded = 55,
+  ArrivedAtStop = 60,
+  ArrivedAtDropoff = 70,
+  Completed = 400,
+  Cancelled = 500
+}

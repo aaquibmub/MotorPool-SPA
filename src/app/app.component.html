@@ -25,6 +25,11 @@
   [tripId]="tripId"
 ></app-trip-execute-popup>
 
+<app-trip-cancel-popup
+  *ngIf="showTripCancelPopup"
+  [tripId]="tripId"
+></app-trip-cancel-popup>
+
 <app-allocate-vehical-popup
   *ngIf="showAllocateVehicalPopup"
   [driverId]="driverId"

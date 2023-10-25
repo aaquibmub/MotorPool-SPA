@@ -1,14 +1,16 @@
-import { environment } from './../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Observable, Subject } from 'rxjs';
-import { GridList } from '../../models/common/grid/grid-list';
-import { HttpClient } from '@angular/common/http';
-import { TripGridModel } from '../../models/trips/enroute/trip-grid-model';
 import { TripType } from '../../common/shared-types';
-import { TripExecuteModel } from '../../models/trips/enroute/trip-execute-model';
-import { ResponseModel } from '../../models/common/response-model';
+import { GridList } from '../../models/common/grid/grid-list';
 import { PopupConfigModel } from '../../models/common/popup-config-model';
+import { ResponseModel } from '../../models/common/response-model';
+import { TripExecuteModel } from '../../models/trips/enroute/trip-execute-model';
+import { TripGridModel } from '../../models/trips/enroute/trip-grid-model';
+import { TripStatusDetailModel } from '../../models/trips/enroute/trip-status-detail-model';
+import { TripStatusModel } from '../../models/trips/enroute/trip-status-model';
+import { environment } from './../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,7 @@ export class TripService {
 
   private gridData = new Subject<GridList<TripGridModel>>();
   private showTripExecutePopup = new Subject<PopupConfigModel>();
+  private showTripCancelPopup = new Subject<PopupConfigModel>();
 
   constructor(
     private http: HttpClient) { }
@@ -56,6 +59,22 @@ export class TripService {
 
   executeTrip(model: TripExecuteModel): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'execute-trip', model);
+  }
+
+  getTripCancelPopup(): Observable<PopupConfigModel> {
+    return this.showTripCancelPopup.asObservable();
+  }
+  setTripCancelPopup(show: boolean, arg?: any): void {
+    this.showTripCancelPopup.next({ show, arg });
+  }
+
+  getTripStatusDetailModel(id: string): Observable<TripStatusDetailModel> {
+    return this.http.get<TripStatusDetailModel>(
+      this.baseUrl + 'get-trip-status-detail-model?id=' + id);
+  }
+
+  updateTripStatus(model: TripStatusModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-status', model);
   }
 
 }

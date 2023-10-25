@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { TripComponent } from './trip.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
-import { TripBookingComponent } from './components/trip-booking/trip-booking.component';
 import { TripBookingScheduledEditComponent } from './components/trip-booking/trip-booking-scheduled-edit/trip-booking-scheduled-edit.component';
-import { TripBookingsComponent } from './components/trip-bookings/trip-bookings.component';
+import { TripBookingStartNowEditComponent } from './components/trip-booking/trip-booking-start-now-edit/trip-booking-start-now-edit.component';
+import { TripBookingComponent } from './components/trip-booking/trip-booking.component';
 import { TripBookingAllComponent } from './components/trip-bookings/trip-booking-all/trip-booking-all.component';
 import { TripBookingScheduledListComponent } from './components/trip-bookings/trip-booking-scheduled-list/trip-booking-scheduled-list.component';
 import { TripBookingStartNowListComponent } from './components/trip-bookings/trip-booking-start-now-list/trip-booking-start-now-list.component';
-import { TripBookingStartNowEditComponent } from './components/trip-booking/trip-booking-start-now-edit/trip-booking-start-now-edit.component';
+import { TripBookingsComponent } from './components/trip-bookings/trip-bookings.component';
+import { TripViewDetailComponent } from './components/trip-view/trip-view-detail/trip-view-detail.component';
+import { TripViewComponent } from './components/trip-view/trip-view.component';
+import { TripComponent } from './trip.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,18 @@ const routes: Routes = [
           { path: 'all', component: TripBookingAllComponent },
           { path: 'scheduled', component: TripBookingScheduledListComponent },
           { path: 'start-now', component: TripBookingStartNowListComponent }
+        ]
+      },
+      {
+        path: 'view',
+        component: TripViewComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: '/trips/bookings/all',
+            pathMatch: 'full'
+          },
+          { path: 'detail', component: TripViewDetailComponent },
         ]
       },
     ]

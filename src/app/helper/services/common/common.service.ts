@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { environment } from './../../../../environments/environment';
 import { Injectable } from '@angular/core';
-import { DropdownType } from '../../common/shared-types';
 import { Observable } from 'rxjs';
+import { DropdownType } from '../../common/shared-types';
 import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
+import { environment } from './../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -4,6 +4,7 @@ import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-gr
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { TripGridModel } from 'src/app/helper/models/trips/enroute/trip-grid-model';
 import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
 import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
@@ -22,6 +23,8 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
   searchQuery: string;
 
   pageSizeSubscription: Subscription;
+  tripExecutePopupSubscription: Subscription;
+  tripCancelPopupSubscription: Subscription;
 
   constructor(
     private tripService: TripService,
@@ -30,6 +33,25 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
+    this.tripExecutePopupSubscription = this.tripService.getTripExecutePopup()
+      .subscribe(
+        (config: PopupConfigModel) => {
+          if (!config.show) {
+            this.tripService.fetchGridData(this.state, this.searchQuery);
+          }
+        }
+      );
+
+    this.tripCancelPopupSubscription = this.tripService.getTripCancelPopup()
+      .subscribe(
+        (config: PopupConfigModel) => {
+          if (!config.show) {
+            this.tripService.fetchGridData(this.state, this.searchQuery);
+          }
+        }
+      );
+
     this.pageSizeSubscription = this.gridToolbarService.getPageSize()
       .subscribe(
         (pageSize: number) => {
@@ -71,7 +93,15 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
   getGridActions(item: TripGridModel): ActionButton[] {
     const actions: ActionButton[] = [];
 
-    if (!item.onGoing) {
+    actions.push({
+      handle: () => {
+        this.router.navigate(['/trips/view/detail']);
+      },
+      icon: '',
+      label: 'View'
+    });
+
+    if (!item.onGoing && !item.cancelled) {
       actions.push({
         handle: () => {
           this.tripService.setTripExecutePopup(true, item.id);
@@ -79,6 +109,17 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
         icon: '',
         label: 'Execute'
       });
+    } else {
+      if (!item.cancelled) {
+
+        actions.push({
+          handle: () => {
+            this.tripService.setTripCancelPopup(true, item.id);
+          },
+          icon: '',
+          label: 'Cancel'
+        });
+      }
     }
 
     return actions;
@@ -86,5 +127,11 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.pageSizeSubscription.unsubscribe();
+    if (this.tripExecutePopupSubscription) {
+      this.tripExecutePopupSubscription.unsubscribe();
+    }
+    if (this.tripCancelPopupSubscription) {
+      this.tripCancelPopupSubscription.unsubscribe();
+    }
   }
 }

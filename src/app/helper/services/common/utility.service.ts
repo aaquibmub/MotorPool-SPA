@@ -82,7 +82,7 @@ export class UtilityService {
 
       const value = typeof data === 'boolean'
         || typeof data === 'number' ? data.toString() :
-        (data instanceof Date ? data.toDateString() : data);
+        (data instanceof Date ? data.toJSON() : data);
 
       formData.append(parentKey as string, value as string);
     }

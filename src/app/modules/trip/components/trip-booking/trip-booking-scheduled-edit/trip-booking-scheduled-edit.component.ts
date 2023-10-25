@@ -152,7 +152,7 @@ export class TripBookingScheduledEditComponent implements OnInit {
         this.addressList = list;
       });
 
-    this.driverService.getDropdownListForTrip('')
+    this.driverService.getDropdownList('')
       .subscribe((list: DropdownItem<string>[]) => {
         this.driverList = list;
       });
