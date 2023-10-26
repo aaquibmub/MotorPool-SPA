@@ -1,0 +1,29 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>{{ pageTitle }}</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="tab-left">
+      <div class="tab-left-items">
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/trips/list/today"
+          >Today Trips
+        </a>
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/trips/list/on-going"
+          >On-going Trips</a
+        >
+      </div>
+      <div class="tab-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

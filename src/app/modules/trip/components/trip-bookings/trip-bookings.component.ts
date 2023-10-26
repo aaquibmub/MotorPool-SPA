@@ -1,7 +1,7 @@
-import { ActionButton } from './../../../../helper/models/common/grid/action-button';
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActionButton } from './../../../../helper/models/common/grid/action-button';
 
 @Component({
   selector: 'app-trip-bookings',
@@ -12,19 +12,27 @@ export class TripBookingsComponent implements OnInit {
   pageTitle: string;
 
   buttons: ActionButton[] = [
-    {
-      handle: () => {
-        this.router.navigate(['/trips/booking/new-scheduled']);
-      },
-      icon: '',
-      label: 'New Scheduled'
-    },
+
     {
       handle: () => {
         this.router.navigate(['/trips/booking/new-start-now']);
       },
       icon: '',
-      label: 'New Start Now'
+      label: 'New Trip'
+    },
+    {
+      handle: () => {
+        this.router.navigate(['/trips/booking/new-scheduled']);
+      },
+      icon: '',
+      label: 'Scheduled Trip'
+    },
+    {
+      handle: () => {
+        this.router.navigate(['/trips/booking/new-refuelling']);
+      },
+      icon: '',
+      label: 'Refuelling Trip'
     }
   ];
 
@@ -36,11 +44,14 @@ export class TripBookingsComponent implements OnInit {
       if (path === '/trips/bookings/all') {
         this.pageTitle = 'All Trip Bookings';
       }
-      if (path === '/trips/bookings/scheduled') {
-        this.pageTitle = 'Scheduled Booking';
-      }
       if (path === '/trips/bookings/start-now') {
-        this.pageTitle = 'Start Now Bookings';
+        this.pageTitle = 'New Trips';
+      }
+      if (path === '/trips/bookings/scheduled') {
+        this.pageTitle = 'Scheduled Trips';
+      }
+      if (path === '/trips/bookings/refuelling') {
+        this.pageTitle = 'Refuelling Trips';
       }
     });
   }

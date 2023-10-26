@@ -18,7 +18,11 @@ export enum OPM {
 
 export enum TripType {
   Scheduled = 10,
-  StartsNow = 20
+  StartsNow = 20,
+  Refuelling = 30,
+
+  Today = 400,
+  Ongoing = 500
 }
 
 export enum TripRoute {

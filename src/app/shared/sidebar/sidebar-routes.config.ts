@@ -199,8 +199,8 @@ export const ROUTES: RouteInfo[] = [
             submenu: []
           },
           {
-            path: '/trips/bookings/scheduled',
-            title: 'Scheduled Bookings',
+            path: '/trips/bookings/start-now',
+            title: 'New Trip Bookings',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -209,8 +209,41 @@ export const ROUTES: RouteInfo[] = [
             submenu: []
           },
           {
-            path: '/trips/bookings/start-now',
-            title: 'Start Now Bookings',
+            path: '/trips/bookings/scheduled',
+            title: 'Scheduled Trip Bookings',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
+
+      // trips
+      {
+        path: '/trips/list/',
+        title: 'Trips',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            path: '/trips/list/today',
+            title: 'Today Trips',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/trips/list/on-going',
+            title: 'On-going Trips',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
