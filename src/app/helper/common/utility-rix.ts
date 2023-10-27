@@ -47,4 +47,13 @@ export class UtilityRix {
       content: msg
     };
   }
+  static getSuccsessNotification(msg: string): NotificationSettings {
+    return {
+      hideAfter: 1000,
+      position: { horizontal: 'center', vertical: 'bottom' },
+      animation: { type: 'fade', duration: 400 },
+      type: { style: 'success', icon: true },
+      content: msg
+    };
+  }
 }

@@ -78,8 +78,7 @@
                 />
                 <div
                   *ngIf="
-                    !form.get('lastName').valid &&
-                    form.get('lastName').touched
+                    !form.get('lastName').valid && form.get('lastName').touched
                   "
                   class="invalid-feedback"
                 >
@@ -125,8 +124,7 @@
                 />
                 <div
                   *ngIf="
-                    !form.get('idNumber').valid &&
-                    form.get('idNumber').touched
+                    !form.get('idNumber').valid && form.get('idNumber').touched
                   "
                   class="invalid-feedback"
                 >
@@ -135,24 +133,23 @@
               </div>
             </div>
           </div>
-          <!-- Nationality -->
+
+          <!-- Active -->
           <div class="col-md-4">
             <div class="form-group">
-              <div class="label">
-                <label>Driver Status</label>
-              </div>
               <div class="control">
-                <kendo-dropdownlist
-                  class="form-control"
-                  textField="text"
-                  valueField="value"
-                  [data]="nationalityList"
-                  formControlName="type"
-                >
-                  <ng-template kendoDropDownListItemTemplate let-dataItem>
-                    <span>{{ dataItem.text }}</span>
-                  </ng-template>
-                </kendo-dropdownlist>
+                <div class="display-flex">
+                  <div class="checkbox-control">
+                    <kendo-switch
+                      [size]="'small'"
+                      id="inputActive"
+                      formControlName="isActive"
+                    ></kendo-switch>
+                  </div>
+                  <div class="label">
+                    <label for="inputActive">is active</label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -209,172 +206,152 @@
               </div>
             </div>
           </div>
-
-          <!-- Active -->
-          <div class="col-md-4">
-            <div class="form-group">
-              <div class="control">
-                <div class="display-flex">
-                  <div class="checkbox-control">
-                    <kendo-switch
-                      [size]="'small'"
-                      id="inputActive"
-                      formControlName="isActive"
-                    ></kendo-switch>
-                  </div>
-                  <div class="label">
-                    <label for="inputActive">is active</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-<!--        <div class="row">-->
-<!--          &lt;!&ndash; Make &ndash;&gt;-->
-<!--          <div class="col-md-4">-->
-<!--            <div class="form-group">-->
-<!--              <div class="label">-->
-<!--                <label for="inputMake">Make</label>-->
-<!--              </div>-->
-<!--              <div class="control">-->
-<!--                <input-->
-<!--                  type="text"-->
-<!--                  class="form-control"-->
-<!--                  name="inputMake"-->
-<!--                  formControlName="make"-->
-<!--                  id="inputMake"-->
-<!--                />-->
-<!--                <div-->
-<!--                  *ngIf="!form.get('make').valid && form.get('make').touched"-->
-<!--                  class="invalid-feedback"-->
-<!--                >-->
-<!--                  Make is required-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          &lt;!&ndash; Model &ndash;&gt;-->
-<!--          <div class="col-md-4">-->
-<!--            <div class="form-group">-->
-<!--              <div class="label">-->
-<!--                <label for="inputModel">Model</label>-->
-<!--              </div>-->
-<!--              <div class="control">-->
-<!--                <input-->
-<!--                  type="text"-->
-<!--                  class="form-control"-->
-<!--                  name="inputModel"-->
-<!--                  formControlName="model"-->
-<!--                  id="inputModel"-->
-<!--                />-->
-<!--                <div-->
-<!--                  *ngIf="!form.get('model').valid && form.get('model').touched"-->
-<!--                  class="invalid-feedback"-->
-<!--                >-->
-<!--                  Model is required-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          &lt;!&ndash; Model &ndash;&gt;-->
-<!--          <div class="col-md-4">-->
-<!--            <div class="form-group">-->
-<!--              <div class="label">-->
-<!--                <label for="inputModelYear">Model Year</label>-->
-<!--              </div>-->
-<!--              <div class="control">-->
-<!--                <input-->
-<!--                  type="number"-->
-<!--                  class="form-control"-->
-<!--                  name="inputModelYear"-->
-<!--                  formControlName="modelYear"-->
-<!--                  id="inputModelYear"-->
-<!--                />-->
-<!--                <div-->
-<!--                  *ngIf="-->
-<!--                    !form.get('modelYear').valid &&-->
-<!--                    form.get('modelYear').touched-->
-<!--                  "-->
-<!--                  class="invalid-feedback"-->
-<!--                >-->
-<!--                  Model Year is required-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          &lt;!&ndash; Type &ndash;&gt;-->
-<!--          <div class="col-md-4">-->
-<!--            <div class="form-group">-->
-<!--              <div class="label">-->
-<!--                <label for="inputType">Type</label>-->
-<!--              </div>-->
-<!--              <div class="control">-->
-<!--                <kendo-dropdownlist-->
-<!--                  class="form-control"-->
-<!--                  textField="text"-->
-<!--                  valueField="value"-->
-<!--                  [defaultItem]="utilityService.dropdownDefaultItem"-->
-<!--                  [data]="typeList"-->
-<!--                  formControlName="type"-->
-<!--                >-->
-<!--                  <ng-template kendoDropDownListItemTemplate let-dataItem>-->
-<!--                    <span>{{ dataItem.text }}</span>-->
-<!--                  </ng-template>-->
-<!--                </kendo-dropdownlist>-->
-<!--                <div-->
-<!--                  *ngIf="!form.get('type').valid && form.get('type').touched"-->
-<!--                  class="invalid-feedback"-->
-<!--                >-->
-<!--                  Type is required-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="col-md-4">-->
-<!--            <div class="form-group">-->
-<!--              <div class="label">-->
-<!--                <label for="inputColor">Color</label>-->
-<!--              </div>-->
-<!--              <div class="control">-->
-<!--                <input-->
-<!--                  type="text"-->
-<!--                  class="form-control"-->
-<!--                  name="inputColor"-->
-<!--                  formControlName="color"-->
-<!--                  id="inputColor"-->
-<!--                />-->
-<!--                <div-->
-<!--                  *ngIf="!form.get('color').valid && form.get('color').touched"-->
-<!--                  class="invalid-feedback"-->
-<!--                >-->
-<!--                  Color is required-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          &lt;!&ndash; Armoued &ndash;&gt;-->
-<!--          <div class="col-md-4">-->
-<!--            <div class="form-group">-->
-<!--              <div class="control">-->
-<!--                <div class="display-flex">-->
-<!--                  <div class="checkbox-control">-->
-<!--                    <kendo-switch-->
-<!--                      [size]="'small'"-->
-<!--                      id="inputArmoured"-->
-<!--                      formControlName="armoured"-->
-<!--                    ></kendo-switch>-->
-<!--                  </div>-->
-<!--                  <div class="label">-->
-<!--                    <label for="inputArmoured">is armoured</label>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <!--        <div class="row">-->
+        <!--          &lt;!&ndash; Make &ndash;&gt;-->
+        <!--          <div class="col-md-4">-->
+        <!--            <div class="form-group">-->
+        <!--              <div class="label">-->
+        <!--                <label for="inputMake">Make</label>-->
+        <!--              </div>-->
+        <!--              <div class="control">-->
+        <!--                <input-->
+        <!--                  type="text"-->
+        <!--                  class="form-control"-->
+        <!--                  name="inputMake"-->
+        <!--                  formControlName="make"-->
+        <!--                  id="inputMake"-->
+        <!--                />-->
+        <!--                <div-->
+        <!--                  *ngIf="!form.get('make').valid && form.get('make').touched"-->
+        <!--                  class="invalid-feedback"-->
+        <!--                >-->
+        <!--                  Make is required-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          &lt;!&ndash; Model &ndash;&gt;-->
+        <!--          <div class="col-md-4">-->
+        <!--            <div class="form-group">-->
+        <!--              <div class="label">-->
+        <!--                <label for="inputModel">Model</label>-->
+        <!--              </div>-->
+        <!--              <div class="control">-->
+        <!--                <input-->
+        <!--                  type="text"-->
+        <!--                  class="form-control"-->
+        <!--                  name="inputModel"-->
+        <!--                  formControlName="model"-->
+        <!--                  id="inputModel"-->
+        <!--                />-->
+        <!--                <div-->
+        <!--                  *ngIf="!form.get('model').valid && form.get('model').touched"-->
+        <!--                  class="invalid-feedback"-->
+        <!--                >-->
+        <!--                  Model is required-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          &lt;!&ndash; Model &ndash;&gt;-->
+        <!--          <div class="col-md-4">-->
+        <!--            <div class="form-group">-->
+        <!--              <div class="label">-->
+        <!--                <label for="inputModelYear">Model Year</label>-->
+        <!--              </div>-->
+        <!--              <div class="control">-->
+        <!--                <input-->
+        <!--                  type="number"-->
+        <!--                  class="form-control"-->
+        <!--                  name="inputModelYear"-->
+        <!--                  formControlName="modelYear"-->
+        <!--                  id="inputModelYear"-->
+        <!--                />-->
+        <!--                <div-->
+        <!--                  *ngIf="-->
+        <!--                    !form.get('modelYear').valid &&-->
+        <!--                    form.get('modelYear').touched-->
+        <!--                  "-->
+        <!--                  class="invalid-feedback"-->
+        <!--                >-->
+        <!--                  Model Year is required-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div class="row">-->
+        <!--          &lt;!&ndash; Type &ndash;&gt;-->
+        <!--          <div class="col-md-4">-->
+        <!--            <div class="form-group">-->
+        <!--              <div class="label">-->
+        <!--                <label for="inputType">Type</label>-->
+        <!--              </div>-->
+        <!--              <div class="control">-->
+        <!--                <kendo-dropdownlist-->
+        <!--                  class="form-control"-->
+        <!--                  textField="text"-->
+        <!--                  valueField="value"-->
+        <!--                  [defaultItem]="utilityService.dropdownDefaultItem"-->
+        <!--                  [data]="typeList"-->
+        <!--                  formControlName="type"-->
+        <!--                >-->
+        <!--                  <ng-template kendoDropDownListItemTemplate let-dataItem>-->
+        <!--                    <span>{{ dataItem.text }}</span>-->
+        <!--                  </ng-template>-->
+        <!--                </kendo-dropdownlist>-->
+        <!--                <div-->
+        <!--                  *ngIf="!form.get('type').valid && form.get('type').touched"-->
+        <!--                  class="invalid-feedback"-->
+        <!--                >-->
+        <!--                  Type is required-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          <div class="col-md-4">-->
+        <!--            <div class="form-group">-->
+        <!--              <div class="label">-->
+        <!--                <label for="inputColor">Color</label>-->
+        <!--              </div>-->
+        <!--              <div class="control">-->
+        <!--                <input-->
+        <!--                  type="text"-->
+        <!--                  class="form-control"-->
+        <!--                  name="inputColor"-->
+        <!--                  formControlName="color"-->
+        <!--                  id="inputColor"-->
+        <!--                />-->
+        <!--                <div-->
+        <!--                  *ngIf="!form.get('color').valid && form.get('color').touched"-->
+        <!--                  class="invalid-feedback"-->
+        <!--                >-->
+        <!--                  Color is required-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          &lt;!&ndash; Armoued &ndash;&gt;-->
+        <!--          <div class="col-md-4">-->
+        <!--            <div class="form-group">-->
+        <!--              <div class="control">-->
+        <!--                <div class="display-flex">-->
+        <!--                  <div class="checkbox-control">-->
+        <!--                    <kendo-switch-->
+        <!--                      [size]="'small'"-->
+        <!--                      id="inputArmoured"-->
+        <!--                      formControlName="armoured"-->
+        <!--                    ></kendo-switch>-->
+        <!--                  </div>-->
+        <!--                  <div class="label">-->
+        <!--                    <label for="inputArmoured">is armoured</label>-->
+        <!--                  </div>-->
+        <!--                </div>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
       </div>
 
       <div class="page-body">
@@ -397,9 +374,8 @@
                   />
                   <div
                     *ngIf="
-                    !form.get('userId').valid &&
-                    form.get('userId').touched
-                  "
+                      !form.get('userId').valid && form.get('userId').touched
+                    "
                     class="invalid-feedback"
                   >
                     User ID is required
@@ -423,9 +399,9 @@
                   />
                   <div
                     *ngIf="
-                    !form.get('password').valid &&
-                    form.get('password').touched
-                  "
+                      !form.get('password').valid &&
+                      form.get('password').touched
+                    "
                     class="invalid-feedback"
                   >
                     User ID is required
@@ -460,7 +436,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </form>

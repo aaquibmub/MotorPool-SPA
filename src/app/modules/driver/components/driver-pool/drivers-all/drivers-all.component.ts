@@ -1,15 +1,17 @@
-import { DriverService } from './../../../../../helper/services/drivers/driver.service';
-import { DriverGridModel } from './../../../../../helper/models/drivers/driver-grid-model';
-import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
-import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
-import { TripService } from './../../../../../helper/services/trips/trip.service';
-import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
+import { NotificationService } from '@progress/kendo-angular-notification';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
+import { ResponseModel } from './../../../../../helper/models/common/response-model';
+import { DriverGridModel } from './../../../../../helper/models/drivers/driver-grid-model';
+import { AlertService } from './../../../../../helper/services/common/alert.service';
+import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
+import { DriverService } from './../../../../../helper/services/drivers/driver.service';
 
 @Component({
   selector: 'app-drivers-all',
@@ -28,6 +30,8 @@ export class DriversAllComponent implements OnInit, OnDestroy {
   constructor(
     private driverService: DriverService,
     private router: Router,
+    private alertService: AlertService,
+    private notificationService: NotificationService,
     private gridToolbarService: GridToolbarService
   ) { }
 
@@ -86,7 +90,44 @@ export class DriversAllComponent implements OnInit, OnDestroy {
   }
 
   getGridActions(item: DriverGridModel): ActionButton[] {
-    const actions: ActionButton[] = [];
+    const actions: ActionButton[] = [
+      {
+        handle: () => {
+          if (item.status) {
+            this.driverService.disable(item.id)
+              .subscribe(
+                (response: ResponseModel<string>) => {
+                  if (response.hasError) {
+                    this.alertService.setErrorAlert(response.msg);
+                    return;
+                  }
+                  this.notificationService.show(
+                    UtilityRix.getSuccsessNotification('Driver Deactivated'));
+                  this.driverService.fetchGridData(this.state, this.searchQuery);
+
+                }
+              );
+          }
+          else {
+            this.driverService.enable(item.id)
+              .subscribe(
+                (response: ResponseModel<string>) => {
+                  if (response.hasError) {
+                    this.alertService.setErrorAlert(response.msg);
+                    return;
+                  }
+                  this.notificationService.show(
+                    UtilityRix.getSuccsessNotification('Driver Activated'));
+                  this.driverService.fetchGridData(this.state, this.searchQuery);
+
+                }
+              );
+          }
+        },
+        icon: '',
+        label: item.status ? 'Disable' : 'Enable'
+      }
+    ];
     if (item.vehicalAllocated) {
       actions.push({
         handle: () => {

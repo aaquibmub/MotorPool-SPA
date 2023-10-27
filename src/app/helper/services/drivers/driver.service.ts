@@ -81,5 +81,11 @@ export class DriverService {
   addUpdate(model: any): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl, model);
   }
+  enable(id: string): Observable<ResponseModel<string>> {
+    return this.http.delete<ResponseModel<string>>(this.baseUrl + 'enable/' + id);
+  }
+  disable(id: string): Observable<ResponseModel<string>> {
+    return this.http.delete<ResponseModel<string>>(this.baseUrl + 'disable/' + id);
+  }
 
 }

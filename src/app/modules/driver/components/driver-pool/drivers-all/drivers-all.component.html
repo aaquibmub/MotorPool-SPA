@@ -27,15 +27,21 @@
     </kendo-grid-column>
     <kendo-grid-column field="mobileNumber" title="Mobile #">
     </kendo-grid-column>
-    <kendo-grid-column field="createdDate" title="Date Created" filter="date">
-      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        {{ dataItem.createdDate | dateformat : "g" }}
-      </ng-template>
-    </kendo-grid-column>
     <kendo-grid-column field="status" title="Status" filter="boolean">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <span *ngIf="dataItem.status">Active</span>
         <span *ngIf="!dataItem.status">Iactive</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="busy" title="Busy" filter="boolean">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span *ngIf="dataItem.status">Busy</span>
+        <span *ngIf="!dataItem.status">Idle</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="createdDate" title="Date Created" filter="date">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        {{ dataItem.createdDate | dateformat : "g" }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column headerClass="action-column">

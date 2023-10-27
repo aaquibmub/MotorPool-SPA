@@ -7,5 +7,6 @@ export class DriverGridModel {
   mobileNumber: string;
   createdDate: Date;
   status: boolean;
+  busy: boolean;
   vehicalAllocated: boolean;
 }
