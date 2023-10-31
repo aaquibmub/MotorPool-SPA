@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Observable, Subject } from 'rxjs';
+import { VehicalStatus } from '../../common/shared-types';
 import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
 import { GridList } from '../../models/common/grid/grid-list';
 import { ResponseModel } from '../../models/common/response-model';
@@ -48,12 +49,12 @@ export class VehicalService {
   fetchGridData(
     state: any,
     query: string,
-    active?: boolean): void {
+    status?: VehicalStatus): void {
     this.http.post<GridList<VehicalGridModel>>(
       this.baseUrl + 'get-vehical-gridlist', {
       gridFilters: state,
       search: query,
-      active
+      status
     }).subscribe(
       (gridData: GridList<VehicalGridModel>) => {
         this.gridData.next(gridData);

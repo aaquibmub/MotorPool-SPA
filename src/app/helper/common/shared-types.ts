@@ -136,12 +136,44 @@ export enum TripStatus {
   Created = 10,
   AssignedToDriver = 20,
   TripStarted = 30,
+  OdoMeterAtStart = 35,
   VehicalDispatched = 40,
   ArrivedAtPickupLocation = 50,
   WaitingForPassenger = 52,
   PassengerOnboarded = 55,
   ArrivedAtStop = 60,
   ArrivedAtDropoff = 70,
+  OdoMeterAtEnd = 80,
   Completed = 400,
   Cancelled = 500
+}
+
+export enum VehicalStatus {
+  Active = 10,
+  Inactive = 20,
+  Maintenance = 30,
+  Gripped = 40
+}
+
+
+export function GetVehicalStatusForDropdownList():
+  DropdownItem<VehicalStatus>[] {
+  return [
+    {
+      value: VehicalStatus.Active,
+      text: 'Active'
+    },
+    {
+      value: VehicalStatus.Inactive,
+      text: 'Inactive'
+    },
+    {
+      value: VehicalStatus.Maintenance,
+      text: 'Maintenance'
+    },
+    {
+      value: VehicalStatus.Gripped,
+      text: 'Gripped'
+    },
+  ];
 }

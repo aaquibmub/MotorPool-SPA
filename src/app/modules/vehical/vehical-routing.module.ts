@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
-import { VehicalComponent } from './vehical.component';
-import { VehicalFormsComponent } from './components/vehical-forms/vehical-forms.component';
 import { VehicalEditComponent } from './components/vehical-forms/vehical-edit/vehical-edit.component';
+import { VehicalFormsComponent } from './components/vehical-forms/vehical-forms.component';
 import { VehicalPoolComponent } from './components/vehical-pool/vehical-pool.component';
-import { VehicalsInactiveComponent } from './components/vehical-pool/vehicals-inactive/vehicals-inactive.component';
 import { VehicalsActiveComponent } from './components/vehical-pool/vehicals-active/vehicals-active.component';
 import { VehicalsAllComponent } from './components/vehical-pool/vehicals-all/vehicals-all.component';
+import { VehicalsGrippedComponent } from './components/vehical-pool/vehicals-gripped/vehicals-gripped.component';
+import { VehicalsInactiveComponent } from './components/vehical-pool/vehicals-inactive/vehicals-inactive.component';
+import { VehicalsMaintenanceComponent } from './components/vehical-pool/vehicals-maintenance/vehicals-maintenance.component';
+import { VehicalComponent } from './vehical.component';
 
 const routes: Routes = [
   {
@@ -43,7 +45,9 @@ const routes: Routes = [
           { path: '', redirectTo: 'all', pathMatch: 'full' },
           { path: 'all', component: VehicalsAllComponent },
           { path: 'active', component: VehicalsActiveComponent },
-          { path: 'inactive', component: VehicalsInactiveComponent }
+          { path: 'inactive', component: VehicalsInactiveComponent },
+          { path: 'maintenance', component: VehicalsMaintenanceComponent },
+          { path: 'gripped', component: VehicalsGrippedComponent }
         ]
       },
     ]

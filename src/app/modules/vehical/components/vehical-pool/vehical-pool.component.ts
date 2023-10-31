@@ -2,7 +2,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 
 @Component({
   selector: 'app-vehical-pool',
@@ -25,6 +24,12 @@ export class VehicalPoolComponent implements OnInit {
       }
       if (path === '/vehicals/pool/inactive') {
         this.pageTitle = 'Inactive Vehicals';
+      }
+      if (path === '/vehicals/pool/maintenance') {
+        this.pageTitle = 'Under Maintenance';
+      }
+      if (path === '/vehicals/pool/gripped') {
+        this.pageTitle = 'Gripped Vehicals';
       }
     });
   }

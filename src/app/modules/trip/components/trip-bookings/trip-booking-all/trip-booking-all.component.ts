@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
+import { TripStatus } from 'src/app/helper/common/shared-types';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { TripGridModel } from 'src/app/helper/models/trips/enroute/trip-grid-model';
@@ -102,16 +103,17 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
     });
 
     if (!item.onGoing && !item.cancelled) {
-      actions.push({
-        handle: () => {
-          this.tripService.setTripExecutePopup(true, item.id);
-        },
-        icon: '',
-        label: 'Execute'
-      });
+      if (item.status < TripStatus.AssignedToDriver) {
+        actions.push({
+          handle: () => {
+            this.tripService.setTripExecutePopup(true, item.id);
+          },
+          icon: '',
+          label: 'Execute'
+        });
+      }
     } else {
       if (!item.cancelled) {
-
         actions.push({
           handle: () => {
             this.tripService.setTripCancelPopup(true, item.id);

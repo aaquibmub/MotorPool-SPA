@@ -1,3 +1,4 @@
+import { VehicalStatus } from '../../common/shared-types';
 import { DropdownItem } from '../common/dropdown/dropdown-item.model';
 
 export class VehicalModel {
@@ -5,7 +6,7 @@ export class VehicalModel {
   vehicalId: number;
   vehicalIdStr: string;
   registrationPlate: string;
-  active: boolean;
+  status: DropdownItem<VehicalStatus>;
   make: string;
   model: string;
   modelYear: number;

@@ -1,3 +1,55 @@
-<p>
-  vehicals-inactive works!
-</p>
+<div class="grid-content">
+  <app-grid-toolbar
+    [numberOfRecords]="gridData?.total"
+    entity="driver"
+  ></app-grid-toolbar>
+  <kendo-grid
+    [data]="gridData"
+    [pageSize]="state.take"
+    [skip]="state.skip"
+    [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
+    scrollable="none"
+    (dataStateChange)="dataStateChange($event)"
+  >
+    <kendo-grid-column field="vehicalId" title="ID">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <a routerLink="/drivers/driver/{{ dataItem.id }}/view">{{
+          dataItem.vehicalIdStr
+        }}</a>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="make" title="Make"> </kendo-grid-column>
+    <kendo-grid-column field="model" title="Model"> </kendo-grid-column>
+    <kendo-grid-column field="modelYear" title="Model Year">
+    </kendo-grid-column>
+    <kendo-grid-column field="armoured" title="Armord">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span *ngIf="dataItem.armoured">Yes</span>
+        <span *ngIf="!dataItem.armoured">No</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="registrationPlate" title="Registration Plate">
+    </kendo-grid-column>
+    <kendo-grid-column field="status" title="Status">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span>{{ utilityService.getVehicalStatusLabel(dataItem.status) }}</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column headerClass="action-column">
+      <ng-template kendoGridHeaderTemplate>
+        <span><i class="action-column-icon"></i></span>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <app-grid-action-dropdown
+          [actions]="getGridActions(dataItem)"
+          [index]="rowIndex"
+          [states]="getGridActionMenuState()"
+        ></app-grid-action-dropdown>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>

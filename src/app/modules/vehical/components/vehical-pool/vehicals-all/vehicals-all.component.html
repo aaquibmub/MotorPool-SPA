@@ -36,8 +36,7 @@
     </kendo-grid-column>
     <kendo-grid-column field="status" title="Status">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <span *ngIf="dataItem.status">Active</span>
-        <span *ngIf="!dataItem.status">Inactive</span>
+        <span>{{ utilityService.getVehicalStatusLabel(dataItem.status) }}</span>
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column headerClass="action-column">

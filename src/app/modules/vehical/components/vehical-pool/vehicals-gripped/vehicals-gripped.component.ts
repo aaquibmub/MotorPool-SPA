@@ -8,14 +8,15 @@ import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.service';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { VehicalService } from 'src/app/helper/services/vehicals/vehical.service';
+import { VehicalStatus } from './../../../../../helper/common/shared-types';
 import { VehicalGridModel } from './../../../../../helper/models/vehicals/vehical-grid-model';
 
 @Component({
-  selector: 'app-vehicals-all',
-  templateUrl: './vehicals-all.component.html',
-  styleUrls: ['./vehicals-all.component.css']
+  selector: 'app-vehicals-gripped',
+  templateUrl: './vehicals-gripped.component.html',
+  styleUrls: ['./vehicals-gripped.component.css']
 })
-export class VehicalsAllComponent implements OnInit, OnDestroy {
+export class VehicalsGrippedComponent implements OnInit, OnDestroy {
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
@@ -36,18 +37,18 @@ export class VehicalsAllComponent implements OnInit, OnDestroy {
       .subscribe(
         (pageSize: number) => {
           this.state.take = pageSize;
-          this.vehicalService.fetchGridData(this.state, this.searchQuery);
+          this.vehicalService.fetchGridData(this.state, this.searchQuery, VehicalStatus.Gripped);
         }
       );
     this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.vehicalService.fetchGridData(this.state, this.searchQuery);
+          this.vehicalService.fetchGridData(this.state, this.searchQuery, VehicalStatus.Gripped);
         }
       );
 
-    this.vehicalService.fetchGridData(this.state, this.searchQuery);
+    this.vehicalService.fetchGridData(this.state, this.searchQuery, VehicalStatus.Gripped);
     this.vehicalService.getGridData()
       .subscribe(
         (data: any) => {
@@ -59,7 +60,7 @@ export class VehicalsAllComponent implements OnInit, OnDestroy {
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.vehicalService.fetchGridData(state, this.searchQuery);
+    this.vehicalService.fetchGridData(state, this.searchQuery, VehicalStatus.Gripped);
   }
 
   getGridActionMenuState(): boolean[] {
