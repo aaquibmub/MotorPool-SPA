@@ -1,5 +1,5 @@
-import { AuthGuard } from './../../modules/auth/auth.guard';
 import { Routes } from '@angular/router';
+import { AuthGuard } from './../../modules/auth/auth.guard';
 
 // Route for content layout with sidebar, navbar and footer.
 
@@ -34,6 +34,18 @@ export const Full_ROUTES: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('../../modules/vehical/vehical.module')
       .then(m => m.VehicalModule)
+  },
+  {
+    path: 'passengers',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../modules/passenger/passenger.module')
+      .then(m => m.PassengerModule)
+  },
+  {
+    path: 'addresses',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../modules/address/address.module')
+      .then(m => m.AddressModule)
   },
   {
     path: 'setting',
