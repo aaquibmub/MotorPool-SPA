@@ -45,6 +45,11 @@ export class TripService {
     );
   }
 
+  fetchTripById(id: string) {
+    return this.http.get(
+      environment.apiUrl + 'trip/get-trip/id/' + id);
+  }
+
   getTripExecutePopup(): Observable<PopupConfigModel> {
     return this.showTripExecutePopup.asObservable();
   }

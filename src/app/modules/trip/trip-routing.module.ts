@@ -65,7 +65,7 @@ const routes: Routes = [
             redirectTo: '/trips/list/today',
             pathMatch: 'full'
           },
-          { path: 'detail', component: TripViewDetailComponent },
+          { path: 'detail/:id', component: TripViewDetailComponent },
         ]
       },
       {

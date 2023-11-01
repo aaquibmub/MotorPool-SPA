@@ -18,6 +18,7 @@ import { ResponseModel } from 'src/app/helper/models/common/response-model';
 })
 export class DriverEditComponent implements OnInit {
 
+  id: string;
   model: DriverModel;
   form: UntypedFormGroup;
   nationalityList: DropdownItem<string>[];
@@ -112,6 +113,7 @@ export class DriverEditComponent implements OnInit {
     }
 
     const formValue = this.form.value as DriverModel;
+    formValue.id = this.id;
     const primaryAction = this.editMode ? 'Update' : 'Create';
     const successAction = this.editMode ? 'Updated' : 'Created';
     const primaryMsg = 'Do you want to ' + primaryAction + ' vehical?';

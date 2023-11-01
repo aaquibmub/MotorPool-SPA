@@ -1,6 +1,7 @@
 import { DropdownItem } from '../common/dropdown/dropdown-item.model';
 
 export class DriverModel {
+  id: string;
   firstName: string;
   middleName: string;
   lastName: string;
