@@ -4,7 +4,7 @@ import { Gender, TripDestination, TripRoute } from './../../../common/shared-typ
 import { TripBookingPassengerModel } from './trip-booking-passenger-model';
 import { TripBookingSpecialServiceModel } from './trip-booking-special-service-model';
 
-export class TripViewBooking {
+export class TripViewModel {
   id: string;
   serialNumber: number;
   bookedBy: DropdownItem<string>;
@@ -15,6 +15,7 @@ export class TripViewBooking {
   requesterAddress: DropdownItem<string>;
   isRequesterTraveling: boolean;
   passengers: TripBookingPassengerModel[];
+  phoneNumber: string;
 
   isSpecialServicesRequired: boolean;
   specialSevices: TripBookingSpecialServiceModel[];

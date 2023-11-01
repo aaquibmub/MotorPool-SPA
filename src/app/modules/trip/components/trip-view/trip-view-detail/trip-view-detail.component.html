@@ -1,5 +1,6 @@
-<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
-  <div class="page-actions"></div>
+<div *ngIf="model">
+
+<div class="page-actions"></div>
   <div class="page-area">
     <div class="page-header">
       <div class="page-title">
@@ -24,7 +25,7 @@
                   name="bookedBy"
                   [value]="model.bookedBy?.text"
                   readonly
-                  id=""
+                  id="bookedBy"
                 />
               </div>
             </div>
@@ -35,29 +36,14 @@
                 <label for="inputApprovedBy">Approved By</label>
               </div>
               <div class="control">
-                <kendo-dropdownlist
+                <input
+                  type="text"
                   class="form-control"
-                  textField="text"
-                  valueField="value"
-                  [filterable]="true"
-                  [defaultItem]="utilityService.dropdownDefaultItem"
-                  (filterChange)="handleApproverFilter($event)"
-                  [data]="approverList"
-                  formControlName="approvedBy"
-                >
-                  <ng-template kendoDropDownListItemTemplate let-dataItem>
-                    <span>{{ dataItem.text }}</span>
-                  </ng-template>
-                </kendo-dropdownlist>
-                <div
-                  *ngIf="
-                    !form.get('approvedBy').valid &&
-                    form.get('approvedBy').touched
-                  "
-                  class="invalid-feedback"
-                >
-                  Approver is required
-                </div>
+                  name="approvedBy"
+                  [value]="model.approvedBy?.text"
+                  readonly
+                  id="approvedBy"
+                />
               </div>
             </div>
           </div>
@@ -79,19 +65,10 @@
                     type="text"
                     class="form-control"
                     name="requester"
-                    [value]="viewModel.requester"
+                    [value]="model.requester?.text"
                     readonly
                     id=""
                   />
-                  <div
-                    *ngIf="
-                      !form.get('requester').valid &&
-                      form.get('requester').touched
-                    "
-                    class="invalid-feedback"
-                  >
-                    Requester is required
-                  </div>
                 </div>
               </div>
             </div>
@@ -105,7 +82,7 @@
                     type="text"
                     class="form-control"
                     name="requesterPhone"
-                    [value]="requesterDetail?.phoneNumber"
+                    [value]="model.phoneNumber"
                     readonly
                     id=""
                   />
@@ -162,7 +139,6 @@
           <!-- Requester as Passenger -->
           <div
             class="form-section blue-section"
-            *ngIf="form.get('isRequesterTraveling').value"
           >
             <div class="section-header">Passenger 1 (The Requester)</div>
             <div class="section-body">
@@ -177,7 +153,7 @@
                         type="text"
                         class="form-control"
                         name="requesterPhone"
-                        [value]="requesterDetail?.name"
+                        [value]="model.passenger.name"
                         readonly
                         id=""
                       />
@@ -211,7 +187,7 @@
                         type="text"
                         class="form-control"
                         name="requesterPhone"
-                        [value]="requesterDetail?.ageGroup?.text"
+                        [value]="model.ageGroup.text"
                         readonly
                         id=""
                       />
@@ -814,4 +790,5 @@
       </div>
     </div>
   </div>
-</form>
+
+</div>
