@@ -253,6 +253,72 @@ export const ROUTES: RouteInfo[] = [
           },
         ]
       },
+
+      // Passengers
+      {
+        path: '/passengers/list/',
+        title: 'Passengers',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            path: '/passengers/passenger/new',
+            title: 'Add New Passenger',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/passengers/list/all',
+            title: 'All Passengers',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
+
+      // Address
+      {
+        path: '/addresses/list/',
+        title: 'Addresses',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            path: '/addresses/address/new',
+            title: 'Add New Address',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/addresses/list/all',
+            title: 'All Addresses',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
     ]
   },
 
