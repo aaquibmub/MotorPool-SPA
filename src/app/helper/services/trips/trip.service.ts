@@ -10,6 +10,8 @@ import { TripExecuteModel } from '../../models/trips/enroute/trip-execute-model'
 import { TripGridModel } from '../../models/trips/enroute/trip-grid-model';
 import { TripStatusDetailModel } from '../../models/trips/enroute/trip-status-detail-model';
 import { TripStatusModel } from '../../models/trips/enroute/trip-status-model';
+import { TripViewDetailModel } from '../../models/trips/trip-view/trip-view-detail-model';
+import { TripViewModel } from '../../models/trips/trip-view/trip-view-model';
 import { environment } from './../../../../environments/environment';
 
 @Injectable({
@@ -45,9 +47,12 @@ export class TripService {
     );
   }
 
-  fetchTripById(id: string) {
-    return this.http.get(
-      environment.apiUrl + 'trip/get-trip/id/' + id);
+  getTripViewModel(id: string): Observable<TripViewModel> {
+    return this.http.get<TripViewModel>(this.baseUrl + 'get-trip-view-model/' + id);
+  }
+
+  getTripViewDetailModel(id: string): Observable<TripViewDetailModel> {
+    return this.http.get<TripViewDetailModel>(this.baseUrl + 'get-trip-view-detail-model/' + id);
   }
 
   getTripExecutePopup(): Observable<PopupConfigModel> {

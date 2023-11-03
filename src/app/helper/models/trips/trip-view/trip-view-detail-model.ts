@@ -1,21 +1,26 @@
+import { Gender, OPM, TripDestination, TripRoute } from 'src/app/helper/common/shared-types';
 import { DropdownItem } from '../../common/dropdown/dropdown-item.model';
 import { TripDestinationModel } from '../enroute/trip-destination-model';
-import { Gender, TripDestination, TripRoute } from './../../../common/shared-types';
-import { TripBookingPassengerModel } from './trip-booking-passenger-model';
-import { TripBookingSpecialServiceModel } from './trip-booking-special-service-model';
+import { TripBookingPassengerModel } from '../trip-bookings/trip-booking-passenger-model';
+import { TripBookingSpecialServiceModel } from '../trip-bookings/trip-booking-special-service-model';
 
-export class TripViewModel {
-  id: string;
-  serialNumber: number;
+export class TripViewDetailModel {
+
+  odoMeterStart?: number;
+  odoMeterEnd?: number;
+  odoMeterDifference?: number;
+
   bookedBy: DropdownItem<string>;
   approvedBy: DropdownItem<string>;
+  executedBy: DropdownItem<string>;
 
   requester: DropdownItem<string>;
+  requesterPhone: string;
+  requesterOpm: DropdownItem<OPM>;
   requesterGender: DropdownItem<Gender>;
   requesterAddress: DropdownItem<string>;
   isRequesterTraveling: boolean;
   passengers: TripBookingPassengerModel[];
-  phoneNumber: string;
 
   isSpecialServicesRequired: boolean;
   specialSevices: TripBookingSpecialServiceModel[];
@@ -33,3 +38,4 @@ export class TripViewModel {
   notes: string;
 
 }
+
