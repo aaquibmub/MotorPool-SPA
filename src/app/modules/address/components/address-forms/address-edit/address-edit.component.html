@@ -1,3 +1,85 @@
-<p>
-  address-edit works!
-</p>
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <div class="page-actions"></div>
+  <div class="page-area">
+    <div class="page-header">
+      <div class="page-title">
+        <span>Address</span>
+      </div>
+    </div>
+    <div class="page-body">
+      <!-- Vehical Info -->
+      <div class="form-section">
+        <div class="row">
+          <!-- Registration Plate -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputAddress">Address</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputAddress"
+                  formControlName="address"
+                  id="inputAddress"
+                />
+                <div
+                  *ngIf="
+                    !form.get('address').valid &&
+                    form.get('address').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Status -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="control">
+                <div class="display-flex">
+                  <div class="checkbox-control">
+                    <kendo-switch
+                      [size]="'small'"
+                      id="inputStatus"
+                      formControlName="status"
+                    ></kendo-switch>
+                  </div>
+                  <div class="label">
+                    <label for="inputStatus">is active</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="form-section transparent-section">
+        <div class="section-body">
+          <div class="description sm-hide"></div>
+          <div class="fields">
+            <div class="form-group">
+              <button
+                class="btn btn-default mr-16"
+                type="button"
+                (click)="cancel()"
+              >
+                Cancel
+              </button>
+              <button *ngIf="!editMode" class="btn btn-primary" type="submit">
+                Create
+              </button>
+              <button *ngIf="editMode" class="btn btn-primary" type="submit">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
