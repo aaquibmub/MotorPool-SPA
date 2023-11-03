@@ -23,6 +23,10 @@
   border-radius: 5px;
 }
 
+.form-section-border {
+  border: 1px solid var(--border-color-1) !important;
+}
+
 .transparent-section {
   background-color: transparent !important;
   border: none !important;

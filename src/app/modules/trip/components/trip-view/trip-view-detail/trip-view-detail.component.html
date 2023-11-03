@@ -1,794 +1,610 @@
 <div *ngIf="model">
-
-<div class="page-actions"></div>
-  <div class="page-area">
-    <div class="page-header">
-      <div class="page-title">
-        <span>View Trip Detail</span>
-      </div>
-    </div>
-    <div class="page-body">
-      <!-- Booking Info -->
-      <div class="form-section">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <div class="label">
-                <label for="inputBookedBy">{{
-                  utilityService.language.bookedBy | translate
-                  }}</label>
-              </div>
-              <div class="control">
-                <input
-                  type="text"
-                  class="form-control"
-                  name="bookedBy"
-                  [value]="model.bookedBy?.text"
-                  readonly
-                  id="bookedBy"
-                />
-              </div>
+  <!-- Trip Milage -->
+  <div class="form-section form-section-border">
+    <div class="section-header">Trip Millage</div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputOdoStart">ODO Meter Startup</label>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <div class="label">
-                <label for="inputApprovedBy">Approved By</label>
-              </div>
-              <div class="control">
-                <input
-                  type="text"
-                  class="form-control"
-                  name="approvedBy"
-                  [value]="model.approvedBy?.text"
-                  readonly
-                  id="approvedBy"
-                />
-              </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="inputOdoStart"
+                [value]="model.odoMeterStart"
+                readonly
+                id="inputOdoStart"
+              />
             </div>
           </div>
         </div>
-      </div>
-      <!-- Trip Requester -->
-      <div class="form-section">
-        <div class="section-header">Trip Requester</div>
-        <div class="section-body">
-          <!-- Requester Info -->
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="label">
-                  <label for="inputRequester">Requester</label>
-                </div>
-                <div class="control">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="requester"
-                    [value]="model.requester?.text"
-                    readonly
-                    id=""
-                  />
-                </div>
-              </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputOdoEnd">ODO Meter End</label>
             </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="label">
-                  <label for="inputRequestPhone">Reqester Phone</label>
-                </div>
-                <div class="control">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="requesterPhone"
-                    [value]="model.phoneNumber"
-                    readonly
-                    id=""
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="label">
-                  <label for="inputRequestOpm">OPM</label>
-                </div>
-                <div class="control">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="requesterOpm"
-                    [value]="requesterDetail?.opm?.text"
-                    readonly
-                    id=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Is Requester Traveling -->
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="control">
-                  <div class="display-flex">
-                    <div class="checkbox-control">
-                      <kendo-switch
-                        [size]="'small'"
-                        id="inputRequesterTraveling"
-                        formControlName="isRequesterTraveling"
-                      ></kendo-switch>
-                    </div>
-                    <div class="label">
-                      <label for="inputRequesterTraveling"
-                      >is requester travelling</label
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="inputOdoEnd"
+                [value]="model.odoMeterEnd"
+                readonly
+                id="inputOdoEnd"
+              />
             </div>
           </div>
         </div>
-      </div>
-      <!-- Passengers -->
-      <div class="form-section">
-        <div class="section-header">Passengers</div>
-        <div class="section-body">
-          <!-- Requester as Passenger -->
-          <div
-            class="form-section blue-section"
-          >
-            <div class="section-header">Passenger 1 (The Requester)</div>
-            <div class="section-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <div class="label">
-                      <label [for]="'inputPassengerName'">Passenger Name</label>
-                    </div>
-                    <div class="control">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="requesterPhone"
-                        [value]="model.passenger.name"
-                        readonly
-                        id=""
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <div class="label">
-                      <label [for]="'inputPassengerGender'">Gender</label>
-                    </div>
-                    <div class="control">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="requesterPhone"
-                        [value]="requesterDetail?.gender?.text"
-                        readonly
-                        id=""
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <div class="label">
-                      <label [for]="'inputPassengerAgeGroup'">Age Group</label>
-                    </div>
-                    <div class="control">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="requesterPhone"
-                        [value]="model.ageGroup.text"
-                        readonly
-                        id=""
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputMilageKm">Millage KM</label>
             </div>
-          </div>
-          <!-- Number of Extra Passengers -->
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="label">
-                  <label for="inputNumberOfPassengers"
-                  >Number of
-                    {{ form.get("isRequesterTraveling").value ? "Extra" : "" }}
-                    Passengers</label
-                  >
-                </div>
-                <div class="control">
-                  <input
-                    type="number"
-                    class="form-control"
-                    name="inputNumberOfPassengers"
-                    [value]="0"
-                    min="0"
-                    max="10"
-                    (change)="handleNumberOfPassengerChange($event)"
-                    id=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Passengers -->
-          <div formArrayName="passengers">
-            <div
-              class="form-section blue-section"
-              *ngFor="
-                let passenger of form.get('passengers').controls;
-                let j = index
-              "
-              [formGroupName]="j"
-            >
-              <div class="section-header">
-                Passenger
-                {{ j + (form.get("isRequesterTraveling").value ? 2 : 1) }}
-              </div>
-              <div class="section-body">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <div class="label">
-                        <label [for]="'inputPassengerName' + j"
-                        >Passenger Name</label
-                        >
-                      </div>
-                      <div class="control">
-                        <kendo-dropdownlist
-                          class="form-control"
-                          textField="text"
-                          valueField="value"
-                          [filterable]="true"
-                          [defaultItem]="utilityService.dropdownDefaultItem"
-                          (filterChange)="handlePassengerFilter($event)"
-                          (valueChange)="handlePassengerValueChange($event, j)"
-                          [data]="requesterList"
-                          formControlName="passenger"
-                        >
-                          <ng-template
-                            kendoDropDownListItemTemplate
-                            let-dataItem
-                          >
-                            <span>{{ dataItem.text }}</span
-                            ><span
-                            *ngIf="dataItem.value == ''"
-                            class="fa fa-plus-square quick-add-icon"
-                            (click)="openPassengerQuickAddPopup(true)"
-                          ></span>
-                          </ng-template>
-                        </kendo-dropdownlist>
-                        <div
-                          *ngIf="
-                            !passenger.get('passenger').valid &&
-                            passenger.get('passenger').touched
-                          "
-                          class="invalid-feedback"
-                        >
-                          Passenger is required
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <div class="label">
-                        <label [for]="'inputPassengerGender' + j">Gender</label>
-                      </div>
-                      <div class="control">
-                        <kendo-dropdownlist
-                          class="form-control"
-                          textField="text"
-                          valueField="value"
-                          [defaultItem]="utilityService.dropdownDefaultItem"
-                          [data]="genderList"
-                          formControlName="gender"
-                        >
-                          <ng-template
-                            kendoDropDownListItemTemplate
-                            let-dataItem
-                          >
-                            <span>{{ dataItem.text | translate }}</span>
-                          </ng-template>
-                        </kendo-dropdownlist>
-                        <div
-                          *ngIf="
-                            !passenger.get('gender').valid &&
-                            passenger.get('gender').touched
-                          "
-                          class="invalid-feedback"
-                        >
-                          Gender is required
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <div class="label">
-                        <label [for]="'inputPassengerAgeGroup' + j"
-                        >Age Group</label
-                        >
-                      </div>
-                      <div class="control">
-                        <kendo-dropdownlist
-                          class="form-control"
-                          textField="text"
-                          valueField="value"
-                          [defaultItem]="utilityService.dropdownDefaultItem"
-                          [data]="ageGroupList"
-                          formControlName="ageGroup"
-                        >
-                          <ng-template
-                            kendoDropDownListItemTemplate
-                            let-dataItem
-                          >
-                            <span>{{ dataItem.text | translate }}</span>
-                          </ng-template>
-                        </kendo-dropdownlist>
-                        <div
-                          *ngIf="
-                            !passenger.get('ageGroup').valid &&
-                            passenger.get('ageGroup').touched
-                          "
-                          class="invalid-feedback"
-                        >
-                          Age group is required
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Special Services -->
-      <div class="form-section">
-        <div class="section-header">Special Services</div>
-        <div class="section-body">
-          <!-- Is Special Service Required -->
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="control">
-                  <div class="display-flex">
-                    <div class="checkbox-control">
-                      <kendo-switch
-                        [size]="'small'"
-                        id="inputSpecialServiceRequired"
-                        formControlName="isSpecialServicesRequired"
-                      ></kendo-switch>
-                    </div>
-                    <div class="label">
-                      <label for="inputRequesterTraveling"
-                      >is special service required</label
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Special Services -->
-          <div
-            class="row"
-            formArrayName="specialSevices"
-            *ngIf="form.get('isSpecialServicesRequired').value"
-          >
-            <div
-              class="col-md-3"
-              *ngFor="
-                let specialService of form.get('specialSevices').controls;
-                let j = index
-              "
-              [formGroupName]="j"
-            >
-              <div class="form-group">
-                <div class="control" style="border: 1px solid; padding: 5px">
-                  <div class="display-flex">
-                    <div class="checkbox-control">
-                      <input
-                        type="checkbox"
-                        id="inputAlloDiscount"
-                        formControlName="required"
-                        [id]="'inputSpecialServiceRequired' + j"
-                        kendoCheckBox
-                      />
-                      <label for="inputAlloDiscount">{{
-                        specialService.get("specialService").value?.text
-                        }}</label>
-                    </div>
-                    <div class="control">
-                      <input
-                        type="number"
-                        class="form-control"
-                        name=""
-                        id=""
-                        formControlName="qty"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Booking -->
-      <div class="form-section">
-        <div class="section-header">Booking</div>
-        <div class="section-body">
-          <!-- Pickup Time -->
-          <div class="form-section blue-section">
-            <div class="section-header">Pickup Date & Time</div>
-            <div class="section-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <div class="label">
-                      <label for="inputPickupDate">Pickup Date</label>
-                    </div>
-                    <div class="control">
-                      <kendo-datepicker
-                        class="form-control"
-                        id="inputPickupDate"
-                        formControlName="pickupDate"
-                      >
-                      </kendo-datepicker>
-                      <div
-                        *ngIf="
-                          !form.get('pickupDate').valid &&
-                          form.get('pickupDate').touched
-                        "
-                        class="invalid-feedback"
-                      >
-                        Pickup date is required.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <div class="label">
-                      <label for="inputPickupTime">Pickup Time</label>
-                    </div>
-                    <div class="control">
-                      <kendo-timepicker
-                        class="form-control"
-                        id="inputPickupTime"
-                        formControlName="pickupTime"
-                      >
-                      </kendo-timepicker>
-                      <div
-                        *ngIf="
-                          !form.get('pickupTime').valid &&
-                          form.get('pickupTime').touched
-                        "
-                        class="invalid-feedback"
-                      >
-                        Pickup time is required.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Trip Destination -->
-      <div class="form-section">
-        <div class="section-header">Trip Destination</div>
-        <div class="section-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="label">
-                  <label for="inputTripType">Trip</label>
-                </div>
-                <div class="control">
-                  <kendo-dropdownlist
-                    class="form-control"
-                    textField="text"
-                    valueField="value"
-                    [defaultItem]="utilityService.dropdownDefaultItem"
-                    [data]="tripTypeList"
-                    formControlName="tripRoute"
-                  >
-                    <ng-template kendoDropDownListItemTemplate let-dataItem>
-                      <span>{{ dataItem.text | translate }}</span>
-                    </ng-template>
-                  </kendo-dropdownlist>
-                  <div
-                    *ngIf="
-                      !form.get('tripRoute').valid &&
-                      form.get('tripRoute').touched
-                    "
-                    class="invalid-feedback"
-                  >
-                    Trip is required
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="label">
-                  <label for="inputTripDestination">Trip Destination</label>
-                </div>
-                <div class="control">
-                  <kendo-dropdownlist
-                    class="form-control"
-                    textField="text"
-                    valueField="value"
-                    [defaultItem]="utilityService.dropdownDefaultItem"
-                    [data]="tripDestinationList"
-                    formControlName="tripDestination"
-                  >
-                    <ng-template kendoDropDownListItemTemplate let-dataItem>
-                      <span>{{ dataItem.text | translate }}</span>
-                    </ng-template>
-                  </kendo-dropdownlist>
-                  <div
-                    *ngIf="
-                      !form.get('tripDestination').valid &&
-                      form.get('tripDestination').touched
-                    "
-                    class="invalid-feedback"
-                  >
-                    Trip destination is required
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Starting Point -->
-          <div class="form-section green-section">
-            <div class="section-header">Default Starting Point</div>
-            <div class="section-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="form-group">
-                    <div class="label">
-                      <label for="inputStartingPointAddress">Address</label>
-                    </div>
-                    <div class="control">
-                      <kendo-dropdownlist
-                        class="form-control"
-                        textField="text"
-                        valueField="value"
-                        [filterable]="true"
-                        [defaultItem]="utilityService.dropdownDefaultItem"
-                        (filterChange)="handleAddressFilter($event)"
-                        [data]="addressList"
-                        formControlName="startingPoint"
-                      >
-                        <ng-template kendoDropDownListItemTemplate let-dataItem>
-                          <span>{{ dataItem.text | translate }}</span>
-                        </ng-template>
-                      </kendo-dropdownlist>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Pickups -->
-          <div formArrayName="destinations">
-            <div
-              class="form-section blue-section"
-              *ngFor="
-                let destination of form.get('destinations').controls;
-                let j = index
-              "
-              [formGroupName]="j"
-            >
-              <div class="section-header">
-                <div class="header-title">
-                  {{ destination.get("type").value.text }} {{ j + 1 }}
-                </div>
-                <div class="header-actions">
-                  <span
-                    class="clickable"
-                    (click)="removeDestination(j)"
-                    class="fa fa-times"
-                  ></span>
-                </div>
-              </div>
-              <div class="section-body">
-                <div class="row">
-                  <div class="col-md-8">
-                    <div class="form-group">
-                      <div class="label">
-                        <label [for]="'inputPickupAddress' + j">Address</label>
-                      </div>
-                      <div class="control">
-                        <kendo-dropdownlist
-                          class="form-control"
-                          textField="text"
-                          valueField="value"
-                          [filterable]="true"
-                          [defaultItem]="utilityService.dropdownDefaultItem"
-                          (filterChange)="handleAddressFilter($event)"
-                          [data]="addressList"
-                          formControlName="address"
-                        >
-                          <ng-template
-                            kendoDropDownListItemTemplate
-                            let-dataItem
-                          >
-                            <span>{{ dataItem.text | translate }}</span>
-                          </ng-template>
-                        </kendo-dropdownlist>
-                        <div
-                          *ngIf="
-                            !destination.get('address').valid &&
-                            destination.get('address').touched
-                          "
-                          class="invalid-feedback"
-                        >
-                          Address is required.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="display-flex justify-content-center">
-                      <kendo-dropdownbutton
-                        [data]="destinationButtons[j]"
-                        class="btn"
-                        style="margin-left: 8px"
-                        [popupSettings]="{
-                          popupClass: 'et-dropdown-menu'
-                        }"
-                      >
-                        Add New Destination<i
-                        class="k-button-icon k-icon k-i-arrow-s"
-                      ></i>
-                        <ng-template
-                          kendoDropDownButtonItemTemplate
-                          let-dataItem
-                        >
-                          <div
-                            style="width: 100%"
-                            (click)="
-                              handleAddDestinationButtonClick(j, dataItem)
-                            "
-                          >
-                            <span
-                              class="{{ dataItem.icon }}"
-                              *ngIf="dataItem.icon"
-                            ></span>
-                            <span>{{ dataItem.label }}</span>
-                          </div>
-                        </ng-template>
-                      </kendo-dropdownbutton>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Driver and Transportation -->
-      <div class="form-section">
-        <div class="section-header">Driver & Transportation</div>
-        <div class="section-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="label">
-                  <label for="inputDriver">Driver</label>
-                </div>
-                <div class="control">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="driver"
-                    [value]="viewModel.driver"
-                    readonly
-                    id=""
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="label">
-                  <label for="inputVehical">Vehical</label>
-                </div>
-                <div class="control">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="vehical"
-                    [value]="viewModel.vehical"
-                    readonly
-                    id=""
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="label">
-                  <label for="inputRegistrationPlate">Registration Plate</label>
-                </div>
-                <div class="control">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="inputRegistrationPlate"
-                    formControlName="registrationPlate"
-                    readonly
-                    id=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Notes -->
-      <div class="form-section">
-        <div class="section-header">Notes</div>
-        <div class="section-body">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <div class="control">
-                  <textarea
-                    class="form-control form-text-area"
-                    name=""
-                    formControlName="notes"
-                    id=""
-                    cols="30"
-                    rows="10"
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Actions -->
-      <div class="form-section transparent-section">
-        <div class="section-body">
-          <div class="description sm-hide"></div>
-          <div class="fields">
-            <div class="form-group">
-              <button
-                class="btn btn-default mr-16"
-                type="button"
-                (click)="cancel()"
-              >
-                Cancel
-              </button>
-              <button class="btn btn-primary" type="submit">Create</button>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="inputMilageKm"
+                [value]="model.odoMeterDifference"
+                readonly
+                id="inputMilageKm"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+  <!-- Booking Info -->
+  <div class="form-section form-section-border">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <div class="label">
+            <label for="inputBookedBy">{{
+              utilityService.language.bookedBy | translate
+            }}</label>
+          </div>
+          <div class="control">
+            <input
+              type="text"
+              class="form-control"
+              name="bookedBy"
+              [value]="model.bookedBy?.text"
+              readonly
+              id="bookedBy"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <div class="label">
+            <label for="inputApprovedBy">Approved By</label>
+          </div>
+          <div class="control">
+            <input
+              type="text"
+              class="form-control"
+              name="approvedBy"
+              [value]="model.approvedBy?.text"
+              readonly
+              id="approvedBy"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <div class="label">
+            <label for="inputExecutedBy">Executed By</label>
+          </div>
+          <div class="control">
+            <input
+              type="text"
+              class="form-control"
+              name="inputExecutedBy"
+              [value]="model.executedBy?.text"
+              readonly
+              id="inputExecutedBy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Trip Requester -->
+  <div class="form-section form-section-border">
+    <div class="section-header">Trip Requester</div>
+    <div class="section-body">
+      <!-- Requester Info -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputRequester">Requester</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="requester"
+                [value]="model.requester?.text"
+                readonly
+                id=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputRequestPhone">Reqester Phone</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="requesterPhone"
+                [value]="model.requesterPhone"
+                readonly
+                id=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputRequestOpm">OPM</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="requesterOpm"
+                [value]="model?.requesterOpm?.text"
+                readonly
+                id=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Passengers -->
+  <div class="form-section form-section-border">
+    <div class="section-header">Passengers</div>
+    <div class="section-body">
+      <!-- Requester as Passenger -->
+      <!-- <div class="form-section blue-section">
+        <div class="section-header">Passenger 1 (The Requester)</div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label [for]="'inputPassengerName'">Passenger Name</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterPhone"
+                    [value]="model.passenger.name"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label [for]="'inputPassengerGender'">Gender</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterPhone"
+                    [value]="requesterDetail?.gender?.text"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label [for]="'inputPassengerAgeGroup'">Age Group</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterPhone"
+                    [value]="model.ageGroup.text"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- Number of Extra Passengers -->
+      <!-- <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputNumberOfPassengers"
+                >Number of
+                {{ form.get("isRequesterTraveling").value ? "Extra" : "" }}
+                Passengers</label
+              >
+            </div>
+            <div class="control">
+              <input
+                type="number"
+                class="form-control"
+                name="inputNumberOfPassengers"
+                [value]="0"
+                min="0"
+                max="10"
+                (change)="handleNumberOfPassengerChange($event)"
+                id=""
+              />
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- Passengers -->
+      <div>
+        <div
+          class="form-section blue-section"
+          *ngFor="let passenger of model.passengers; let j = index"
+        >
+          <div class="section-header">
+            Passenger
+            {{ j + 1 }}
+          </div>
+          <div class="section-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="label">
+                    <label [for]="'inputPassengerName' + j"
+                      >Passenger Name</label
+                    >
+                  </div>
+                  <div class="control">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="passenger.passenger?.text"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="label">
+                    <label [for]="'inputPassengerGender' + j">Gender</label>
+                  </div>
+                  <div class="control">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="passenger.gender?.text"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="label">
+                    <label [for]="'inputPassengerAgeGroup' + j"
+                      >Age Group</label
+                    >
+                  </div>
+                  <div class="control">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="passenger.ageGroup?.text"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Special Services -->
+  <div
+    class="form-section form-section-border"
+    *ngIf="model.isSpecialServicesRequired"
+  >
+    <div class="section-header">Special Services</div>
+    <div class="section-body">
+      <!-- Special Services -->
+      <div class="row">
+        <div
+          class="col-md-3"
+          *ngFor="let specialService of model.specialSevices; let j = index"
+        >
+          <div class="form-group">
+            <div class="control" style="border: 1px solid; padding: 5px">
+              <div class="display-flex">
+                <div class="checkbox-control">
+                  <input
+                    type="checkbox"
+                    id="inputAlloDiscount"
+                    [checked]="specialService.required"
+                    [id]="'inputSpecialServiceRequired' + j"
+                    kendoCheckBox
+                  />
+                  <label for="inputAlloDiscount">{{
+                    specialService.specialService?.text
+                  }}</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="number"
+                    class="form-control"
+                    name=""
+                    id=""
+                    [value]="specialService.qty"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Booking -->
+  <div class="form-section form-section-border">
+    <div class="section-header">Booking</div>
+    <div class="section-body">
+      <!-- Pickup Time -->
+      <div class="form-section blue-section">
+        <div class="section-header">Pickup Date & Time</div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputPickupDate">Pickup Date</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterOpm"
+                    [value]="model.pickupDate | dateformat"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputPickupTime">Pickup Time</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterOpm"
+                    [value]="model.pickupTime | timeformat"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Trip Destination -->
+  <div class="form-section">
+    <div class="section-header">Trip Destination</div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputTripType">Trip</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="requesterOpm"
+                [value]="model.tripRoute?.text"
+                readonly
+                id=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputTripDestination">Trip Destination</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                [value]="model.tripDestination?.text"
+                readonly
+                id=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Starting Point -->
+      <div class="form-section green-section">
+        <div class="section-header">Default Starting Point</div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputStartingPointAddress">Address</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [value]="model.startingPoint?.text"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Pickups -->
+      <div>
+        <div
+          class="form-section blue-section"
+          *ngFor="let destination of model.destinations; let j = index"
+        >
+          <div class="section-header">
+            <div class="header-title">
+              {{ destination.type?.text }} {{ j + 1 }}
+            </div>
+            <div class="header-actions"></div>
+          </div>
+          <div class="section-body">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <div class="label">
+                    <label [for]="'inputPickupAddress' + j">Address</label>
+                  </div>
+                  <div class="control">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="destination.address?.text"
+                      readonly
+                      id=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Driver and Transportation -->
+  <div class="form-section">
+    <div class="section-header">Driver & Transportation</div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputDriver">Driver</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="driver"
+                [value]="model.driver?.text"
+                readonly
+                id=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputVehical">Vehical</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="vehical"
+                [value]="model.vehical?.text"
+                readonly
+                id=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputRegistrationPlate">Registration Plate</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="vehical"
+                [value]="model.vehicalPlateNumber"
+                readonly
+                id=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Notes -->
+  <div class="form-section">
+    <div class="section-header">Notes</div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="control">
+              <textarea
+                class="form-control form-text-area"
+                name=""
+                [value]="model.notes"
+                readonly
+                id=""
+                cols="30"
+                rows="10"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

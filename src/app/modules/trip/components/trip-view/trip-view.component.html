@@ -1,1 +1,66 @@
-<router-outlet></router-outlet>
+<div *ngIf="model">
+  <div class="page-actions"></div>
+  <div class="page-area">
+    <div class="page-header">
+      <div class="page-title">
+        <span>Trip - {{ model.tripId }}</span>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="grid-toolbar">
+        <div class="left"></div>
+        <div
+          class="right"
+          style="display: flex; justify-content: space-between"
+        >
+          <button class="btn btn-orange">
+            <i class="fa fa-pencil"></i> Edit
+          </button>
+          <button class="btn btn-orange" (click)="executeTrip()">
+            <i class="fa fa-check-circle-o"></i> Execute Trip
+          </button>
+          <button class="btn btn-orange">
+            <i class="fa fa-check-circle-o"></i> Trip Handover
+          </button>
+          <button class="btn btn-orange" (click)="cancelTrip()">
+            <i class="fa fa-times-circle-o"></i> Cancel Trip
+          </button>
+          <button class="btn btn-orange">
+            <i class="fa fa-print"></i> Print
+          </button>
+        </div>
+      </div>
+      <div class="tab-left">
+        <div class="tab-left-items">
+          <a
+            class="tab-left-item"
+            routerLinkActive="active"
+            routerLink="/trips/view/{{ model.id }}/detail"
+            >Trip Details</a
+          >
+          <a
+            class="tab-left-item"
+            routerLinkActive="active"
+            routerLink="/trips/view/{{ model.id }}/log"
+            >Trip Log</a
+          >
+          <a
+            class="tab-left-item"
+            routerLinkActive="active"
+            routerLink="/trips/view/{{ model.id }}/vehicle"
+            >Vehicle</a
+          >
+          <a
+            class="tab-left-item"
+            routerLinkActive="active"
+            routerLink="/trips/view/{{ model.id }}/driver"
+            >Driver</a
+          >
+        </div>
+        <div class="tab-content" style="background-color: white; padding: 8px">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

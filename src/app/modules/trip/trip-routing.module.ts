@@ -14,6 +14,9 @@ import { TripListComponent } from './components/trip-list/trip-list.component';
 import { TripOngoingListComponent } from './components/trip-list/trip-ongoing-list/trip-ongoing-list.component';
 import { TripTodayListComponent } from './components/trip-list/trip-today-list/trip-today-list.component';
 import { TripViewDetailComponent } from './components/trip-view/trip-view-detail/trip-view-detail.component';
+import { TripViewDriverComponent } from './components/trip-view/trip-view-driver/trip-view-driver.component';
+import { TripViewLogComponent } from './components/trip-view/trip-view-log/trip-view-log.component';
+import { TripViewVehicalComponent } from './components/trip-view/trip-view-vehical/trip-view-vehical.component';
 import { TripViewComponent } from './components/trip-view/trip-view.component';
 import { TripComponent } from './trip.component';
 
@@ -57,15 +60,18 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'view',
+        path: 'view/:id',
         component: TripViewComponent,
         children: [
           {
             path: '',
-            redirectTo: '/trips/list/today',
+            redirectTo: '/trips/view/:id/detail',
             pathMatch: 'full'
           },
-          { path: 'detail/:id', component: TripViewDetailComponent },
+          { path: 'detail', component: TripViewDetailComponent },
+          { path: 'log', component: TripViewLogComponent },
+          { path: 'vehicle', component: TripViewVehicalComponent },
+          { path: 'driver', component: TripViewDriverComponent },
         ]
       },
       {
