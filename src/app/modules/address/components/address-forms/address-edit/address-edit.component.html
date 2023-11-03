@@ -1,4 +1,4 @@
-<form (ngSubmit)="submit()" [formGroup]="form">
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
   <div class="page-actions"></div>
   <div class="page-area">
     <div class="page-header">
@@ -7,10 +7,9 @@
       </div>
     </div>
     <div class="page-body">
-      <!-- Vehical Info -->
       <div class="form-section">
         <div class="row">
-          <!-- Registration Plate -->
+          <!-- Address -->
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
@@ -26,8 +25,7 @@
                 />
                 <div
                   *ngIf="
-                    !form.get('address').valid &&
-                    form.get('address').touched
+                    !form.get('address').valid && form.get('address').touched
                   "
                   class="invalid-feedback"
                 >

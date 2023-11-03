@@ -165,7 +165,7 @@ export function GetVehicalStatusForDropdownList():
     },
     {
       value: VehicalStatus.Inactive,
-      text: 'Inactive'
+      text: 'Disabled'
     },
     {
       value: VehicalStatus.Maintenance,

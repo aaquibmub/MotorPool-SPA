@@ -17,7 +17,7 @@ export class AddressListComponent implements OnInit {
     router.events.subscribe((event) => {
       const path = location.path();
       if (path === '/addresses/list/all') {
-        this.pageTitle = 'Addressses';
+        this.pageTitle = 'Addresses';
       }
     });
   }
