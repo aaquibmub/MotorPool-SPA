@@ -13,16 +13,44 @@
           class="right"
           style="display: flex; justify-content: space-between"
         >
-          <button class="btn btn-orange">
+          <button
+            class="btn btn-orange"
+            *ngIf="model.status === status.Created"
+          >
             <i class="fa fa-pencil"></i> Edit
           </button>
-          <button class="btn btn-orange" (click)="executeTrip()">
+          <button
+            class="btn btn-orange"
+            *ngIf="model.status < status.AssignedToDriver"
+            (click)="executeTrip()"
+          >
             <i class="fa fa-check-circle-o"></i> Execute Trip
           </button>
-          <button class="btn btn-orange">
+          <button
+            class="btn btn-orange"
+            *ngIf="
+              model.status >= status.AssignedToDriver &&
+              model.status < status.Completed
+            "
+            (click)="handoverTrip()"
+          >
             <i class="fa fa-check-circle-o"></i> Trip Handover
           </button>
-          <button class="btn btn-orange" (click)="cancelTrip()">
+          <button
+            class="btn btn-orange"
+            *ngIf="
+              model.status >= status.AssignedToDriver &&
+              model.status < status.Completed
+            "
+            (click)="cancelTrip()"
+          >
+            <i class="fa fa-times-circle-o"></i> Terminate Trip
+          </button>
+          <button
+            class="btn btn-orange"
+            *ngIf="model.status == status.Created"
+            (click)="cancelTrip()"
+          >
             <i class="fa fa-times-circle-o"></i> Cancel Trip
           </button>
           <button class="btn btn-orange">

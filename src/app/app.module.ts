@@ -25,10 +25,11 @@ import { FullLayoutComponent } from './layouts/full/full-layout.component';
 import { LoaderBlockUiComponent } from './shared/components/loader-block-ui/loader-block-ui.component';
 import { PassengerQuickAddPopupComponent } from './shared/components/passengers/passenger-quick-add-popup/passenger-quick-add-popup.component';
 import { NotificationRuleEditComponent } from './shared/components/settings/notifications/notification-rule-edit/notification-rule-edit.component';
-import { TripExecutePopupComponent } from './shared/components/trips/trip-execute-popup/trip-execute-popup.component';
 import { AllocateVehicalPopupComponent } from './shared/popups/drivers/allocate-vehical-popup/allocate-vehical-popup.component';
 import { DeallocateVehicalPopupComponent } from './shared/popups/drivers/deallocate-vehical-popup/deallocate-vehical-popup.component';
 import { TripCancelPopupComponent } from './shared/popups/trips/trip-cancel-popup/trip-cancel-popup.component';
+import { TripExecutePopupComponent } from './shared/popups/trips/trip-execute-popup/trip-execute-popup.component';
+import { TripHandoverPopupComponent } from './shared/popups/trips/trip-handover-popup/trip-handover-popup.component';
 import { SharedModule } from './shared/shared.module';
 
 export function tokenGetter(): string {
@@ -50,6 +51,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     NotificationRuleEditComponent,
 
     TripExecutePopupComponent,
+    TripHandoverPopupComponent,
     TripCancelPopupComponent,
 
     AllocateVehicalPopupComponent,

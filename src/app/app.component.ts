@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
 
   // trip execute/cancel
   showTripExecutePopup: boolean;
+  showTripHandoverPopup: boolean;
   showTripCancelPopup: boolean;
   tripId: string;
 
@@ -144,6 +145,15 @@ export class AppComponent implements OnInit {
       .subscribe({
         next: (flag: PopupConfigModel) => {
           this.showTripExecutePopup = flag.show;
+          this.tripId = flag.arg;
+        }
+      }
+      );
+
+    this.tripService.getTripHandoverPopup()
+      .subscribe({
+        next: (flag: PopupConfigModel) => {
+          this.showTripHandoverPopup = flag.show;
           this.tripId = flag.arg;
         }
       }

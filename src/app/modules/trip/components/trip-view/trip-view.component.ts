@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TripStatus } from 'src/app/helper/common/shared-types';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { TripService } from 'src/app/helper/services/trips/trip.service';
@@ -15,7 +16,10 @@ export class TripViewComponent implements OnInit, OnDestroy {
 
   model: TripViewModel;
 
+  status = TripStatus;
+
   tripExecutePopupSubscription: Subscription;
+  tripHandoverPopupSubscription: Subscription;
   tripCancelPopupSubscription: Subscription;
 
   constructor(
@@ -46,6 +50,15 @@ export class TripViewComponent implements OnInit, OnDestroy {
         }
       );
 
+    this.tripHandoverPopupSubscription = this.tripService.getTripHandoverPopup()
+      .subscribe(
+        (config: PopupConfigModel) => {
+          if (!config.show) {
+            this.utilityService.redirectToUrl('/trips/view/' + this.model.id + '/detail');
+          }
+        }
+      );
+
     this.tripCancelPopupSubscription = this.tripService.getTripCancelPopup()
       .subscribe(
         (config: PopupConfigModel) => {
@@ -58,6 +71,10 @@ export class TripViewComponent implements OnInit, OnDestroy {
 
   executeTrip(): void {
     this.tripService.setTripExecutePopup(true, this.model.id);
+  }
+
+  handoverTrip(): void {
+    this.tripService.setTripHandoverPopup(true, this.model.id);
   }
 
   cancelTrip(): void {

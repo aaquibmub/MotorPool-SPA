@@ -8,6 +8,7 @@ import { PopupConfigModel } from '../../models/common/popup-config-model';
 import { ResponseModel } from '../../models/common/response-model';
 import { TripExecuteModel } from '../../models/trips/enroute/trip-execute-model';
 import { TripGridModel } from '../../models/trips/enroute/trip-grid-model';
+import { TripHandoverModel } from '../../models/trips/enroute/trip-handover-model';
 import { TripStatusDetailModel } from '../../models/trips/enroute/trip-status-detail-model';
 import { TripStatusModel } from '../../models/trips/enroute/trip-status-model';
 import { TripViewDetailModel } from '../../models/trips/trip-view/trip-view-detail-model';
@@ -22,6 +23,7 @@ export class TripService {
 
   private gridData = new Subject<GridList<TripGridModel>>();
   private showTripExecutePopup = new Subject<PopupConfigModel>();
+  private showTripHandoverPopup = new Subject<PopupConfigModel>();
   private showTripCancelPopup = new Subject<PopupConfigModel>();
 
   constructor(
@@ -69,6 +71,22 @@ export class TripService {
 
   executeTrip(model: TripExecuteModel): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'execute-trip', model);
+  }
+
+  getTripHandoverPopup(): Observable<PopupConfigModel> {
+    return this.showTripHandoverPopup.asObservable();
+  }
+  setTripHandoverPopup(show: boolean, arg?: any): void {
+    this.showTripHandoverPopup.next({ show, arg });
+  }
+
+  getTripHandoverModel(id: string): Observable<TripHandoverModel> {
+    return this.http.get<TripHandoverModel>(
+      this.baseUrl + 'get-trip-handover-model?id=' + id);
+  }
+
+  handoverTrip(model: TripHandoverModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'handover-trip', model);
   }
 
   getTripCancelPopup(): Observable<PopupConfigModel> {

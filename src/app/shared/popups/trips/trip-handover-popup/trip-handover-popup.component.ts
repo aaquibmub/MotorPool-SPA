@@ -1,25 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
+import { ResponseModel } from 'src/app/helper/models/common/response-model';
 import { VehicalModel } from 'src/app/helper/models/vehicals/vehical-model';
+import { AlertService } from 'src/app/helper/services/common/alert.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { DriverService } from 'src/app/helper/services/drivers/driver.service';
+import { TripService } from 'src/app/helper/services/trips/trip.service';
 import { VehicalService } from 'src/app/helper/services/vehicals/vehical.service';
-import { DropdownItem } from './../../../../helper/models/common/dropdown/dropdown-item.model';
-import { ResponseModel } from './../../../../helper/models/common/response-model';
-import { TripExecuteModel } from './../../../../helper/models/trips/enroute/trip-execute-model';
-import { AlertService } from './../../../../helper/services/common/alert.service';
-import { UtilityService } from './../../../../helper/services/common/utility.service';
-import { DriverService } from './../../../../helper/services/drivers/driver.service';
-import { TripService } from './../../../../helper/services/trips/trip.service';
+import { TripHandoverModel } from './../../../../helper/models/trips/enroute/trip-handover-model';
 
 @Component({
-  selector: 'app-trip-execute-popup',
-  templateUrl: './trip-execute-popup.component.html',
-  styleUrls: ['./trip-execute-popup.component.css']
+  selector: 'app-trip-handover-popup',
+  templateUrl: './trip-handover-popup.component.html',
+  styleUrls: ['./trip-handover-popup.component.css']
 })
-export class TripExecutePopupComponent implements OnInit {
+export class TripHandoverPopupComponent implements OnInit {
   @Input() tripId: string;
   form: UntypedFormGroup;
-  model: TripExecuteModel;
+  model: TripHandoverModel;
 
   driverList: DropdownItem<string>[];
 
@@ -33,9 +33,9 @@ export class TripExecutePopupComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.tripService.getTripExecuteModel(this.tripId)
+    this.tripService.getTripHandoverModel(this.tripId)
       .subscribe(
-        (model: TripExecuteModel) => {
+        (model: TripHandoverModel) => {
           this.model = model;
 
           this.initForm();
@@ -50,11 +50,11 @@ export class TripExecutePopupComponent implements OnInit {
 
   private initForm(): void {
     this.form = new UntypedFormGroup({
-      driver: new UntypedFormControl(
-        this.model.driver, [UtilityRix.dropdownRequired as ValidatorFn]
+      newDriver: new UntypedFormControl(
+        this.model.newDriver, [UtilityRix.dropdownRequired as ValidatorFn]
       ),
-      vehical: new UntypedFormControl(
-        this.model.vehical, [UtilityRix.dropdownRequired as ValidatorFn]
+      newVehical: new UntypedFormControl(
+        this.model.newVehical, [UtilityRix.dropdownRequired as ValidatorFn]
       ),
       notes: new UntypedFormControl(null)
     });
@@ -74,14 +74,14 @@ export class TripExecutePopupComponent implements OnInit {
 
           const vehcial = response.result as VehicalModel;
 
-          this.form.get('vehical').setValue({
+          this.form.get('newVehical').setValue({
             text: vehcial.make + ' '
               + vehcial.model + ' '
               + vehcial.modelYear.toString(),
             value: vehcial.id
           });
 
-          this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
+          // this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
 
         }
       );
@@ -93,18 +93,18 @@ export class TripExecutePopupComponent implements OnInit {
     }
     this.model = this.form.value;
     this.model.id = this.tripId;
-    this.tripService.executeTrip(this.model)
+    this.tripService.handoverTrip(this.model)
       .subscribe((response: ResponseModel<string>) => {
         if (response.hasError) {
           this.alertService.setErrorAlert(response.msg);
           return;
         }
-        this.tripService.setTripExecutePopup(false);
+        this.tripService.setTripHandoverPopup(false);
       });
   }
 
   close(): void {
-    this.tripService.setTripExecutePopup(false);
+    this.tripService.setTripHandoverPopup(false);
   }
 
 

@@ -25,6 +25,11 @@
   [tripId]="tripId"
 ></app-trip-execute-popup>
 
+<app-trip-handover-popup
+  *ngIf="showTripHandoverPopup"
+  [tripId]="tripId"
+></app-trip-handover-popup>
+
 <app-trip-cancel-popup
   *ngIf="showTripCancelPopup"
   [tripId]="tripId"
