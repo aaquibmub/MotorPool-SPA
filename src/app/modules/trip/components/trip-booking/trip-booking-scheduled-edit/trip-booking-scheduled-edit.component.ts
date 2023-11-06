@@ -16,7 +16,6 @@ import { PassengerModel } from './../../../../../helper/models/passengers/passen
 import { TripBookingScheduledModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-scheduled-model';
 import { AlertService } from './../../../../../helper/services/common/alert.service';
 import { CommonService } from './../../../../../helper/services/common/common.service';
-import { NotificationService } from './../../../../../helper/services/common/notification.service';
 import { OverlayService } from './../../../../../helper/services/common/overlay.service';
 import { UtilityService } from './../../../../../helper/services/common/utility.service';
 import { DriverService } from './../../../../../helper/services/drivers/driver.service';
@@ -58,7 +57,6 @@ export class TripBookingScheduledEditComponent implements OnInit {
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
-    private notificationService: NotificationService,
     private overlayService: OverlayService,
     private signalRService: SignalRService,
     private dialogService: DialogService,

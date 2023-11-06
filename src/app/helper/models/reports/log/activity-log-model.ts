@@ -1,8 +1,9 @@
 export class ActivityLogModel {
-    ActivityID : string;
-    message: string;
-    createdTime: Date;
-    showTime: Date;
-    activityBy: string;
+  activityID: string;
+  message: string;
+  createdTime: Date;
+  showTime: Date;
+  activityBy: string;
+  userID: string;
 }
 

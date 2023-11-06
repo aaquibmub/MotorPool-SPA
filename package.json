@@ -58,6 +58,7 @@
     "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "guid-typescript": "^1.0.9",
+    "howler": "^2.2.4",
     "jquery": "^3.7.1",
     "ngx-barcode-scanner": "^0.3.0",
     "ngx-paypal": "^9.0.0",

@@ -1,12 +1,12 @@
-import { NotificationService } from './../../helper/services/common/notification.service';
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NotificationListModel } from './../../helper/models/common/notifications/notification-list-model';
+import { AuthService } from './../../helper/services/auth/auth.service';
 import { AlertService } from './../../helper/services/common/alert.service';
+import { NotificationTickerService } from './../../helper/services/common/notification.service';
 import { OverlayService } from './../../helper/services/common/overlay.service';
 import { SidebarService } from './../../helper/services/common/sidebar.service';
-import { AuthService } from './../../helper/services/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
     public sidebarservice: SidebarService,
     private overlayService: OverlayService,
     // private userService: UserService,
-    private notificationService: NotificationService,
+    private notificationService: NotificationTickerService,
     private location: Location,
     private router: Router,
     private route: ActivatedRoute,

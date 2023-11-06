@@ -1,10 +1,15 @@
-import { environment } from './../../../../environments/environment';
-import { NotificationService } from './notification.service';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { from, Observable } from 'rxjs';
+import { NotificationService } from '@progress/kendo-angular-notification';
+import { Observable, from } from 'rxjs';
+import { UtilityRix } from '../../common/utility-rix';
+import { ActivityLogModel } from '../../models/reports/log/activity-log-model';
+import { AuthService } from '../auth/auth.service';
+import { environment } from './../../../../environments/environment';
+import { AlertService } from './alert.service';
+import { NotificationTickerService } from './notification.service';
+import { UtilityService } from './utility.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +21,11 @@ export class SignalRService {
 
   constructor(
     private http: HttpClient,
-    private notificationService: NotificationService) { }
+    private utilityService: UtilityService,
+    private authService: AuthService,
+    private notificationTickerService: NotificationTickerService,
+    private notificationService: NotificationService,
+    private alertService: AlertService) { }
 
   public connect = () => {
     this.startConnection();
@@ -48,7 +57,18 @@ export class SignalRService {
   private addListeners(): void {
     this.hubConnection.on('updateNotificationList', () => {
       console.log('message received from API Controller');
-      this.notificationService.setNotificationList();
+      this.notificationTickerService.setNotificationList();
+    });
+    this.hubConnection.on('ActivityNotification', (model: ActivityLogModel) => {
+
+      console.log('message received from API Controller');
+
+      var user = this.authService.getCurrentUser();
+      if (user && user.id == model.userID) {
+        this.utilityService.playNotificationSound();
+        this.notificationService.show(
+          UtilityRix.getSuccsessNotification(model.message));
+      }
     });
   }
 

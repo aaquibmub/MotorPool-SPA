@@ -1,14 +1,13 @@
-import { environment } from './../../../../environments/environment';
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { NotificationListModel } from '../../models/common/notifications/notification-list-model';
+import { environment } from './../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationService {
+export class NotificationTickerService {
   notificationUrl = environment.apiUrl + 'notification/';
   notificationList = new Subject<NotificationListModel[]>();
   showHideNotificationTicker = new Subject<boolean>();
