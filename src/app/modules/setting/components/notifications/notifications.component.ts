@@ -1,13 +1,17 @@
-import { GridToolbarService } from './../../../../helper/services/common/grid-toolbar.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
+import { NotificationService } from '@progress/kendo-angular-notification';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
-import { NotificationConfigService } from 'src/app/helper/services/utilities/notification-config.service';
+import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { NotificationConfigGridModel } from 'src/app/helper/models/settings/notification-config/notification-config-grid-model';
+import { AlertService } from 'src/app/helper/services/common/alert.service';
+import { NotificationConfigService } from 'src/app/helper/services/utilities/notification-config.service';
+import { ResponseModel } from './../../../../helper/models/common/response-model';
+import { GridToolbarService } from './../../../../helper/services/common/grid-toolbar.service';
 
 @Component({
   selector: 'app-notifications',
@@ -26,6 +30,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   public notificationConfigsGrid: GridComponent;
 
   pageSizeSubscription: Subscription;
+  notificationRuleAddUpdatePopupSubscription: Subscription;
 
   createButton: ActionButton = {
     handle: () => {
@@ -41,12 +46,23 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   // notificationConfigType = NotificationConfigType;
 
   constructor(
+    private notificationService: NotificationService,
+    private alertService: AlertService,
     private notificationConfigService: NotificationConfigService,
     private router: Router,
     private gridToolbarService: GridToolbarService
   ) { }
 
   ngOnInit(): void {
+
+    this.notificationRuleAddUpdatePopupSubscription = this.notificationConfigService.getNotificationConfigQuickAddPopup()
+      .subscribe(
+        (model: PopupConfigModel) => {
+          if (!model.show) {
+            this.notificationConfigService.fetchGridData(this.state, this.searchQuery);
+          }
+        }
+      );
 
     this.pageSizeSubscription = this.gridToolbarService.getPageSize()
       .subscribe(
@@ -91,7 +107,28 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
     actions.push({
       handle: () => {
-        // this.router.navigate(['/inventory/notificationConfigs/' + item.itemID + '/view']);
+        this.notificationConfigService.setNotificationConfigQuickAddPopup({
+          show: true,
+          arg: item.id
+        });
+      },
+      icon: '',
+      label: 'Edit'
+    });
+    actions.push({
+      handle: () => {
+        this.notificationConfigService.delete(item.id)
+          .subscribe(
+            (response: ResponseModel<string>) => {
+              if (response.hasError) {
+                this.alertService.setErrorAlert(response.msg);
+                return;
+              }
+              this.notificationService.show(
+                UtilityRix.getSuccsessNotification('Notification rule deleted'));
+              this.notificationConfigService.fetchGridData(this.state, this.searchQuery);
+            }
+          );
       },
       icon: '',
       label: 'Delete'
@@ -102,6 +139,10 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.pageSizeSubscription.unsubscribe();
+
+    if (this.notificationRuleAddUpdatePopupSubscription) {
+      this.notificationRuleAddUpdatePopupSubscription.unsubscribe();
+    }
   }
 
 }

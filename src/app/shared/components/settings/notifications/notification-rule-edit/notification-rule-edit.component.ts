@@ -1,19 +1,19 @@
-import { ResponseModel } from './../../../../../helper/models/common/response-model';
-import { UtilityRix } from './../../../../../helper/common/utility-rix';
-import { GridList } from './../../../../../helper/models/common/grid/grid-list';
-import { UserRoleModel } from './../../../../../helper/models/auth/user-role-model';
-import { AlertService } from './../../../../../helper/services/common/alert.service';
-import { UtilityService } from 'src/app/helper/services/common/utility.service';
-import { NotificationFeatureModel } from './../../../../../helper/models/settings/notification-config/notification-feature-model';
-import { GridComponent } from '@progress/kendo-angular-grid';
-import { GetNotificationForDropdownList, GetUserRoleListForNotification, NotificationFor, UserRoleType } from './../../../../../helper/common/shared-types';
-import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
-import { NotificationConfigModel, NotificationConfigUserModel } from './../../../../../helper/models/settings/notification-config/notification-config-model';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { GridComponent } from '@progress/kendo-angular-grid';
 import { NotificationService } from '@progress/kendo-angular-notification';
-import { NotificationConfigService } from 'src/app/helper/services/utilities/notification-config.service';
 import { UserService } from 'src/app/helper/services/auth/user.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { NotificationConfigService } from 'src/app/helper/services/utilities/notification-config.service';
+import { GetNotificationForDropdownList, GetUserRoleListForNotification, NotificationFor, UserRoleType } from './../../../../../helper/common/shared-types';
+import { UtilityRix } from './../../../../../helper/common/utility-rix';
+import { UserRoleModel } from './../../../../../helper/models/auth/user-role-model';
+import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
+import { GridList } from './../../../../../helper/models/common/grid/grid-list';
+import { ResponseModel } from './../../../../../helper/models/common/response-model';
+import { NotificationConfigModel, NotificationConfigUserModel } from './../../../../../helper/models/settings/notification-config/notification-config-model';
+import { NotificationFeatureModel } from './../../../../../helper/models/settings/notification-config/notification-feature-model';
+import { AlertService } from './../../../../../helper/services/common/alert.service';
 
 @Component({
   selector: 'app-notification-rule-edit',
@@ -23,6 +23,7 @@ import { UserService } from 'src/app/helper/services/auth/user.service';
 export class NotificationRuleEditComponent implements OnInit {
   @Input() ruleId: string;
 
+  id: string;
   form: UntypedFormGroup;
   model: NotificationConfigModel;
 
@@ -59,6 +60,7 @@ export class NotificationRuleEditComponent implements OnInit {
         .subscribe(
           (model: NotificationConfigModel) => {
             this.model = model;
+            this.id = model.id;
             this.initForm();
           }
         );
@@ -70,20 +72,32 @@ export class NotificationRuleEditComponent implements OnInit {
     let name = '';
     let pushType = true;
     let emailType = true;
+    let mobileType = true;
 
     const userRoleType = this.userRoleList[0];
     const eventCategory = this.eventCategoryList[0];
 
     if (this.model) {
+
+      if (this.model.users && this.model.users.length > 0) {
+        this.myUserSelection = this.model.users.map(m => m.user.value);
+      }
+      debugger;
+      if (this.model.features && this.model.features.length > 0) {
+        this.myEventSelection = this.model.features.map(m => m.id);
+      }
+
       name = this.model.name;
       pushType = this.model.onSystem;
       emailType = this.model.onEmail;
+      mobileType = this.model.onMobile;
     }
 
     this.form = new UntypedFormGroup({
       name: new UntypedFormControl(name, [Validators.required]),
       onSystem: new UntypedFormControl(pushType),
       onEmail: new UntypedFormControl(emailType),
+      onMobile: new UntypedFormControl(mobileType),
       userRole: new UntypedFormControl(userRoleType),
       eventCategory: new UntypedFormControl(eventCategory)
     });
@@ -148,7 +162,7 @@ export class NotificationRuleEditComponent implements OnInit {
     this.model.features = this.myEventSelection.map(idx => {
       return this.eventGridList.find(item => item.id === idx);
     });
-
+    this.model.id = this.id;
     this.notificationConfigService.addUpdate(this.model)
       .subscribe(
         (response: ResponseModel<string>) => {

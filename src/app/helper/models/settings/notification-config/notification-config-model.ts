@@ -3,9 +3,11 @@ import { DropdownItem } from '../../common/dropdown/dropdown-item.model';
 import { NotificationFeatureModel } from './notification-feature-model';
 
 export class NotificationConfigModel {
+  id: string;
   name: string;
   onSystem: boolean;
   onEmail: boolean;
+  onMobile: boolean;
   features: NotificationFeatureModel[];
   users: NotificationConfigUserModel[];
 }

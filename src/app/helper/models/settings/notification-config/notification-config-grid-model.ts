@@ -4,5 +4,6 @@ export class NotificationConfigGridModel {
   features: string;
   onSystem: boolean;
   onEmail: boolean;
+  onMobile: boolean;
 
 }

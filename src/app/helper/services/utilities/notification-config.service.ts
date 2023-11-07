@@ -1,14 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { ResponseModel } from '../../models/common/response-model';
-import { GridDataResult } from '@progress/kendo-angular-grid';
-import { GridList } from '../../models/common/grid/grid-list';
-import { NotificationConfigGridModel } from '../../models/settings/notification-config/notification-config-grid-model';
-import { PopupConfigModel } from '../../models/common/popup-config-model';
-import { NotificationConfigModel } from '../../models/settings/notification-config/notification-config-model';
 import { NotificationFor } from '../../common/shared-types';
+import { GridList } from '../../models/common/grid/grid-list';
+import { PopupConfigModel } from '../../models/common/popup-config-model';
+import { ResponseModel } from '../../models/common/response-model';
+import { NotificationConfigGridModel } from '../../models/settings/notification-config/notification-config-grid-model';
+import { NotificationConfigModel } from '../../models/settings/notification-config/notification-config-model';
 import { NotificationFeatureModel } from '../../models/settings/notification-config/notification-feature-model';
 
 @Injectable({
@@ -37,6 +37,9 @@ export class NotificationConfigService {
 
   addUpdate(model: NotificationConfigModel): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl, model);
+  }
+  delete(id: string): Observable<ResponseModel<string>> {
+    return this.http.delete<ResponseModel<string>>(this.baseUrl + id);
   }
 
   getSelectedNotificationConfigModel(): Observable<NotificationConfigModel> {

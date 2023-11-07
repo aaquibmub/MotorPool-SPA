@@ -45,14 +45,61 @@
             let-dataItem
             let-rowIndex="rowIndex"
           >
-            <span *ngIf="dataItem.onSystem == true && dataItem.onEmail == false"
+            <span
+              *ngIf="
+                dataItem.onSystem == true &&
+                dataItem.onEmail == false &&
+                dataItem.onMobile == false
+              "
               >Push</span
             >
-            <span *ngIf="dataItem.onEmail == true && dataItem.onSystem == false"
+            <span
+              *ngIf="
+                dataItem.onEmail == true &&
+                dataItem.onSystem == false &&
+                dataItem.onMobile == false
+              "
               >Email</span
             >
-            <span *ngIf="dataItem.onEmail == true && dataItem.onSystem == true"
+            <span
+              *ngIf="
+                dataItem.onMobile == true &&
+                dataItem.onEmail == false &&
+                dataItem.onSystem == false
+              "
+              >Mobile</span
+            >
+            <span
+              *ngIf="
+                dataItem.onEmail == true &&
+                dataItem.onSystem == true &&
+                dataItem.onMobile == false
+              "
               >Push & Email</span
+            >
+            <span
+              *ngIf="
+                dataItem.onEmail == false &&
+                dataItem.onSystem == true &&
+                dataItem.onMobile == true
+              "
+              >Push & Mobile</span
+            >
+            <span
+              *ngIf="
+                dataItem.onEmail == true &&
+                dataItem.onSystem == false &&
+                dataItem.onMobile == true
+              "
+              >Email & Mobile</span
+            >
+            <span
+              *ngIf="
+                dataItem.onEmail == true &&
+                dataItem.onSystem == true &&
+                dataItem.onMobile == true
+              "
+              >Push, Email & Mobile</span
             >
           </ng-template>
         </kendo-grid-column>
