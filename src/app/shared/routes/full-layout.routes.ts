@@ -18,6 +18,12 @@ export const Full_ROUTES: Routes = [
       .then(m => m.HomeModule)
   },
   {
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../modules/dashboard/dashboard.module')
+      .then(m => m.DashboardModule)
+  },
+  {
     path: 'trips',
     canActivate: [AuthGuard],
     loadChildren: () => import('../../modules/trip/trip.module')

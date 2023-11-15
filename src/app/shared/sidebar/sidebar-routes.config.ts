@@ -3,9 +3,9 @@ import { RouteInfo } from './sidebar.metadata';
 // Sidebar menu Routes and data
 export const ROUTES: RouteInfo[] = [
 
-  // home
+  // dashboard
   {
-    path: '/home',
+    path: '/dashboard',
     title: 'Home',
     icon: 'home-icon',
     class: '',

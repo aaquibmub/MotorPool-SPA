@@ -1,0 +1,31 @@
+<div class="trip-tile">
+  <div class="tile-top">
+    <div class="tile-top-info">
+      <div class="tile-icon pb-24">
+        <div [class]="iconClass"></div>
+      </div>
+      <div class="tile-title">{{ title }}</div>
+    </div>
+    <div class="tile-top-count">{{ count }}</div>
+  </div>
+  <div class="tile-bottom">
+    <div class="display-flex">
+      <div class="display-flex flex-1">
+        <div class="flex-2 tile-bottom-item tile-bottom-lable purple-text">
+          {{ bottomLeftLable }}
+        </div>
+        <div class="flex-1 tile-bottom-item tile-bottom-value purple-text">
+          {{ bottomLeftValue }}
+        </div>
+      </div>
+      <div class="display-flex flex-1">
+        <div class="flex-2 tile-bottom-item tile-bottom-lable red-text">
+          {{ bottomRightLable }}
+        </div>
+        <div class="flex-1 tile-bottom-item tile-bottom-value red-text">
+          {{ bottomRightValue }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

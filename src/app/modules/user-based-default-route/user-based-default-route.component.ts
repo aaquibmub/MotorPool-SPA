@@ -1,6 +1,6 @@
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './../../helper/services/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-user-based-default-route',
@@ -16,7 +16,7 @@ export class UserBasedDefaultRouteComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.loggedIn()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/dashboard']);
     } else {
       this.router.navigate(['/auth/login']);
     }

@@ -1,0 +1,88 @@
+.trip-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 220px;
+  font-family: "Roboto";
+  border-radius: 4px;
+}
+
+.tile-top {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 16px;
+  flex: 3;
+}
+
+.tile-top .tile-top-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  flex: 2;
+}
+
+.today-trip-icon {
+  background-image: url("./../../../../../../assets/icons/dashboard/ico-today-trips.svg");
+  height: 48px;
+  width: 48px;
+}
+
+.ongoing-trip-icon {
+  background-image: url("./../../../../../../assets/icons/dashboard/ico-ongoing-trips.svg");
+  height: 48px;
+  width: 48px;
+}
+
+.vehicles-icon {
+  background-image: url("./../../../../../../assets/icons/dashboard/ico-vehicle.svg");
+  height: 48px;
+  width: 48px;
+}
+
+.drivers-icon {
+  background-image: url("./../../../../../../assets/icons/dashboard/ico-drivers.svg");
+  height: 48px;
+  width: 48px;
+}
+
+.tile-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.tile-top-count {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  font-size: 110px;
+  /* font-weight: bold; */
+  text-align: center;
+}
+
+.tile-bottom {
+  background-color: #ebeaff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tile-bottom-item {
+  padding: 8px;
+  text-align: center;
+}
+.tile-bottom-lable {
+  font-size: 16px;
+}
+.tile-bottom-value {
+  font-size: 32px;
+}
+
+.purple-text {
+  color: #635cf7;
+}
+
+.red-text {
+  color: #dc3545;
+}

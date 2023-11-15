@@ -84,6 +84,10 @@
   }
 }
 
+.p-8 {
+  padding: 8px !important;
+}
+
 .p-24 {
   padding: 24px !important;
 }
@@ -96,8 +100,16 @@
 
 /******************* padding-bottom ********************/
 
+.pb-8 {
+  padding-bottom: 8px !important;
+}
+
 .pb-16 {
   padding-bottom: 16px !important;
+}
+
+.pb-24 {
+  padding-bottom: 24px !important;
 }
 
 /******************* padding-left ********************/

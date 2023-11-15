@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-3">
+    <app-dashboard-home-trip-tile
+      iconClass="today-trip-icon"
+      title="Today Trips"
+      [count]="countModel?.todayTrips"
+      bottomLeftLable="Ongoing"
+      [bottomLeftValue]="countModel?.todayOngoing"
+      bottomRightLable="In Queue"
+      [bottomRightValue]="countModel?.todayInQueue"
+    ></app-dashboard-home-trip-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-tile
+      iconClass="ongoing-trip-icon"
+      title="Ongoing Trips"
+      [count]="countModel?.ongoingTrips"
+      bottomLeftLable="In DQ"
+      [bottomLeftValue]="countModel?.ongoingInDq"
+      bottomRightLable="Out DQ"
+      [bottomRightValue]="countModel?.ongoingOutDq"
+    ></app-dashboard-home-trip-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-tile
+      iconClass="vehicles-icon"
+      title="Vehicles"
+      [count]="countModel?.activeVehicles"
+      bottomLeftLable="Allocated"
+      [bottomLeftValue]="countModel?.allocatedVehicles"
+      bottomRightLable="Unallocated"
+      [bottomRightValue]="countModel?.unallocatedVehicles"
+    ></app-dashboard-home-trip-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-tile
+      iconClass="drivers-icon"
+      title="Drivers"
+      [count]="countModel?.activeDrivers"
+      bottomLeftLable="Busy"
+      [bottomLeftValue]="countModel?.busyDrivers"
+      bottomRightLable="Idle"
+      [bottomRightValue]="countModel?.idleDrivers"
+    ></app-dashboard-home-trip-tile>
+  </div>
+</div>

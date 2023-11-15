@@ -1,10 +1,10 @@
-import { UserRoleType } from './../../../../helper/common/shared-types';
-import { AlertService } from './../../../../helper/services/common/alert.service';
-import { AuthService } from './../../../../helper/services/auth/auth.service';
-import { LoginModel } from './../../../../helper/models/auth/login-model';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserRoleType } from './../../../../helper/common/shared-types';
+import { LoginModel } from './../../../../helper/models/auth/login-model';
+import { AuthService } from './../../../../helper/services/auth/auth.service';
+import { AlertService } from './../../../../helper/services/common/alert.service';
 
 @Component({
   selector: 'app-auth-login',
@@ -50,7 +50,7 @@ export class AuthLoginComponent implements OnInit {
             this.router.navigate(['/driver']);
             return;
           }
-          this.router.navigate(['/home']);
+          this.router.navigate(['/dashboard']);
         },
         (error) => {
           this.loginFailed = true;
