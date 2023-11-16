@@ -1,0 +1,102 @@
+<div class="row pb-24">
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="opm-blue-icon"
+      title="Trips OPM"
+      subtitle="Today"
+      [count]="countModel?.todayOpmTrips"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="opm-yellow-icon"
+      title="Trips OPM"
+      [subtitle]="currentMonth"
+      [count]="countModel?.currentMonthOpmTrips"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="today-saudi-icon"
+      title="Trips Saudi"
+      subtitle="Today"
+      [count]="countModel?.todaySaudiTrips"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="month-saudi-icon"
+      title="Trips Saudi"
+      [subtitle]="currentMonth"
+      [count]="countModel?.currentMonthSaudiTrips"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+</div>
+<div class="row pb-24">
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="today-milage-opm-icon"
+      title="Milage OPM"
+      [subtitle]="'Today'"
+      [count]="countModel?.todayOpmMilage"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="month-milage-opm-icon"
+      title="Milage OPM"
+      [subtitle]="currentMonth"
+      [count]="countModel?.currentMonthOpmMilage"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="today-milage-saudi-icon"
+      title="Milage Saudi"
+      subtitle="Today"
+      [count]="countModel?.todaySaudiMilage"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="month-milage-saudi-icon"
+      title="Milage Saudi"
+      [subtitle]="currentMonth"
+      [count]="countModel?.currentMonthSaudiMilage"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+</div>
+<div class="row pb-24">
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="oil-change-icon"
+      title="Oil Change"
+      [subtitle]="'Vehicles'"
+      [count]="countModel?.oilChange"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="trips-icon"
+      title="Trips"
+      [subtitle]="currentMonth"
+      [count]="countModel?.currentMonthTrips"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="today-milage-icon"
+      title="Milage"
+      subtitle="Today"
+      [count]="countModel?.todayMilage"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+  <div class="col-3">
+    <app-dashboard-home-trip-bottom-tile
+      iconClass="month-milage-icon"
+      title="Milage"
+      [subtitle]="currentMonth"
+      [count]="countModel?.currentMonthMilage"
+    ></app-dashboard-home-trip-bottom-tile>
+  </div>
+</div>
