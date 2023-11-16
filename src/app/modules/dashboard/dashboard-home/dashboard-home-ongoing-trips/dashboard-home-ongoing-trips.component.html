@@ -1,3 +1,26 @@
-<p>
-  dashboard-home-ongoing-trips works!
-</p>
+<div class="dashboard-widget">
+  <div class="header">Ongoing Trips</div>
+  <div class="caption">Trips ongoing right now</div>
+  <div class="table" *ngIf="list">
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Trip ID</th>
+          <th>Passenger</th>
+          <th>Driver</th>
+          <th>Vehicle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list">
+          <td>{{ item.time | dateformat : "hh:mm aa" }}</td>
+          <td>{{ item.tripId }}</td>
+          <td>{{ item.passenger }}</td>
+          <td>{{ item.driver }}</td>
+          <td>{{ item.vehical }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

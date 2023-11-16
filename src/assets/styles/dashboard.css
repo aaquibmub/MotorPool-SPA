@@ -1,0 +1,34 @@
+.dashboard-widget {
+  display: block;
+  background-color: white;
+  padding: 16px;
+}
+
+.dashboard-widget .header {
+  padding: 0px !important;
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: 8px !important;
+}
+
+.dashboard-widget .caption {
+  padding: 0px !important;
+  font-size: 10px;
+  padding-bottom: 24px !important;
+}
+
+.dashboard-widget .table {
+  display: flex;
+}
+
+.dashboard-widget .table table {
+  width: 100%;
+}
+
+.dashboard-widget .table table th {
+  background-color: #fff7f4;
+  color: #dd4352;
+  vertical-align: top;
+  padding: 8px !important;
+  font-weight: normal;
+}

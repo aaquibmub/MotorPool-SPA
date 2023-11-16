@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { DashboardHomeOngoingTripsComponent } from './dashboard-home/dashboard-home-ongoing-trips/dashboard-home-ongoing-trips.component';
 import { DashboardHomeTripBottomTileComponent } from './dashboard-home/dashboard-home-trip-bottom-tiles/dashboard-home-trip-bottom-tile/dashboard-home-trip-bottom-tile.component';
 import { DashboardHomeTripBottomTilesComponent } from './dashboard-home/dashboard-home-trip-bottom-tiles/dashboard-home-trip-bottom-tiles.component';
@@ -15,6 +16,7 @@ import { DashboardComponent } from './dashboard.component';
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     DashboardRoutingModule
   ],
   declarations: [
