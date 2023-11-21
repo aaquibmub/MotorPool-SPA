@@ -1,3 +1,44 @@
-<p>
-  dashboard-home-trip-milage-chart works!
-</p>
+<div class="dashboard-widget" style="padding: 0">
+  <div class="row">
+    <div class="col-6">
+      <div class="dashboard-widget" style="padding-top: 64px">
+        <div class="header">Milage</div>
+        <div class="widget-content">
+          <div class="trip-counts">
+            <div class="item" *ngFor="let item of data">
+              <div [class]="'icon ' + item.iconClass + '-trip-type-icon'"></div>
+              <div class="label">{{ item.label }}</div>
+              <div class="count">{{ item.milage }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <kendo-chart *ngIf="data && data.length > 0">
+        <ng-template kendoChartDonutCenterTemplate>
+          <h6>{{ totalMilage }}</h6>
+          KM
+        </ng-template>
+        <kendo-chart-area background="#FFF2E8"></kendo-chart-area>
+        <kendo-chart-series>
+          <kendo-chart-series-item
+            type="donut"
+            [data]="data"
+            colorField="color"
+            categoryField="label"
+            field="milage"
+          >
+            <!-- <kendo-chart-series-item-labels
+              [content]="labelContent"
+              color="#fff"
+              background="none"
+            >
+            </kendo-chart-series-item-labels> -->
+          </kendo-chart-series-item>
+        </kendo-chart-series>
+        <kendo-chart-legend [visible]="false"></kendo-chart-legend>
+      </kendo-chart>
+    </div>
+  </div>
+</div>

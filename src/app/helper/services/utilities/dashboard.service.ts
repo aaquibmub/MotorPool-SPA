@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { DashboardTripListModel } from '../../models/dashboard/dashboard-trip-list-model';
 import { TripCountModel } from '../../models/dashboard/trip-count-model';
 import { TripDetailCountModel } from '../../models/dashboard/trip-detail-count-model';
+import { TripTypeChartModel } from '../../models/dashboard/trip-type-chart-model';
+import { TripTypeMilageChartModel } from '../../models/dashboard/trip-type-milage-chart-model';
 import { environment } from './../../../../environments/environment';
 
 @Injectable({
@@ -31,6 +33,14 @@ export class DashboardService {
   getOngoingTrips(): Observable<DashboardTripListModel[]> {
     return this.http.get<DashboardTripListModel[]>(
       this.baseUrl + 'get-ongoing-trip-list');
+  }
+  getTripTypeChartListModel(): Observable<TripTypeChartModel[]> {
+    return this.http.get<TripTypeChartModel[]>(
+      this.baseUrl + 'get-trip-type-chart-list');
+  }
+  getTripTypeMilageChartListModel(): Observable<TripTypeMilageChartModel[]> {
+    return this.http.get<TripTypeMilageChartModel[]>(
+      this.baseUrl + 'get-trip-type-milage-chart-list');
   }
 }
 

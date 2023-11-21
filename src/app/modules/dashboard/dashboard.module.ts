@@ -13,11 +13,15 @@ import { DashboardHomeComponent } from './dashboard-home/dashboard-home.componen
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
+import { ChartsModule } from "@progress/kendo-angular-charts";
+
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+
+    ChartsModule
   ],
   declarations: [
     DashboardComponent,

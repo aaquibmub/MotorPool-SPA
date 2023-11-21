@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-  flex: 2;
+  flex: 1;
 }
 
 .tile-title {
@@ -41,6 +41,7 @@
   font-size: 80px;
   font-weight: bold;
   text-align: center;
+  overflow: auto;
 }
 
 .opm-blue-icon {

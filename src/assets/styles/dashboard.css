@@ -2,6 +2,7 @@
   display: block;
   background-color: white;
   padding: 16px;
+  min-height: 300px;
 }
 
 .dashboard-widget .header {
@@ -31,4 +32,66 @@
   vertical-align: top;
   padding: 8px !important;
   font-weight: normal;
+}
+
+.widget-content {
+  display: flex;
+  padding: 64px 0 16px;
+}
+
+.trip-counts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.trip-counts .item {
+  display: flex;
+  padding-bottom: 16px;
+}
+
+.trip-counts .item .icon {
+  margin-right: 8px;
+}
+
+.trip-counts .item .label {
+  margin-right: 8px;
+  flex: 4;
+  font-family: "Roboto";
+  font-size: 14px;
+  color: #445153;
+}
+
+.trip-counts .item .count {
+  margin-right: 8px;
+  flex: 2;
+  text-align: right;
+  font-family: "Roboto";
+  font-size: 14px;
+  color: #adb6bb;
+}
+
+.blue-trip-type-icon {
+  background-image: url("./../../assets/icons/chart-ico/Blue.Ellipse.svg");
+  height: 16px;
+  width: 16px;
+}
+
+.purple-trip-type-icon {
+  background-image: url("./../../assets/icons/chart-ico/Purple.Ellipse.svg");
+  height: 16px;
+  width: 16px;
+}
+
+.red-trip-type-icon {
+  background-image: url("./../../assets/icons/chart-ico/Red.Ellipse.svg");
+  height: 16px;
+  width: 16px;
+}
+
+.yellow-trip-type-icon {
+  background-image: url("./../../assets/icons/chart-ico/Yellow.Ellipse.svg");
+  height: 16px;
+  width: 16px;
 }

@@ -28,6 +28,7 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "@progress/kendo-angular-barcodes": "^1.0.0",
     "@progress/kendo-angular-buttons": "^7.0.0",
+    "@progress/kendo-angular-charts": "^6.0.0",
     "@progress/kendo-angular-common": "^2.0.0",
     "@progress/kendo-angular-dateinputs": "^6.0.0",
     "@progress/kendo-angular-dialog": "^6.0.0",
