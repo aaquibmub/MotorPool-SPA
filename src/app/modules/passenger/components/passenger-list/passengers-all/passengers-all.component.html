@@ -1,3 +1,55 @@
-<p>
-  passengers-all works!
-</p>
+<div class="grid-content">
+  <app-grid-toolbar
+    [numberOfRecords]="gridData?.total"
+    entity="driver"
+  ></app-grid-toolbar>
+  <kendo-grid
+    [data]="gridData"
+    [pageSize]="state.take"
+    [skip]="state.skip"
+    [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
+    scrollable="none"
+    (dataStateChange)="dataStateChange($event)"
+  >
+    <kendo-grid-column field="vehicalId" title="ID">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <a routerLink="/passenger/passenger/{{ dataItem.id }}/view">{{
+          dataItem.pass
+        }}</a>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
+    <kendo-grid-column field="gender" title="Gender"> </kendo-grid-column>
+    <kendo-grid-column field="ageGroup" title="Age Group">
+    </kendo-grid-column>
+    <kendo-grid-column field="opm" title="Opm">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span *ngIf="dataItem.armoured">Yes</span>
+        <span *ngIf="!dataItem.armoured">No</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="phoneNumber" title="Phone Number">
+    </kendo-grid-column>
+    <kendo-grid-column field="address" title="Address">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span>{{ utilityService.getVehicalStatusLabel(dataItem.status) }}</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column headerClass="action-column">
+      <ng-template kendoGridHeaderTemplate>
+        <span><i class="action-column-icon"></i></span>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <app-grid-action-dropdown
+          [actions]="getGridActions(dataItem)"
+          [index]="rowIndex"
+          [states]="getGridActionMenuState()"
+        ></app-grid-action-dropdown>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>

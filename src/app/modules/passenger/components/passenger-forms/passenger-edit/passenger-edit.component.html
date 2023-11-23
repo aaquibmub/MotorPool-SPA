@@ -1,3 +1,252 @@
-<p>
-  passenger-edit works!
-</p>
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <div class="page-actions"></div>
+  <div class="page-area">
+    <div class="page-header">
+      <div class="page-title">
+        <span>Passanger</span>
+      </div>
+    </div>
+    <div class="page-body">
+      <!-- Vehical Info -->
+      <div class="form-section">
+        <div class="row">
+          <!-- Vehical ID -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputPassangerId">Passanger ID</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputPassangerId"
+                  formControlName="passangerIdStr"
+                  id="inputPassangerId"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+          <!-- Name -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputName">Name</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputName"
+                  formControlName="name"
+                  id="inputName"
+                />
+                <div
+                  *ngIf="
+                    !form.get('inputName').valid &&
+                    form.get('inputName').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Name is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Gender -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label [for]="'inputPassengerGender' + j">Gender</label>
+              </div>
+              <div class="control">
+                <kendo-dropdownlist
+                  class="form-control"
+                  textField="text"
+                  valueField="value"
+                  [defaultItem]="utilityService.dropdownDefaultItem"
+                  [data]="genderList"
+                  formControlName="gender"
+                >
+                  <ng-template
+                    kendoDropDownListItemTemplate
+                    let-dataItem
+                  >
+                    <span>{{ dataItem.text | translate }}</span>
+                  </ng-template>
+                </kendo-dropdownlist>
+                <div
+                  *ngIf="
+                    !passenger.get('gender').valid &&
+                    passenger.get('gender').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Gender is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Age Group -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label [for]="'inputPassengerAgeGroup' + j"
+                  >Age Group</label
+                >
+              </div>
+              <div class="control">
+                <kendo-dropdownlist
+                  class="form-control"
+                  textField="text"
+                  valueField="value"
+                  [defaultItem]="utilityService.dropdownDefaultItem"
+                  [data]="ageGroupList"
+                  formControlName="ageGroup"
+                >
+                  <ng-template
+                    kendoDropDownListItemTemplate
+                    let-dataItem
+                  >
+                    <span>{{ dataItem.text | translate }}</span>
+                  </ng-template>
+                </kendo-dropdownlist>
+                <div
+                  *ngIf="
+                    !passenger.get('ageGroup').valid &&
+                    passenger.get('ageGroup').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Age group is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- OPM -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label [for]="'inputPassengerGender' + j">OPM</label>
+              </div>
+              <div class="control">
+                <kendo-dropdownlist
+                  class="form-control"
+                  textField="text"
+                  valueField="value"
+                  [defaultItem]="utilityService.dropdownDefaultItem"
+                  [data]="opmList"
+                  formControlName="opm"
+                >
+                  <ng-template
+                    kendoDropDownListItemTemplate
+                    let-dataItem
+                  >
+                    <span>{{ dataItem.text | translate }}</span>
+                  </ng-template>
+                </kendo-dropdownlist>
+                <div
+                  *ngIf="
+                    !passenger.get('opm').valid &&
+                    passenger.get('opm').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  OPM is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Phone number -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputModelYear">Phone Number</label>
+              </div>
+              <div class="control">
+                <input
+                  type="tel"
+                  class="form-control"
+                  name="inputPhoneNumber"
+                  formControlName="phoneNumber"
+                  id="inputPhoneNumber"
+                />
+                <div
+                  *ngIf="
+                    !form.get('phoneNumber').valid &&
+                    form.get('phoneNumber').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Phone Number is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Address -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label [for]="'inputPassengerGender' + j">Address</label>
+              </div>
+              <div class="control">
+                <kendo-dropdownlist
+                  class="form-control"
+                  textField="text"
+                  valueField="value"
+                  [defaultItem]="utilityService.dropdownDefaultItem"
+                  [data]="addressList"
+                  formControlName="address"
+                >
+                  <ng-template
+                    kendoDropDownListItemTemplate
+                    let-dataItem
+                  >
+                    <span>{{ dataItem.text | translate }}</span>
+                  </ng-template>
+                </kendo-dropdownlist>
+                <div
+                  *ngIf="
+                    !passenger.get('address').valid &&
+                    passenger.get('address').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="form-section transparent-section">
+        <div class="section-body">
+          <div class="description sm-hide"></div>
+          <div class="fields">
+            <div class="form-group">
+              <button
+                class="btn btn-default mr-16"
+                type="button"
+                (click)="cancel()"
+              >
+                Cancel
+              </button>
+              <button *ngIf="!editMode" class="btn btn-primary" type="submit">
+                Create
+              </button>
+              <button *ngIf="editMode" class="btn btn-primary" type="submit">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

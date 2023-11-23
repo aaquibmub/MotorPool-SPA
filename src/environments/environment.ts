@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  baseDomain: 'localhost:9001',
-  baseUrl: 'https://localhost:9001/',
-  apiUrl: 'https://localhost:9001/api/',
+  baseDomain: '135.125.212.110:8095',
+  baseUrl: 'http://135.125.212.110:8095/',
+  apiUrl: 'http://135.125.212.110:8095/api/',
 };
 
 /*
