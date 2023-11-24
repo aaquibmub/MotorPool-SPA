@@ -26,9 +26,14 @@ export class VehicalService {
       this.baseUrl + 'get-dropdown-list?text=' + text);
   }
 
-  getTableList(text: string): Observable<VehicalModel[]> {
-    return this.http.get<VehicalModel[]>(
-      this.baseUrl + 'get-table-list?text=' + text);
+  getTableList(
+    text: string,
+    allocated?: boolean): Observable<VehicalModel[]> {
+    let url = this.baseUrl + 'get-table-list?text=' + text;
+    if (allocated) {
+      url += '&allocated=' + allocated;
+    }
+    return this.http.get<VehicalModel[]>(url);
   }
 
   get(id: string): Observable<VehicalModel> {

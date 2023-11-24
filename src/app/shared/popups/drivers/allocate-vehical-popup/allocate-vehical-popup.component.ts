@@ -1,15 +1,14 @@
-import { VehicalModel } from './../../../../helper/models/vehicals/vehical-model';
-import { ResponseModel } from './../../../../helper/models/common/response-model';
+import { Component, Input, OnInit } from '@angular/core';
+import { UntypedFormControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
-import { VehicalService } from './../../../../helper/services/vehicals/vehical.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { ResponseModel } from './../../../../helper/models/common/response-model';
+import { AllocateVehicalModel } from './../../../../helper/models/drivers/allocate-vehical-model';
+import { VehicalModel } from './../../../../helper/models/vehicals/vehical-model';
 import { AlertService } from './../../../../helper/services/common/alert.service';
 import { CommonService } from './../../../../helper/services/common/common.service';
 import { DriverService } from './../../../../helper/services/drivers/driver.service';
-import { UtilityService } from 'src/app/helper/services/common/utility.service';
-import { AllocateVehicalModel } from './../../../../helper/models/drivers/allocate-vehical-model';
-import { DropdownItem } from './../../../../helper/models/common/dropdown/dropdown-item.model';
-import { Component, Input, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
+import { VehicalService } from './../../../../helper/services/vehicals/vehical.service';
 
 @Component({
   selector: 'app-allocate-vehical-popup',
@@ -42,7 +41,7 @@ export class AllocateVehicalPopupComponent implements OnInit {
         }
       );
 
-    this.vehicalService.getTableList('')
+    this.vehicalService.getTableList('', true)
       .subscribe((list: VehicalModel[]) => {
         this.vehicalList = list;
       });
