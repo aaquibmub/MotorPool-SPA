@@ -6,11 +6,9 @@ import { VehicalStatus } from '../../common/shared-types';
 import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
 import { GridList } from '../../models/common/grid/grid-list';
 import { ResponseModel } from '../../models/common/response-model';
-import { VehicalGridModel } from '../../models/vehicals/vehical-grid-model';
-import { VehicalModel } from '../../models/vehicals/vehical-model';
-import { environment } from './../../../../environments/environment';
 import { PassangerGridModel } from '../../models/passengers/passanger-grid-model';
 import { PassengerModel } from '../../models/passengers/passenger-model';
+import { environment } from './../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +42,7 @@ export class PassangerService {
     query: string,
     status?: VehicalStatus): void {
     this.http.post<GridList<PassangerGridModel>>(
-      this.baseUrl + 'get-passanger-gridlist', {
+      this.baseUrl + 'get-gridlist', {
       gridFilters: state,
       search: query,
       status

@@ -128,24 +128,26 @@ export class DriversAllComponent implements OnInit, OnDestroy {
         label: item.status ? 'Disable' : 'Enable'
       }
     ];
-    if (item.vehicalAllocated) {
-      actions.push({
-        handle: () => {
-          this.driverService.setDeallocateVehicalPopup(true, item.id);
-        },
-        icon: '',
-        label: 'Deallocate Vehical'
-      });
+    if (!item.busy) {
+      if (item.vehicalAllocated) {
+        actions.push({
+          handle: () => {
+            this.driverService.setDeallocateVehicalPopup(true, item.id);
+          },
+          icon: '',
+          label: 'Deallocate Vehical'
+        });
 
-    } else {
-      actions.push({
-        handle: () => {
-          this.driverService.setAllocateVehicalPopup(true, item.id);
-        },
-        icon: '',
-        label: 'Allocate Vehical'
-      });
+      } else {
+        actions.push({
+          handle: () => {
+            this.driverService.setAllocateVehicalPopup(true, item.id);
+          },
+          icon: '',
+          label: 'Allocate Vehical'
+        });
 
+      }
     }
 
     return actions;

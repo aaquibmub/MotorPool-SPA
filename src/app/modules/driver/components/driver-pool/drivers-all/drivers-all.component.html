@@ -35,9 +35,11 @@
     </kendo-grid-column>
     <kendo-grid-column field="busy" title="Busy" filter="boolean">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <span *ngIf="dataItem.status">Busy</span>
-        <span *ngIf="!dataItem.status">Idle</span>
+        <span *ngIf="dataItem.busy">Busy</span>
+        <span *ngIf="!dataItem.busy">Idle</span>
       </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="vehicalAllocated" title="Vehical">
     </kendo-grid-column>
     <kendo-grid-column field="createdDate" title="Date Created" filter="date">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">

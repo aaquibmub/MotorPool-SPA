@@ -111,9 +111,6 @@
                                     Model Year
                                   </div>
                                   <div class="flex-1 k-font-weight-bold">
-                                    Armoured
-                                  </div>
-                                  <div class="flex-1 k-font-weight-bold">
                                     Registration Plate
                                   </div>
                                   <div class="flex-1 k-font-weight-bold">
@@ -136,24 +133,13 @@
                                     {{ dataItem.modelYear }}
                                   </div>
                                   <div class="flex-1">
-                                    {{
-                                      dataItem.armoured
-                                        ? dataItem.armoured === true
-                                          ? "Yes"
-                                          : "No"
-                                        : ""
-                                    }}
-                                  </div>
-                                  <div class="flex-1">
                                     {{ dataItem.registrationPlate }}
                                   </div>
                                   <div class="flex-1">
                                     {{
-                                      dataItem.active
-                                        ? dataItem.active === true
-                                          ? "Yes"
-                                          : "No"
-                                        : ""
+                                      utilityService.getVehicalStatusLabel(
+                                        dataItem.status?.value
+                                      )
                                     }}
                                   </div>
                                 </div>
