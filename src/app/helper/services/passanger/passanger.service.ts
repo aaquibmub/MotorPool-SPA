@@ -14,7 +14,7 @@ import { environment } from './../../../../environments/environment';
   providedIn: 'root'
 })
 export class PassangerService {
-  baseUrl = environment.apiUrl + 'passanger/';
+  baseUrl = environment.apiUrl + 'passenger/';
 
   private gridData = new Subject<GridList<PassangerGridModel>>();
 

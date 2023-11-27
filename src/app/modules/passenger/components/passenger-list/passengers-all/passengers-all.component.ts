@@ -8,7 +8,7 @@ import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { PassangerGridModel } from 'src/app/helper/models/passengers/passanger-grid-model';
 import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.service';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
-import { PassangerService } from 'src/app/helper/services/passanger/passanger.service'
+import { PassangerService } from 'src/app/helper/services/passanger/passanger.service';
 
 @Component({
   selector: 'app-passengers-all',
@@ -76,7 +76,7 @@ export class PassengersAllComponent implements OnInit {
 
     actions.push({
       handle: () => {
-        this.router.navigate(['/passangers/passanger/' + item.id + '/edit']);
+        this.router.navigate(['/passengers/passenger/' + item.id + '/edit']);
       },
       icon: '',
       label: 'Edit'

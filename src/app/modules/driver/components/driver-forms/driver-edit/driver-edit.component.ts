@@ -1,15 +1,15 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { DriverModel } from 'src/app/helper/models/drivers/driver-model';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { DropdownItem } from "../../../../../helper/models/common/dropdown/dropdown-item.model";
-import { VehicalTypeService } from 'src/app/helper/services/vehicals/vehical-type.service';
-import { DriverService } from 'src/app/helper/services/drivers/driver.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {CommonService} from "../../../../../helper/services/common/common.service";
-import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
-import { AlertService } from 'src/app/helper/services/common/alert.service';
 import { ResponseModel } from 'src/app/helper/models/common/response-model';
+import { DriverModel } from 'src/app/helper/models/drivers/driver-model';
+import { AlertService } from 'src/app/helper/services/common/alert.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { DriverService } from 'src/app/helper/services/drivers/driver.service';
+import { VehicalTypeService } from 'src/app/helper/services/vehicals/vehical-type.service';
+import { DropdownItem } from "../../../../../helper/models/common/dropdown/dropdown-item.model";
+import { CommonService } from "../../../../../helper/services/common/common.service";
 
 @Component({
   selector: 'app-driver-edit',
@@ -41,7 +41,7 @@ export class DriverEditComponent implements OnInit {
 
     this.route.params
       .subscribe(() => {
-          this.initForm();
+        this.initForm();
       });
 
     this.driverNationalityService.getDropdownList('')
@@ -116,7 +116,7 @@ export class DriverEditComponent implements OnInit {
     formValue.id = this.id;
     const primaryAction = this.editMode ? 'Update' : 'Create';
     const successAction = this.editMode ? 'Updated' : 'Created';
-    const primaryMsg = 'Do you want to ' + primaryAction + ' vehical?';
+    const primaryMsg = 'Do you want to ' + primaryAction + ' driver?';
 
     const dialog: DialogRef = this.dialogService
       .open(this.alertService.getConfirmDialougeConfig(
@@ -134,11 +134,11 @@ export class DriverEditComponent implements OnInit {
               }
 
               this.alertService.setSuccessAlert(
-                'Vehical is '
+                'Driver is '
                 + successAction
                 + ' successfully');
 
-              this.utilityService.redirectToUrl('/vehicals/pool/all');
+              this.utilityService.redirectToUrl('/drivers/pool/all');
 
             }
           );

@@ -3,13 +3,28 @@ import { DropdownItem } from '../models/common/dropdown/dropdown-item.model';
 export enum DropdownType {
   Gender = 10,
   TripRoute = 20,
-  TripDestination = 30
+  TripDestination = 30,
+  Opm = 40
 }
 
 export enum Gender {
   Male = 10,
   Female = 20
 }
+export function GetGenderForDropdownList():
+  DropdownItem<Gender>[] {
+  return [
+    {
+      value: Gender.Male,
+      text: 'Male'
+    },
+    {
+      value: Gender.Female,
+      text: 'Female'
+    },
+  ];
+}
+
 
 
 export enum OPM {

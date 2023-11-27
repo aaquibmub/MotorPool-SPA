@@ -10,24 +10,6 @@
       <!-- Vehical Info -->
       <div class="form-section">
         <div class="row">
-          <!-- Vehical ID -->
-          <div class="col-md-4">
-            <div class="form-group">
-              <div class="label">
-                <label for="inputPassangerId">Passanger ID</label>
-              </div>
-              <div class="control">
-                <input
-                  type="text"
-                  class="form-control"
-                  name="inputPassangerId"
-                  formControlName="passangerIdStr"
-                  id="inputPassangerId"
-                  readonly
-                />
-              </div>
-            </div>
-          </div>
           <!-- Name -->
           <div class="col-md-4">
             <div class="form-group">
@@ -43,10 +25,7 @@
                   id="inputName"
                 />
                 <div
-                  *ngIf="
-                    !form.get('inputName').valid &&
-                    form.get('inputName').touched
-                  "
+                  *ngIf="!form.get('name').valid && form.get('name').touched"
                   class="invalid-feedback"
                 >
                   Name is required
@@ -58,7 +37,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerGender' + j">Gender</label>
+                <label [for]="'inputPassengerGender'">Gender</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -69,17 +48,13 @@
                   [data]="genderList"
                   formControlName="gender"
                 >
-                  <ng-template
-                    kendoDropDownListItemTemplate
-                    let-dataItem
-                  >
+                  <ng-template kendoDropDownListItemTemplate let-dataItem>
                     <span>{{ dataItem.text | translate }}</span>
                   </ng-template>
                 </kendo-dropdownlist>
                 <div
                   *ngIf="
-                    !passenger.get('gender').valid &&
-                    passenger.get('gender').touched
+                    !form.get('gender').valid && form.get('gender').touched
                   "
                   class="invalid-feedback"
                 >
@@ -94,9 +69,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerAgeGroup' + j"
-                  >Age Group</label
-                >
+                <label [for]="'inputPassengerAgeGroup'">Age Group</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -107,17 +80,13 @@
                   [data]="ageGroupList"
                   formControlName="ageGroup"
                 >
-                  <ng-template
-                    kendoDropDownListItemTemplate
-                    let-dataItem
-                  >
+                  <ng-template kendoDropDownListItemTemplate let-dataItem>
                     <span>{{ dataItem.text | translate }}</span>
                   </ng-template>
                 </kendo-dropdownlist>
                 <div
                   *ngIf="
-                    !passenger.get('ageGroup').valid &&
-                    passenger.get('ageGroup').touched
+                    !form.get('ageGroup').valid && form.get('ageGroup').touched
                   "
                   class="invalid-feedback"
                 >
@@ -130,7 +99,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerGender' + j">OPM</label>
+                <label [for]="'inputPassengerOpm'">OPM</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -141,18 +110,12 @@
                   [data]="opmList"
                   formControlName="opm"
                 >
-                  <ng-template
-                    kendoDropDownListItemTemplate
-                    let-dataItem
-                  >
+                  <ng-template kendoDropDownListItemTemplate let-dataItem>
                     <span>{{ dataItem.text | translate }}</span>
                   </ng-template>
                 </kendo-dropdownlist>
                 <div
-                  *ngIf="
-                    !passenger.get('opm').valid &&
-                    passenger.get('opm').touched
-                  "
+                  *ngIf="!form.get('opm').valid && form.get('opm').touched"
                   class="invalid-feedback"
                 >
                   OPM is required
@@ -164,7 +127,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputModelYear">Phone Number</label>
+                <label for="inputPhoneNumber">Phone Number</label>
               </div>
               <div class="control">
                 <input
@@ -192,7 +155,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerGender' + j">Address</label>
+                <label [for]="'inputPassengerAddress'">Address</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -203,17 +166,13 @@
                   [data]="addressList"
                   formControlName="address"
                 >
-                  <ng-template
-                    kendoDropDownListItemTemplate
-                    let-dataItem
-                  >
+                  <ng-template kendoDropDownListItemTemplate let-dataItem>
                     <span>{{ dataItem.text | translate }}</span>
                   </ng-template>
                 </kendo-dropdownlist>
                 <div
                   *ngIf="
-                    !passenger.get('address').valid &&
-                    passenger.get('address').touched
+                    !form.get('address').valid && form.get('address').touched
                   "
                   class="invalid-feedback"
                 >
