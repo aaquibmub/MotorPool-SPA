@@ -1,6 +1,6 @@
+import { Pipe, PipeTransform } from '@angular/core';
 import { IntlService } from '@progress/kendo-angular-intl';
 import { ZonedDate } from '@progress/kendo-date-math';
-import { Pipe, PipeTransform } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 
 @Pipe({
@@ -41,6 +41,7 @@ export class DateFormatPipe implements PipeTransform {
         return this.intl.formatDate(dateTime, args);
       }
     }
+    debugger;
     return this.intl.formatDate(new Date(value));
   }
 }

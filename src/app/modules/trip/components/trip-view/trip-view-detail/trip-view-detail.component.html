@@ -355,6 +355,7 @@
                     [checked]="specialService.required"
                     [id]="'inputSpecialServiceRequired' + j"
                     kendoCheckBox
+                    disabled
                   />
                   <label for="inputAlloDiscount">{{
                     specialService.specialService?.text
@@ -367,6 +368,7 @@
                     name=""
                     id=""
                     [value]="specialService.qty"
+                    readonly
                   />
                 </div>
               </div>
