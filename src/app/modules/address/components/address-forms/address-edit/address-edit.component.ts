@@ -109,7 +109,7 @@ export class AddressEditComponent implements OnInit {
               }
 
               this.alertService.setSuccessAlert(
-                'Vehical is '
+                'Address is '
                 + successAction
                 + ' successfully');
 

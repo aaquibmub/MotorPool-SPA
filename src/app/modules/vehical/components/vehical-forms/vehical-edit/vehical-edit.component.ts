@@ -25,6 +25,7 @@ export class VehicalEditComponent implements OnInit {
   editMode = false;
   model: VehicalModel;
   form: UntypedFormGroup;
+  activeTab = 1;
 
   typeList: DropdownItem<string>[];
   statusList: DropdownItem<VehicalStatus>[];
@@ -81,6 +82,21 @@ export class VehicalEditComponent implements OnInit {
     let color: string = null;
     let armoured: boolean = false;
 
+    let engineOilCapacity: number = null;
+    let recommendedOilBrand: string = null;
+    let oilNextDueMilage: number = null;
+    let oilNextDueDate: string = null;
+    let oilComments: string = null;
+
+    let rimSize: string = null;
+    let tyreSize: string = null;
+    let tireBrand: string = null;
+    let tyreExpiryDate: Date = null;
+    let tyreComments: string = null;
+
+    let odoMeter: number = null;
+    let odoMeterComments: string = null;
+
     if (this.model) {
       vehicalIdStr = this.model.vehicalIdStr;
       registrationPlate = this.model.registrationPlate;
@@ -92,6 +108,22 @@ export class VehicalEditComponent implements OnInit {
 
       color = this.model.color;
       armoured = this.model.armoured;
+
+      engineOilCapacity = this.model.engineOilCapacity;
+      recommendedOilBrand = this.model.recommendedOilBrand;
+      oilNextDueMilage = this.model.oilNextDueMilage;
+      oilNextDueDate = this.model.oilNextDueDate;
+      oilComments = this.model.oilComments;
+
+      rimSize = this.model.rimSize;
+      tyreSize = this.model.tyreSize;
+      tireBrand = this.model.tireBrand;
+      tyreExpiryDate = this.model.tyreExpiryDate;
+      tyreComments = this.model.tyreComments;
+
+      odoMeter = this.model.odoMeter;
+      odoMeterComments = this.model.odoMeterComments;
+
     }
 
     this.form = new UntypedFormGroup({
@@ -113,6 +145,24 @@ export class VehicalEditComponent implements OnInit {
         color, [Validators.required]),
       armoured: new UntypedFormControl(
         armoured, [Validators.required]),
+
+      engineOilCapacity: new UntypedFormControl(engineOilCapacity),
+      recommendedOilBrand: new UntypedFormControl(recommendedOilBrand),
+      oilNextDueMilage: new UntypedFormControl(oilNextDueMilage),
+      oilNextDueDate: new UntypedFormControl(
+        oilNextDueDate ? new Date(oilNextDueDate) : new Date()
+      ),
+      oilComments: new UntypedFormControl(oilComments),
+
+      rimSize: new UntypedFormControl(rimSize),
+      tyreSize: new UntypedFormControl(tyreSize),
+      tireBrand: new UntypedFormControl(tireBrand),
+      tyreExpiryDate: new UntypedFormControl(
+        tyreExpiryDate ? new Date(tyreExpiryDate) : new Date()),
+      tyreComments: new UntypedFormControl(tyreComments),
+
+      odoMeter: new UntypedFormControl(odoMeter),
+      odoMeterComments: new UntypedFormControl(odoMeterComments),
     });
 
   }
@@ -159,6 +209,10 @@ export class VehicalEditComponent implements OnInit {
           );
       }
     });
+  }
+
+  setActiveTab(active: number): void {
+    this.activeTab = active;
   }
 
 }

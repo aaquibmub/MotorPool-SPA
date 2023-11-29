@@ -14,6 +14,21 @@ export class VehicalModel {
   color: string;
   armoured: boolean;
 
+  engineOilCapacity: number;
+  recommendedOilBrand: string;
+  oilNextDueMilage: number;
+  oilNextDueDate: string;
+  oilComments: string;
+
+  rimSize: string;
+  tyreSize: string;
+  tireBrand: string;
+  tyreExpiryDate: Date;
+  tyreComments: string;
+
+  odoMeter: number;
+  odoMeterComments: string;
+
   get getFullName() {
     return this.make + ' ' + this.model + ' ' + this.modelYear.toString();
   }

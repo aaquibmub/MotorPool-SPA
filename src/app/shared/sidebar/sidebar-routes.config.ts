@@ -28,7 +28,7 @@ export const ROUTES: RouteInfo[] = [
 
       // vehicals
       {
-        path: '/vehicles/all',
+        path: '/vehicals/pool/all',
         title: 'Vehicles',
         icon: 'bx bx-right-arrow-alt',
         class: '',
@@ -61,7 +61,7 @@ export const ROUTES: RouteInfo[] = [
 
       // Vehicle Status
       {
-        path: '/vehicles/status',
+        path: '/vehicals/pool/active',
         title: 'Vehicle Status',
         icon: 'bx bx-right-arrow-alt',
         class: '',
@@ -70,7 +70,7 @@ export const ROUTES: RouteInfo[] = [
         isExternalLink: false,
         submenu: [
           {
-            path: '/vehicles/status/active',
+            path: '/vehicals/pool/active',
             title: 'Active',
             icon: 'bx bx-right-arrow-alt',
             class: '',
@@ -80,8 +80,8 @@ export const ROUTES: RouteInfo[] = [
             submenu: []
           },
           {
-            path: '/vehicles/status/idle',
-            title: 'All Invoices',
+            path: '/vehicals/pool/inactive',
+            title: 'Inactive',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -90,8 +90,18 @@ export const ROUTES: RouteInfo[] = [
             submenu: []
           },
           {
-            path: '/vehicles/status/maintainance',
+            path: '/vehicals/pool/maintenance',
             title: 'Maintainance',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/vehicals/pool/gripped',
+            title: 'Gripped',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',

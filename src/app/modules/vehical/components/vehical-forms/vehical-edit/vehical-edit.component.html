@@ -231,6 +231,287 @@
           </div>
         </div>
       </div>
+      <div class="tab-left">
+        <div class="tab-left-items">
+          <a
+            class="tab-left-item"
+            [ngClass]="{ active: activeTab == 1 }"
+            (click)="setActiveTab(1)"
+            >Engine Oil
+          </a>
+          <a
+            class="tab-left-item"
+            [ngClass]="{ active: activeTab == 2 }"
+            (click)="setActiveTab(2)"
+            >Wheels & Tires</a
+          >
+          <a
+            class="tab-left-item"
+            [ngClass]="{ active: activeTab == 3 }"
+            (click)="setActiveTab(3)"
+            >ODO Meter</a
+          >
+        </div>
+        <div class="tab-content" style="background-color: white">
+          <div *ngIf="activeTab == 1">
+            <!-- General -->
+            <div class="form-section">
+              <div class="section-header">General</div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputEngineCapacity"
+                          >Engine Capacity (Liters)</label
+                        >
+                      </div>
+                      <div class="control">
+                        <input
+                          type="number"
+                          class="form-control"
+                          name="inputEngineCapacity"
+                          formControlName="engineOilCapacity"
+                          id=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputOilBrand"
+                          >Recommended Engine Oil Brand</label
+                        >
+                      </div>
+                      <div class="control">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="inputOilBrand"
+                          formControlName="recommendedOilBrand"
+                          id=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Next Due -->
+            <div class="form-section">
+              <div class="section-header">Next Due</div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputOilNextDueMilage">Milage (KM)</label>
+                      </div>
+                      <div class="control">
+                        <input
+                          type="number"
+                          class="form-control"
+                          name="inputOilNextDueMilage"
+                          formControlName="oilNextDueMilage"
+                          id=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputOilNextDueDate">Date</label>
+                      </div>
+                      <div class="control">
+                        <kendo-datepicker
+                          class="form-control"
+                          id="inputOilNextDueDate"
+                          formControlName="oilNextDueDate"
+                        >
+                        </kendo-datepicker>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Commnets -->
+
+            <div class="form-section">
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputOilComments">Comments</label>
+                      </div>
+                      <div class="control">
+                        <textarea
+                          class="form-control form-text-area"
+                          name="inputOilComments"
+                          formControlName="oilComments"
+                          id=""
+                          cols="30"
+                          rows="10"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="activeTab == 2">
+            <div class="form-section">
+              <div class="section-header">General</div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputRimSize">RIM Size</label>
+                      </div>
+                      <div class="control">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="inputRimSize"
+                          formControlName="rimSize"
+                          id=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputTyreSize">Tyre Size</label>
+                      </div>
+                      <div class="control">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="inputTyreSize"
+                          formControlName="tyreSize"
+                          id=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputTireBrand">Recommended Brand</label>
+                      </div>
+                      <div class="control">
+                        <input
+                          type="string"
+                          class="form-control"
+                          name="inputTireBrand"
+                          formControlName="tireBrand"
+                          id=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputTyreExpiryDate">Expiry Date</label>
+                      </div>
+                      <div class="control">
+                        <kendo-datepicker
+                          class="form-control"
+                          id="inputTyreExpiryDate"
+                          formControlName="tyreExpiryDate"
+                        >
+                        </kendo-datepicker>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-section">
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputTyreComments">Comments</label>
+                      </div>
+                      <div class="control">
+                        <textarea
+                          class="form-control form-text-area"
+                          name="inputTyreComments"
+                          formControlName="tyreComments"
+                          id=""
+                          cols="30"
+                          rows="10"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="activeTab == 3">
+            <div class="form-section">
+              <div class="section-header">Milage on ODO Meter</div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputOdoMeter">Milage (KM)</label>
+                      </div>
+                      <div class="control">
+                        <input
+                          type="number"
+                          class="form-control"
+                          name="inputOdoMeter"
+                          formControlName="odoMeter"
+                          id=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="label">
+                        <label for="inputOdoComments">Comments</label>
+                      </div>
+                      <div class="control">
+                        <textarea
+                          class="form-control form-text-area"
+                          name="inputOdoComments"
+                          formControlName="odoMeterComments"
+                          id=""
+                          cols="30"
+                          rows="10"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Actions -->
       <div class="form-section transparent-section">
         <div class="section-body">

@@ -1,20 +1,20 @@
-import { Observable } from 'rxjs';
-import { environment } from './../../../../environments/environment';
-import { Injectable } from '@angular/core';
-import { TripBookingScheduledModel } from '../../models/trips/trip-bookings/trip-booking-scheduled-model';
 import { HttpClient } from '@angular/common/http';
-import { TripBookingPassengerModel } from '../../models/trips/trip-bookings/trip-booking-passenger-model';
+import { Injectable } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
 import { guid } from '@progress/kendo-angular-common';
+import { Observable } from 'rxjs';
 import { UtilityRix } from '../../common/utility-rix';
-import { TripBookingSpecialServiceModel } from '../../models/trips/trip-bookings/trip-booking-special-service-model';
-import { TripStopModel } from '../../models/trips/enroute/trip-stop-model';
 import { ResponseModel } from '../../models/common/response-model';
-import { UtilityService } from '../common/utility.service';
-import { TripPickupModel } from '../../models/trips/enroute/trip-pickup-model';
-import { TripDropoffModel } from '../../models/trips/enroute/trip-dropoff-model';
-import { TripBookingStartNowModel } from '../../models/trips/trip-bookings/trip-booking-start-now-model';
 import { TripDestinationModel } from '../../models/trips/enroute/trip-destination-model';
+import { TripDropoffModel } from '../../models/trips/enroute/trip-dropoff-model';
+import { TripPickupModel } from '../../models/trips/enroute/trip-pickup-model';
+import { TripStopModel } from '../../models/trips/enroute/trip-stop-model';
+import { TripBookingPassengerModel } from '../../models/trips/trip-bookings/trip-booking-passenger-model';
+import { TripBookingScheduledModel } from '../../models/trips/trip-bookings/trip-booking-scheduled-model';
+import { TripBookingSpecialServiceModel } from '../../models/trips/trip-bookings/trip-booking-special-service-model';
+import { TripBookingStartNowModel } from '../../models/trips/trip-bookings/trip-booking-start-now-model';
+import { UtilityService } from '../common/utility.service';
+import { environment } from './../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +55,18 @@ export class TripBookingService {
     let index = 0;
     formValue.destinations.forEach(f => {
       this.utilityService.buildFormData(formData, f, 'destinations[' + index + ']');
+      index++;
+    });
+
+    index = 0;
+    formValue.passengers.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'passengers[' + index + ']');
+      index++;
+    });
+
+    index = 0;
+    formValue.specialSevices.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'specialSevices[' + index + ']');
       index++;
     });
 
