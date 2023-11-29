@@ -65,4 +65,10 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => import('../../modules/reports/reports.module')
       .then(m => m.ReportsModule)
   },
+  {
+    path: 'approvers',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../modules/approver/approver.module')
+      .then(m => m.ApproverModule)
+  },
 ];

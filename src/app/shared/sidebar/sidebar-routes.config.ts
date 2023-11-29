@@ -319,6 +319,40 @@ export const ROUTES: RouteInfo[] = [
           },
         ]
       },
+
+
+      // Address
+      {
+        path: '/approvers/list/',
+        title: 'Approvers',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            path: '/approvers/approver/new',
+            title: 'Add New Approver',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/approvers/list/all',
+            title: 'All Approvers',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
     ]
   },
 

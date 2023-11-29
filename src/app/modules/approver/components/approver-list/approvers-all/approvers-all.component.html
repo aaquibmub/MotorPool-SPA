@@ -1,0 +1,36 @@
+<div class="grid-content">
+    
+    <kendo-grid
+      [data]="gridData"
+      [pageSize]="state.take"
+      [skip]="state.skip"
+      [sort]="state.sort"
+      [sortable]="true"
+      [pageable]="pageable"
+      [filter]="state.filter"
+      [filterable]="filterable"
+      scrollable="none"
+      (dataStateChange)="dataStateChange($event)"
+    >
+      <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
+      <kendo-grid-column field="status" title="Status">
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+          <span *ngIf="dataItem.status">Active</span>
+          <span *ngIf="!dataItem.status">Disabled</span>
+        </ng-template></kendo-grid-column
+      >
+      <kendo-grid-column headerClass="action-column">
+        <ng-template kendoGridHeaderTemplate>
+          <span><i class="action-column-icon"></i></span>
+        </ng-template>
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+          <app-grid-action-dropdown
+            [actions]="getGridActions(dataItem)"
+            [index]="rowIndex"
+            [states]="getGridActionMenuState()"
+          ></app-grid-action-dropdown>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+  

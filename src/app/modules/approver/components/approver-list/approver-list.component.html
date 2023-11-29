@@ -1,0 +1,23 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>{{ pageTitle }}</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="grid-toolbar">
+      <div class="left"></div>
+      <div class="right">
+        <button class="btn btn-green" (click)="handleCreateNewButtonClick()">
+          Create New Approver
+        </button>
+      </div>
+    </div>
+    <div class="tab-left">
+      <div class="tab-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
