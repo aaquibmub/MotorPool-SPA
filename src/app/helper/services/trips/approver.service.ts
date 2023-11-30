@@ -45,7 +45,7 @@ export class ApproverService {
     state: any,
     query: string): void {
         this.http.post<GridList<ApproverGridModel>>(
-          this.baseUrl + 'get-address-gridlist', {
+          this.baseUrl + 'get-approver-gridlist', {
           gridFilters: state,
           search: query
         }).subscribe(
