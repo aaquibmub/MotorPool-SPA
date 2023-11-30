@@ -1,5 +1,6 @@
 import { VehicalStatus } from '../../common/shared-types';
 import { DropdownItem } from '../common/dropdown/dropdown-item.model';
+import { VehicalInspectionModel } from './inspections/vehical-inspection-model';
 
 export class VehicalModel {
   id: string;
@@ -28,6 +29,8 @@ export class VehicalModel {
 
   odoMeter: number;
   odoMeterComments: string;
+
+  inspection: VehicalInspectionModel;
 
   get getFullName() {
     return this.make + ' ' + this.model + ' ' + this.modelYear.toString();

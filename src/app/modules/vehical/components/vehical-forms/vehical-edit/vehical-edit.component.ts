@@ -7,6 +7,8 @@ import { GetVehicalStatusForDropdownList, VehicalStatus } from 'src/app/helper/c
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
 import { ResponseModel } from 'src/app/helper/models/common/response-model';
+import { VehicalInspectionBodyPartItemModel } from 'src/app/helper/models/vehicals/inspections/vehical-inspection-body-side-item-model';
+import { VehicalInspectionGeneralItemModel } from 'src/app/helper/models/vehicals/inspections/vehical-inspection-general-item-model';
 import { VehicalModel } from 'src/app/helper/models/vehicals/vehical-model';
 import { AlertService } from 'src/app/helper/services/common/alert.service';
 import { CommonService } from 'src/app/helper/services/common/common.service';
@@ -29,6 +31,9 @@ export class VehicalEditComponent implements OnInit {
 
   typeList: DropdownItem<string>[];
   statusList: DropdownItem<VehicalStatus>[];
+
+  generalInspectionItems: VehicalInspectionGeneralItemModel[];
+  bodyInspectionItems: VehicalInspectionBodyPartItemModel[];
 
   constructor(
     private renderer: Renderer2,
@@ -54,6 +59,17 @@ export class VehicalEditComponent implements OnInit {
             .subscribe((model: VehicalModel) => {
               this.model = model;
               this.editMode = true;
+              var inspection = this.model.inspection;
+              this.generalInspectionItems = inspection ? inspection.generalInspectionItems : null;
+              var bodyInspectionItems: VehicalInspectionBodyPartItemModel[] = [];
+              if (inspection && inspection.bodyInspectionItems) {
+                inspection.bodyInspectionItems.forEach(f => {
+                  f.parts.forEach(p => {
+                    bodyInspectionItems.push(p);
+                  });
+                });
+              }
+              this.bodyInspectionItems = bodyInspectionItems;
               this.initForm();
             });
         } else {
@@ -213,6 +229,36 @@ export class VehicalEditComponent implements OnInit {
 
   setActiveTab(active: number): void {
     this.activeTab = active;
+  }
+
+  hasGeneralInspection(): boolean {
+    return this.generalInspectionItems
+      && this.generalInspectionItems.length > 0;
+  }
+
+  onGeneralInspectionSearch(query: KeyboardEvent): void {
+    var value = (query.currentTarget as HTMLInputElement).value;
+    this.generalInspectionItems = this.model.inspection.generalInspectionItems
+      .filter(f => f.option.text.toLocaleLowerCase().includes(value));
+  }
+
+  hasBodyInspection(): boolean {
+    return this.generalInspectionItems
+      && this.generalInspectionItems.length > 0;
+  }
+
+  onBodyInspectionSearch(query: KeyboardEvent): void {
+    var value = (query.currentTarget as HTMLInputElement).value;
+
+    var bodyInspectionItems: VehicalInspectionBodyPartItemModel[] = [];
+    if (this.model.inspection && this.model.inspection.bodyInspectionItems) {
+      this.model.inspection.bodyInspectionItems.forEach(f => {
+        f.parts.forEach(p => {
+          bodyInspectionItems.push(p);
+        });
+      });
+    }
+    this.bodyInspectionItems = bodyInspectionItems.filter(f => f.part.text.toLocaleLowerCase().includes(value));
   }
 
 }
