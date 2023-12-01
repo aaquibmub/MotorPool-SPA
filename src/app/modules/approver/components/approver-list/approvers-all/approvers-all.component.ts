@@ -9,6 +9,7 @@ import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.service';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ApproverService } from 'src/app/helper/services/trips/approver.service';
+import { AddressGridModel } from 'src/app/helper/models/address/address-grid-model';
 
 @Component({
   selector: 'app-approvers-all',

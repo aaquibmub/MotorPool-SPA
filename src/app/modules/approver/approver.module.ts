@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { ApproverRoutingModule } from "./approver-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { InputsModule, SharedModule } from "@progress/kendo-angular-inputs";
+import { InputsModule } from "@progress/kendo-angular-inputs";
 import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
 import { GridModule } from "@progress/kendo-angular-grid";
@@ -13,6 +13,7 @@ import { ApproversAllComponent } from "./components/approver-list/approvers-all/
 import { ApproverFormsComponent } from "./components/approver-forms/approver-forms.component";
 import { ApproverEditComponent } from "./components/approver-forms/approver-edit/approver-edit.component";
 import { NgModule } from "@angular/core";
+import { SharedModule } from "src/app/shared/shared.module";
 
 @NgModule({
     imports: [

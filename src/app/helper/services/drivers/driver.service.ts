@@ -38,12 +38,12 @@ export class DriverService {
   fetchGridData(
     state: any,
     query: string,
-    active?: boolean): void {
+    status?: boolean): void {
     this.http.post<GridList<DriverGridModel>>(
       this.baseUrl + 'get-driver-gridlist', {
       gridFilters: state,
       search: query,
-      active
+      status
     }).subscribe(
       (gridData: GridList<DriverGridModel>) => {
         this.gridData.next(gridData);

@@ -1,5 +1,5 @@
 export class ApproverGridModel {
     id: string;
-    address: string;
+    name: string;
     status: boolean;
   }

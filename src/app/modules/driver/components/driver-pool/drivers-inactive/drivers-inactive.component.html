@@ -1,3 +1,62 @@
-<p>
-  drivers-inactive works!
-</p>
+<div class="grid-content">
+  <app-grid-toolbar
+    [numberOfRecords]="gridData?.total"
+    entity="driver"
+  ></app-grid-toolbar>
+  <kendo-grid
+    [data]="gridData"
+    [pageSize]="state.take"
+    [skip]="state.skip"
+    [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
+    scrollable="none"
+    (dataStateChange)="dataStateChange($event)"
+  >
+    <kendo-grid-column field="userId" title="ID" filter="numeric">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <a routerLink="/drivers/driver/{{ dataItem.id }}/view">{{
+          dataItem.userIdStr
+        }}</a>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="fullName" title="Full Name"> </kendo-grid-column>
+    <kendo-grid-column field="nationalId" title="National ID #">
+    </kendo-grid-column>
+    <kendo-grid-column field="mobileNumber" title="Mobile #">
+    </kendo-grid-column>
+    <kendo-grid-column field="status" title="Status" filter="boolean">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span *ngIf="dataItem.status">Active</span>
+        <span *ngIf="!dataItem.status">Iactive</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="busy" title="Busy" filter="boolean">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span *ngIf="dataItem.busy">Busy</span>
+        <span *ngIf="!dataItem.busy">Idle</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="vehicalAllocated" title="Vehical">
+    </kendo-grid-column>
+    <kendo-grid-column field="createdDate" title="Date Created" filter="date">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        {{ dataItem.createdDate | dateformat : "g" }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column headerClass="action-column">
+      <ng-template kendoGridHeaderTemplate>
+        <span><i class="action-column-icon"></i></span>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <app-grid-action-dropdown
+          [actions]="getGridActions(dataItem)"
+          [index]="rowIndex"
+          [states]="getGridActionMenuState()"
+        ></app-grid-action-dropdown>
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>

@@ -112,7 +112,7 @@ export class ApproverEditComponent implements OnInit {
                 + successAction
                 + ' successfully');
 
-              this.utilityService.redirectToUrl('/addresses/list/all');
+              this.utilityService.redirectToUrl('/approvers/list/all');
 
             }
           );
