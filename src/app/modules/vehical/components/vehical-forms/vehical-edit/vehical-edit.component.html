@@ -251,8 +251,21 @@
             (click)="setActiveTab(3)"
             >ODO Meter</a
           >
+          <a
+            class="tab-left-item"
+            [ngClass]="{ active: activeTab == 4 }"
+            (click)="setActiveTab(4)"
+            >General Inspection</a
+          >
+          <a
+            class="tab-left-item"
+            [ngClass]="{ active: activeTab == 5 }"
+            (click)="setActiveTab(5)"
+            >Body</a
+          >
         </div>
         <div class="tab-content" style="background-color: white">
+          <!-- Engine Oil -->
           <div *ngIf="activeTab == 1">
             <!-- General -->
             <div class="form-section">
@@ -363,6 +376,7 @@
               </div>
             </div>
           </div>
+          <!-- Wheels & Tires -->
           <div *ngIf="activeTab == 2">
             <div class="form-section">
               <div class="section-header">General</div>
@@ -461,6 +475,7 @@
               </div>
             </div>
           </div>
+          <!-- ODO Meter -->
           <div *ngIf="activeTab == 3">
             <div class="form-section">
               <div class="section-header">Milage on ODO Meter</div>
@@ -504,6 +519,134 @@
                           rows="10"
                         ></textarea>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- General Inspection -->
+          <div *ngIf="activeTab == 4">
+            <div class="form-section">
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="grid-content" *ngIf="hasGeneralInspection()">
+                      <div class="grid-toolbar">
+                        <div class="left"></div>
+                        <div class="right">
+                          <input
+                            type="search"
+                            class="form-control"
+                            placeholder="Search"
+                            (keyup)="onGeneralInspectionSearch($event)"
+                          />
+                        </div>
+                      </div>
+
+                      <kendo-grid
+                        [data]="generalInspectionItems"
+                        [pageable]="false"
+                        scrollable="none"
+                      >
+                        <kendo-grid-column title="Inspection Item">
+                          <ng-template
+                            kendoGridCellTemplate
+                            let-dataItem
+                            let-rowIndex="rowIndex"
+                          >
+                            <div class="display-flex justify-content-start">
+                              <img
+                                [src]="
+                                  'data:image/png; base64, ' + dataItem.image
+                                "
+                                alt="abc"
+                              />
+                              <p
+                                style="
+                                  padding: 16px;
+                                  margin-top: 8px;
+                                  margin-bottom: 0;
+                                "
+                              >
+                                {{ dataItem.option?.text }}
+                              </p>
+                            </div>
+                          </ng-template>
+                        </kendo-grid-column>
+                        <kendo-grid-column field="answer" title="Result">
+                          <ng-template
+                            kendoGridCellTemplate
+                            let-dataItem
+                            let-rowIndex="rowIndex"
+                          >
+                            <span *ngIf="dataItem.answer">Pass</span>
+                            <span *ngIf="!dataItem.answer">Fail</span>
+                          </ng-template>
+                        </kendo-grid-column>
+                      </kendo-grid>
+                    </div>
+                    <div
+                      class="display-flex justify-content-center"
+                      *ngIf="!hasGeneralInspection()"
+                    >
+                      <p style="margin-bottom: 0">No data available</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Body -->
+          <div *ngIf="activeTab == 5">
+            <div class="form-section">
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="grid-content" *ngIf="hasBodyInspection()">
+                      <div class="grid-toolbar">
+                        <div class="left"></div>
+                        <div class="right">
+                          <input
+                            type="search"
+                            class="form-control"
+                            placeholder="Search"
+                            (keyup)="onBodyInspectionSearch($event)"
+                          />
+                        </div>
+                      </div>
+
+                      <kendo-grid
+                        [data]="bodyInspectionItems"
+                        [pageable]="false"
+                        scrollable="none"
+                      >
+                        <kendo-grid-column title="Inspection Item">
+                          <ng-template
+                            kendoGridCellTemplate
+                            let-dataItem
+                            let-rowIndex="rowIndex"
+                          >
+                            <div class="display-flex justify-content-start">
+                              <p style="margin-bottom: 0">
+                                {{ dataItem.part?.text }}
+                              </p>
+                            </div>
+                          </ng-template>
+                        </kendo-grid-column>
+                        <kendo-grid-column field="scraches" title="Scratch">
+                        </kendo-grid-column>
+                        <kendo-grid-column field="damages" title="Damage">
+                        </kendo-grid-column>
+                        <kendo-grid-column field="dents" title="Dent">
+                        </kendo-grid-column>
+                      </kendo-grid>
+                    </div>
+                    <div
+                      class="display-flex justify-content-center"
+                      *ngIf="!hasBodyInspection()"
+                    >
+                      <p style="margin-bottom: 0">No data available</p>
                     </div>
                   </div>
                 </div>
