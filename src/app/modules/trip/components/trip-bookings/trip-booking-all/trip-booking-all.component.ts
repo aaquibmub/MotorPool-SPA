@@ -96,7 +96,7 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
 
     actions.push({
       handle: () => {
-        this.router.navigate(['/trips/view/detail', item.id]).then();
+        this.router.navigate(['/trips/view/' + item.id + '/detail']);
       },
       icon: '',
       label: 'View'

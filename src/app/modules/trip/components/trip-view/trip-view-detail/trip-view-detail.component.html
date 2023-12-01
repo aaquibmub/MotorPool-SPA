@@ -117,7 +117,7 @@
     </div>
   </div>
   <!-- Trip Requester -->
-  <div class="form-section form-section-border">
+  <div class="form-section form-section-border" *ngIf="model.requester">
     <div class="section-header">Trip Requester</div>
     <div class="section-body">
       <!-- Requester Info -->
@@ -177,7 +177,10 @@
     </div>
   </div>
   <!-- Passengers -->
-  <div class="form-section form-section-border">
+  <div
+    class="form-section form-section-border"
+    *ngIf="model.passengers && model.passengers.length > 0"
+  >
     <div class="section-header">Passengers</div>
     <div class="section-body">
       <!-- Requester as Passenger -->

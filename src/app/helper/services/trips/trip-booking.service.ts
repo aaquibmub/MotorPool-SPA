@@ -10,6 +10,7 @@ import { TripDropoffModel } from '../../models/trips/enroute/trip-dropoff-model'
 import { TripPickupModel } from '../../models/trips/enroute/trip-pickup-model';
 import { TripStopModel } from '../../models/trips/enroute/trip-stop-model';
 import { TripBookingPassengerModel } from '../../models/trips/trip-bookings/trip-booking-passenger-model';
+import { TripBookingRefuelingModel } from '../../models/trips/trip-bookings/trip-booking-refueling-model';
 import { TripBookingScheduledModel } from '../../models/trips/trip-bookings/trip-booking-scheduled-model';
 import { TripBookingSpecialServiceModel } from '../../models/trips/trip-bookings/trip-booking-special-service-model';
 import { TripBookingStartNowModel } from '../../models/trips/trip-bookings/trip-booking-start-now-model';
@@ -120,7 +121,40 @@ export class TripBookingService {
 
   }
 
+  getRefuelingBooking(id: string): Observable<TripBookingRefuelingModel> {
+    return this.http.get<TripBookingRefuelingModel>(this.baseUrl + 'get-refeuling' + id);
+  }
 
+  getDefaultRefuelingBookingModel(): Observable<TripBookingRefuelingModel> {
+    const url = this.baseUrl + 'get-default-refueling';
+    return this.http.get<TripBookingRefuelingModel>(url);
+  }
+
+  addUpdateRefueling(model: any): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'refueling', model);
+  }
+
+  prepareSaveTripBookingRefueling(
+    id: string,
+    formValue: TripBookingRefuelingModel
+  ): FormData {
+
+    const formData = new FormData();
+    if (id) {
+      formData.append('id', id);
+    }
+
+    this.utilityService.buildFormData(formData, formValue);
+
+    let index = 0;
+    formValue.destinations.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'destinations[' + index + ']');
+      index++;
+    });
+
+    return formData;
+
+  }
 
   // Form Groups
   createPassengerFormGroup(model: TripBookingPassengerModel): UntypedFormGroup {

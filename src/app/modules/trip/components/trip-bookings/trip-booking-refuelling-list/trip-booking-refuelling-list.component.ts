@@ -9,6 +9,8 @@ import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { TripGridModel } from 'src/app/helper/models/trips/enroute/trip-grid-model';
 import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.service';
 import { TripService } from 'src/app/helper/services/trips/trip.service';
+import { TripStatus } from './../../../../../helper/common/shared-types';
+import { PopupConfigModel } from './../../../../../helper/models/common/popup-config-model';
 
 @Component({
   selector: 'app-trip-booking-refuelling-list',
@@ -23,6 +25,8 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
   searchQuery: string;
 
   pageSizeSubscription: Subscription;
+  tripExecutePopupSubscription: Subscription;
+  tripCancelPopupSubscription: Subscription;
 
   constructor(
     private tripService: TripService,
@@ -31,6 +35,25 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
+    this.tripExecutePopupSubscription = this.tripService.getTripExecutePopup()
+      .subscribe(
+        (config: PopupConfigModel) => {
+          if (!config.show) {
+            this.tripService.fetchGridData(this.state, this.searchQuery);
+          }
+        }
+      );
+
+    this.tripCancelPopupSubscription = this.tripService.getTripCancelPopup()
+      .subscribe(
+        (config: PopupConfigModel) => {
+          if (!config.show) {
+            this.tripService.fetchGridData(this.state, this.searchQuery);
+          }
+        }
+      );
+
     this.pageSizeSubscription = this.gridToolbarService.getPageSize()
       .subscribe(
         (pageSize: number) => {
@@ -76,14 +99,34 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
   getGridActions(item: TripGridModel): ActionButton[] {
     const actions: ActionButton[] = [];
 
-    if (!item.onGoing) {
-      actions.push({
-        handle: () => {
-          this.tripService.setTripExecutePopup(true, item.id);
-        },
-        icon: '',
-        label: 'Execute'
-      });
+    actions.push({
+      handle: () => {
+        this.router.navigate(['/trips/view/' + item.id + '/detail']);
+      },
+      icon: '',
+      label: 'View'
+    });
+
+    if (!item.onGoing && !item.cancelled) {
+      if (item.status < TripStatus.AssignedToDriver) {
+        actions.push({
+          handle: () => {
+            this.tripService.setTripExecutePopup(true, item.id);
+          },
+          icon: '',
+          label: 'Execute'
+        });
+      }
+    } else {
+      if (!item.cancelled) {
+        actions.push({
+          handle: () => {
+            this.tripService.setTripCancelPopup(true, item.id);
+          },
+          icon: '',
+          label: 'Cancel'
+        });
+      }
     }
 
     return actions;
@@ -91,5 +134,12 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.pageSizeSubscription.unsubscribe();
+    if (this.tripExecutePopupSubscription) {
+      this.tripExecutePopupSubscription.unsubscribe();
+    }
+    if (this.tripCancelPopupSubscription) {
+      this.tripCancelPopupSubscription.unsubscribe();
+    }
   }
 }
+

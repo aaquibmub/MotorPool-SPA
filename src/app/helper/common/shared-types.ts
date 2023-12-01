@@ -125,7 +125,8 @@ export function GetNotificationForDropdownList():
 export enum DestinationType {
   Pickup = 10,
   Stop = 20,
-  Dropoff = 30
+  Dropoff = 30,
+  Address = 40
 }
 
 export function GetDestinationTypeForDropdownList():

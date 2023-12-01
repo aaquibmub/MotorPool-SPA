@@ -1,3 +1,392 @@
-<p>
-  trip-booking-refuelling-edit works!
-</p>
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <div class="page-actions"></div>
+  <div class="page-area">
+    <div class="page-header">
+      <div class="page-title">
+        <span>New Refuelling Trip</span>
+      </div>
+    </div>
+    <div class="page-body">
+      <!-- Booking Info -->
+      <div class="form-section">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputBookedBy">{{
+                  utilityService.language.bookedBy | translate
+                }}</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="bookedBy"
+                  [value]="model.bookedBy?.text"
+                  readonly
+                  id=""
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputApprovedBy">Approved By</label>
+              </div>
+              <div class="control">
+                <kendo-dropdownlist
+                  class="form-control"
+                  textField="text"
+                  valueField="value"
+                  [filterable]="true"
+                  [defaultItem]="utilityService.dropdownDefaultItem"
+                  (filterChange)="handleApproverFilter($event)"
+                  [data]="approverList"
+                  formControlName="approvedBy"
+                >
+                  <ng-template kendoDropDownListItemTemplate let-dataItem>
+                    <span>{{ dataItem.text }}</span>
+                  </ng-template>
+                </kendo-dropdownlist>
+                <div
+                  *ngIf="
+                    !form.get('approvedBy').valid &&
+                    form.get('approvedBy').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Approver is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Booking -->
+      <div class="form-section">
+        <div class="section-header">Booking</div>
+        <div class="section-body">
+          <!-- Pickup Time -->
+          <div class="form-section blue-section">
+            <div class="section-header">Pickup Date & Time</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputPickupDate">Pickup Date</label>
+                    </div>
+                    <div class="control">
+                      <kendo-datepicker
+                        class="form-control"
+                        id="inputPickupDate"
+                        formControlName="pickupDate"
+                      >
+                      </kendo-datepicker>
+                      <div
+                        *ngIf="
+                          !form.get('pickupDate').valid &&
+                          form.get('pickupDate').touched
+                        "
+                        class="invalid-feedback"
+                      >
+                        Pickup date is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputPickupTime">Pickup Time</label>
+                    </div>
+                    <div class="control">
+                      <kendo-timepicker
+                        class="form-control"
+                        id="inputPickupTime"
+                        formControlName="pickupTime"
+                      >
+                      </kendo-timepicker>
+                      <div
+                        *ngIf="
+                          !form.get('pickupTime').valid &&
+                          form.get('pickupTime').touched
+                        "
+                        class="invalid-feedback"
+                      >
+                        Pickup time is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Trip Destination -->
+      <div class="form-section">
+        <div class="section-header">Trip Destination</div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputTripType">Trip</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    [data]="tripTypeList"
+                    formControlName="tripRoute"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <div
+                    *ngIf="
+                      !form.get('tripRoute').valid &&
+                      form.get('tripRoute').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    Trip is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputTripDestination">Trip Destination</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    [data]="tripDestinationList"
+                    formControlName="tripDestination"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <div
+                    *ngIf="
+                      !form.get('tripDestination').valid &&
+                      form.get('tripDestination').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    Trip destination is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Starting Point -->
+          <div class="form-section green-section">
+            <div class="section-header">Default Starting Point</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputStartingPointAddress">Address</label>
+                    </div>
+                    <div class="control">
+                      <kendo-dropdownlist
+                        class="form-control"
+                        textField="text"
+                        valueField="value"
+                        [filterable]="true"
+                        [defaultItem]="utilityService.dropdownDefaultItem"
+                        (filterChange)="handleAddressFilter($event)"
+                        [data]="addressList"
+                        formControlName="startingPoint"
+                      >
+                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                          <span>{{ dataItem.text | translate }}</span>
+                        </ng-template>
+                      </kendo-dropdownlist>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Pickups -->
+          <div formArrayName="destinations">
+            <div
+              class="form-section blue-section"
+              *ngFor="
+                let destination of form.get('destinations').controls;
+                let j = index
+              "
+              [formGroupName]="j"
+            >
+              <div class="section-header">
+                <div class="header-title">
+                  {{ destination.get("type").value.text }}
+                </div>
+                <div class="header-actions"></div>
+              </div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputPickupAddress' + j">Address</label>
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [filterable]="true"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          (filterChange)="handleAddressFilter($event)"
+                          [data]="addressList"
+                          formControlName="address"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text | translate }}</span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !destination.get('address').valid &&
+                            destination.get('address').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          Address is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Driver and Transportation -->
+      <div class="form-section">
+        <div class="section-header">Driver & Transportation</div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputDriver">Driver</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (valueChange)="handleDriverValueChange($event)"
+                    [data]="driverList"
+                    formControlName="driver"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputVehical">Vehical</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="inputVehical"
+                    [value]="form.get('vehical').value?.text"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRegistrationPlate">Registration Plate</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="inputRegistrationPlate"
+                    formControlName="registrationPlate"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Notes -->
+      <div class="form-section">
+        <div class="section-header">Notes</div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <div class="control">
+                  <textarea
+                    class="form-control form-text-area"
+                    name=""
+                    formControlName="notes"
+                    id=""
+                    cols="30"
+                    rows="10"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="form-section transparent-section">
+        <div class="section-body">
+          <div class="description sm-hide"></div>
+          <div class="fields">
+            <div class="form-group">
+              <button
+                class="btn btn-default mr-16"
+                type="button"
+                (click)="cancel()"
+              >
+                Cancel
+              </button>
+              <button class="btn btn-primary" type="submit">Create</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
