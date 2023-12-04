@@ -1,13 +1,16 @@
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { FormArray, UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { guid } from '@progress/kendo-angular-common';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { NotificationService } from '@progress/kendo-angular-notification';
+import { Subscription } from 'rxjs';
 import { DropdownType } from 'src/app/helper/common/shared-types';
 import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
+import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { TripDestinationModel } from 'src/app/helper/models/trips/enroute/trip-destination-model';
 import { VehicalModel } from 'src/app/helper/models/vehicals/vehical-model';
+import { TripService } from 'src/app/helper/services/trips/trip.service';
 import { DestinationType, Gender, GetDestinationTypeForDropdownList, TripDestination, TripRoute } from './../../../../../helper/common/shared-types';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
 import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
@@ -32,7 +35,7 @@ import { VehicalService } from './../../../../../helper/services/vehicals/vehica
   templateUrl: './trip-booking-start-now-edit.component.html',
   styleUrls: ['./trip-booking-start-now-edit.component.css']
 })
-export class TripBookingStartNowEditComponent implements OnInit {
+export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
 
   editMode = false;
   model: TripBookingStartNowModel;
@@ -56,6 +59,8 @@ export class TripBookingStartNowEditComponent implements OnInit {
   driverList: DropdownItem<string>[];
   vehicalList: DropdownItem<string>[];
 
+  tripExecutePopupSubscription: Subscription;
+
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
@@ -66,6 +71,7 @@ export class TripBookingStartNowEditComponent implements OnInit {
     public utilityService: UtilityService,
     private commonService: CommonService,
     private tripBookingService: TripBookingService,
+    private tripService: TripService,
     private approverService: ApproverService,
     private ageGroupService: AgeGroupService,
     private passengerService: PassengerService,
@@ -78,6 +84,15 @@ export class TripBookingStartNowEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.tripExecutePopupSubscription = this.tripService.getTripExecutePopup()
+      .subscribe(
+        (config: PopupConfigModel) => {
+          if (!config.show) {
+            this.utilityService.redirectToUrl('/trips');
+          }
+        }
+      );
 
     this.route.params
       .subscribe((params: Params) => {
@@ -317,7 +332,7 @@ export class TripBookingStartNowEditComponent implements OnInit {
     this.router.navigate(['/trips/bookings/start-now']);
   }
 
-  submit(): void {
+  submit(execute?: boolean): void {
 
     if (!this.form.valid) {
       this.utilityService.scrollToFirstInvalidControl(this.el, '.page-wrapper');
@@ -348,14 +363,19 @@ export class TripBookingStartNowEditComponent implements OnInit {
                 return;
               }
 
-              this.alertService.setSuccessAlert(
-                'Trip booking is '
-                + successAction
-                + ' successfully');
-
               this.signalRService.updateNotificationList();
 
-              this.utilityService.redirectToUrl('/trips');
+              if (execute) {
+                this.tripService.setTripExecutePopup(true, response.result);
+              } else {
+
+                this.alertService.setSuccessAlert(
+                  'Trip booking is '
+                  + successAction
+                  + ' successfully');
+
+                this.utilityService.redirectToUrl('/trips');
+              }
 
             }
           );
@@ -595,4 +615,9 @@ export class TripBookingStartNowEditComponent implements OnInit {
       );
   }
 
+  ngOnDestroy(): void {
+    if (this.tripExecutePopupSubscription) {
+      this.tripExecutePopupSubscription.unsubscribe();
+    }
+  }
 }

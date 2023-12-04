@@ -50,7 +50,10 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row">
+                    <div
+                      class="row"
+                      *ngIf="model.requester != null && model.requester != ''"
+                    >
                       <div class="col-md-6">
                         <div class="form-group">
                           <div class="label">
