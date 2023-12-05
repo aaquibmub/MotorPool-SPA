@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { NotificationService } from '@progress/kendo-angular-notification';
@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { DriverStatus } from './../../../../../helper/common/shared-types';
 import { ResponseModel } from './../../../../../helper/models/common/response-model';
 import { DriverGridModel } from './../../../../../helper/models/drivers/driver-grid-model';
 import { AlertService } from './../../../../../helper/services/common/alert.service';
@@ -29,6 +31,7 @@ export class DriversInactiveComponent implements OnInit {
   pageSizeSubscription: Subscription;
 
   constructor(
+    public utilityService: UtilityService,
     private driverService: DriverService,
     private router: Router,
     private alertService: AlertService,
@@ -129,7 +132,8 @@ export class DriversInactiveComponent implements OnInit {
         label: item.status ? 'Disable' : 'Enable'
       }
     ];
-    if (!item.busy) {
+    if (item.status != DriverStatus.Busy
+      && item.status != DriverStatus.OffDuty) {
       if (item.vehicalAllocated) {
         actions.push({
           handle: () => {

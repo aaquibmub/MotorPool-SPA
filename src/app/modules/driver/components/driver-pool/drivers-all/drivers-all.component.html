@@ -27,16 +27,15 @@
     </kendo-grid-column>
     <kendo-grid-column field="mobileNumber" title="Mobile #">
     </kendo-grid-column>
-    <kendo-grid-column field="status" title="Status" filter="boolean">
+    <kendo-grid-column field="active" title="Status" filter="boolean">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <span *ngIf="dataItem.status">Active</span>
         <span *ngIf="!dataItem.status">Iactive</span>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="busy" title="Busy" filter="boolean">
+    <kendo-grid-column field="status" title="Busy" filter="boolean">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <span *ngIf="dataItem.busy">Busy</span>
-        <span *ngIf="!dataItem.busy">Idle</span>
+        <span>{{ utilityService.getDriverStatusLabel(dataItem.status) }}</span>
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="vehicalAllocated" title="Vehical">

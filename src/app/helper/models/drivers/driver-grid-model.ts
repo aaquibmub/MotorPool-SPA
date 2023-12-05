@@ -1,3 +1,5 @@
+import { DriverStatus } from '../../common/shared-types';
+
 export class DriverGridModel {
   id: string;
   userId: number;
@@ -6,7 +8,7 @@ export class DriverGridModel {
   nationalId: string;
   mobileNumber: string;
   createdDate: Date;
-  status: boolean;
-  busy: boolean;
+  active: boolean;
+  status: DriverStatus;
   vehicalAllocated: boolean;
 }

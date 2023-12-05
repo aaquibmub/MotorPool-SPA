@@ -1,12 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
+import { DriverStatus } from 'src/app/helper/common/shared-types';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ResponseModel } from './../../../../../helper/models/common/response-model';
 import { DriverGridModel } from './../../../../../helper/models/drivers/driver-grid-model';
 import { AlertService } from './../../../../../helper/services/common/alert.service';
@@ -29,6 +31,7 @@ export class DriversActiveComponent implements OnInit {
   pageSizeSubscription: Subscription;
 
   constructor(
+    public utilityService: UtilityService,
     private driverService: DriverService,
     private router: Router,
     private alertService: AlertService,
@@ -94,7 +97,7 @@ export class DriversActiveComponent implements OnInit {
     const actions: ActionButton[] = [
       {
         handle: () => {
-          if (item.status) {
+          if (item.active) {
             this.driverService.disable(item.id)
               .subscribe(
                 (response: ResponseModel<string>) => {
@@ -129,7 +132,8 @@ export class DriversActiveComponent implements OnInit {
         label: item.status ? 'Disable' : 'Enable'
       }
     ];
-    if (!item.busy) {
+    if (item.status != DriverStatus.Busy
+      && item.status != DriverStatus.OffDuty) {
       if (item.vehicalAllocated) {
         actions.push({
           handle: () => {

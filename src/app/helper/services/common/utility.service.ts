@@ -2,7 +2,7 @@ import { ElementRef, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Howl, Howler } from 'howler';
 import { LanguageKeys } from '../../common/language-keys';
-import { Gender, GetGenderForDropdownList, GetVehicalStatusForDropdownList, SystemLogType, VehicalStatus } from '../../common/shared-types';
+import { DriverStatus, Gender, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetVehicalStatusForDropdownList, SystemLogType, VehicalStatus } from '../../common/shared-types';
 @Injectable({
   providedIn: 'root'
 })
@@ -116,6 +116,12 @@ export class UtilityService {
 
   getVehicalStatusLabel(value: VehicalStatus): string {
     var statusList = GetVehicalStatusForDropdownList();
+    var status = statusList.find(f => f.value == value);
+    return status != null ? status.text : '';
+  }
+
+  getDriverStatusLabel(value: DriverStatus): string {
+    var statusList = GetDriverStatusForDropdownList();
     var status = statusList.find(f => f.value == value);
     return status != null ? status.text : '';
   }

@@ -171,7 +171,6 @@ export enum VehicalStatus {
   Gripped = 40
 }
 
-
 export function GetVehicalStatusForDropdownList():
   DropdownItem<VehicalStatus>[] {
   return [
@@ -193,3 +192,34 @@ export function GetVehicalStatusForDropdownList():
     },
   ];
 }
+
+export enum DriverStatus {
+  Idle = 10,
+  Busy = 20,
+  OnDuty = 40,
+  OffDuty = 50
+}
+
+
+export function GetDriverStatusForDropdownList():
+  DropdownItem<DriverStatus>[] {
+  return [
+    {
+      value: DriverStatus.Idle,
+      text: 'Idle'
+    },
+    {
+      value: DriverStatus.Busy,
+      text: 'Busy'
+    },
+    {
+      value: DriverStatus.OnDuty,
+      text: 'On-Duty'
+    },
+    {
+      value: DriverStatus.OffDuty,
+      text: 'Off-Duty'
+    },
+  ];
+}
+
