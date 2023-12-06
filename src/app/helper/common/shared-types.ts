@@ -41,7 +41,9 @@ export enum TripType {
 }
 
 export enum TripRoute {
-
+  Oneway = 10,
+  RoundTrip = 20,
+  Open = 30
 }
 
 export enum TripDestination {
@@ -143,6 +145,10 @@ export function GetDestinationTypeForDropdownList():
     {
       value: DestinationType.Dropoff,
       text: 'Dropoff'
+    },
+    {
+      value: DestinationType.Address,
+      text: 'Address'
     },
   ];
 }

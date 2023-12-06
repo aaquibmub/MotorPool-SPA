@@ -544,6 +544,7 @@
                     textField="text"
                     valueField="value"
                     [defaultItem]="utilityService.dropdownDefaultItem"
+                    (valueChange)="handleTripTypeValueChange($event)"
                     [data]="tripTypeList"
                     formControlName="tripRoute"
                   >
@@ -637,7 +638,8 @@
             >
               <div class="section-header">
                 <div class="header-title">
-                  {{ destination.get("type").value.text }} {{ j + 1 }}
+                  {{ destination.get("type").value.text }}
+                  {{ getDestinationTypeCount(destination.value) + 1 }}
                 </div>
                 <div class="header-actions">
                   <span

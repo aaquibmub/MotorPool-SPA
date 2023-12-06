@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { UtilityService } from "../../../../../helper/services/common/utility.service";
 import { TripService } from "../../../../../helper/services/trips/trip.service";
+import { TripDestinationModel } from './../../../../../helper/models/trips/enroute/trip-destination-model';
 import { TripViewDetailModel } from './../../../../../helper/models/trips/trip-view/trip-view-detail-model';
 
 @Component({
@@ -30,6 +31,12 @@ export class TripViewDetailComponent implements OnInit {
             })
         }
       });
+  }
+
+  getDestinationTypeCount(destination: TripDestinationModel): number {
+    var destinations = this.model.destinations;
+    var destinationsByType = destinations.filter(f => f.type.value == destination.type.value);
+    return destinationsByType.findIndex(f => f.id == destination.id);
   }
 
 }
