@@ -502,7 +502,8 @@
         >
           <div class="section-header">
             <div class="header-title">
-              {{ destination.type?.text }} {{ j + 1 }}
+              {{ destination.type?.text }}
+              {{ getDestinationTypeCount(destination) + 1 }}
             </div>
             <div class="header-actions"></div>
           </div>
