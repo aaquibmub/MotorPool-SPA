@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
+import { Subscription } from 'rxjs';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.service';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { DriverService } from 'src/app/helper/services/drivers/driver.service';
 
@@ -20,10 +22,13 @@ export class DriverViewInspectionComponent implements OnInit {
   searchQuery: string;
   id: string;
 
+  pageSizeSubscription: Subscription;
+
   constructor(
     public utilityService: UtilityService,
     private driverService: DriverService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private gridToolbarService: GridToolbarService
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +36,18 @@ export class DriverViewInspectionComponent implements OnInit {
       .subscribe((params: Params) => {
         if (params.id) {
           this.id = params.id;
-          this.driverService.fetchDriverInspectionGridData(this.state, this.searchQuery, params.id);
+        }
+      });
+
+      this.pageSizeSubscription = this.gridToolbarService.getPageSize()
+      .subscribe(
+        (pageSize: number) => {
+          this.state.take = pageSize;
+          this.driverService.fetchDriverInspectionGridData(this.state, this.searchQuery, this.id);
+        }
+      );
+
+      this.driverService.fetchDriverInspectionGridData(this.state, this.searchQuery, this.id);
           this.driverService.getDriverInspectionGridData()
             .subscribe(
               (data: any) => {
@@ -39,8 +55,6 @@ export class DriverViewInspectionComponent implements OnInit {
                 this.gridData.total = data.total;
               }
             );
-        }
-      });
 
     
   }
@@ -49,6 +63,10 @@ export class DriverViewInspectionComponent implements OnInit {
     debugger;
     this.state = state;
     this.driverService.fetchDriverInspectionGridData(state, this.searchQuery, this.id);
+  }
+
+  ngOnDestroy(): void {
+    this.pageSizeSubscription.unsubscribe();
   }
 
 }
