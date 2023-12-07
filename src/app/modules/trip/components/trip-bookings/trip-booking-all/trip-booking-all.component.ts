@@ -7,6 +7,7 @@ import { TripStatus } from 'src/app/helper/common/shared-types';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { TripGridModel } from 'src/app/helper/models/trips/enroute/trip-grid-model';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
 import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
 import { TripService } from './../../../../../helper/services/trips/trip.service';
@@ -28,6 +29,7 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
   tripCancelPopupSubscription: Subscription;
 
   constructor(
+    public utilityService: UtilityService,
     private tripService: TripService,
     private router: Router,
     private gridToolbarService: GridToolbarService

@@ -24,8 +24,17 @@
     </kendo-grid-column>
     <kendo-grid-column field="requester" title="Trip Requester">
     </kendo-grid-column>
-    <kendo-grid-column field="type" title="Trip Type"> </kendo-grid-column>
+    <kendo-grid-column field="type" title="Trip Type">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span>{{ utilityService.getTripTypeLabel(dataItem.type) }}</span>
+      </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="destination" title="Destination">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span>{{
+          utilityService.getTripDestinationLabel(dataItem.destination)
+        }}</span>
+      </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="createdDate" title="Date Created" filter="date">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">

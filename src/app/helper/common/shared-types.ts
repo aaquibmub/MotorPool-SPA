@@ -40,6 +40,32 @@ export enum TripType {
   Ongoing = 500
 }
 
+export function GetTripTypeForDropdownList():
+  DropdownItem<TripType>[] {
+  return [
+    {
+      value: TripType.Scheduled,
+      text: 'Scheduled'
+    },
+    {
+      value: TripType.StartsNow,
+      text: 'New Trip'
+    },
+    {
+      value: TripType.Refuelling,
+      text: 'Refuelling'
+    },
+    {
+      value: TripType.Today,
+      text: 'Today'
+    },
+    {
+      value: TripType.Ongoing,
+      text: 'Ongoing'
+    },
+  ];
+}
+
 export enum TripRoute {
   Oneway = 10,
   RoundTrip = 20,
@@ -47,7 +73,32 @@ export enum TripRoute {
 }
 
 export enum TripDestination {
+  InDQ = 10,
+  OutOfDQ = 20,
+  OutOfRiyadh = 30,
+  OutOfKingdom = 40
+}
 
+export function GetTripDestinationForDropdownList():
+  DropdownItem<TripDestination>[] {
+  return [
+    {
+      value: TripDestination.InDQ,
+      text: 'In DQ'
+    },
+    {
+      value: TripDestination.OutOfDQ,
+      text: 'Out Of DQ'
+    },
+    {
+      value: TripDestination.OutOfRiyadh,
+      text: 'Out Of Riyadh'
+    },
+    {
+      value: TripDestination.OutOfKingdom,
+      text: 'Out Of Kingdom'
+    },
+  ];
 }
 
 export enum ResponseAction {
