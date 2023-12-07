@@ -1,0 +1,290 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>Driver Sheet</span>
+    </div>
+    <div class="page-breadcrum">
+      <span>Reports </span> / <span> Driver Sheet</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="grid-content">
+      <div class="row">
+        <div class="col-3">
+          <kendo-dropdownlist
+            class="form-control"
+            textField="text"
+            valueField="value"
+            (valueChange)="handleDriverValueChange($event)"
+            [data]="driverList"
+            [(ngModel)]="selectedDriver"
+          >
+            <ng-template kendoDropDownListItemTemplate let-dataItem>
+              <span>{{ dataItem.text | translate }}</span>
+            </ng-template>
+          </kendo-dropdownlist>
+        </div>
+        <div class="col-3">
+          <kendo-datepicker
+            class="form-control"
+            id="inputPickupDate"
+            (valueChange)="handleDateValueChange($event)"
+            [(ngModel)]="selectedDate"
+          >
+          </kendo-datepicker>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" *ngIf="!model">
+          <p class="p-24 text-center">No Data</p>
+        </div>
+        <div class="col-12" *ngIf="model">
+          <!-- Driver Information -->
+          <div class="form-section form-section-border">
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="driverId">Driver Id</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="driverId"
+                        [value]="model.driverId"
+                        readonly
+                        id="driverId"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputName">Name</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="inputName"
+                        [value]="model.driverName"
+                        readonly
+                        id="inputName"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="totalMilage">Total Milage (KM)</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="totalMilage"
+                        [value]="model.totalMilage"
+                        readonly
+                        id="totalMilage"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Vehicle Information -->
+          <div
+            class="form-section form-section-border"
+            *ngFor="let v of model.vehicalWiseTrips"
+          >
+            <div class="section-header">{{ v.vehicalPlateNumber }}</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <!-- ODO Meter -->
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputOdoMeterAtDeparture"
+                        >ODO Meter At Departure</label
+                      >
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="inputOdoMeterAtDeparture"
+                        [value]="v.odoMeterAtDeparture"
+                        readonly
+                        id="inputOdoMeterAtDeparture"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputOdoMeterAtReturn"
+                        >ODO Meter At Return</label
+                      >
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="inputOdoMeterAtReturn"
+                        [value]="v.odoMeterAtReturn"
+                        readonly
+                        id="inputOdoMeterAtReturn"
+                      />
+                    </div>
+                  </div>
+                  <!-- Fuel -->
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputfuelAtDeparture"
+                        >Fuel At Departure</label
+                      >
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="inputfuelAtDeparture"
+                        [value]="v.fuelAtDeparture"
+                        readonly
+                        id="inputfuelAtDeparture"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputFuelAtReturn">Fuel At Return</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="inputFuelAtReturn"
+                        [value]="v.fuelAtReturn"
+                        readonly
+                        id="inputFuelAtReturn"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <!-- Trips -->
+                  <div class="row">
+                    <div class="col-12">
+                      <div
+                        class="form-section form-section-border"
+                        *ngFor="let t of v.trips"
+                      >
+                        <div class="section-header">{{ t.tripId }}</div>
+                        <div class="section-body">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <div class="label">
+                                  <label for="passenger">Passenger</label>
+                                </div>
+                                <div class="control">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    name="passenger"
+                                    [value]="t.passenger"
+                                    readonly
+                                    id="passenger"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="label">
+                                  <label for="inputOdoMeterStart"
+                                    >ODO Meter Start</label
+                                  >
+                                </div>
+                                <div class="control">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    name="inputOdoMeterStart"
+                                    [value]="t.meterStart"
+                                    readonly
+                                    id="inputOdoMeterStart"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="label">
+                                  <label for="inputOdoMeterEnd"
+                                    >ODO Meter End</label
+                                  >
+                                </div>
+                                <div class="control">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    name="inputOdoMeterEnd"
+                                    [value]="t.meterEnd"
+                                    readonly
+                                    id="inputOdoMeterEnd"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-8">
+                              <div class="row">
+                                <div class="col-12">
+                                  <div class="form-group">
+                                    <div class="label">
+                                      <label for="departureLocation"
+                                        >Departture Location</label
+                                      >
+                                    </div>
+                                    <div class="control">
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="departureLocation"
+                                        [value]="t.departureLocation"
+                                        readonly
+                                        id="departureLocation"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-12">
+                                    <div
+                                      class="form-section form-section-border"
+                                      *ngFor="let d of t.destinations"
+                                    >
+                                      <div class="section-header">
+                                        {{ d.type }}
+                                      </div>
+                                      <div class="section-body"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

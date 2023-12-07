@@ -44,6 +44,11 @@
   background-repeat: no-repeat;
 }
 
+.reports-icon {
+  background-image: url("./../../icons/menu/reports-white.png");
+  background-repeat: no-repeat;
+}
+
 .quick-add-icon {
   margin-left: 10px;
   font-size: 22px;

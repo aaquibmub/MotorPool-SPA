@@ -1,16 +1,20 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReportsComponent } from './reports.component';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { TranslateModule } from '@ngx-translate/core';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
-import { ReportsRoutingModule } from './reports-routing.module';
-import { InputsModule } from '@progress/kendo-angular-inputs';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ActitvityLogComponent } from './components/logs/actitvity-log/actitvity-log.component';
 import { LogsComponent } from './components/logs/logs.component';
 import { SystemLogComponent } from './components/logs/system-log/system-log.component';
-import { ActitvityLogComponent } from './components/logs/actitvity-log/actitvity-log.component';
+import { ReportTripsDriverSheetComponent } from './components/report-trips/report-trips-driver-sheet/report-trips-driver-sheet.component';
+import { ReportTripsPassengerSheetComponent } from './components/report-trips/report-trips-passenger-sheet/report-trips-passenger-sheet.component';
+import { ReportTripsComponent } from './components/report-trips/report-trips.component';
+import { ReportsRoutingModule } from './reports-routing.module';
+import { ReportsComponent } from './reports.component';
 
 @NgModule({
   imports: [
@@ -22,13 +26,18 @@ import { ActitvityLogComponent } from './components/logs/actitvity-log/actitvity
     FormsModule,
     ReportsRoutingModule,
     InputsModule,
-    GridModule
+    GridModule,
+    TranslateModule.forChild()
   ],
   declarations: [
     ReportsComponent,
     LogsComponent,
     SystemLogComponent,
     ActitvityLogComponent,
+
+    ReportTripsComponent,
+    ReportTripsDriverSheetComponent,
+    ReportTripsPassengerSheetComponent
   ]
 })
 export class ReportsModule { }

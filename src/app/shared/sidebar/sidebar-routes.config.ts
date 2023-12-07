@@ -412,4 +412,50 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
 
+  // reports
+  {
+    path: '/reports',
+    title: 'Reports',
+    icon: 'reports-icon',
+    class: 'sub',
+    badge: '',
+    badgeClass: '',
+    isExternalLink: false,
+    submenu: [
+
+      // vehicals
+      {
+        path: '/reports/trips/driver-sheet',
+        title: 'Trips',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            path: '/reports/trips/driver-sheet',
+            title: 'Driver Sheet',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/passenger-sheet',
+            title: 'Passenger Sheet',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
+    ]
+  },
+
 ];
