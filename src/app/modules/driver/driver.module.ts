@@ -16,6 +16,11 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { TranslateModule } from '@ngx-translate/core';
+import { DriverViewComponent } from './components/driver-view/driver-view.component';
+import { DriverViewDetailComponent } from './components/driver-view/driver-view-detail/driver-view-detail.component';
+import { DriverViewTripsComponent } from './components/driver-view/driver-view-trips/driver-view-trips.component';
+import { DriverViewInspectionComponent } from './components/driver-view/driver-view-inspection/driver-view-inspection.component';
+import { DriverViewVehicleComponent } from './components/driver-view/driver-view-vehicle/driver-view-vehicle.component';
 
 @NgModule({
   imports: [
@@ -41,7 +46,12 @@ import { TranslateModule } from '@ngx-translate/core';
     DriverPoolComponent,
     DriversAllComponent,
     DriversActiveComponent,
-    DriversInactiveComponent
+    DriversInactiveComponent,
+    DriverViewComponent,
+    DriverViewDetailComponent,
+    DriverViewTripsComponent,
+    DriverViewInspectionComponent,
+    DriverViewVehicleComponent
 
   ]
 })

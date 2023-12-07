@@ -1,0 +1,26 @@
+<div class="grid-content">
+    <app-grid-toolbar
+      [numberOfRecords]="gridData?.total"
+      entity="driver"
+    ></app-grid-toolbar>
+    <kendo-grid
+      [data]="gridData"
+      [sortable]="true"
+      [pageable]="pageable"
+      [filterable]="filterable"
+      scrollable="none"
+    >
+      <kendo-grid-column field="inspectionIdStr" title="ID">
+      </kendo-grid-column>
+      <kendo-grid-column field="vehicalName" title="Vehicle Name">
+      </kendo-grid-column>
+      <kendo-grid-column field="vehicalPlate" title="Vehicle Plate">
+      </kendo-grid-column>
+      <kendo-grid-column field="creationDate" title="Date Created" filter="date">
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+          {{ dataItem.creationDate | dateformat : "g" }}
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+  

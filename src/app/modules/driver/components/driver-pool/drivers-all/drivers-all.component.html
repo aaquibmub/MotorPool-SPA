@@ -17,7 +17,7 @@
   >
     <kendo-grid-column field="userId" title="ID" filter="numeric">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <a routerLink="/drivers/driver/{{ dataItem.id }}/view">{{
+        <a routerLink="/drivers/view/{{ dataItem.id }}/detail">{{
           dataItem.userIdStr
         }}</a>
       </ng-template>
