@@ -19,9 +19,7 @@ export class DriverViewTripsComponent implements OnInit {
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
   id: string;
-
-  pageSizeSubscription: Subscription;
-
+  
   constructor(
     public utilityService: UtilityService,
     private driverService: DriverService,
@@ -53,8 +51,5 @@ export class DriverViewTripsComponent implements OnInit {
     this.driverService.fetchDriverTripGridData(state, this.searchQuery, this.id);
   }
 
-  ngOnDestroy(): void {
-    this.pageSizeSubscription.unsubscribe();
-  }
 }
 

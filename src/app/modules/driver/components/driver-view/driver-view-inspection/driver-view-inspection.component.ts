@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
-import { NotificationService } from '@progress/kendo-angular-notification';
 import { State } from '@progress/kendo-data-query';
-import { Subscription } from 'rxjs';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { DriverService } from 'src/app/helper/services/drivers/driver.service';
@@ -21,8 +19,6 @@ export class DriverViewInspectionComponent implements OnInit {
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
   id: string;
-
-  pageSizeSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -55,8 +51,5 @@ export class DriverViewInspectionComponent implements OnInit {
     this.driverService.fetchDriverInspectionGridData(state, this.searchQuery, this.id);
   }
 
-  ngOnDestroy(): void {
-    this.pageSizeSubscription.unsubscribe();
-  }
 }
 
