@@ -5,10 +5,15 @@
     ></app-grid-toolbar>
     <kendo-grid
       [data]="gridData"
+      [pageSize]="state.take"
+      [skip]="state.skip"
+      [sort]="state.sort"
       [sortable]="true"
       [pageable]="pageable"
+      [filter]="state.filter"
       [filterable]="filterable"
       scrollable="none"
+      (dataStateChange)="dataStateChange($event)"
     >
     <kendo-grid-column field="tripIdStr" title="Trip No">
     </kendo-grid-column>

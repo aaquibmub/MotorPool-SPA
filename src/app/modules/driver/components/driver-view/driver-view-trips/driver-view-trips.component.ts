@@ -4,6 +4,7 @@ import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-gr
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.service';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { DriverService } from 'src/app/helper/services/drivers/driver.service';
 
@@ -19,11 +20,14 @@ export class DriverViewTripsComponent implements OnInit {
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
   id: string;
-  
+
+  pageSizeSubscription: Subscription;
+
   constructor(
     public utilityService: UtilityService,
     private driverService: DriverService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private gridToolbarService: GridToolbarService
   ) { }
 
   ngOnInit(): void {
@@ -31,24 +35,35 @@ export class DriverViewTripsComponent implements OnInit {
       .subscribe((params: Params) => {
         if (params.id) {
           this.id = params.id;
-          this.driverService.fetchDriverTripGridData(this.state, this.searchQuery, params.id);
-          this.driverService.getDriverTripGridData()
-            .subscribe(
-              (data: any) => {
-                this.gridData.data = data.data;
-                this.gridData.total = data.total;
-              }
-            );
         }
       });
 
-    
+    this.pageSizeSubscription = this.gridToolbarService.getPageSize()
+      .subscribe(
+        (pageSize: number) => {
+          this.state.take = pageSize;
+          this.driverService.fetchDriverTripGridData(this.state, this.searchQuery, this.id);
+        }
+      );
+
+    this.driverService.fetchDriverTripGridData(this.state, this.searchQuery, this.id);
+    this.driverService.getDriverTripGridData()
+      .subscribe(
+        (data: any) => {
+          this.gridData.data = data.data;
+          this.gridData.total = data.total;
+        }
+      );
   }
 
   dataStateChange(state: DataStateChangeEvent): void {
     debugger;
     this.state = state;
     this.driverService.fetchDriverTripGridData(state, this.searchQuery, this.id);
+  }
+
+  ngOnDestroy(): void {
+    this.pageSizeSubscription.unsubscribe();
   }
 
 }
