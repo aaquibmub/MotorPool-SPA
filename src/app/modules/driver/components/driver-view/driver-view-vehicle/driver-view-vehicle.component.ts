@@ -21,8 +21,6 @@ export class DriverViewVehicleComponent implements OnInit {
   searchQuery: string;
   id: string;
 
-  pageSizeSubscription: Subscription;
-
   constructor(
     public utilityService: UtilityService,
     private driverService: DriverService,
@@ -52,10 +50,6 @@ export class DriverViewVehicleComponent implements OnInit {
     debugger;
     this.state = state;
     this.driverService.fetchDriverVehicleGridData(state, this.searchQuery, this.id);
-  }
-
-  ngOnDestroy(): void {
-    this.pageSizeSubscription.unsubscribe();
   }
 }
 
