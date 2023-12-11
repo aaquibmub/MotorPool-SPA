@@ -9,6 +9,29 @@
     </div>
   </div>
   <div class="page-body">
+    <div class="grid-toolbar">
+      <div class="left"></div>
+      <div class="right" style="display: flex; justify-content: space-between">
+        <button class="btn btn-orange" (click)="exportToExcel()">
+          <i class="fa fa-file-excel-o"></i> Excel
+        </button>
+        <button
+          class="btn btn-orange"
+          [useExistingCss]="true"
+          [printTitle]="
+            'Driver Sheet - (' +
+            model?.driverId +
+            '-' +
+            (selectedDate | dateformat) +
+            ')'
+          "
+          printSectionId="print-section"
+          ngxPrint
+        >
+          <i class="fa fa-print"></i> Print
+        </button>
+      </div>
+    </div>
     <div class="grid-content">
       <div class="row">
         <div class="col-3">
@@ -39,7 +62,7 @@
         <div class="col-12" *ngIf="!model">
           <p class="p-24 text-center">No Data</p>
         </div>
-        <div class="col-12" *ngIf="model">
+        <div class="col-12" id="print-section" *ngIf="model">
           <!-- Driver Information -->
           <div class="form-section form-section-border">
             <div class="section-body">
@@ -190,6 +213,21 @@
                             <div class="col-md-4">
                               <div class="form-group">
                                 <div class="label">
+                                  <label for="tripRoute">Trip Route</label>
+                                </div>
+                                <div class="control">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    name="tripRoute"
+                                    [value]="t.tripRoute"
+                                    readonly
+                                    id="tripRoute"
+                                  />
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="label">
                                   <label for="passenger">Passenger</label>
                                 </div>
                                 <div class="control">
@@ -244,7 +282,7 @@
                                   <div class="form-group">
                                     <div class="label">
                                       <label for="departureLocation"
-                                        >Departture Location</label
+                                        >Departure Location</label
                                       >
                                     </div>
                                     <div class="control">
@@ -259,16 +297,46 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="row">
-                                  <div class="col-12">
+                              </div>
+                              <!-- Destinations -->
+                              <div class="row">
+                                <div class="col-12">
+                                  <div
+                                    class="form-section form-section-border"
+                                    style="margin-top: 0; padding-top: 8px"
+                                  >
                                     <div
-                                      class="form-section form-section-border"
-                                      *ngFor="let d of t.destinations"
+                                      class="section-body"
+                                      style="padding-top: 0"
                                     >
-                                      <div class="section-header">
-                                        {{ d.type }}
-                                      </div>
-                                      <div class="section-body"></div>
+                                      <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th>Destination</th>
+                                            <th>Address</th>
+                                            <th>Arrival Time</th>
+                                            <th>Departure Time</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr *ngFor="let d of t.destinations">
+                                            <td>{{ d.type }}</td>
+                                            <td>{{ d.address }}</td>
+                                            <td>
+                                              {{
+                                                d.arrivalTime
+                                                  | dateformat : "hh:mm aa"
+                                              }}
+                                            </td>
+                                            <td>
+                                              {{
+                                                d.pickupTime
+                                                  | dateformat : "hh:mm aa"
+                                              }}
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
                                     </div>
                                   </div>
                                 </div>

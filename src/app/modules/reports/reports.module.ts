@@ -6,6 +6,7 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { InputsModule } from '@progress/kendo-angular-inputs';
+import { NgxPrintModule } from 'ngx-print';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ActitvityLogComponent } from './components/logs/actitvity-log/actitvity-log.component';
 import { LogsComponent } from './components/logs/logs.component';
@@ -27,6 +28,7 @@ import { ReportsComponent } from './reports.component';
     ReportsRoutingModule,
     InputsModule,
     GridModule,
+    NgxPrintModule,
     TranslateModule.forChild()
   ],
   declarations: [

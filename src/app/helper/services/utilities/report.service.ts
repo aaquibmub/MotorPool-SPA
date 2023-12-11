@@ -21,4 +21,20 @@ export class ReportService {
       this.baseUrl + 'get-report-trip-driver-sheet-model', { driverId, date });
   }
 
+  getTripDriverSheetExcel(
+    driverId: string,
+    date: Date,
+  ): Observable<any> {
+    return this.http.post(`${this.baseUrl}get-report-trip-driver-sheet-excel`, {
+      driverId,
+      date,
+    }, {
+      reportProgress: true,
+      observe: 'events',
+      responseType: 'blob'
+    });
+    // return this.http.post<ReportTripDriverSheetModel>(
+    //   this.baseUrl + 'get-report-trip-driver-sheet-model', { driverId, date });
+  }
+
 }

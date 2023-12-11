@@ -215,10 +215,94 @@ export enum TripStatus {
   WaitingForPassenger = 52,
   PassengerOnboarded = 55,
   ArrivedAtStop = 60,
+  WaitingForStopActivity = 62,
+  TripResumedAfterStop = 65,
+  ArrivedAtAddress = 66,
+  WaitingForAddressActivity = 67,
+  TripResumedAfterAddress = 68,
   ArrivedAtDropoff = 70,
   OdoMeterAtEnd = 80,
   Completed = 400,
   Cancelled = 500
+}
+
+
+export function GetTripStatusForDropdownList():
+  DropdownItem<TripStatus>[] {
+  return [
+    {
+      value: TripStatus.Created,
+      text: 'Created'
+    },
+    {
+      value: TripStatus.AssignedToDriver,
+      text: 'AssignedToDriver'
+    },
+    {
+      value: TripStatus.TripStarted,
+      text: 'TripStarted'
+    },
+    {
+      value: TripStatus.OdoMeterAtStart,
+      text: 'OdoMeterAtStart'
+    },
+    {
+      value: TripStatus.VehicalDispatched,
+      text: 'VehicalDispatched'
+    },
+    {
+      value: TripStatus.ArrivedAtPickupLocation,
+      text: 'ArrivedAtPickupLocation'
+    },
+    {
+      value: TripStatus.WaitingForPassenger,
+      text: 'WaitingForPassenger'
+    },
+    {
+      value: TripStatus.PassengerOnboarded,
+      text: 'PassengerOnboarded'
+    },
+    {
+      value: TripStatus.ArrivedAtStop,
+      text: 'ArrivedAtStop'
+    },
+    {
+      value: TripStatus.WaitingForStopActivity,
+      text: 'WaitingForStopActivity'
+    },
+    {
+      value: TripStatus.TripResumedAfterStop,
+      text: 'TripResumedAfterStop'
+    },
+    {
+      value: TripStatus.ArrivedAtAddress,
+      text: 'ArrivedAtAddress'
+    },
+    {
+      value: TripStatus.WaitingForAddressActivity,
+      text: 'WaitingForAddressActivity'
+    },
+    {
+      value: TripStatus.TripResumedAfterAddress,
+      text: 'TripResumedAfterAddress'
+    },
+    {
+      value: TripStatus.ArrivedAtDropoff,
+      text: 'ArrivedAtDropoff'
+    },
+    {
+      value: TripStatus.OdoMeterAtEnd,
+      text: 'OdoMeterAtEnd'
+    },
+    {
+      value: TripStatus.Completed,
+      text: 'Completed'
+    },
+    {
+      value: TripStatus.Cancelled,
+      text: 'Cancelled'
+    },
+  ];
 }
 
 export enum VehicalStatus {

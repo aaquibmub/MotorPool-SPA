@@ -1,3 +1,4 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
 import { ReportTripDriverSheetModel } from 'src/app/helper/models/reports/trips/driver-sheet/report-trip-driver-sheet-model';
@@ -51,9 +52,38 @@ export class ReportTripsDriverSheetComponent implements OnInit {
       .subscribe(
         (model: ReportTripDriverSheetModel) => {
           this.model = model;
-          debugger;
         }
       );
+  }
+
+  exportToExcel(): void {
+    this.reportService.getTripDriverSheetExcel(
+      this.selectedDriver.value,
+      this.selectedDate,
+    )
+      .subscribe(
+        (event) => {
+          if (event.type === HttpEventType.Response) {
+            this.downloadFile(event);
+          }
+        }
+      );
+  }
+
+  private downloadFile = (data: HttpResponse<Blob>) => {
+    const downloadedFile = new Blob([data.body as BlobPart], { type: data.body?.type });
+    const a = document.createElement('a');
+    a.setAttribute('style', 'display:none;');
+    document.body.appendChild(a);
+    a.download = 'Driver Sheet - (' +
+      this.model?.driverId +
+      '-' +
+      this.selectedDate.toDateString().toString() +
+      ').xlsx';
+    a.href = URL.createObjectURL(downloadedFile);
+    a.target = '_blank';
+    a.click();
+    document.body.removeChild(a);
   }
 
 }
