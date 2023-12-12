@@ -1,0 +1,37 @@
+<div class="grid-content">
+    <app-grid-toolbar
+      [numberOfRecords]="gridData?.total"
+      entity="driver"
+    ></app-grid-toolbar>
+    <kendo-grid
+      [data]="gridData"
+      [pageSize]="state.take"
+      [skip]="state.skip"
+      [sort]="state.sort"
+      [sortable]="true"
+      [pageable]="pageable"
+      [filter]="state.filter"
+      [filterable]="filterable"
+      scrollable="none"
+      (dataStateChange)="dataStateChange($event)"
+    >
+      <kendo-grid-column field="tripIdStr" title="ID">
+      </kendo-grid-column>
+      <kendo-grid-column field="route" title="Route">
+      </kendo-grid-column>
+      <kendo-grid-column field="dispatcher" title="Dispatcher">
+      </kendo-grid-column>
+      <kendo-grid-column field="passanger" title="Passanger">
+      </kendo-grid-column>
+      <kendo-grid-column field="driver" title="Driver">
+      </kendo-grid-column>
+      <kendo-grid-column field="creationDate" title="Date Created" filter="date">
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+          {{ dataItem.creationDate | dateformat : "g" }}
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="status" title="Status">
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+  

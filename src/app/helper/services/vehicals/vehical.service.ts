@@ -9,6 +9,11 @@ import { ResponseModel } from '../../models/common/response-model';
 import { VehicalGridModel } from '../../models/vehicals/vehical-grid-model';
 import { VehicalModel } from '../../models/vehicals/vehical-model';
 import { environment } from './../../../../environments/environment';
+import { VehicalViewModel } from '../../models/vehicals/vehical-view-model';
+import { VehicalViewDetailModel } from '../../models/vehicals/vehical-view-detail-model';
+import { VehicalViewInspectionModel } from '../../models/vehicals/vehical-view-inspection-model';
+import { VehicalViewTripModel } from '../../models/vehicals/vehical-view-trip-model';
+import { VehicalViewDriverModel } from '../../models/vehicals/vehical-view-driver-model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +22,9 @@ export class VehicalService {
   baseUrl = environment.apiUrl + 'vehical/';
 
   private gridData = new Subject<GridList<VehicalGridModel>>();
+  private gridInspectionData = new Subject<GridList<VehicalViewInspectionModel>>();
+  private gridTripData = new Subject<GridList<VehicalViewTripModel>>();
+  private gridDriverData = new Subject<GridList<VehicalViewDriverModel>>();
 
   constructor(
     private http: HttpClient) { }
@@ -63,6 +71,74 @@ export class VehicalService {
     }).subscribe(
       (gridData: GridList<VehicalGridModel>) => {
         this.gridData.next(gridData);
+      }
+    );
+  }
+
+  getVehicalViewModel(id: string): Observable<VehicalViewModel> {
+    return this.http.get<VehicalViewModel>(this.baseUrl + 'get-view-model/' + id);
+  }
+
+  getVehicalViewDetailModel(id: string): Observable<VehicalViewDetailModel> {
+    return this.http.get<VehicalViewDetailModel>(this.baseUrl + 'get-view-detail-model/' + id);
+  }
+
+  getVehicalInspectionGridData(): Observable<GridDataResult> {
+    return this.gridInspectionData.asObservable();
+  }
+
+  fetchVehicalInspectionGridData(
+    state: any,
+    query: string,
+    driverId: string): void {
+    this.http.post<GridList<VehicalViewInspectionModel>>(
+      this.baseUrl + 'get-inspection-gridlist', {
+      gridFilters: state,
+      search: query,
+      driverId
+    }).subscribe(
+      (gridInspectionData: GridList<VehicalViewInspectionModel>) => {
+        this.gridInspectionData.next(gridInspectionData);
+      }
+    );
+  }
+
+  getVehicalTripGridData(): Observable<GridDataResult> {
+    return this.gridTripData.asObservable();
+  }
+
+  fetchVehicalTripGridData(
+    state: any,
+    query: string,
+    driverId: string): void {
+    this.http.post<GridList<VehicalViewTripModel>>(
+      this.baseUrl + 'get-trip-gridlist', {
+      gridFilters: state,
+      search: query,
+      driverId
+    }).subscribe(
+      (gridTripData: GridList<VehicalViewTripModel>) => {
+        this.gridTripData.next(gridTripData);
+      }
+    );
+  }
+
+  getVehicalDriverGridData(): Observable<GridDataResult> {
+    return this.gridDriverData.asObservable();
+  }
+
+  fetchVehicalDriverGridData(
+    state: any,
+    query: string,
+    driverId: string): void {
+    this.http.post<GridList<VehicalViewDriverModel>>(
+      this.baseUrl + 'get-driver-gridlist', {
+      gridFilters: state,
+      search: query,
+      driverId
+    }).subscribe(
+      (gridDriverData: GridList<VehicalViewDriverModel>) => {
+        this.gridDriverData.next(gridDriverData);
       }
     );
   }

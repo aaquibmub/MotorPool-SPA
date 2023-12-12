@@ -10,6 +10,11 @@ import { VehicalsGrippedComponent } from './components/vehical-pool/vehicals-gri
 import { VehicalsInactiveComponent } from './components/vehical-pool/vehicals-inactive/vehicals-inactive.component';
 import { VehicalsMaintenanceComponent } from './components/vehical-pool/vehicals-maintenance/vehicals-maintenance.component';
 import { VehicalComponent } from './vehical.component';
+import { VehicalViewComponent } from './components/vehical-view/vehical-view.component';
+import { VehicalViewDetailComponent } from './components/vehical-view/vehical-view-detail/vehical-view-detail.component';
+import { VehicalViewTripsComponent } from './components/vehical-view/vehical-view-trips/vehical-view-trips.component';
+import { VehicalViewInspectionsComponent } from './components/vehical-view/vehical-view-inspections/vehical-view-inspections.component';
+import { VehicalViewDriversComponent } from './components/vehical-view/vehical-view-drivers/vehical-view-drivers.component';
 
 const routes: Routes = [
   {
@@ -36,6 +41,21 @@ const routes: Routes = [
           },
           { path: 'new', component: VehicalEditComponent },
           { path: ':id/edit', component: VehicalEditComponent },
+        ]
+      },
+      {
+        path: 'view/:id',
+        component: VehicalViewComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: '/vehicals/view/:id/detail',
+            pathMatch: 'full'
+          },
+          { path: 'detail', component: VehicalViewDetailComponent },
+          { path: 'trips', component: VehicalViewTripsComponent },
+          { path: 'inspection', component: VehicalViewInspectionsComponent },
+          { path: 'driver', component: VehicalViewDriversComponent },
         ]
       },
       {
