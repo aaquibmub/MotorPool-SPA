@@ -41,7 +41,6 @@ export class DateFormatPipe implements PipeTransform {
         return this.intl.formatDate(dateTime, args);
       }
     }
-    debugger;
     return this.intl.formatDate(new Date(value));
   }
 }

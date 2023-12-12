@@ -6,6 +6,7 @@ import { LogsComponent } from './components/logs/logs.component';
 import { SystemLogComponent } from './components/logs/system-log/system-log.component';
 import { ReportTripsDriverSheetComponent } from './components/report-trips/report-trips-driver-sheet/report-trips-driver-sheet.component';
 import { ReportTripsPassengerSheetComponent } from './components/report-trips/report-trips-passenger-sheet/report-trips-passenger-sheet.component';
+import { ReportTripsVehicleSheetComponent } from './components/report-trips/report-trips-vehicle-sheet/report-trips-vehicle-sheet.component';
 import { ReportTripsComponent } from './components/report-trips/report-trips.component';
 import { ReportsComponent } from './reports.component';
 
@@ -21,7 +22,8 @@ const routes: Routes = [
         children: [
           { path: '', redirectTo: 'driver-sheet', pathMatch: 'full' },
           { path: 'driver-sheet', component: ReportTripsDriverSheetComponent },
-          { path: 'passenger-sheet', component: ReportTripsPassengerSheetComponent }
+          { path: 'passenger-sheet', component: ReportTripsPassengerSheetComponent },
+          { path: 'vehicle-sheet', component: ReportTripsVehicleSheetComponent }
         ]
       },
       {

@@ -1,42 +1,41 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
-import { ReportTripPassengerSheetModel } from 'src/app/helper/models/reports/trips/passenger-sheet/report-trip-passenger-sheet-model';
+import { ReportTripVehicleSheetModel } from 'src/app/helper/models/reports/trips/vehicle-sheet/report-trip-vehicle-sheet-model';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ReportService } from 'src/app/helper/services/utilities/report.service';
-import { PassengerService } from './../../../../../helper/services/trips/passenger.service';
+import { VehicalService } from 'src/app/helper/services/vehicals/vehical.service';
 
 @Component({
-  selector: 'app-report-trips-passenger-sheet',
-  templateUrl: './report-trips-passenger-sheet.component.html',
-  styleUrls: ['./report-trips-passenger-sheet.component.css']
+  selector: 'app-report-trips-vehicle-sheet',
+  templateUrl: './report-trips-vehicle-sheet.component.html',
+  styleUrls: ['./report-trips-vehicle-sheet.component.css']
 })
-export class ReportTripsPassengerSheetComponent implements OnInit {
-  selectedPassenger: DropdownItem<string>;
-  passengerList: DropdownItem<string>[];
+export class ReportTripsVehicleSheetComponent implements OnInit {
+  selectedVehicle: DropdownItem<string>;
+  vehicleList: DropdownItem<string>[];
 
   selectedDate: Date = new Date();
-  selectedToDate: Date = new Date();
 
-  model: ReportTripPassengerSheetModel;
+  model: ReportTripVehicleSheetModel;
 
   constructor(
     public utilityService: UtilityService,
-    private passengerService: PassengerService,
+    private vehicleService: VehicalService,
     private reportService: ReportService
   ) { }
 
   ngOnInit() {
-    this.passengerService.getDropdownList('')
+    this.vehicleService.getDropdownList('')
       .subscribe(
         (list: DropdownItem<string>[]) => {
-          this.passengerList = list;
-          this.handlePassengerValueChange(this.passengerList[0]);
+          this.vehicleList = list;
+          this.handleVehicleValueChange(this.vehicleList[0]);
         });
   }
 
-  handlePassengerValueChange(value: DropdownItem<string>): void {
-    this.selectedPassenger = value;
+  handleVehicleValueChange(value: DropdownItem<string>): void {
+    this.selectedVehicle = value;
     this.fetchReport();
   }
 
@@ -45,29 +44,22 @@ export class ReportTripsPassengerSheetComponent implements OnInit {
     this.fetchReport();
   }
 
-  handleToDateValueChange(value: Date): void {
-    this.selectedToDate = value;
-    this.fetchReport();
-  }
-
   fetchReport(): void {
-    this.reportService.getTripPassengerSheetModel(
-      this.selectedPassenger.value,
+    this.reportService.getTripVehicleSheetModel(
+      this.selectedVehicle?.value,
       this.selectedDate,
-      this.selectedToDate,
     )
       .subscribe(
-        (model: ReportTripPassengerSheetModel) => {
+        (model: ReportTripVehicleSheetModel) => {
           this.model = model;
         }
       );
   }
 
   exportToExcel(): void {
-    this.reportService.getTripPassengerSheetExcel(
-      this.selectedPassenger.value,
+    this.reportService.getTripVehicleSheetExcel(
+      this.selectedVehicle.value,
       this.selectedDate,
-      this.selectedToDate,
     )
       .subscribe(
         (event) => {
@@ -83,12 +75,10 @@ export class ReportTripsPassengerSheetComponent implements OnInit {
     const a = document.createElement('a');
     a.setAttribute('style', 'display:none;');
     document.body.appendChild(a);
-    a.download = 'Passenger Sheet - (' +
-      this.model?.passengerName +
+    a.download = 'Vehicle Sheet - (' +
+      this.model?.vehicleId +
       '-' +
       this.selectedDate.toDateString().toString() +
-      '-' +
-      this.selectedToDate.toDateString().toString() +
       ').xlsx';
     a.href = URL.createObjectURL(downloadedFile);
     a.target = '_blank';

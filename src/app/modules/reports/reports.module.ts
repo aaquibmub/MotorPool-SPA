@@ -13,6 +13,7 @@ import { LogsComponent } from './components/logs/logs.component';
 import { SystemLogComponent } from './components/logs/system-log/system-log.component';
 import { ReportTripsDriverSheetComponent } from './components/report-trips/report-trips-driver-sheet/report-trips-driver-sheet.component';
 import { ReportTripsPassengerSheetComponent } from './components/report-trips/report-trips-passenger-sheet/report-trips-passenger-sheet.component';
+import { ReportTripsVehicleSheetComponent } from './components/report-trips/report-trips-vehicle-sheet/report-trips-vehicle-sheet.component';
 import { ReportTripsComponent } from './components/report-trips/report-trips.component';
 import { ReportsRoutingModule } from './reports-routing.module';
 import { ReportsComponent } from './reports.component';
@@ -39,7 +40,8 @@ import { ReportsComponent } from './reports.component';
 
     ReportTripsComponent,
     ReportTripsDriverSheetComponent,
-    ReportTripsPassengerSheetComponent
+    ReportTripsPassengerSheetComponent,
+    ReportTripsVehicleSheetComponent
   ]
 })
 export class ReportsModule { }
