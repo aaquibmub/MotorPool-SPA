@@ -1,0 +1,31 @@
+<div class="grid-content">
+    <app-grid-toolbar
+      [numberOfRecords]="gridData?.total"
+      entity="driver"
+    ></app-grid-toolbar>
+    <kendo-grid
+      [data]="gridData"
+      [pageSize]="state.take"
+      [skip]="state.skip"
+      [sort]="state.sort"
+      [sortable]="true"
+      [pageable]="pageable"
+      [filter]="state.filter"
+      [filterable]="filterable"
+      scrollable="none"
+      (dataStateChange)="dataStateChange($event)"
+    >
+      <kendo-grid-column field="driverIdStr" title="ID">
+      </kendo-grid-column>
+      <kendo-grid-column field="driverName" title="Driver Name">
+      </kendo-grid-column>
+      <kendo-grid-column field="allocated" title="Allocated">
+      </kendo-grid-column>
+      <kendo-grid-column field="date" title="Date" filter="date">
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+          {{ dataItem.date | dateformat : "g" }}
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+  

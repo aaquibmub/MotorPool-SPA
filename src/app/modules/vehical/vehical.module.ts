@@ -18,6 +18,11 @@ import { VehicalsInactiveComponent } from './components/vehical-pool/vehicals-in
 import { VehicalsMaintenanceComponent } from './components/vehical-pool/vehicals-maintenance/vehicals-maintenance.component';
 import { VehicalRoutingModule } from './vehical-routing.module';
 import { VehicalComponent } from './vehical.component';
+import { VehicalViewComponent } from './components/vehical-view/vehical-view.component';
+import { VehicalViewDetailComponent } from './components/vehical-view/vehical-view-detail/vehical-view-detail.component';
+import { VehicalViewTripsComponent } from './components/vehical-view/vehical-view-trips/vehical-view-trips.component';
+import { VehicalViewInspectionsComponent } from './components/vehical-view/vehical-view-inspections/vehical-view-inspections.component';
+import { VehicalViewDriversComponent } from './components/vehical-view/vehical-view-drivers/vehical-view-drivers.component';
 
 @NgModule({
   imports: [
@@ -46,6 +51,11 @@ import { VehicalComponent } from './vehical.component';
     VehicalsInactiveComponent,
     VehicalsMaintenanceComponent,
     VehicalsGrippedComponent,
+    VehicalViewComponent,
+    VehicalViewDetailComponent,
+    VehicalViewTripsComponent,
+    VehicalViewInspectionsComponent,
+    VehicalViewDriversComponent,
 
   ]
 })

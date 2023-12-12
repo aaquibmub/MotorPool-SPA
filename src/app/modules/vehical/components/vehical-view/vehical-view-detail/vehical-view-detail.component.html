@@ -1,0 +1,84 @@
+<div *ngIf="model">
+    <!-- General Information -->
+    <div class="form-section form-section-border">
+      <div class="section-header">Vehical Information</div>
+      <div class="section-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputMake">Make</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputMake"
+                  [value]="model.make"
+                  readonly
+                  id="inputMake"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputModel">Model</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputModel"
+                  [value]="model.model"
+                  readonly
+                  id="inputModel"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputModelYear">Model Year</label>
+                  </div>
+                  <div class="control">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="inputModelYear"
+                      [value]="model.modelYear"
+                      readonly
+                      id="inputModelYear"
+                    />
+                  </div>
+                </div>
+            </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputRegistrationPlate">Registration Plate</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputRegistrationPlate"
+                  [value]="model.registrationPlate"
+                  readonly
+                  id="inputRegistrationPlate"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  
