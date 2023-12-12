@@ -2,10 +2,10 @@
 <div class="page-area">
   <div class="page-header">
     <div class="page-title">
-      <span>Passenger Sheet</span>
+      <span>Vehicle Sheet</span>
     </div>
     <div class="page-breadcrum">
-      <span>Reports </span> / <span> Passenger Sheet</span>
+      <span>Reports </span> / <span> Vehicle Sheet</span>
     </div>
   </div>
   <div class="page-body">
@@ -19,12 +19,10 @@
           class="btn btn-orange"
           [useExistingCss]="true"
           [printTitle]="
-            'Passenger Sheet - (' +
-            model?.passengerName +
+            'Vehicle Sheet - (' +
+            model?.vehicleId +
             '-' +
             (selectedDate | dateformat) +
-            '-' +
-            (selectedToDate | dateformat) +
             ')'
           "
           printSectionId="print-section"
@@ -41,9 +39,9 @@
             class="form-control"
             textField="text"
             valueField="value"
-            (valueChange)="handlePassengerValueChange($event)"
-            [data]="passengerList"
-            [(ngModel)]="selectedPassenger"
+            (valueChange)="handleVehicleValueChange($event)"
+            [data]="vehicleList"
+            [(ngModel)]="selectedVehicle"
           >
             <ng-template kendoDropDownListItemTemplate let-dataItem>
               <span>{{ dataItem.text | translate }}</span>
@@ -59,38 +57,29 @@
           >
           </kendo-datepicker>
         </div>
-        <div class="col-3">
-          <kendo-datepicker
-            class="form-control"
-            id="inputToPickupDate"
-            (valueChange)="handleToDateValueChange($event)"
-            [(ngModel)]="selectedToDate"
-          >
-          </kendo-datepicker>
-        </div>
       </div>
       <div class="row">
         <div class="col-12" *ngIf="!model">
           <p class="p-24 text-center">No Data</p>
         </div>
         <div class="col-12" id="print-section" *ngIf="model">
-          <!-- Passenger Information -->
+          <!-- Vehicle Information -->
           <div class="form-section form-section-border">
             <div class="section-body">
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="label">
-                      <label for="inputName">Name</label>
+                      <label for="vehicleId">Vehicle Id</label>
                     </div>
                     <div class="control">
                       <input
                         type="text"
                         class="form-control"
-                        name="inputName"
-                        [value]="model.passengerName"
+                        name="vehicleId"
+                        [value]="model.vehicleId"
                         readonly
-                        id="inputName"
+                        id="vehicleId"
                       />
                     </div>
                   </div>
@@ -98,33 +87,24 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="label">
-                      <label for="totalMilage">Total Milage (KM)</label>
+                      <label for="inputName">Plate Number</label>
                     </div>
                     <div class="control">
                       <input
                         type="text"
                         class="form-control"
-                        name="totalMilage"
-                        [value]="model.totalMilage"
+                        name="inputName"
+                        [value]="model.vehiclePlateNumber"
                         readonly
-                        id="totalMilage"
+                        id="inputName"
                       />
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <!-- Vehicle Information -->
-          <div
-            class="form-section form-section-border"
-            *ngFor="let v of model.vehicalWiseTrips"
-          >
-            <div class="section-header">{{ v.vehicalPlateNumber }}</div>
-            <div class="section-body">
+              <!-- ODO meter  -->
               <div class="row">
-                <div class="col-md-3">
-                  <!-- ODO Meter -->
+                <div class="col-md-4">
                   <div class="form-group">
                     <div class="label">
                       <label for="inputOdoMeterAtDeparture"
@@ -136,12 +116,14 @@
                         type="text"
                         class="form-control"
                         name="inputOdoMeterAtDeparture"
-                        [value]="v.odoMeterAtDeparture"
+                        [value]="model.odoMeterAtDeparture"
                         readonly
                         id="inputOdoMeterAtDeparture"
                       />
                     </div>
                   </div>
+                </div>
+                <div class="col-md-4">
                   <div class="form-group">
                     <div class="label">
                       <label for="inputOdoMeterAtReturn"
@@ -153,9 +135,76 @@
                         type="text"
                         class="form-control"
                         name="inputOdoMeterAtReturn"
-                        [value]="v.odoMeterAtReturn"
+                        [value]="model.odoMeterAtReturn"
                         readonly
                         id="inputOdoMeterAtReturn"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Fuel -->
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputfuelAtDeparture"
+                        >Fuel At Departure</label
+                      >
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="inputfuelAtDeparture"
+                        [value]="model.fuelAtDeparture"
+                        readonly
+                        id="inputfuelAtDeparture"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputFuelAtReturn">Fuel At Return</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="inputFuelAtReturn"
+                        [value]="model.fuelAtReturn"
+                        readonly
+                        id="inputFuelAtReturn"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Driver Information -->
+          <div
+            class="form-section form-section-border"
+            *ngFor="let v of model.driverWiseTrips"
+          >
+            <div class="section-header">{{ v.driverName }}</div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="totalMilage">Total Milage (KM)</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="totalMilage"
+                        [value]="v.totalMilage"
+                        readonly
+                        id="totalMilage"
                       />
                     </div>
                   </div>

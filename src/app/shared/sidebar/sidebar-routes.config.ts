@@ -453,6 +453,16 @@ export const ROUTES: RouteInfo[] = [
             isExternalLink: false,
             submenu: []
           },
+          {
+            path: '/reports/trips/vehicle-sheet',
+            title: 'Vehicle Sheet',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
         ]
       },
     ]
