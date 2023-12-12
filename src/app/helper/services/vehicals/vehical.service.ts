@@ -90,12 +90,12 @@ export class VehicalService {
   fetchVehicalInspectionGridData(
     state: any,
     query: string,
-    driverId: string): void {
+    vehicalId: string): void {
     this.http.post<GridList<VehicalViewInspectionModel>>(
       this.baseUrl + 'get-inspection-gridlist', {
       gridFilters: state,
       search: query,
-      driverId
+      vehicalId
     }).subscribe(
       (gridInspectionData: GridList<VehicalViewInspectionModel>) => {
         this.gridInspectionData.next(gridInspectionData);
@@ -110,12 +110,12 @@ export class VehicalService {
   fetchVehicalTripGridData(
     state: any,
     query: string,
-    driverId: string): void {
+    vehicalId: string): void {
     this.http.post<GridList<VehicalViewTripModel>>(
       this.baseUrl + 'get-trip-gridlist', {
       gridFilters: state,
       search: query,
-      driverId
+      vehicalId
     }).subscribe(
       (gridTripData: GridList<VehicalViewTripModel>) => {
         this.gridTripData.next(gridTripData);
@@ -130,12 +130,12 @@ export class VehicalService {
   fetchVehicalDriverGridData(
     state: any,
     query: string,
-    driverId: string): void {
+    vehicalId: string): void {
     this.http.post<GridList<VehicalViewDriverModel>>(
       this.baseUrl + 'get-driver-gridlist', {
       gridFilters: state,
       search: query,
-      driverId
+      vehicalId
     }).subscribe(
       (gridDriverData: GridList<VehicalViewDriverModel>) => {
         this.gridDriverData.next(gridDriverData);
