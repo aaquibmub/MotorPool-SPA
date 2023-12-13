@@ -17,7 +17,7 @@ export class ReportTripsDriverSheetComponent implements OnInit {
 
   selectedDate: Date = new Date();
 
-  model: ReportTripDriverSheetModel;
+  model: ReportTripDriverSheetModel[];
 
   constructor(
     public utilityService: UtilityService,
@@ -46,11 +46,11 @@ export class ReportTripsDriverSheetComponent implements OnInit {
 
   fetchReport(): void {
     this.reportService.getTripDriverSheetModel(
-      this.selectedDriver.value,
       this.selectedDate,
+      this.selectedDriver?.value,
     )
       .subscribe(
-        (model: ReportTripDriverSheetModel) => {
+        (model: ReportTripDriverSheetModel[]) => {
           this.model = model;
         }
       );
@@ -58,8 +58,8 @@ export class ReportTripsDriverSheetComponent implements OnInit {
 
   exportToExcel(): void {
     this.reportService.getTripDriverSheetExcel(
-      this.selectedDriver.value,
       this.selectedDate,
+      this.selectedDriver?.value,
     )
       .subscribe(
         (event) => {
@@ -76,7 +76,7 @@ export class ReportTripsDriverSheetComponent implements OnInit {
     a.setAttribute('style', 'display:none;');
     document.body.appendChild(a);
     a.download = 'Driver Sheet - (' +
-      this.model?.driverId +
+      this.selectedDriver?.text +
       '-' +
       this.selectedDate.toDateString().toString() +
       ').xlsx';

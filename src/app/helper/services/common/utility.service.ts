@@ -10,6 +10,7 @@ export class UtilityService {
 
   language: LanguageKeys = new LanguageKeys();
   dropdownDefaultItem = { text: 'Please select..', value: '' };
+  dropdownAllItem = { text: 'All', value: null };
 
   constructor(
     private router: Router,) { }

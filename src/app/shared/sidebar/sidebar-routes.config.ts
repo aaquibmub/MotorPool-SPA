@@ -463,6 +463,16 @@ export const ROUTES: RouteInfo[] = [
             isExternalLink: false,
             submenu: []
           },
+          {
+            path: '/reports/trips/trip-sheet',
+            title: 'Trip Sheet',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
         ]
       },
     ]

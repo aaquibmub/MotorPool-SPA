@@ -37,36 +37,57 @@
     <div class="grid-content">
       <div class="row">
         <div class="col-3">
-          <kendo-dropdownlist
-            class="form-control"
-            textField="text"
-            valueField="value"
-            (valueChange)="handlePassengerValueChange($event)"
-            [data]="passengerList"
-            [(ngModel)]="selectedPassenger"
-          >
-            <ng-template kendoDropDownListItemTemplate let-dataItem>
-              <span>{{ dataItem.text | translate }}</span>
-            </ng-template>
-          </kendo-dropdownlist>
+          <div class="form-group">
+            <div class="label">
+              <label for="passenger">Passenger</label>
+            </div>
+            <div class="control">
+              <kendo-dropdownlist
+                class="form-control"
+                textField="text"
+                valueField="value"
+                (valueChange)="handlePassengerValueChange($event)"
+                [data]="passengerList"
+                [(ngModel)]="selectedPassenger"
+              >
+                <ng-template kendoDropDownListItemTemplate let-dataItem>
+                  <span>{{ dataItem.text | translate }}</span>
+                </ng-template>
+              </kendo-dropdownlist>
+            </div>
+          </div>
         </div>
         <div class="col-3">
-          <kendo-datepicker
-            class="form-control"
-            id="inputPickupDate"
-            (valueChange)="handleDateValueChange($event)"
-            [(ngModel)]="selectedDate"
-          >
-          </kendo-datepicker>
+          <div class="form-group">
+            <div class="label">
+              <label for="fromDate">From Date</label>
+            </div>
+            <div class="control">
+              <kendo-datepicker
+                class="form-control"
+                id="inputPickupDate"
+                (valueChange)="handleDateValueChange($event)"
+                [(ngModel)]="selectedDate"
+              >
+              </kendo-datepicker>
+            </div>
+          </div>
         </div>
         <div class="col-3">
-          <kendo-datepicker
-            class="form-control"
-            id="inputToPickupDate"
-            (valueChange)="handleToDateValueChange($event)"
-            [(ngModel)]="selectedToDate"
-          >
-          </kendo-datepicker>
+          <div class="form-group">
+            <div class="label">
+              <label for="toDate">To Date</label>
+            </div>
+            <div class="control">
+              <kendo-datepicker
+                class="form-control"
+                id="toDate"
+                (valueChange)="handleToDateValueChange($event)"
+                [(ngModel)]="selectedToDate"
+              >
+              </kendo-datepicker>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">

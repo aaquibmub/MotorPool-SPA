@@ -20,7 +20,7 @@
           [useExistingCss]="true"
           [printTitle]="
             'Vehicle Sheet - (' +
-            model?.vehicleId +
+            selectedVehicle?.text +
             '-' +
             (selectedDate | dateformat) +
             ')'
@@ -35,36 +35,58 @@
     <div class="grid-content">
       <div class="row">
         <div class="col-3">
-          <kendo-dropdownlist
-            class="form-control"
-            textField="text"
-            valueField="value"
-            (valueChange)="handleVehicleValueChange($event)"
-            [data]="vehicleList"
-            [(ngModel)]="selectedVehicle"
-          >
-            <ng-template kendoDropDownListItemTemplate let-dataItem>
-              <span>{{ dataItem.text | translate }}</span>
-            </ng-template>
-          </kendo-dropdownlist>
+          <div class="form-group">
+            <div class="label">
+              <label for="vehicle">Vehicle</label>
+            </div>
+            <div class="control">
+              <kendo-dropdownlist
+                class="form-control"
+                textField="text"
+                valueField="value"
+                [defaultItem]="utilityService.dropdownAllItem"
+                (valueChange)="handleVehicleValueChange($event)"
+                [data]="vehicleList"
+                [(ngModel)]="selectedVehicle"
+              >
+                <ng-template kendoDropDownListItemTemplate let-dataItem>
+                  <span>{{ dataItem.text | translate }}</span>
+                </ng-template>
+              </kendo-dropdownlist>
+            </div>
+          </div>
         </div>
         <div class="col-3">
-          <kendo-datepicker
-            class="form-control"
-            id="inputPickupDate"
-            (valueChange)="handleDateValueChange($event)"
-            [(ngModel)]="selectedDate"
-          >
-          </kendo-datepicker>
+          <div class="form-group">
+            <div class="label">
+              <label for="date">Date</label>
+            </div>
+            <div class="control">
+              <kendo-datepicker
+                class="form-control"
+                id="date"
+                (valueChange)="handleDateValueChange($event)"
+                [(ngModel)]="selectedDate"
+              >
+              </kendo-datepicker>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-12" *ngIf="!model">
+        <div class="col-12" *ngIf="!(model && model.length > 0)">
           <p class="p-24 text-center">No Data</p>
         </div>
-        <div class="col-12" id="print-section" *ngIf="model">
+        <div
+          class="col-12"
+          id="print-section"
+          *ngIf="model && model.length > 0"
+        >
           <!-- Vehicle Information -->
-          <div class="form-section form-section-border">
+          <div
+            class="form-section form-section-border"
+            *ngFor="let vh of model"
+          >
             <div class="section-body">
               <div class="row">
                 <div class="col-md-4">
@@ -77,7 +99,7 @@
                         type="text"
                         class="form-control"
                         name="vehicleId"
-                        [value]="model.vehicleId"
+                        [value]="vh.vehicleId"
                         readonly
                         id="vehicleId"
                       />
@@ -94,7 +116,7 @@
                         type="text"
                         class="form-control"
                         name="inputName"
-                        [value]="model.vehiclePlateNumber"
+                        [value]="vh.vehiclePlateNumber"
                         readonly
                         id="inputName"
                       />
@@ -116,7 +138,7 @@
                         type="text"
                         class="form-control"
                         name="inputOdoMeterAtDeparture"
-                        [value]="model.odoMeterAtDeparture"
+                        [value]="vh.odoMeterAtDeparture"
                         readonly
                         id="inputOdoMeterAtDeparture"
                       />
@@ -135,7 +157,7 @@
                         type="text"
                         class="form-control"
                         name="inputOdoMeterAtReturn"
-                        [value]="model.odoMeterAtReturn"
+                        [value]="vh.odoMeterAtReturn"
                         readonly
                         id="inputOdoMeterAtReturn"
                       />
@@ -157,7 +179,7 @@
                         type="text"
                         class="form-control"
                         name="inputfuelAtDeparture"
-                        [value]="model.fuelAtDeparture"
+                        [value]="vh.fuelAtDeparture"
                         readonly
                         id="inputfuelAtDeparture"
                       />
@@ -174,7 +196,7 @@
                         type="text"
                         class="form-control"
                         name="inputFuelAtReturn"
-                        [value]="model.fuelAtReturn"
+                        [value]="vh.fuelAtReturn"
                         readonly
                         id="inputFuelAtReturn"
                       />
@@ -182,171 +204,174 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <!-- Driver Information -->
-          <div
-            class="form-section form-section-border"
-            *ngFor="let v of model.driverWiseTrips"
-          >
-            <div class="section-header">{{ v.driverName }}</div>
-            <div class="section-body">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <div class="label">
-                      <label for="totalMilage">Total Milage (KM)</label>
-                    </div>
-                    <div class="control">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="totalMilage"
-                        [value]="v.totalMilage"
-                        readonly
-                        id="totalMilage"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <!-- Trips -->
+
+              <!-- Driver Information -->
+              <div
+                class="form-section form-section-border"
+                *ngFor="let v of vh.driverWiseTrips"
+              >
+                <div class="section-header">{{ v.driverName }}</div>
+                <div class="section-body">
                   <div class="row">
-                    <div class="col-12">
-                      <div
-                        class="form-section form-section-border"
-                        *ngFor="let t of v.trips"
-                      >
-                        <div class="section-header">{{ t.tripId }}</div>
-                        <div class="section-body">
-                          <div class="row">
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <div class="label">
-                                  <label for="tripRoute">Trip Route</label>
-                                </div>
-                                <div class="control">
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    name="tripRoute"
-                                    [value]="t.tripRoute"
-                                    readonly
-                                    id="tripRoute"
-                                  />
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <div class="label">
-                                  <label for="passenger">Passenger</label>
-                                </div>
-                                <div class="control">
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    name="passenger"
-                                    [value]="t.passenger"
-                                    readonly
-                                    id="passenger"
-                                  />
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <div class="label">
-                                  <label for="inputOdoMeterStart"
-                                    >ODO Meter Start</label
-                                  >
-                                </div>
-                                <div class="control">
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    name="inputOdoMeterStart"
-                                    [value]="t.meterStart"
-                                    readonly
-                                    id="inputOdoMeterStart"
-                                  />
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <div class="label">
-                                  <label for="inputOdoMeterEnd"
-                                    >ODO Meter End</label
-                                  >
-                                </div>
-                                <div class="control">
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    name="inputOdoMeterEnd"
-                                    [value]="t.meterEnd"
-                                    readonly
-                                    id="inputOdoMeterEnd"
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-8">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <div class="label">
+                          <label for="totalMilage">Total Milage (KM)</label>
+                        </div>
+                        <div class="control">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="totalMilage"
+                            [value]="v.totalMilage"
+                            readonly
+                            id="totalMilage"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <!-- Trips -->
+                      <div class="row">
+                        <div class="col-12">
+                          <div
+                            class="form-section form-section-border"
+                            *ngFor="let t of v.trips"
+                          >
+                            <div class="section-header">{{ t.tripId }}</div>
+                            <div class="section-body">
                               <div class="row">
-                                <div class="col-12">
+                                <div class="col-md-4">
                                   <div class="form-group">
                                     <div class="label">
-                                      <label for="departureLocation"
-                                        >Departure Location</label
+                                      <label for="tripRoute">Trip Route</label>
+                                    </div>
+                                    <div class="control">
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="tripRoute"
+                                        [value]="t.tripRoute"
+                                        readonly
+                                        id="tripRoute"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="label">
+                                      <label for="passenger">Passenger</label>
+                                    </div>
+                                    <div class="control">
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="passenger"
+                                        [value]="t.passenger"
+                                        readonly
+                                        id="passenger"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="label">
+                                      <label for="inputOdoMeterStart"
+                                        >ODO Meter Start</label
                                       >
                                     </div>
                                     <div class="control">
                                       <input
                                         type="text"
                                         class="form-control"
-                                        name="departureLocation"
-                                        [value]="t.departureLocation"
+                                        name="inputOdoMeterStart"
+                                        [value]="t.meterStart"
                                         readonly
-                                        id="departureLocation"
+                                        id="inputOdoMeterStart"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="label">
+                                      <label for="inputOdoMeterEnd"
+                                        >ODO Meter End</label
+                                      >
+                                    </div>
+                                    <div class="control">
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        name="inputOdoMeterEnd"
+                                        [value]="t.meterEnd"
+                                        readonly
+                                        id="inputOdoMeterEnd"
                                       />
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <!-- Destinations -->
-                              <div class="row">
-                                <div class="col-12">
-                                  <div
-                                    class="form-section form-section-border"
-                                    style="margin-top: 0; padding-top: 8px"
-                                  >
-                                    <div
-                                      class="section-body"
-                                      style="padding-top: 0"
-                                    >
-                                      <table class="table">
-                                        <thead>
-                                          <tr>
-                                            <th>Destination</th>
-                                            <th>Address</th>
-                                            <th>Arrival Time</th>
-                                            <th>Departure Time</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr *ngFor="let d of t.destinations">
-                                            <td>{{ d.type }}</td>
-                                            <td>{{ d.address }}</td>
-                                            <td>
-                                              {{
-                                                d.arrivalTime
-                                                  | dateformat : "hh:mm aa"
-                                              }}
-                                            </td>
-                                            <td>
-                                              {{
-                                                d.pickupTime
-                                                  | dateformat : "hh:mm aa"
-                                              }}
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
+                                <div class="col-md-8">
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <div class="form-group">
+                                        <div class="label">
+                                          <label for="departureLocation"
+                                            >Departure Location</label
+                                          >
+                                        </div>
+                                        <div class="control">
+                                          <input
+                                            type="text"
+                                            class="form-control"
+                                            name="departureLocation"
+                                            [value]="t.departureLocation"
+                                            readonly
+                                            id="departureLocation"
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- Destinations -->
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <div
+                                        class="form-section form-section-border"
+                                        style="margin-top: 0; padding-top: 8px"
+                                      >
+                                        <div
+                                          class="section-body"
+                                          style="padding-top: 0"
+                                        >
+                                          <table class="table">
+                                            <thead>
+                                              <tr>
+                                                <th>Destination</th>
+                                                <th>Address</th>
+                                                <th>Arrival Time</th>
+                                                <th>Departure Time</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr
+                                                *ngFor="let d of t.destinations"
+                                              >
+                                                <td>{{ d.type }}</td>
+                                                <td>{{ d.address }}</td>
+                                                <td>
+                                                  {{
+                                                    d.arrivalTime
+                                                      | dateformat : "hh:mm aa"
+                                                  }}
+                                                </td>
+                                                <td>
+                                                  {{
+                                                    d.pickupTime
+                                                      | dateformat : "hh:mm aa"
+                                                  }}
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>

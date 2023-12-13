@@ -1,41 +1,44 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DropdownType } from 'src/app/helper/common/shared-types';
 import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
-import { ReportTripVehicleSheetModel } from 'src/app/helper/models/reports/trips/vehicle-sheet/report-trip-vehicle-sheet-model';
+import { ReportTripSheetModel } from 'src/app/helper/models/reports/trips/trip-sheet/report-trip-sheet-model';
+import { CommonService } from 'src/app/helper/services/common/common.service';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ReportService } from 'src/app/helper/services/utilities/report.service';
-import { VehicalService } from 'src/app/helper/services/vehicals/vehical.service';
 
 @Component({
-  selector: 'app-report-trips-vehicle-sheet',
-  templateUrl: './report-trips-vehicle-sheet.component.html',
-  styleUrls: ['./report-trips-vehicle-sheet.component.css']
+  selector: 'app-report-trip-sheet',
+  templateUrl: './report-trip-sheet.component.html',
+  styleUrls: ['./report-trip-sheet.component.css']
 })
-export class ReportTripsVehicleSheetComponent implements OnInit {
-  selectedVehicle: DropdownItem<string>;
-  vehicleList: DropdownItem<string>[];
+export class ReportTripSheetComponent implements OnInit {
+  selectedTripRoute: DropdownItem<number>;
+  tripRouteList: DropdownItem<number>[];
 
   selectedDate: Date = new Date();
+  selectedToDate: Date = new Date();
 
-  model: ReportTripVehicleSheetModel[];
+  model: ReportTripSheetModel[];
 
   constructor(
     public utilityService: UtilityService,
-    private vehicleService: VehicalService,
+    private commonService: CommonService,
     private reportService: ReportService
   ) { }
 
   ngOnInit() {
-    this.vehicleService.getDropdownList('')
+    this.selectedDate.setDate(this.selectedDate.getDate() - 7);
+    this.commonService.getDropdownList(DropdownType.TripRoute, '')
       .subscribe(
-        (list: DropdownItem<string>[]) => {
-          this.vehicleList = list;
-          this.handleVehicleValueChange(this.vehicleList[0]);
+        (list: DropdownItem<number>[]) => {
+          this.tripRouteList = list;
+          this.fetchReport();
         });
   }
 
-  handleVehicleValueChange(value: DropdownItem<string>): void {
-    this.selectedVehicle = value;
+  handleTripRouteValueChange(value: DropdownItem<number>): void {
+    this.selectedTripRoute = value;
     this.fetchReport();
   }
 
@@ -44,22 +47,29 @@ export class ReportTripsVehicleSheetComponent implements OnInit {
     this.fetchReport();
   }
 
+  handleToDateValueChange(value: Date): void {
+    this.selectedToDate = value;
+    this.fetchReport();
+  }
+
   fetchReport(): void {
-    this.reportService.getTripVehicleSheetModel(
+    this.reportService.getTripSheetModel(
       this.selectedDate,
-      this.selectedVehicle?.value,
+      this.selectedToDate,
+      this.selectedTripRoute?.value,
     )
       .subscribe(
-        (model: ReportTripVehicleSheetModel[]) => {
+        (model: ReportTripSheetModel[]) => {
           this.model = model;
         }
       );
   }
 
   exportToExcel(): void {
-    this.reportService.getTripVehicleSheetExcel(
+    this.reportService.getTripSheetExcel(
       this.selectedDate,
-      this.selectedVehicle.value,
+      this.selectedToDate,
+      this.selectedTripRoute?.value,
     )
       .subscribe(
         (event) => {
@@ -75,10 +85,12 @@ export class ReportTripsVehicleSheetComponent implements OnInit {
     const a = document.createElement('a');
     a.setAttribute('style', 'display:none;');
     document.body.appendChild(a);
-    a.download = 'Vehicle Sheet - (' +
-      this.selectedVehicle?.text +
+    a.download = 'Trip Sheet - (' +
+      // this.model?.passengerName +
       '-' +
       this.selectedDate.toDateString().toString() +
+      '-' +
+      this.selectedToDate.toDateString().toString() +
       ').xlsx';
     a.href = URL.createObjectURL(downloadedFile);
     a.target = '_blank';

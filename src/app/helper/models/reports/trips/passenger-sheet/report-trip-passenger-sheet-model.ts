@@ -17,7 +17,7 @@ export class ReportTripPassengerSheetVehicalTripModel {
 
   tripId: string;
   departureLocation: string;
-  destinations: ReportTripPassengerSheetVehicalTripDestinationModel;
+  destinations: ReportTripPassengerSheetVehicalTripDestinationModel[];
   meterStart: number;
   meterEnd: number;
   passenger: string;
