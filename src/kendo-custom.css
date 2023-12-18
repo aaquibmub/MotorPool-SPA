@@ -100,3 +100,10 @@
 .k-panelbar > .k-panelbar-header > .k-link {
   color: var(--text-color) !important;
 }
+
+.k-grid .k-grid-aria-root {
+  overflow-x: auto !important;
+}
+.k-filtercell {
+  width: 150px !important;
+}

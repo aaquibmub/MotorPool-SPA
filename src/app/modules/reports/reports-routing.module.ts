@@ -9,6 +9,7 @@ import { ReportTripsDriverSheetComponent } from './components/report-trips/repor
 import { ReportTripsPassengerSheetComponent } from './components/report-trips/report-trips-passenger-sheet/report-trips-passenger-sheet.component';
 import { ReportTripsVehicleSheetComponent } from './components/report-trips/report-trips-vehicle-sheet/report-trips-vehicle-sheet.component';
 import { ReportTripsComponent } from './components/report-trips/report-trips.component';
+import { ReportVehiclesAllComponent } from './components/report-vehicles/report-vehicles-all/report-vehicles-all.component';
 import { ReportsComponent } from './reports.component';
 
 const routes: Routes = [
@@ -26,6 +27,14 @@ const routes: Routes = [
           { path: 'passenger-sheet', component: ReportTripsPassengerSheetComponent },
           { path: 'vehicle-sheet', component: ReportTripsVehicleSheetComponent },
           { path: 'trip-sheet', component: ReportTripSheetComponent }
+        ]
+      },
+      {
+        path: 'vehicles',
+        component: ReportTripsComponent,
+        children: [
+          { path: '', redirectTo: 'all', pathMatch: 'full' },
+          { path: 'all', component: ReportVehiclesAllComponent },
         ]
       },
       {

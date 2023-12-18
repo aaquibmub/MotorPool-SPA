@@ -19,7 +19,7 @@ export class UtilityRix {
       responsive: true,
       info: false
     },
-    filterable: 'menu'
+    filterable: 'row'
   };
 
   static dropdownRequired(control: UntypedFormControl): { [s: string]: boolean } {

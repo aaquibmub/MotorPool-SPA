@@ -3,6 +3,7 @@ import { DropdownItem } from '../models/common/dropdown/dropdown-item.model';
 export enum DropdownType {
   Gender = 10,
   TripRoute = 20,
+  TripStatus = 25,
   TripDestination = 30,
   Opm = 40
 }
@@ -330,6 +331,20 @@ export function GetVehicalStatusForDropdownList():
     {
       value: VehicalStatus.Gripped,
       text: 'Gripped'
+    },
+  ];
+}
+
+export function GetBooleanForDropdownList():
+  DropdownItem<boolean>[] {
+  return [
+    {
+      value: true,
+      text: 'Yes'
+    },
+    {
+      value: false,
+      text: 'No'
     },
   ];
 }

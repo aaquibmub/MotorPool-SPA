@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { GridDataResult } from '@progress/kendo-angular-grid';
+import { Observable, Subject } from 'rxjs';
+import { GridList } from '../../models/common/grid/grid-list';
 import { ReportTripDriverSheetModel } from '../../models/reports/trips/driver-sheet/report-trip-driver-sheet-model';
 import { ReportTripPassengerSheetModel } from '../../models/reports/trips/passenger-sheet/report-trip-passenger-sheet-model';
 import { ReportTripSheetModel } from '../../models/reports/trips/trip-sheet/report-trip-sheet-model';
 import { ReportTripVehicleSheetModel } from '../../models/reports/trips/vehicle-sheet/report-trip-vehicle-sheet-model';
+import { ReportAllVehicleGridModel } from '../../models/reports/vehicles/all-vehicles/report-all-vehicle-grid-model';
 import { environment } from './../../../../environments/environment';
 
 @Injectable({
@@ -12,6 +15,8 @@ import { environment } from './../../../../environments/environment';
 })
 export class ReportService {
   baseUrl = environment.apiUrl + 'report/';
+
+  private allVehicleGridData = new Subject<GridList<ReportAllVehicleGridModel>>();
 
   constructor(
     private http: HttpClient) { }
@@ -110,6 +115,24 @@ export class ReportService {
       observe: 'events',
       responseType: 'blob'
     });
+  }
+
+  getAllVehicleGridData(): Observable<GridDataResult> {
+    return this.allVehicleGridData.asObservable();
+  }
+
+  fetchAllVehicleGridData(
+    state: any,
+    query: string): void {
+    this.http.post<GridList<ReportAllVehicleGridModel>>(
+      this.baseUrl + 'get-all-vehical-gridlist', {
+      gridFilters: state,
+      search: query
+    }).subscribe(
+      (gridData: GridList<ReportAllVehicleGridModel>) => {
+        this.allVehicleGridData.next(gridData);
+      }
+    );
   }
 
 }
