@@ -1,8 +1,11 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { IntlService } from '@progress/kendo-angular-intl';
+import { ZonedDate } from '@progress/kendo-date-math';
 import { Howl, Howler } from 'howler';
 import { LanguageKeys } from '../../common/language-keys';
-import { DriverStatus, Gender, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetTripDestinationForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetVehicalStatusForDropdownList, SystemLogType, TripDestination, TripStatus, TripType, VehicalStatus } from '../../common/shared-types';
+import { DriverStatus, Gender, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripStatus, TripType, VehicalStatus } from '../../common/shared-types';
+import { AuthService } from '../auth/auth.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +16,10 @@ export class UtilityService {
   dropdownAllItem = { text: 'All', value: null };
 
   constructor(
-    private router: Router,) { }
+    private router: Router,
+    private authService: AuthService,
+    private intl: IntlService,
+  ) { }
 
   scrollToFirstInvalidControl(
     element: ElementRef,
@@ -133,6 +139,12 @@ export class UtilityService {
     return status != null ? status.text : '';
   }
 
+  getOpmLabel(value: OPM): string {
+    var statusList = GetOpmForDropdownList();
+    var status = statusList.find(f => f.value == value);
+    return status != null ? status.text : '';
+  }
+
   getTripTypeLabel(value: TripType): string {
     var statusList = GetTripTypeForDropdownList();
     var status = statusList.find(f => f.value == value);
@@ -149,6 +161,35 @@ export class UtilityService {
     var statusList = GetTripStatusForDropdownList();
     var status = statusList.find(f => f.value == value);
     return status != null ? status.text : '';
+  }
+
+  formatDate(value: Date, args?: string): string {
+    if (!value || value === null) {
+      return '';
+    }
+    if (args) {
+      const user = this.authService.getCurrentUser();
+      let tzDate: ZonedDate = null;
+      try {
+        const dateValue = new Date(value);
+        // const zone = zonesPerGroup(user.timeZoneID)[0];
+        tzDate = ZonedDate.fromLocalDate(
+          dateValue,
+          'ar-SA');
+
+      } catch (e) {
+        console.log(e);
+      }
+      if (tzDate) {
+        return this.intl.formatDate(tzDate.toUTCDate(), args);
+      } else {
+        const date = new Date(value);
+        const utc = date.getTime() - (date.getTimezoneOffset() * 60000);
+        const dateTime = new Date(utc);
+        return this.intl.formatDate(dateTime, args);
+      }
+    }
+    return this.intl.formatDate(new Date(value))
   }
 
   playNotificationSound(): void {

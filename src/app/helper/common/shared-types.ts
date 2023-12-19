@@ -379,3 +379,22 @@ export function GetDriverStatusForDropdownList():
   ];
 }
 
+
+
+export enum OPM {
+  SaudiSide = 10,
+  USSide = 20
+}
+export function GetOpmForDropdownList():
+  DropdownItem<OPM>[] {
+  return [
+    {
+      value: OPM.SaudiSide,
+      text: 'Saudi Side'
+    },
+    {
+      value: OPM.USSide,
+      text: 'US Side'
+    },
+  ];
+}

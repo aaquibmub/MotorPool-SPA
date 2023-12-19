@@ -476,7 +476,7 @@ export const ROUTES: RouteInfo[] = [
         ]
       },
 
-      // trips
+      // vehicles
       {
         path: '/reports/vehicles/all',
         title: 'Vehicles',
@@ -489,6 +489,39 @@ export const ROUTES: RouteInfo[] = [
           {
             path: '/reports/vehicles/all',
             title: 'All Vehicles',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
+
+      // drivers
+      {
+        path: '/reports/drivers/all',
+        title: 'Drivers',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            path: '/reports/drivers/all',
+            title: 'All Drivers',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/drivers/trips',
+            title: 'Driver vs Trips',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',

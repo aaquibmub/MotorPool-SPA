@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { State } from '@progress/kendo-data-query';
@@ -28,11 +27,11 @@ export class DriversAllComponent implements OnInit, OnDestroy {
   searchQuery: string;
 
   pageSizeSubscription: Subscription;
+  gridDataSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
     private driverService: DriverService,
-    private router: Router,
     private alertService: AlertService,
     private notificationService: NotificationService,
     private gridToolbarService: GridToolbarService
@@ -69,7 +68,7 @@ export class DriversAllComponent implements OnInit, OnDestroy {
       );
 
     this.driverService.fetchGridData(this.state, this.searchQuery);
-    this.driverService.getGridData()
+    this.gridDataSubscription = this.driverService.getGridData()
       .subscribe(
         (data: any) => {
           this.gridData.data = data.data;
@@ -158,5 +157,8 @@ export class DriversAllComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.pageSizeSubscription.unsubscribe();
+    if (this.gridDataSubscription) {
+      this.gridDataSubscription.unsubscribe();
+    }
   }
 }
