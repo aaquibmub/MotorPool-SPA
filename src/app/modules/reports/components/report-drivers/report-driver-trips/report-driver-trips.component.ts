@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DataStateChangeEvent, ExcelExportEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
+import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
 import { flatten } from '@progress/kendo-angular-grid/dist/es2015/filtering/base-filter-cell.component';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
@@ -72,35 +72,6 @@ export class ReportDriverTripsComponent implements OnInit, OnDestroy {
 
   exportToExcel(grid: GridComponent): void {
     grid.saveAsExcel();
-  }
-
-  onExcelExport(e: ExcelExportEvent): void {
-    const rows = e.workbook.sheets[0].rows;
-    // set alternating row color
-    rows.forEach((row) => {
-      if (row.type === "data") {
-        let cellIndex = 0;
-        row.cells.forEach((cell) => {
-          // if (cellIndex === 2) { // tripId
-          //   debugger;
-          //   cell.value = row.cells[cellIndex].value;
-          // }
-          if (cellIndex === 3) { // tripDate
-            cell.value = this.utilityService.formatDate(cell.value);
-          }
-          if (cellIndex === 4) { // pickupTime
-            cell.value = this.utilityService.formatDate(cell.value, 'hh:mm aa');
-          }
-          if (cellIndex === 6) { // opm
-            cell.value = this.utilityService.getOpmLabel(cell.value);
-          }
-          if (cellIndex === 7) { // destination
-            cell.value = this.utilityService.getTripDestinationLabel(cell.value);
-          }
-          cellIndex++;
-        });
-      }
-    });
   }
 
   handleOpmValueChange(value: DropdownItem<OPM>): void {

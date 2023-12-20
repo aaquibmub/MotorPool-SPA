@@ -1,5 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ExcelExportEvent, GridComponent } from '@progress/kendo-angular-grid';
 import { IntlService } from '@progress/kendo-angular-intl';
 import { ZonedDate } from '@progress/kendo-date-math';
 import { Howl, Howler } from 'howler';
@@ -190,6 +191,86 @@ export class UtilityService {
       }
     }
     return this.intl.formatDate(new Date(value))
+  }
+
+  onExcelExport(ex: ExcelExportEvent, e: GridComponent): void {
+    var data = e.data;
+    var gridColumns = e.columns.toArray();
+    var sheet = ex.workbook.sheets[0];
+    var visibleGridColumns = [];
+    var columnFields = [];
+    var dataItem;
+
+    gridColumns = gridColumns.sort((a, b) => a.orderIndex - b.orderIndex);
+    // Get a list of visible columns
+    for (var i = 0; i < gridColumns.length; i++) {
+      if (!gridColumns[i].hidden) {
+        visibleGridColumns.push(gridColumns[i]);
+      }
+    }
+
+    // Create a collection of the column templates, together with the current column index
+    for (var i = 0; i < visibleGridColumns.length; i++) {
+      if (visibleGridColumns[i].field) {
+        columnFields.push({ cellIndex: i, field: visibleGridColumns[i].field });
+        // columnTemplates.push({ cellIndex: i, template: kendo.template(visibleGridColumns[i].template) });
+      }
+    }
+
+    // Traverse all exported rows.
+    for (var i = 1; i < sheet.rows.length; i++) {
+      var row = sheet.rows[i];
+      // Traverse the column templates and apply them for each row at the stored column position.
+
+      // Get the data item corresponding to the current row.
+      var dataIndex = i - 1;
+      var dataItem = (data as any).data[dataIndex];
+      for (var j = 0; j < columnFields.length; j++) {
+        var columnField = columnFields[j];
+        // Generate the template content for the current cell.
+        var dataItemValue = dataItem[columnField.field];
+
+        if (row.cells[columnField.cellIndex] != undefined)
+          // Output the text content of the templated cell into the exported cell.
+          switch (columnField.field) {
+            case 'tripDate': {
+              row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue);
+              break;
+            }
+            case 'createdDate': {
+              row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue);
+              break;
+            }
+            case 'pickupTime': {
+              row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue, 'hh:mm aa');
+              break;
+            }
+            case 'opm': {
+              row.cells[columnField.cellIndex].value = this.getOpmLabel(dataItemValue);
+              break;
+            }
+            case 'destination': {
+              row.cells[columnField.cellIndex].value = this.getTripDestinationLabel(dataItemValue);
+              break;
+            }
+            case 'driverStatus': {
+              row.cells[columnField.cellIndex].value = this.getDriverStatusLabel(dataItemValue);
+              break;
+            }
+            case 'armoured': {
+              row.cells[columnField.cellIndex].value = dataItemValue == true ? 'Yes' : 'No';
+              break;
+            }
+            case 'vehicleStatus': {
+              row.cells[columnField.cellIndex].value = this.getVehicalStatusLabel(dataItemValue);
+              break;
+            }
+            default: {
+              row.cells[columnField.cellIndex].value = dataItemValue || "";
+            }
+          }
+      }
+    }
   }
 
   playNotificationSound(): void {

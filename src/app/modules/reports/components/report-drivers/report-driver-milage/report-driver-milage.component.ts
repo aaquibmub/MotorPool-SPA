@@ -1,32 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
-import { flatten } from '@progress/kendo-angular-grid/dist/es2015/filtering/base-filter-cell.component';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
-import { GetBooleanForDropdownList, GetDriverStatusForDropdownList } from 'src/app/helper/common/shared-types';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { ReportService } from 'src/app/helper/services/utilities/report.service';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
-import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
 import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
-import { UtilityService } from './../../../../../helper/services/common/utility.service';
-import { ReportService } from './../../../../../helper/services/utilities/report.service';
 
 @Component({
-  selector: 'app-report-drivers-all',
-  templateUrl: './report-drivers-all.component.html',
-  styleUrls: ['./report-drivers-all.component.css']
+  selector: 'app-report-driver-milage',
+  templateUrl: './report-driver-milage.component.html',
+  styleUrls: ['./report-driver-milage.component.css']
 })
-export class ReportDriversAllComponent implements OnInit, OnDestroy {
+export class ReportDriverMilageComponent implements OnInit, OnDestroy {
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
-
-  driverStatusList: DropdownItem<number>[] = [];
-  selectedDriverStatus: DropdownItem<number>;
-
-  booleanList: DropdownItem<boolean>[] = GetBooleanForDropdownList();
-  selectedArmoured: DropdownItem<boolean>;
 
   pageSizeSubscription: Subscription;
   gridDataSubscription: Subscription;
@@ -40,25 +31,22 @@ export class ReportDriversAllComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.driverStatusList = GetDriverStatusForDropdownList();
-
     this.pageSizeSubscription = this.gridToolbarService.getPageSize()
       .subscribe(
         (pageSize: number) => {
           this.state.take = pageSize;
-          this.reportService.fetchAllDriverGridData(this.state, this.searchQuery);
+          this.reportService.fetchDriverMilageGridData(this.state, this.searchQuery);
         }
       );
     this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.reportService.fetchAllDriverGridData(this.state, this.searchQuery);
+          this.reportService.fetchDriverMilageGridData(this.state, this.searchQuery);
         }
       );
-
-    this.reportService.fetchAllDriverGridData(this.state, this.searchQuery);
-    this.gridDataSubscription = this.reportService.getAllDriverGridData()
+    this.reportService.fetchDriverMilageGridData(this.state, this.searchQuery);
+    this.gridDataSubscription = this.reportService.getDriverMilageGridData()
       .subscribe(
         (data: any) => {
           this.gridData.data = data.data;
@@ -70,28 +58,11 @@ export class ReportDriversAllComponent implements OnInit, OnDestroy {
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.reportService.fetchAllDriverGridData(state, this.searchQuery);
+    this.reportService.fetchDriverMilageGridData(state, this.searchQuery);
   }
 
   exportToExcel(grid: GridComponent): void {
     grid.saveAsExcel();
-  }
-
-  handleDriverStatusValueChange(value: DropdownItem<number>): void {
-    const root = { logic: 'and', filters: [], ...this.state.filter };
-    const [filter] = flatten(root).filter(x => x.field === "driverStatus");
-    if (!filter) {
-      root.filters.push({
-        field: "driverStatus",
-        operator: "eq",
-        value: value.value
-      });
-    } else {
-      filter.value = value.value;
-    }
-    this.selectedDriverStatus = value;
-    this.state.filter = root;
-    this.dataStateChange(this.state as DataStateChangeEvent);
   }
 
   ngOnDestroy(): void {

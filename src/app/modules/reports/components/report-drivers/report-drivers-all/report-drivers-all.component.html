@@ -14,16 +14,25 @@
         </button>
       </div>
     </div>
-    <div class="">
+    <div class="grid-content">
+      <app-grid-toolbar
+        [numberOfRecords]="gridData?.total"
+        entity="driver"
+      ></app-grid-toolbar>
       <kendo-grid
         #grid="kendoGrid"
         [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
         [sort]="state.sort"
         [sortable]="true"
+        [resizable]="true"
+        [reorderable]="true"
+        [pageable]="pageable"
         [filter]="state.filter"
         [filterable]="filterable"
         (dataStateChange)="dataStateChange($event)"
-        (excelExport)="onExcelExport($event)"
+        (excelExport)="this.utilityService.onExcelExport($event, grid)"
         scrollable="none"
       >
         <kendo-grid-column field="id" title="Driver ID"> </kendo-grid-column>
@@ -39,16 +48,17 @@
           field="createdDate"
           title="Driver Creation Date"
           filter="date"
+          [width]="250"
         >
           <ng-template
             kendoGridCellTemplate
             let-dataItem
             let-rowIndex="rowIndex"
           >
-            {{ dataItem.createdDate | dateformat : "g" }}
+            {{ dataItem.createdDate | dateformat }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="status" title="Status">
+        <kendo-grid-column field="driverStatus" title="Status">
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 200px"
@@ -71,7 +81,7 @@
             let-rowIndex="rowIndex"
           >
             <span>{{
-              utilityService.getDriverStatusLabel(dataItem.status)
+              utilityService.getDriverStatusLabel(dataItem.driverStatus)
             }}</span>
           </ng-template>
         </kendo-grid-column>

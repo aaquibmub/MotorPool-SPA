@@ -22,19 +22,37 @@
       <kendo-grid
         #grid="kendoGrid"
         [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
         [sort]="state.sort"
         [sortable]="true"
+        [resizable]="true"
+        [reorderable]="true"
+        [pageable]="pageable"
         [filter]="state.filter"
         [filterable]="filterable"
         (dataStateChange)="dataStateChange($event)"
-        (excelExport)="onExcelExport($event)"
+        (excelExport)="this.utilityService.onExcelExport($event, grid)"
         scrollable="none"
       >
-        <kendo-grid-column field="driverName" title="Driver Name اسم السائق">
+        <kendo-grid-column
+          field="driverName"
+          title="Driver Name اسم السائق"
+          [width]="200"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="driverId" title="Driver ID  رقم السائق">
+        <kendo-grid-column
+          field="driverId"
+          title="Driver ID  رقم السائق"
+          [width]="200"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="tripSrNo" title="Trip ID رقم الرحلة">
+        <kendo-grid-column
+          field="tripSrNo"
+          title="Trip ID رقم الرحلة"
+          filter="numeric"
+          [width]="200"
+        >
           <ng-template
             kendoGridCellTemplate
             let-dataItem
@@ -43,7 +61,12 @@
             {{ dataItem.tripId }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="tripDate" title="Date تاريخ" filter="date">
+        <kendo-grid-column
+          field="tripDate"
+          title="Date تاريخ"
+          filter="date"
+          [width]="200"
+        >
           <ng-template
             kendoGridCellTemplate
             let-dataItem
@@ -52,7 +75,11 @@
             {{ dataItem.tripDate | dateformat }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="pickupTime" title="Pickup Time اخذ الراكب">
+        <kendo-grid-column
+          field="pickupTime"
+          title="Pickup Time اخذ الراكب"
+          [width]="200"
+        >
           <ng-template
             kendoGridCellTemplate
             let-dataItem
@@ -61,9 +88,17 @@
             {{ dataItem.pickupTime | dateformat : "hh:mm aa" }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="passenger" title="Passenger Name اسم الراكب">
+        <kendo-grid-column
+          field="passenger"
+          title="Passenger Name اسم الراكب"
+          [width]="200"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="opm" title="OPM Group أو بي أيم جماعة">
+        <kendo-grid-column
+          field="opm"
+          title="OPM Group أو بي أيم جماعة"
+          [width]="200"
+        >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 150px"
@@ -88,7 +123,11 @@
             <span>{{ utilityService.getOpmLabel(dataItem.opm) }}</span>
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="destination" title="Destination مكان الوصول">
+        <kendo-grid-column
+          field="destination"
+          title="Destination مكان الوصول"
+          [width]="200"
+        >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 150px"
@@ -118,14 +157,21 @@
         <kendo-grid-column
           field="pickupLocation"
           title="Pickup Location موقع التحمول"
+          [width]="200"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="dropoffLocation"
           title="Dropoff Location موقع الترجل"
+          [width]="200"
         >
         </kendo-grid-column>
-        <kendo-grid-column field="milageInKm" title="KM كم">
+        <kendo-grid-column
+          field="milageInKm"
+          title="KM كم"
+          filter="numeric"
+          [width]="150"
+        >
         </kendo-grid-column>
         <kendo-grid-excel fileName="DriverVsTrips.xlsx"> </kendo-grid-excel>
       </kendo-grid>

@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
+import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
 // import { FilterExpression } from "@progress/kendo-angular-filter";
-import { DataStateChangeEvent, ExcelExportEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
+import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
 import { flatten } from '@progress/kendo-angular-grid/dist/es2015/filtering/base-filter-cell.component';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
@@ -19,9 +20,9 @@ import { ReportService } from 'src/app/helper/services/utilities/report.service'
 export class ReportVehiclesAllComponent implements OnInit, OnDestroy {
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
+  pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
-
-  gridDataSubscription: Subscription;
+  searchQuery: string;
 
   vehicleStatusList: DropdownItem<number>[] = [];
   selectedVehicleStatus: DropdownItem<number>;
@@ -29,16 +30,36 @@ export class ReportVehiclesAllComponent implements OnInit, OnDestroy {
   booleanList: DropdownItem<boolean>[] = GetBooleanForDropdownList();
   selectedArmoured: DropdownItem<boolean>;
 
+  pageSizeSubscription: Subscription;
+  gridDataSubscription: Subscription;
+  gridSearchQuerySubscription: Subscription;
+
   constructor(
     public utilityService: UtilityService,
     private reportService: ReportService,
+    private gridToolbarService: GridToolbarService
   ) { }
 
   ngOnInit(): void {
 
     this.vehicleStatusList = GetVehicalStatusForDropdownList();
 
-    this.reportService.fetchAllVehicleGridData(this.state);
+    this.pageSizeSubscription = this.gridToolbarService.getPageSize()
+      .subscribe(
+        (pageSize: number) => {
+          this.state.take = pageSize;
+          this.reportService.fetchAllVehicleGridData(this.state, this.searchQuery);
+        }
+      );
+    this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
+      .subscribe(
+        (query: string) => {
+          this.searchQuery = query;
+          this.reportService.fetchAllVehicleGridData(this.state, this.searchQuery);
+        }
+      );
+
+    this.reportService.fetchAllVehicleGridData(this.state, this.searchQuery);
     this.gridDataSubscription = this.reportService.getAllVehicleGridData()
       .subscribe(
         (data: any) => {
@@ -51,38 +72,19 @@ export class ReportVehiclesAllComponent implements OnInit, OnDestroy {
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.reportService.fetchAllVehicleGridData(state);
+    this.reportService.fetchAllVehicleGridData(state, this.searchQuery);
   }
 
   exportToExcel(grid: GridComponent): void {
     grid.saveAsExcel();
   }
 
-  onExcelExport(e: ExcelExportEvent): void {
-    const rows = e.workbook.sheets[0].rows;
-    // set alternating row color
-    rows.forEach((row) => {
-      if (row.type === "data") {
-        let cellIndex = 0;
-        row.cells.forEach((cell) => {
-          if (cellIndex === 5) { // armoured
-            cell.value = cell.value == true ? 'Yes' : 'No';
-          }
-          if (cellIndex === 6) { // status
-            cell.value = this.utilityService.getVehicalStatusLabel(cell.value);
-          }
-          cellIndex++;
-        });
-      }
-    });
-  }
-
   handleVehicleStatusValueChange(value: DropdownItem<number>): void {
     const root = { logic: 'and', filters: [], ...this.state.filter };
-    const [filter] = flatten(root).filter(x => x.field === "status");
+    const [filter] = flatten(root).filter(x => x.field === "vehicleStatus");
     if (!filter) {
       root.filters.push({
-        field: "status",
+        field: "vehicleStatus",
         operator: "eq",
         value: value.value
       });
