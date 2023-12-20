@@ -1,3 +1,28 @@
-<p>
-  trip-view-log works!
-</p>
+<div class="grid-content">
+  <app-grid-toolbar
+    [numberOfRecords]="gridData?.total"
+    entity="trip"
+  ></app-grid-toolbar>
+  <kendo-grid
+    [data]="gridData"
+    [pageSize]="state.take"
+    [skip]="state.skip"
+    [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
+    scrollable="none"
+    (dataStateChange)="dataStateChange($event)"
+  >
+    <kendo-grid-column field="operation" title="Operation"> </kendo-grid-column>
+    <kendo-grid-column field="user" title="User">
+    </kendo-grid-column>
+    <kendo-grid-column field="userRole" title="UserRole"> </kendo-grid-column>
+    <kendo-grid-column field="date" title="Date" filter="date">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        {{ dataItem.date | dateformat : "g" }}
+      </ng-template>
+    </kendo-grid-column>
+  </kendo-grid>
+</div>

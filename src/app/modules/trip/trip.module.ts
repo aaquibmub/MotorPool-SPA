@@ -7,7 +7,6 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { InputsModule } from '@progress/kendo-angular-inputs';
-import { SharedModule } from './../../shared/shared.module';
 import { TripBookingRefuellingEditComponent } from './components/trip-booking/trip-booking-refuelling-edit/trip-booking-refuelling-edit.component';
 import { TripBookingScheduledEditComponent } from './components/trip-booking/trip-booking-scheduled-edit/trip-booking-scheduled-edit.component';
 import { TripBookingStartNowEditComponent } from './components/trip-booking/trip-booking-start-now-edit/trip-booking-start-now-edit.component';
@@ -24,6 +23,10 @@ import { TripViewDetailComponent } from './components/trip-view/trip-view-detail
 import { TripViewComponent } from './components/trip-view/trip-view.component';
 import { TripRoutingModule } from './trip-routing.module';
 import { TripComponent } from './trip.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { TripViewLogComponent } from './components/trip-view/trip-view-log/trip-view-log.component';
+import { TripViewVehicalComponent } from './components/trip-view/trip-view-vehical/trip-view-vehical.component';
+import { TripViewDriverComponent } from './components/trip-view/trip-view-driver/trip-view-driver.component';
 
 @NgModule({
   imports: [
@@ -58,6 +61,9 @@ import { TripComponent } from './trip.component';
 
     TripViewComponent,
     TripViewDetailComponent,
+    TripViewLogComponent,
+    TripViewVehicalComponent,
+    TripViewDriverComponent,
 
     TripListComponent,
     TripTodayListComponent,
