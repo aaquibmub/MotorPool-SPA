@@ -1,8 +1,8 @@
-import { UtilityService } from './../../../../helper/services/common/utility.service';
-import { GridToolbarService } from './../../../../helper/services/common/grid-toolbar.service';
-import { ActionButton } from './../../../../helper/models/common/grid/action-button';
-import { GridComponent } from '@progress/kendo-angular-grid';
 import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { GridComponent } from '@progress/kendo-angular-grid';
+import { ActionButton } from './../../../../helper/models/common/grid/action-button';
+import { GridToolbarService } from './../../../../helper/services/common/grid-toolbar.service';
+import { UtilityService } from './../../../../helper/services/common/utility.service';
 
 @Component({
   selector: 'app-grid-toolbar',
@@ -36,7 +36,6 @@ export class GridToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.docClickSubscription = this.renderer.listen(
       'document',
       'click',

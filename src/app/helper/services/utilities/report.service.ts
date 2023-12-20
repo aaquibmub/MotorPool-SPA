@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Observable, Subject } from 'rxjs';
 import { GridList } from '../../models/common/grid/grid-list';
+import { ReportAllDriverGridModel } from '../../models/reports/drivers/all-drivers/report-all-driver-grid-model';
+import { ReportDriverMilageGridModel } from '../../models/reports/drivers/milages/report-driver-milage-grid-model';
+import { ReportDriverTripGridModel } from '../../models/reports/drivers/trips/report-driver-trip-grid-model';
 import { ReportTripDriverSheetModel } from '../../models/reports/trips/driver-sheet/report-trip-driver-sheet-model';
 import { ReportTripPassengerSheetModel } from '../../models/reports/trips/passenger-sheet/report-trip-passenger-sheet-model';
 import { ReportTripSheetModel } from '../../models/reports/trips/trip-sheet/report-trip-sheet-model';
@@ -17,6 +20,9 @@ export class ReportService {
   baseUrl = environment.apiUrl + 'report/';
 
   private allVehicleGridData = new Subject<GridList<ReportAllVehicleGridModel>>();
+  private allDriverGridData = new Subject<GridList<ReportAllDriverGridModel>>();
+  private driverTripGridData = new Subject<GridList<ReportDriverTripGridModel>>();
+  private driverMilageGridData = new Subject<GridList<ReportDriverMilageGridModel>>();
 
   constructor(
     private http: HttpClient) { }
@@ -123,14 +129,68 @@ export class ReportService {
 
   fetchAllVehicleGridData(
     state: any,
-    query: string): void {
+    search: string): void {
     this.http.post<GridList<ReportAllVehicleGridModel>>(
       this.baseUrl + 'get-all-vehical-gridlist', {
       gridFilters: state,
-      search: query
+      search
     }).subscribe(
       (gridData: GridList<ReportAllVehicleGridModel>) => {
         this.allVehicleGridData.next(gridData);
+      }
+    );
+  }
+
+  getAllDriverGridData(): Observable<GridDataResult> {
+    return this.allDriverGridData.asObservable();
+  }
+
+  fetchAllDriverGridData(
+    state: any,
+    search: string): void {
+    this.http.post<GridList<ReportAllDriverGridModel>>(
+      this.baseUrl + 'get-all-driver-gridlist', {
+      gridFilters: state,
+      search
+    }).subscribe(
+      (gridData: GridList<ReportAllDriverGridModel>) => {
+        this.allDriverGridData.next(gridData);
+      }
+    );
+  }
+
+  getDriverTripGridData(): Observable<GridDataResult> {
+    return this.driverTripGridData.asObservable();
+  }
+
+  fetchDriverTripGridData(
+    state: any,
+    search: string): void {
+    this.http.post<GridList<ReportDriverTripGridModel>>(
+      this.baseUrl + 'get-driver-trip-gridlist', {
+      gridFilters: state,
+      search
+    }).subscribe(
+      (gridData: GridList<ReportDriverTripGridModel>) => {
+        this.driverTripGridData.next(gridData);
+      }
+    );
+  }
+
+  getDriverMilageGridData(): Observable<GridDataResult> {
+    return this.driverMilageGridData.asObservable();
+  }
+
+  fetchDriverMilageGridData(
+    state: any,
+    search: string): void {
+    this.http.post<GridList<ReportDriverMilageGridModel>>(
+      this.baseUrl + 'get-driver-milage-gridlist', {
+      gridFilters: state,
+      search
+    }).subscribe(
+      (gridData: GridList<ReportDriverMilageGridModel>) => {
+        this.driverMilageGridData.next(gridData);
       }
     );
   }

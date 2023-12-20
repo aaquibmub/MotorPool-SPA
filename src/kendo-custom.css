@@ -105,5 +105,9 @@
   overflow-x: auto !important;
 }
 .k-filtercell {
-  width: 150px !important;
+  width: 150px;
+}
+
+kendo-grid-date-filter-cell {
+  width: 220px !important;
 }

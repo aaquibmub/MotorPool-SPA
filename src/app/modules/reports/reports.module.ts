@@ -11,6 +11,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ActitvityLogComponent } from './components/logs/actitvity-log/actitvity-log.component';
 import { LogsComponent } from './components/logs/logs.component';
 import { SystemLogComponent } from './components/logs/system-log/system-log.component';
+import { ReportDriverMilageComponent } from './components/report-drivers/report-driver-milage/report-driver-milage.component';
+import { ReportDriverTripsComponent } from './components/report-drivers/report-driver-trips/report-driver-trips.component';
+import { ReportDriversAllComponent } from './components/report-drivers/report-drivers-all/report-drivers-all.component';
+import { ReportDriversComponent } from './components/report-drivers/report-drivers.component';
 import { ReportTripSheetComponent } from './components/report-trips/report-trip-sheet/report-trip-sheet.component';
 import { ReportTripsDriverSheetComponent } from './components/report-trips/report-trips-driver-sheet/report-trips-driver-sheet.component';
 import { ReportTripsPassengerSheetComponent } from './components/report-trips/report-trips-passenger-sheet/report-trips-passenger-sheet.component';
@@ -49,7 +53,12 @@ import { ReportsComponent } from './reports.component';
     ReportTripSheetComponent,
 
     ReportVehiclesComponent,
-    ReportVehiclesAllComponent
+    ReportVehiclesAllComponent,
+
+    ReportDriversComponent,
+    ReportDriversAllComponent,
+    ReportDriverTripsComponent,
+    ReportDriverMilageComponent,
   ],
   providers: [FilterService]
 })
