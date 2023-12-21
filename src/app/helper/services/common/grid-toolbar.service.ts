@@ -8,6 +8,7 @@ export class GridToolbarService {
   private pageSize = new Subject<number>();
   private gridSearchQuery = new Subject<string>();
   private gridColumn = new Subject<string>();
+  private gridFilter = new Subject<boolean>();
 
   constructor() { }
 
@@ -31,6 +32,13 @@ export class GridToolbarService {
   }
   setGridHiddenColumn(column: string): void {
     this.gridColumn.next(column);
+  }
+
+  getGridFilter(): Observable<boolean> {
+    return this.gridFilter.asObservable();
+  }
+  setGridFilter(show: boolean): void {
+    this.gridFilter.next(show);
   }
 
 }

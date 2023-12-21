@@ -29,6 +29,8 @@ export class GridToolbarComponent implements OnInit {
   showColumnMenu = false;
   columns: ColumnBase[] = [];
 
+  showFilters = false;
+
   pageDropdownData = [10, 25, 50, 100];
 
   private docClickSubscription: any;
@@ -40,6 +42,8 @@ export class GridToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.gridToolbarService.setGridFilter(this.showFilters);
 
     this.docClickSubscription = this.renderer.listen(
       'document',
@@ -92,6 +96,11 @@ export class GridToolbarComponent implements OnInit {
 
   exportToPdf(): void {
     this.grid.saveAsPDF();
+  }
+
+  toggleFilterIcon(): void {
+    this.showFilters = !this.showFilters;
+    this.gridToolbarService.setGridFilter(this.showFilters);
   }
 
   toggleColumnDropdownMenu(): void {

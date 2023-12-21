@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
+import { flatten } from '@progress/kendo-angular-grid/dist/es2015/filtering/base-filter-cell.component';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
@@ -7,7 +8,8 @@ import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
-import { DriverStatus } from './../../../../../helper/common/shared-types';
+import { DriverStatus, GetBooleanForDropdownList, GetDriverStatusForDropdownList } from './../../../../../helper/common/shared-types';
+import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
 import { ResponseModel } from './../../../../../helper/models/common/response-model';
 import { DriverGridModel } from './../../../../../helper/models/drivers/driver-grid-model';
 import { AlertService } from './../../../../../helper/services/common/alert.service';
@@ -26,8 +28,15 @@ export class DriversAllComponent implements OnInit, OnDestroy {
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
 
+  booleanList: DropdownItem<boolean>[] = GetBooleanForDropdownList();
+  selectedActive: DropdownItem<boolean>;
+
+  driverStatusList: DropdownItem<number>[] = [];
+  selectedDriverStatus: DropdownItem<number>;
+
   pageSizeSubscription: Subscription;
   gridDataSubscription: Subscription;
+  gridFilterSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -38,6 +47,16 @@ export class DriversAllComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
+    this.driverStatusList = GetDriverStatusForDropdownList();
+
+    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
+      .subscribe(
+        (show: boolean) => {
+          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+        }
+      );
+
     this.pageSizeSubscription = this.gridToolbarService.getPageSize()
       .subscribe(
         (pageSize: number) => {
@@ -94,7 +113,7 @@ export class DriversAllComponent implements OnInit, OnDestroy {
     const actions: ActionButton[] = [
       {
         handle: () => {
-          if (item.status) {
+          if (item.active) {
             this.driverService.disable(item.id)
               .subscribe(
                 (response: ResponseModel<string>) => {
@@ -126,11 +145,11 @@ export class DriversAllComponent implements OnInit, OnDestroy {
           }
         },
         icon: '',
-        label: item.status ? 'Disable' : 'Enable'
+        label: item.active ? 'Disable' : 'Enable'
       }
     ];
-    if (item.status != DriverStatus.Busy
-      && item.status != DriverStatus.OffDuty) {
+    if (item.driverStatus != DriverStatus.Busy
+      && item.driverStatus != DriverStatus.OffDuty) {
       if (item.vehicalAllocated) {
         actions.push({
           handle: () => {
@@ -155,10 +174,47 @@ export class DriversAllComponent implements OnInit, OnDestroy {
     return actions;
   }
 
+  handleActiveValueChange(value: DropdownItem<boolean>): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "active");
+    if (!filter) {
+      root.filters.push({
+        field: "active",
+        operator: "eq",
+        value: value.value
+      });
+    } else {
+      filter.value = value.value;
+    }
+    this.selectedActive = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
+  }
+
+  handleDriverStatusValueChange(value: DropdownItem<number>): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "driverStatus");
+    if (!filter) {
+      root.filters.push({
+        field: "driverStatus",
+        operator: "eq",
+        value: value.value
+      });
+    } else {
+      filter.value = value.value;
+    }
+    this.selectedDriverStatus = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
+  }
+
   ngOnDestroy(): void {
     this.pageSizeSubscription.unsubscribe();
     if (this.gridDataSubscription) {
       this.gridDataSubscription.unsubscribe();
+    }
+    if (this.gridFilterSubscription) {
+      this.gridFilterSubscription.unsubscribe();
     }
   }
 }
