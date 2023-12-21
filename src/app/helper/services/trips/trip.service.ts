@@ -14,6 +14,7 @@ import { TripStatusModel } from '../../models/trips/enroute/trip-status-model';
 import { TripViewDetailModel } from '../../models/trips/trip-view/trip-view-detail-model';
 import { TripViewModel } from '../../models/trips/trip-view/trip-view-model';
 import { environment } from './../../../../environments/environment';
+import { TripViewLogModel } from '../../models/trips/trip-view/trip-view-log-model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,8 @@ export class TripService {
   private showTripExecutePopup = new Subject<PopupConfigModel>();
   private showTripHandoverPopup = new Subject<PopupConfigModel>();
   private showTripCancelPopup = new Subject<PopupConfigModel>();
+
+  private gridLogData = new Subject<GridList<TripViewLogModel>>();
 
   constructor(
     private http: HttpClient) { }
@@ -103,6 +106,26 @@ export class TripService {
 
   updateTripStatus(model: TripStatusModel): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-status', model);
+  }
+
+  getTripLogGridData(): Observable<GridDataResult> {
+    return this.gridLogData.asObservable();
+  }
+
+  fetchTripLogGridData(
+    state: any,
+    query: string,
+    tripId: string): void {
+    this.http.post<GridList<TripViewLogModel>>(
+      this.baseUrl + 'get-trip-log-gridlist', {
+      gridFilters: state,
+      search: query,
+      tripId
+    }).subscribe(
+      (gridLogData: GridList<TripViewLogModel>) => {
+        this.gridLogData.next(gridLogData);
+      }
+    );
   }
 
 }
