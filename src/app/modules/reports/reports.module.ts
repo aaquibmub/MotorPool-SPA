@@ -15,6 +15,7 @@ import { ReportDriverMilageComponent } from './components/report-drivers/report-
 import { ReportDriverTripsComponent } from './components/report-drivers/report-driver-trips/report-driver-trips.component';
 import { ReportDriversAllComponent } from './components/report-drivers/report-drivers-all/report-drivers-all.component';
 import { ReportDriversComponent } from './components/report-drivers/report-drivers.component';
+import { ReportHomeComponent } from './components/report-home/report-home.component';
 import { ReportPassengerTripsComponent } from './components/report-passengers/report-passenger-trips/report-passenger-trips.component';
 import { ReportPassengersAllComponent } from './components/report-passengers/report-passengers-all/report-passengers-all.component';
 import { ReportPassengersComponent } from './components/report-passengers/report-passengers.component';
@@ -60,6 +61,8 @@ import { ReportsComponent } from './reports.component';
     LogsComponent,
     SystemLogComponent,
     ActitvityLogComponent,
+
+    ReportHomeComponent,
 
     ReportTripsComponent,
     ReportTripsDriverSheetComponent,

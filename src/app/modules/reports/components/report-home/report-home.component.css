@@ -1,0 +1,31 @@
+.menu-section {
+  margin-bottom: 32px;
+  background-color: white;
+  padding: 16px;
+  min-height: 260px;
+  max-height: 260px;
+  overflow: auto;
+}
+
+.menu-section .section-heading {
+  font-weight: bold;
+  padding: 8px 0;
+}
+
+.menu-section ul {
+  margin: 0;
+  padding: 0;
+}
+
+.menu-section ul li {
+  display: block;
+  padding: 8px 0;
+}
+
+.menu-section a {
+  text-decoration: none;
+  color: var(--primary-color) !important;
+}
+.sub-menu-title {
+  padding-top: 8px;
+}

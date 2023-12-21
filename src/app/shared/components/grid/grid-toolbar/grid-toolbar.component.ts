@@ -124,7 +124,6 @@ export class GridToolbarComponent implements OnInit {
         e.target,
         '.column-dropdown .fa-ellipsis-v'
       );
-      debugger;
       if (!columnButtonClicked) {
         this.showColumnMenu = false;
       }

@@ -1,0 +1,62 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>Reports</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="row">
+      <div class="col-6" *ngFor="let menuSectionItem of menuItems">
+        <div class="menu-section">
+          <div class="section-heading">
+            <a
+              [routerLink]="[menuSectionItem.path]"
+              *ngIf="!menuSectionItem.isExternalLink"
+            >
+              <i [ngClass]="[menuSectionItem.icon]"></i>
+              <span class="sub-menu-title">{{ menuSectionItem.title }}</span>
+              <span
+                *ngIf="menuSectionItem.badge != ''"
+                [ngClass]="[menuSectionItem.badgeClass]"
+                >{{ menuSectionItem.badge }}</span
+              >
+            </a>
+          </div>
+          <div class="row">
+            <div
+              class="col-6"
+              style="padding-bottom: 8px"
+              *ngFor="let menuSubItem of menuSectionItem.submenu"
+            >
+              <a
+                [routerLink]="[menuSubItem.path]"
+                *ngIf="!menuSubItem.isExternalLink; else externalSubLinkBlock"
+                (click)="showHideSubMenu(false)"
+              >
+                <i [ngClass]="[menuSubItem.icon]"></i>
+                <span class="sub-menu-title">{{ menuSubItem.title }}</span>
+                <span
+                  *ngIf="menuSubItem.badge != ''"
+                  [ngClass]="[menuSubItem.badgeClass]"
+                  >{{ menuSubItem.badge }}</span
+                >
+              </a>
+              <ng-template #externalSubLinkBlock>
+                <a [href]="[menuSubItem.path]" target="_blank">
+                  <i [ngClass]="[menuSubItem.icon]"></i>
+                  <span class="sub-menu-title">{{ menuSubItem.title }}</span>
+                  <span
+                    *ngIf="menuSubItem.badge != ''"
+                    [ngClass]="[menuSubItem.badgeClass]"
+                    >{{ menuSubItem.badge }}</span
+                  >
+                </a>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
