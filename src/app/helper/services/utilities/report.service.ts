@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Observable, Subject } from 'rxjs';
-import { TripType } from '../../common/shared-types';
+import { OPM, TripType } from '../../common/shared-types';
 import { GridList } from '../../models/common/grid/grid-list';
 import { ReportAllDriverGridModel } from '../../models/reports/drivers/all-drivers/report-all-driver-grid-model';
 import { ReportDriverMilageGridModel } from '../../models/reports/drivers/milages/report-driver-milage-grid-model';
@@ -11,6 +11,7 @@ import { ReportAllPassengerGridModel } from '../../models/reports/passengers/all
 import { ReportPassengerTripGridModel } from '../../models/reports/passengers/trips/report-passenger-trip-model';
 import { ReportAllTripGridModel } from '../../models/reports/trips/all-trips/report-all-trip-grid-model';
 import { ReportTripDriverSheetModel } from '../../models/reports/trips/driver-sheet/report-trip-driver-sheet-model';
+import { ReportTripMilageGridModel } from '../../models/reports/trips/milages/report-trip-milage-grid-model';
 import { ReportTripPassengerSheetModel } from '../../models/reports/trips/passenger-sheet/report-trip-passenger-sheet-model';
 import { ReportTripSheetModel } from '../../models/reports/trips/trip-sheet/report-trip-sheet-model';
 import { ReportTripVehicleSheetModel } from '../../models/reports/trips/vehicle-sheet/report-trip-vehicle-sheet-model';
@@ -25,6 +26,7 @@ export class ReportService {
 
   // trips
   private allTripGridData = new Subject<GridList<ReportAllTripGridModel>>();
+  private tripMilageGridData = new Subject<GridList<ReportTripMilageGridModel>>();
   // vehicles
   private allVehicleGridData = new Subject<GridList<ReportAllVehicleGridModel>>();
   // drivers
@@ -141,15 +143,39 @@ export class ReportService {
   fetchAllTripGridData(
     state: any,
     search: string,
-    type?: TripType): void {
+    type?: TripType,
+    opm?: OPM): void {
     this.http.post<GridList<ReportAllTripGridModel>>(
       this.baseUrl + 'get-all-trip-gridlist', {
       gridFilters: state,
       search,
-      type
+      type,
+      opm
     }).subscribe(
       (gridData: GridList<ReportAllTripGridModel>) => {
         this.allTripGridData.next(gridData);
+      }
+    );
+  }
+
+  getTripMilageGridData(): Observable<GridDataResult> {
+    return this.tripMilageGridData.asObservable();
+  }
+
+  fetchTripMilageGridData(
+    state: any,
+    search: string,
+    type?: TripType,
+    opm?: OPM): void {
+    this.http.post<GridList<ReportTripMilageGridModel>>(
+      this.baseUrl + 'get-trip-milage-gridlist', {
+      gridFilters: state,
+      search,
+      type,
+      opm
+    }).subscribe(
+      (gridData: GridList<ReportTripMilageGridModel>) => {
+        this.tripMilageGridData.next(gridData);
       }
     );
   }

@@ -39,7 +39,8 @@ export enum TripType {
 
   Today = 400,
   Ongoing = 500,
-  Upcoming = 600
+  Upcoming = 600,
+  CurrentMonth = 700
 }
 
 export function GetTripTypeForDropdownList():

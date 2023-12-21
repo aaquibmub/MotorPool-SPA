@@ -474,6 +474,86 @@ export const ROUTES: RouteInfo[] = [
             submenu: []
           },
           {
+            path: '/reports/trips/opm-today',
+            title: 'OPM Trips - Today',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/opm-current-month',
+            title: 'OPM Trips - Current Month',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/saudi-today',
+            title: 'Saudi Trips - Today',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/saudi-current-month',
+            title: 'Saudi Trips - Current Month',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/opm-milage-today',
+            title: 'OPM Milage - Today',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/opm-milage-current-month',
+            title: 'OPM Milage - Current Month',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/saudi-milage-today',
+            title: 'Saudi Milage - Today',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/saudi-milage-current-month',
+            title: 'Saudi Milage - Current Month',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
             path: '/reports/trips/driver-sheet',
             title: 'Driver Sheet',
             icon: 'bx bx-right-arrow-alt',

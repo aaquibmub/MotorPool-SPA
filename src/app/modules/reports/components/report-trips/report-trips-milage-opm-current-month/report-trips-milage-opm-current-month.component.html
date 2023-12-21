@@ -1,0 +1,82 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>OPM Milage - Current Month</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="grid-toolbar">
+      <div class="left"></div>
+      <div class="right" style="display: flex; justify-content: space-between">
+        <button class="btn btn-orange" (click)="exportToExcel(grid)">
+          <i class="fa fa-file-excel-o"></i> Excel
+        </button>
+      </div>
+    </div>
+    <div class="grid-content">
+      <app-grid-toolbar
+        *ngIf="grid"
+        [grid]="grid"
+        [numberOfRecords]="gridData?.total"
+        entity="trip"
+      ></app-grid-toolbar>
+      <kendo-grid
+        #grid="kendoGrid"
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [sortable]="true"
+        [resizable]="true"
+        [reorderable]="true"
+        [pageable]="pageable"
+        [filter]="state.filter"
+        [filterable]="filterable"
+        (dataStateChange)="dataStateChange($event)"
+        (excelExport)="this.utilityService.onExcelExport($event, grid)"
+        scrollable="none"
+      >
+        <kendo-grid-column
+          field="tripSrNo"
+          title="Trip ID رقم الرحلة"
+          filter="numeric"
+          [width]="200"
+          [hidden]="isHidden('tripSrNo')"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            {{ dataItem.tripId }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="tripDate"
+          title="Date تاريخ"
+          filter="date"
+          [width]="200"
+          [hidden]="isHidden('tripDate')"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            {{ dataItem.tripDate | dateformat }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="milageInKm"
+          title="KM كم"
+          filter="numeric"
+          [width]="150"
+        >
+        </kendo-grid-column>
+        <kendo-grid-excel fileName="OPM-Milage-CurrentMonth.xlsx">
+        </kendo-grid-excel>
+      </kendo-grid>
+    </div>
+  </div>
+</div>

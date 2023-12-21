@@ -119,7 +119,6 @@ export class GridToolbarComponent implements OnInit {
       e.target,
       '.column-menu .control label'
     );
-    debugger;
     if (!columnMenuInputClicked && !columnMenuLabelClicked) {
       const columnButtonClicked = this.utilityService.matches(
         e.target,
