@@ -89,6 +89,7 @@
       <span class="{{ deleteBtn.icon }}" *ngIf="deleteBtn.icon"></span>
       {{ deleteBtn.label }}
     </button> -->
+
     <input
       type="search"
       class="form-control"
@@ -96,5 +97,30 @@
       *ngIf="!hideSearchField"
       (keyup)="onSearch($event)"
     />
+    <div class="column-dropdown" *ngIf="!hideColumnDropdown">
+      <span class="k-cursor-pointer" (click)="toggleColumnDropdownMenu()">
+        <i class="fa fa-ellipsis-v primary-color"></i
+      ></span>
+      <div class="column-menu et-dropdown-menu" *ngIf="showColumnMenu">
+        <ul *ngFor="let col of columns; let j = index">
+          <li>
+            <div class="form-group">
+              <div class="control">
+                <div class="checkbox-control" style="padding: 0">
+                  <input
+                    type="checkbox"
+                    kendoCheckBox
+                    [id]="'columnCheckBox' + j"
+                    [checked]="!col.hidden"
+                    (change)="handleColumnChange(col)"
+                  />
+                  <label [for]="'columnCheckBox' + j">{{ col.title }}</label>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

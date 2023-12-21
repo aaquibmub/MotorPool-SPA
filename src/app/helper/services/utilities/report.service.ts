@@ -2,10 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Observable, Subject } from 'rxjs';
+import { TripType } from '../../common/shared-types';
 import { GridList } from '../../models/common/grid/grid-list';
 import { ReportAllDriverGridModel } from '../../models/reports/drivers/all-drivers/report-all-driver-grid-model';
 import { ReportDriverMilageGridModel } from '../../models/reports/drivers/milages/report-driver-milage-grid-model';
 import { ReportDriverTripGridModel } from '../../models/reports/drivers/trips/report-driver-trip-grid-model';
+import { ReportAllPassengerGridModel } from '../../models/reports/passengers/all-passengers/report-all-passenger-grid-model';
+import { ReportPassengerTripGridModel } from '../../models/reports/passengers/trips/report-passenger-trip-model';
+import { ReportAllTripGridModel } from '../../models/reports/trips/all-trips/report-all-trip-grid-model';
 import { ReportTripDriverSheetModel } from '../../models/reports/trips/driver-sheet/report-trip-driver-sheet-model';
 import { ReportTripPassengerSheetModel } from '../../models/reports/trips/passenger-sheet/report-trip-passenger-sheet-model';
 import { ReportTripSheetModel } from '../../models/reports/trips/trip-sheet/report-trip-sheet-model';
@@ -19,10 +23,17 @@ import { environment } from './../../../../environments/environment';
 export class ReportService {
   baseUrl = environment.apiUrl + 'report/';
 
+  // trips
+  private allTripGridData = new Subject<GridList<ReportAllTripGridModel>>();
+  // vehicles
   private allVehicleGridData = new Subject<GridList<ReportAllVehicleGridModel>>();
+  // drivers
   private allDriverGridData = new Subject<GridList<ReportAllDriverGridModel>>();
   private driverTripGridData = new Subject<GridList<ReportDriverTripGridModel>>();
   private driverMilageGridData = new Subject<GridList<ReportDriverMilageGridModel>>();
+  //passengers
+  private allPassengerGridData = new Subject<GridList<ReportAllPassengerGridModel>>();
+  private passengerTripGridData = new Subject<GridList<ReportPassengerTripGridModel>>();
 
   constructor(
     private http: HttpClient) { }
@@ -123,6 +134,26 @@ export class ReportService {
     });
   }
 
+  getAllTripGridData(): Observable<GridDataResult> {
+    return this.allTripGridData.asObservable();
+  }
+
+  fetchAllTripGridData(
+    state: any,
+    search: string,
+    type?: TripType): void {
+    this.http.post<GridList<ReportAllTripGridModel>>(
+      this.baseUrl + 'get-all-trip-gridlist', {
+      gridFilters: state,
+      search,
+      type
+    }).subscribe(
+      (gridData: GridList<ReportAllTripGridModel>) => {
+        this.allTripGridData.next(gridData);
+      }
+    );
+  }
+
   getAllVehicleGridData(): Observable<GridDataResult> {
     return this.allVehicleGridData.asObservable();
   }
@@ -191,6 +222,42 @@ export class ReportService {
     }).subscribe(
       (gridData: GridList<ReportDriverMilageGridModel>) => {
         this.driverMilageGridData.next(gridData);
+      }
+    );
+  }
+
+  getAllPassengerGridData(): Observable<GridDataResult> {
+    return this.allPassengerGridData.asObservable();
+  }
+
+  fetchAllPassengerGridData(
+    state: any,
+    search: string): void {
+    this.http.post<GridList<ReportAllPassengerGridModel>>(
+      this.baseUrl + 'get-all-passenger-gridlist', {
+      gridFilters: state,
+      search
+    }).subscribe(
+      (gridData: GridList<ReportAllPassengerGridModel>) => {
+        this.allPassengerGridData.next(gridData);
+      }
+    );
+  }
+
+  getPassengerTripGridData(): Observable<GridDataResult> {
+    return this.passengerTripGridData.asObservable();
+  }
+
+  fetchPassengerTripGridData(
+    state: any,
+    search: string): void {
+    this.http.post<GridList<ReportPassengerTripGridModel>>(
+      this.baseUrl + 'get-passenger-trip-gridlist', {
+      gridFilters: state,
+      search
+    }).subscribe(
+      (gridData: GridList<ReportPassengerTripGridModel>) => {
+        this.passengerTripGridData.next(gridData);
       }
     );
   }

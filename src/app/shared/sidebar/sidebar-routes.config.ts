@@ -425,7 +425,7 @@ export const ROUTES: RouteInfo[] = [
 
       // trips
       {
-        path: '/reports/trips/driver-sheet',
+        path: '/reports/trips/all',
         title: 'Trips',
         icon: 'bx bx-right-arrow-alt',
         class: '',
@@ -433,6 +433,46 @@ export const ROUTES: RouteInfo[] = [
         badgeClass: '',
         isExternalLink: false,
         submenu: [
+          {
+            path: '/reports/trips/all',
+            title: 'All Trips',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/today',
+            title: 'Today Trips',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/ongoing',
+            title: 'Ongoing Trips',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/trips/upcoming',
+            title: 'Upcoming Trips',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
           {
             path: '/reports/trips/driver-sheet',
             title: 'Driver Sheet',
@@ -532,6 +572,39 @@ export const ROUTES: RouteInfo[] = [
           {
             path: '/reports/drivers/milage',
             title: 'Driver`s Daily Milage',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
+
+      // passengers
+      {
+        path: '/reports/passengers/all',
+        title: 'Passengers',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            path: '/reports/passengers/all',
+            title: 'All Passengers',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/passengers/trips',
+            title: 'Passenger vs Trips',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',

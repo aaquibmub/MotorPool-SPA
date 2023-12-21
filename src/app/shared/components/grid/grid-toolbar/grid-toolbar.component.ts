@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Renderer2 } from '@angular/core';
-import { GridComponent } from '@progress/kendo-angular-grid';
+import { ColumnBase, GridComponent } from '@progress/kendo-angular-grid';
 import { ActionButton } from './../../../../helper/models/common/grid/action-button';
 import { GridToolbarService } from './../../../../helper/services/common/grid-toolbar.service';
 import { UtilityService } from './../../../../helper/services/common/utility.service';
@@ -15,6 +15,7 @@ export class GridToolbarComponent implements OnInit {
   @Input() entity: string;
   @Input() hidePagingDropdown: boolean;
   @Input() hideExportDropdown: boolean;
+  @Input() hideColumnDropdown: boolean;
   @Input() createBtn: ActionButton;
   @Input() removeBtn: ActionButton;
   @Input() buttons: ActionButton[];
@@ -24,6 +25,9 @@ export class GridToolbarComponent implements OnInit {
 
   showOptionButtons = false;
   showExportMenu = false;
+
+  showColumnMenu = false;
+  columns: ColumnBase[] = [];
 
   pageDropdownData = [10, 25, 50, 100];
 
@@ -36,6 +40,7 @@ export class GridToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.docClickSubscription = this.renderer.listen(
       'document',
       'click',
@@ -89,6 +94,14 @@ export class GridToolbarComponent implements OnInit {
     this.grid.saveAsPDF();
   }
 
+  toggleColumnDropdownMenu(): void {
+    this.columns = this.grid.columns.toArray();
+    this.showColumnMenu = !this.showColumnMenu;
+  }
+
+  handleColumnChange(val: any): void {
+    this.gridToolbarService.setGridHiddenColumn(val.field);
+  }
 
   private onDocumentClick(e: any): void {
     const exportButtonClicked = this.utilityService.matches(
@@ -97,6 +110,25 @@ export class GridToolbarComponent implements OnInit {
     );
     if (!exportButtonClicked) {
       this.showExportMenu = false;
+    }
+    const columnMenuInputClicked = this.utilityService.matches(
+      e.target,
+      '.column-menu .control input'
+    );
+    const columnMenuLabelClicked = this.utilityService.matches(
+      e.target,
+      '.column-menu .control label'
+    );
+    debugger;
+    if (!columnMenuInputClicked && !columnMenuLabelClicked) {
+      const columnButtonClicked = this.utilityService.matches(
+        e.target,
+        '.column-dropdown .fa-ellipsis-v'
+      );
+      debugger;
+      if (!columnButtonClicked) {
+        this.showColumnMenu = false;
+      }
     }
   }
 

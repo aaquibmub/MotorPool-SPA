@@ -1,0 +1,185 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>Passenger vs Trips</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="grid-toolbar">
+      <div class="left"></div>
+      <div class="right" style="display: flex; justify-content: space-between">
+        <button class="btn btn-orange" (click)="exportToExcel(grid)">
+          <i class="fa fa-file-excel-o"></i> Excel
+        </button>
+      </div>
+    </div>
+    <div class="grid-content">
+      <app-grid-toolbar
+        [numberOfRecords]="gridData?.total"
+        entity="trip"
+      ></app-grid-toolbar>
+      <kendo-grid
+        #grid="kendoGrid"
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [sortable]="true"
+        [resizable]="true"
+        [reorderable]="true"
+        [pageable]="pageable"
+        [filter]="state.filter"
+        [filterable]="filterable"
+        (dataStateChange)="dataStateChange($event)"
+        (excelExport)="this.utilityService.onExcelExport($event, grid)"
+        scrollable="none"
+      >
+        <kendo-grid-column
+          field="name"
+          title="Passenger Name اسم الراكب"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column field="gender" title="Gender جنس" [width]="200">
+          <ng-template kendoGridFilterCellTemplate let-value="value">
+            <kendo-dropdownlist
+              style="width: 150px"
+              class="form-control"
+              textField="text"
+              valueField="value"
+              [defaultItem]="utilityService.dropdownAllItem"
+              (valueChange)="handleGenderValueChange($event)"
+              [data]="genderList"
+              [(ngModel)]="selectedGender"
+            >
+              <ng-template kendoDropDownListItemTemplate let-dataItem>
+                <span>{{ dataItem.text | translate }}</span>
+              </ng-template>
+            </kendo-dropdownlist>
+          </ng-template>
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span>{{ utilityService.getGenderLabel(dataItem.gender) }}</span>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="ageGroup"
+          title="Age Group الفئة العمرية"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="nationality"
+          title="Nationality جنسية"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="opm"
+          title="OPM Group أو بي أيم جماعة"
+          [width]="200"
+        >
+          <ng-template kendoGridFilterCellTemplate let-value="value">
+            <kendo-dropdownlist
+              style="width: 150px"
+              class="form-control"
+              textField="text"
+              valueField="value"
+              [defaultItem]="utilityService.dropdownAllItem"
+              (valueChange)="handleOpmValueChange($event)"
+              [data]="opmList"
+              [(ngModel)]="selectedOpm"
+            >
+              <ng-template kendoDropDownListItemTemplate let-dataItem>
+                <span>{{ dataItem.text | translate }}</span>
+              </ng-template>
+            </kendo-dropdownlist>
+          </ng-template>
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span>{{ utilityService.getOpmLabel(dataItem.opm) }}</span>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="tripSrNo"
+          title="Trip ID رقم الرحلة"
+          filter="numeric"
+          [width]="200"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            {{ dataItem.tripId }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="tripDate"
+          title="Date تاريخ"
+          filter="date"
+          [width]="200"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            {{ dataItem.tripDate | dateformat }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="driverName"
+          title="Driver Name اسم السائق"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="driverId"
+          title="Driver ID  رقم السائق"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="passengerStatus"
+          title="Passenger Status حالة الركاب"
+          [width]="200"
+        >
+          <ng-template kendoGridFilterCellTemplate let-value="value">
+            <kendo-dropdownlist
+              style="width: 200px"
+              class="form-control"
+              textField="text"
+              valueField="value"
+              [defaultItem]="utilityService.dropdownAllItem"
+              (valueChange)="handlePassengerStatusValueChange($event)"
+              [data]="passengerStatusList"
+              [(ngModel)]="selectedPassengerStatus"
+            >
+              <ng-template kendoDropDownListItemTemplate let-dataItem>
+                <span>{{ dataItem.text | translate }}</span>
+              </ng-template>
+            </kendo-dropdownlist>
+          </ng-template>
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span>{{
+              utilityService.getBooleanStatusLabel(dataItem.passengerStatus)
+            }}</span>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-excel fileName="AllPassenger.xlsx"> </kendo-grid-excel>
+      </kendo-grid>
+    </div>
+  </div>
+</div>

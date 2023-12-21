@@ -38,7 +38,8 @@ export enum TripType {
   Refuelling = 30,
 
   Today = 400,
-  Ongoing = 500
+  Ongoing = 500,
+  Upcoming = 600
 }
 
 export function GetTripTypeForDropdownList():
@@ -71,6 +72,24 @@ export enum TripRoute {
   Oneway = 10,
   RoundTrip = 20,
   Open = 30
+}
+
+export function GetTripRouteForDropdownList():
+  DropdownItem<TripRoute>[] {
+  return [
+    {
+      value: TripRoute.Oneway,
+      text: 'Onway'
+    },
+    {
+      value: TripRoute.RoundTrip,
+      text: 'Round Trip'
+    },
+    {
+      value: TripRoute.Open,
+      text: 'Open'
+    },
+  ];
 }
 
 export enum TripDestination {
@@ -345,6 +364,20 @@ export function GetBooleanForDropdownList():
     {
       value: false,
       text: 'No'
+    },
+  ];
+}
+
+export function GetBooleanStatusForDropdownList():
+  DropdownItem<boolean>[] {
+  return [
+    {
+      value: true,
+      text: 'Active'
+    },
+    {
+      value: false,
+      text: 'Disabled'
     },
   ];
 }

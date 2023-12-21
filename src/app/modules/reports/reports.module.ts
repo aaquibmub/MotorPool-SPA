@@ -15,9 +15,16 @@ import { ReportDriverMilageComponent } from './components/report-drivers/report-
 import { ReportDriverTripsComponent } from './components/report-drivers/report-driver-trips/report-driver-trips.component';
 import { ReportDriversAllComponent } from './components/report-drivers/report-drivers-all/report-drivers-all.component';
 import { ReportDriversComponent } from './components/report-drivers/report-drivers.component';
+import { ReportPassengerTripsComponent } from './components/report-passengers/report-passenger-trips/report-passenger-trips.component';
+import { ReportPassengersAllComponent } from './components/report-passengers/report-passengers-all/report-passengers-all.component';
+import { ReportPassengersComponent } from './components/report-passengers/report-passengers.component';
 import { ReportTripSheetComponent } from './components/report-trips/report-trip-sheet/report-trip-sheet.component';
+import { ReportTripsAllComponent } from './components/report-trips/report-trips-all/report-trips-all.component';
 import { ReportTripsDriverSheetComponent } from './components/report-trips/report-trips-driver-sheet/report-trips-driver-sheet.component';
+import { ReportTripsOngoingComponent } from './components/report-trips/report-trips-ongoing/report-trips-ongoing.component';
 import { ReportTripsPassengerSheetComponent } from './components/report-trips/report-trips-passenger-sheet/report-trips-passenger-sheet.component';
+import { ReportTripsTodayComponent } from './components/report-trips/report-trips-today/report-trips-today.component';
+import { ReportTripsUpcomingComponent } from './components/report-trips/report-trips-upcoming/report-trips-upcoming.component';
 import { ReportTripsVehicleSheetComponent } from './components/report-trips/report-trips-vehicle-sheet/report-trips-vehicle-sheet.component';
 import { ReportTripsComponent } from './components/report-trips/report-trips.component';
 import { ReportVehiclesAllComponent } from './components/report-vehicles/report-vehicles-all/report-vehicles-all.component';
@@ -51,6 +58,10 @@ import { ReportsComponent } from './reports.component';
     ReportTripsPassengerSheetComponent,
     ReportTripsVehicleSheetComponent,
     ReportTripSheetComponent,
+    ReportTripsAllComponent,
+    ReportTripsTodayComponent,
+    ReportTripsOngoingComponent,
+    ReportTripsUpcomingComponent,
 
     ReportVehiclesComponent,
     ReportVehiclesAllComponent,
@@ -59,6 +70,10 @@ import { ReportsComponent } from './reports.component';
     ReportDriversAllComponent,
     ReportDriverTripsComponent,
     ReportDriverMilageComponent,
+
+    ReportPassengersComponent,
+    ReportPassengersAllComponent,
+    ReportPassengerTripsComponent
   ],
   providers: [FilterService]
 })

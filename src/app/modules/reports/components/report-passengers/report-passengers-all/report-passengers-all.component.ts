@@ -1,0 +1,146 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
+import { flatten } from '@progress/kendo-angular-grid/dist/es2015/filtering/base-filter-cell.component';
+import { State } from '@progress/kendo-data-query';
+import { Subscription } from 'rxjs';
+import { Gender, GetBooleanStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, OPM } from 'src/app/helper/common/shared-types';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { ReportService } from 'src/app/helper/services/utilities/report.service';
+import { UtilityRix } from './../../../../../helper/common/utility-rix';
+import { DropdownItem } from './../../../../../helper/models/common/dropdown/dropdown-item.model';
+import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
+
+@Component({
+  selector: 'app-report-passengers-all',
+  templateUrl: './report-passengers-all.component.html',
+  styleUrls: ['./report-passengers-all.component.css']
+})
+export class ReportPassengersAllComponent implements OnInit, OnDestroy {
+  gridData: GridDataResult = UtilityRix.gridConfig.gridData;
+  state: State = UtilityRix.gridConfig.state;
+  pageable = UtilityRix.gridConfig.pageable;
+  filterable = UtilityRix.gridConfig.filterable;
+  searchQuery: string;
+
+  opmList: DropdownItem<OPM>[] = GetOpmForDropdownList();
+  selectedOpm: DropdownItem<OPM>;
+
+  genderList: DropdownItem<Gender>[] = GetGenderForDropdownList();
+  selectedGender: DropdownItem<Gender>;
+
+  passengerStatusList: DropdownItem<boolean>[] = GetBooleanStatusForDropdownList();
+  selectedPassengerStatus: DropdownItem<boolean>;
+
+  pageSizeSubscription: Subscription;
+  gridDataSubscription: Subscription;
+  gridSearchQuerySubscription: Subscription;
+
+  constructor(
+    public utilityService: UtilityService,
+    private reportService: ReportService,
+    private gridToolbarService: GridToolbarService
+  ) { }
+
+  ngOnInit(): void {
+
+    this.pageSizeSubscription = this.gridToolbarService.getPageSize()
+      .subscribe(
+        (pageSize: number) => {
+          this.state.take = pageSize;
+          this.reportService.fetchAllPassengerGridData(this.state, this.searchQuery);
+        }
+      );
+    this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
+      .subscribe(
+        (query: string) => {
+          this.searchQuery = query;
+          this.reportService.fetchAllPassengerGridData(this.state, this.searchQuery);
+        }
+      );
+
+    this.reportService.fetchAllPassengerGridData(this.state, this.searchQuery);
+    this.gridDataSubscription = this.reportService.getAllPassengerGridData()
+      .subscribe(
+        (data: any) => {
+          this.gridData.data = data.data;
+          this.gridData.total = data.total;
+        }
+      );
+
+  }
+
+  dataStateChange(state: DataStateChangeEvent): void {
+    this.state = state;
+    this.reportService.fetchAllPassengerGridData(state, this.searchQuery);
+  }
+
+  exportToExcel(grid: GridComponent): void {
+    grid.saveAsExcel();
+  }
+
+  handleGenderValueChange(value: DropdownItem<Gender>): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "gender");
+    if (!filter) {
+      root.filters.push({
+        field: "gender",
+        operator: "eq",
+        value: value.value
+      });
+    } else {
+      filter.value = value.value;
+    }
+    this.selectedGender = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
+  }
+
+  handleOpmValueChange(value: DropdownItem<OPM>): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "opm");
+    if (!filter) {
+      root.filters.push({
+        field: "opm",
+        operator: "eq",
+        value: value.value
+      });
+    } else {
+      filter.value = value.value;
+    }
+    this.selectedOpm = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
+  }
+
+  handlePassengerStatusValueChange(value: DropdownItem<boolean>): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "passengerStatus");
+    if (!filter) {
+      root.filters.push({
+        field: "passengerStatus",
+        operator: "eq",
+        value: value.value
+      });
+    } else {
+      filter.value = value.value;
+    }
+    this.selectedPassengerStatus = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
+  }
+
+  ngOnDestroy(): void {
+    if (this.pageSizeSubscription) {
+      this.pageSizeSubscription.unsubscribe();
+    }
+    if (this.gridDataSubscription) {
+      this.gridDataSubscription.unsubscribe();
+    }
+    if (this.gridSearchQuerySubscription) {
+      this.gridSearchQuerySubscription.unsubscribe();
+    }
+
+    this.state.filter = null;
+  }
+}
+

@@ -8,9 +8,16 @@ import { ReportDriverMilageComponent } from './components/report-drivers/report-
 import { ReportDriverTripsComponent } from './components/report-drivers/report-driver-trips/report-driver-trips.component';
 import { ReportDriversAllComponent } from './components/report-drivers/report-drivers-all/report-drivers-all.component';
 import { ReportDriversComponent } from './components/report-drivers/report-drivers.component';
+import { ReportPassengerTripsComponent } from './components/report-passengers/report-passenger-trips/report-passenger-trips.component';
+import { ReportPassengersAllComponent } from './components/report-passengers/report-passengers-all/report-passengers-all.component';
+import { ReportPassengersComponent } from './components/report-passengers/report-passengers.component';
 import { ReportTripSheetComponent } from './components/report-trips/report-trip-sheet/report-trip-sheet.component';
+import { ReportTripsAllComponent } from './components/report-trips/report-trips-all/report-trips-all.component';
 import { ReportTripsDriverSheetComponent } from './components/report-trips/report-trips-driver-sheet/report-trips-driver-sheet.component';
+import { ReportTripsOngoingComponent } from './components/report-trips/report-trips-ongoing/report-trips-ongoing.component';
 import { ReportTripsPassengerSheetComponent } from './components/report-trips/report-trips-passenger-sheet/report-trips-passenger-sheet.component';
+import { ReportTripsTodayComponent } from './components/report-trips/report-trips-today/report-trips-today.component';
+import { ReportTripsUpcomingComponent } from './components/report-trips/report-trips-upcoming/report-trips-upcoming.component';
 import { ReportTripsVehicleSheetComponent } from './components/report-trips/report-trips-vehicle-sheet/report-trips-vehicle-sheet.component';
 import { ReportTripsComponent } from './components/report-trips/report-trips.component';
 import { ReportVehiclesAllComponent } from './components/report-vehicles/report-vehicles-all/report-vehicles-all.component';
@@ -27,11 +34,16 @@ const routes: Routes = [
         path: 'trips',
         component: ReportTripsComponent,
         children: [
-          { path: '', redirectTo: 'driver-sheet', pathMatch: 'full' },
+          { path: '', redirectTo: 'all', pathMatch: 'full' },
+          { path: 'all', component: ReportTripsAllComponent },
+          { path: 'today', component: ReportTripsTodayComponent },
+          { path: 'ongoing', component: ReportTripsOngoingComponent },
+          { path: 'upcoming', component: ReportTripsUpcomingComponent },
+          { path: 'ongoing', component: ReportTripsOngoingComponent },
           { path: 'driver-sheet', component: ReportTripsDriverSheetComponent },
           { path: 'passenger-sheet', component: ReportTripsPassengerSheetComponent },
           { path: 'vehicle-sheet', component: ReportTripsVehicleSheetComponent },
-          { path: 'trip-sheet', component: ReportTripSheetComponent }
+          { path: 'trip-sheet', component: ReportTripSheetComponent },
         ]
       },
       {
@@ -50,6 +62,15 @@ const routes: Routes = [
           { path: 'all', component: ReportDriversAllComponent },
           { path: 'trips', component: ReportDriverTripsComponent },
           { path: 'milage', component: ReportDriverMilageComponent },
+        ]
+      },
+      {
+        path: 'passengers',
+        component: ReportPassengersComponent,
+        children: [
+          { path: '', redirectTo: 'all', pathMatch: 'full' },
+          { path: 'all', component: ReportPassengersAllComponent },
+          { path: 'trips', component: ReportPassengerTripsComponent },
         ]
       },
       {

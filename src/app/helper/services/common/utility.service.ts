@@ -5,7 +5,7 @@ import { IntlService } from '@progress/kendo-angular-intl';
 import { ZonedDate } from '@progress/kendo-date-math';
 import { Howl, Howler } from 'howler';
 import { LanguageKeys } from '../../common/language-keys';
-import { DriverStatus, Gender, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripStatus, TripType, VehicalStatus } from '../../common/shared-types';
+import { DriverStatus, Gender, GetBooleanStatusForDropdownList, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripRoute, TripStatus, TripType, VehicalStatus } from '../../common/shared-types';
 import { AuthService } from '../auth/auth.service';
 @Injectable({
   providedIn: 'root'
@@ -158,8 +158,20 @@ export class UtilityService {
     return status != null ? status.text : '';
   }
 
+  getTripRouteLabel(value: TripRoute): string {
+    var statusList = GetTripRouteForDropdownList();
+    var status = statusList.find(f => f.value == value);
+    return status != null ? status.text : '';
+  }
+
   getTripStatusLabel(value: TripStatus): string {
     var statusList = GetTripStatusForDropdownList();
+    var status = statusList.find(f => f.value == value);
+    return status != null ? status.text : '';
+  }
+
+  getBooleanStatusLabel(value: boolean): string {
+    var statusList = GetBooleanStatusForDropdownList();
     var status = statusList.find(f => f.value == value);
     return status != null ? status.text : '';
   }
@@ -249,8 +261,24 @@ export class UtilityService {
               row.cells[columnField.cellIndex].value = this.getOpmLabel(dataItemValue);
               break;
             }
+            case 'gender': {
+              row.cells[columnField.cellIndex].value = this.getGenderLabel(dataItemValue);
+              break;
+            }
+            case 'passengerStatus': {
+              row.cells[columnField.cellIndex].value = this.getBooleanStatusLabel(dataItemValue);
+              break;
+            }
             case 'destination': {
               row.cells[columnField.cellIndex].value = this.getTripDestinationLabel(dataItemValue);
+              break;
+            }
+            case 'tripDestination': {
+              row.cells[columnField.cellIndex].value = this.getTripDestinationLabel(dataItemValue);
+              break;
+            }
+            case 'tripRoute': {
+              row.cells[columnField.cellIndex].value = this.getTripRouteLabel(dataItemValue);
               break;
             }
             case 'driverStatus': {

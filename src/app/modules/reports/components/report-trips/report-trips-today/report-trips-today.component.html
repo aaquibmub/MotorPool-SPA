@@ -1,0 +1,223 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>Today Trips</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="grid-toolbar">
+      <div class="left"></div>
+      <div class="right" style="display: flex; justify-content: space-between">
+        <button class="btn btn-orange" (click)="exportToExcel(grid)">
+          <i class="fa fa-file-excel-o"></i> Excel
+        </button>
+      </div>
+    </div>
+    <div class="grid-content">
+      <app-grid-toolbar
+        [numberOfRecords]="gridData?.total"
+        entity="trip"
+      ></app-grid-toolbar>
+      <kendo-grid
+        #grid="kendoGrid"
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [sortable]="true"
+        [resizable]="true"
+        [reorderable]="true"
+        [pageable]="pageable"
+        [filter]="state.filter"
+        [filterable]="filterable"
+        (dataStateChange)="dataStateChange($event)"
+        (excelExport)="this.utilityService.onExcelExport($event, grid)"
+        scrollable="none"
+      >
+        <kendo-grid-column
+          field="tripSrNo"
+          title="Trip ID رقم الرحلة"
+          filter="numeric"
+          [width]="200"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            {{ dataItem.tripId }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="tripDate"
+          title="Date تاريخ"
+          filter="date"
+          [width]="200"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            {{ dataItem.tripDate | dateformat }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="pickupTime"
+          title="Pickup Time اخذ الراكب"
+          [width]="200"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            {{ dataItem.pickupTime | dateformat : "hh:mm aa" }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="tripRoute"
+          title="Trip Type نوع الرحلة"
+          [width]="200"
+        >
+          <ng-template kendoGridFilterCellTemplate let-value="value">
+            <kendo-dropdownlist
+              style="width: 150px"
+              class="form-control"
+              textField="text"
+              valueField="value"
+              [defaultItem]="utilityService.dropdownAllItem"
+              (valueChange)="handleTripRouteValueChange($event)"
+              [data]="tripRouteList"
+              [(ngModel)]="selectedTripRoute"
+            >
+              <ng-template kendoDropDownListItemTemplate let-dataItem>
+                <span>{{ dataItem.text | translate }}</span>
+              </ng-template>
+            </kendo-dropdownlist>
+          </ng-template>
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span>{{
+              utilityService.getTripRouteLabel(dataItem.tripRoute)
+            }}</span>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="passengerName"
+          title="Passenger Name اسم الراكب"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="opm"
+          title="OPM Group أو بي أيم جماعة"
+          [width]="200"
+        >
+          <ng-template kendoGridFilterCellTemplate let-value="value">
+            <kendo-dropdownlist
+              style="width: 150px"
+              class="form-control"
+              textField="text"
+              valueField="value"
+              [defaultItem]="utilityService.dropdownAllItem"
+              (valueChange)="handleOpmValueChange($event)"
+              [data]="opmList"
+              [(ngModel)]="selectedOpm"
+            >
+              <ng-template kendoDropDownListItemTemplate let-dataItem>
+                <span>{{ dataItem.text | translate }}</span>
+              </ng-template>
+            </kendo-dropdownlist>
+          </ng-template>
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span>{{ utilityService.getOpmLabel(dataItem.opm) }}</span>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="tripDestination"
+          title="Destination مكان الوصول"
+          [width]="200"
+        >
+          <ng-template kendoGridFilterCellTemplate let-value="value">
+            <kendo-dropdownlist
+              style="width: 150px"
+              class="form-control"
+              textField="text"
+              valueField="value"
+              [defaultItem]="utilityService.dropdownAllItem"
+              (valueChange)="handleTripDestinationValueChange($event)"
+              [data]="tripDestinationList"
+              [(ngModel)]="selectedTripDestination"
+            >
+              <ng-template kendoDropDownListItemTemplate let-dataItem>
+                <span>{{ dataItem.text | translate }}</span>
+              </ng-template>
+            </kendo-dropdownlist>
+          </ng-template>
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span>{{
+              utilityService.getTripDestinationLabel(dataItem.tripDestination)
+            }}</span>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="requestedBy"
+          title="Requested By بتوصية من"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="bookedBy"
+          title="Booked By تم الحجز بواسطة"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="driverStatus"
+          title="Status حالة"
+          [width]="200"
+        >
+          <ng-template kendoGridFilterCellTemplate let-value="value">
+            <kendo-dropdownlist
+              style="width: 200px"
+              class="form-control"
+              textField="text"
+              valueField="value"
+              [defaultItem]="utilityService.dropdownAllItem"
+              (valueChange)="handleTripStatusValueChange($event)"
+              [data]="tripStatusList"
+              [(ngModel)]="selectedTripStatus"
+            >
+              <ng-template kendoDropDownListItemTemplate let-dataItem>
+                <span>{{ dataItem.text | translate }}</span>
+              </ng-template>
+            </kendo-dropdownlist>
+          </ng-template>
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span>{{
+              utilityService.getTripStatusLabel(dataItem.tripStatus)
+            }}</span>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-excel fileName="AllTrips.xlsx"> </kendo-grid-excel>
+      </kendo-grid>
+    </div>
+  </div>
+</div>
