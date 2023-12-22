@@ -34,6 +34,7 @@ export class ReportPassengersAllComponent implements OnInit, OnDestroy {
   pageSizeSubscription: Subscription;
   gridDataSubscription: Subscription;
   gridSearchQuerySubscription: Subscription;
+  gridFilterSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -42,6 +43,13 @@ export class ReportPassengersAllComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
+    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
+      .subscribe(
+        (show: boolean) => {
+          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+        }
+      );
 
     this.pageSizeSubscription = this.gridToolbarService.getPageSize()
       .subscribe(
@@ -138,6 +146,9 @@ export class ReportPassengersAllComponent implements OnInit, OnDestroy {
     }
     if (this.gridSearchQuerySubscription) {
       this.gridSearchQuerySubscription.unsubscribe();
+    }
+    if (this.gridFilterSubscription) {
+      this.gridFilterSubscription.unsubscribe();
     }
 
     this.state.filter = null;

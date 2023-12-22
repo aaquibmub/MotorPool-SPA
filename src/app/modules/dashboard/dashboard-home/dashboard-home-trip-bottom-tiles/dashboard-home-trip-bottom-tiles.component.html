@@ -5,6 +5,7 @@
       title="Trips OPM"
       subtitle="Today"
       [count]="countModel?.todayOpmTrips"
+      [reportLink]="'/reports/trips/opm-today'"
     ></app-dashboard-home-trip-bottom-tile>
   </div>
   <div class="col-3">
@@ -13,6 +14,7 @@
       title="Trips OPM"
       [subtitle]="currentMonth"
       [count]="countModel?.currentMonthOpmTrips"
+      [reportLink]="'/reports/trips/opm-current-month'"
     ></app-dashboard-home-trip-bottom-tile>
   </div>
   <div class="col-3">
@@ -21,6 +23,7 @@
       title="Trips Saudi"
       subtitle="Today"
       [count]="countModel?.todaySaudiTrips"
+      [reportLink]="'/reports/trips/saudi-today'"
     ></app-dashboard-home-trip-bottom-tile>
   </div>
   <div class="col-3">
@@ -29,6 +32,7 @@
       title="Trips Saudi"
       [subtitle]="currentMonth"
       [count]="countModel?.currentMonthSaudiTrips"
+      [reportLink]="'/reports/trips/saudi-current-month'"
     ></app-dashboard-home-trip-bottom-tile>
   </div>
 </div>
@@ -39,6 +43,7 @@
       title="Milage OPM"
       [subtitle]="'Today'"
       [count]="countModel?.todayOpmMilage"
+      [reportLink]="'/reports/trips/opm-milage-today'"
     ></app-dashboard-home-trip-bottom-tile>
   </div>
   <div class="col-3">
@@ -47,6 +52,7 @@
       title="Milage OPM"
       [subtitle]="currentMonth"
       [count]="countModel?.currentMonthOpmMilage"
+      [reportLink]="'/reports/trips/opm-milage-current-month'"
     ></app-dashboard-home-trip-bottom-tile>
   </div>
   <div class="col-3">
@@ -55,6 +61,7 @@
       title="Milage Saudi"
       subtitle="Today"
       [count]="countModel?.todaySaudiMilage"
+      [reportLink]="'/reports/trips/saudi-milage-today'"
     ></app-dashboard-home-trip-bottom-tile>
   </div>
   <div class="col-3">
@@ -63,6 +70,7 @@
       title="Milage Saudi"
       [subtitle]="currentMonth"
       [count]="countModel?.currentMonthSaudiMilage"
+      [reportLink]="'/reports/trips/saudi-milage-current-month'"
     ></app-dashboard-home-trip-bottom-tile>
   </div>
 </div>

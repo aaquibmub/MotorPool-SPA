@@ -33,6 +33,7 @@ export class ReportVehiclesAllComponent implements OnInit, OnDestroy {
   pageSizeSubscription: Subscription;
   gridDataSubscription: Subscription;
   gridSearchQuerySubscription: Subscription;
+  gridFilterSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -41,6 +42,13 @@ export class ReportVehiclesAllComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
+    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
+      .subscribe(
+        (show: boolean) => {
+          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+        }
+      );
 
     this.vehicleStatusList = GetVehicalStatusForDropdownList();
 
@@ -116,6 +124,9 @@ export class ReportVehiclesAllComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.gridDataSubscription) {
       this.gridDataSubscription.unsubscribe();
+    }
+    if (this.gridFilterSubscription) {
+      this.gridFilterSubscription.unsubscribe();
     }
 
     this.state.filter = null;

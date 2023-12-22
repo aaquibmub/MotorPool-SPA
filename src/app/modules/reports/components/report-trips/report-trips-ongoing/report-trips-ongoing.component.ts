@@ -37,6 +37,7 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
   pageSizeSubscription: Subscription;
   gridDataSubscription: Subscription;
   gridSearchQuerySubscription: Subscription;
+  gridFilterSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -45,6 +46,13 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
+    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
+      .subscribe(
+        (show: boolean) => {
+          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+        }
+      );
 
     this.tripStatusList = this.tripStatusList.filter(f => f.value >= TripStatus.AssignedToDriver && f.value < TripStatus.Completed);
 
@@ -160,6 +168,9 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
     }
     if (this.gridSearchQuerySubscription) {
       this.gridSearchQuerySubscription.unsubscribe();
+    }
+    if (this.gridFilterSubscription) {
+      this.gridFilterSubscription.unsubscribe();
     }
 
     this.state.filter = null;

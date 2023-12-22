@@ -6,7 +6,9 @@
       </div>
       <div class="tile-title">{{ title }}</div>
     </div>
-    <div class="tile-top-count">{{ count }}</div>
+    <div class="tile-top-count k-cursor-pointer" [routerLink]="reportLink">
+      {{ count }}
+    </div>
   </div>
   <div class="tile-bottom">
     <div class="display-flex">

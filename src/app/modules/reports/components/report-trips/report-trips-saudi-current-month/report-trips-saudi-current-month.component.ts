@@ -40,6 +40,7 @@ export class ReportTripsSaudiCurrentMonthComponent implements OnInit, OnDestroy 
   gridDataSubscription: Subscription;
   gridSearchQuerySubscription: Subscription;
   gridColumnsSubscription: Subscription;
+  gridFilterSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -48,6 +49,13 @@ export class ReportTripsSaudiCurrentMonthComponent implements OnInit, OnDestroy 
   ) { }
 
   ngOnInit(): void {
+
+    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
+      .subscribe(
+        (show: boolean) => {
+          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+        }
+      );
 
     this.pageSizeSubscription = this.gridToolbarService.getPageSize()
       .subscribe(
@@ -185,6 +193,9 @@ export class ReportTripsSaudiCurrentMonthComponent implements OnInit, OnDestroy 
     }
     if (this.gridColumnsSubscription) {
       this.gridColumnsSubscription.unsubscribe();
+    }
+    if (this.gridFilterSubscription) {
+      this.gridFilterSubscription.unsubscribe();
     }
 
     this.state.filter = null;

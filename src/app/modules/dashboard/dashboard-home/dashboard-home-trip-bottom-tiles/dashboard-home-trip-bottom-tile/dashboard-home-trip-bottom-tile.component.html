@@ -7,6 +7,8 @@
       <div class="tile-title pb-16">{{ title }}</div>
       <div class="tile-sub-title pb-16">{{ subtitle }}</div>
     </div>
-    <div class="tile-top-count">{{ count }}</div>
+    <div class="tile-top-count k-cursor-pointer" [routerLink]="reportLink">
+      {{ count }}
+    </div>
   </div>
 </div>

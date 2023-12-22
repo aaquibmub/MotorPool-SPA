@@ -40,6 +40,7 @@ export class ReportTripsUpcomingComponent implements OnInit, OnDestroy {
   gridDataSubscription: Subscription;
   gridSearchQuerySubscription: Subscription;
   gridColumnsSubscription: Subscription;
+  gridFilterSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -48,6 +49,13 @@ export class ReportTripsUpcomingComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
+    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
+      .subscribe(
+        (show: boolean) => {
+          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+        }
+      );
 
     this.tripStatusList = this.tripStatusList.filter(f => f.value >= TripStatus.Created && f.value <= TripStatus.AssignedToDriver);
 
@@ -187,6 +195,9 @@ export class ReportTripsUpcomingComponent implements OnInit, OnDestroy {
     }
     if (this.gridColumnsSubscription) {
       this.gridColumnsSubscription.unsubscribe();
+    }
+    if (this.gridFilterSubscription) {
+      this.gridFilterSubscription.unsubscribe();
     }
 
     this.state.filter = null;

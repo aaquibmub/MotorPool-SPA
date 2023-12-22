@@ -10,6 +10,7 @@ export class DashboardHomeTripBottomTileComponent implements OnInit {
   @Input() title: string;
   @Input() subtitle: string;
   @Input() count: string;
+  @Input() reportLink: string;
 
   constructor() { }
 

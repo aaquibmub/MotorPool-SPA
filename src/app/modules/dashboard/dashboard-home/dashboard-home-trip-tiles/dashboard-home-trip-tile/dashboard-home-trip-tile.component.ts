@@ -9,6 +9,7 @@ export class DashboardHomeTripTileComponent implements OnInit {
   @Input() iconClass: string;
   @Input() title: string;
   @Input() count: string;
+  @Input() reportLink: string;
   @Input() bottomLeftLable: string;
   @Input() bottomLeftValue: string;
   @Input() bottomRightLable: string;
