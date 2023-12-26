@@ -26,6 +26,7 @@ export class TripOngoingListComponent implements OnInit, OnDestroy {
   pageSizeSubscription: Subscription;
   tripExecutePopupSubscription: Subscription;
   tripCancelPopupSubscription: Subscription;
+  gridFilterSubscription: Subscription;
 
   constructor(
     private tripService: TripService,
@@ -34,7 +35,12 @@ export class TripOngoingListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-
+    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
+      .subscribe(
+        (show: boolean) => {
+          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+        }
+      );
     this.tripExecutePopupSubscription = this.tripService.getTripExecutePopup()
       .subscribe(
         (config: PopupConfigModel) => {
@@ -134,6 +140,9 @@ export class TripOngoingListComponent implements OnInit, OnDestroy {
     }
     if (this.tripCancelPopupSubscription) {
       this.tripCancelPopupSubscription.unsubscribe();
+    }
+    if (this.gridFilterSubscription) {
+      this.gridFilterSubscription.unsubscribe();
     }
   }
 }
