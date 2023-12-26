@@ -9,7 +9,7 @@ export class UtilityRix {
       total: 0,
     },
     state: {
-      take: 10,
+      take: 20,
       skip: 0,
       filter: null
     },
@@ -17,9 +17,10 @@ export class UtilityRix {
       alwaysVisible: false,
       buttonCount: 3,
       responsive: true,
-      info: false
+      info: false,
+      pageSizes: [20, 50, 100, 200, 300]
     },
-    filterable: 'row'
+    filterable: 'row',
   };
 
   static dropdownRequired(control: UntypedFormControl): { [s: string]: boolean } {

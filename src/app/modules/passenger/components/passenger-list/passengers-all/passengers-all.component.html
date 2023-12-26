@@ -1,7 +1,8 @@
 <div class="grid-content">
   <app-grid-toolbar
     [numberOfRecords]="gridData?.total"
-    entity="driver"
+    entity="passenger"
+    [hideColumnDropdown]="true"
   ></app-grid-toolbar>
   <kendo-grid
     [data]="gridData"
@@ -34,5 +35,26 @@
         ></app-grid-action-dropdown>
       </ng-template>
     </kendo-grid-column>
+    <ng-template
+      kendoPagerTemplate
+      let-totalPages="totalPages"
+      let-currentPage="currentPage"
+    >
+      <div class="grid-toolbar">
+        <div class="left">
+          <kendo-pager-page-sizes
+            [pageSizes]="pageable.pageSizes"
+          ></kendo-pager-page-sizes>
+        </div>
+        <div class="right">
+          <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+          <kendo-pager-next-buttons></kendo-pager-next-buttons>
+        </div>
+      </div>
+    </ng-template>
+    <kendo-grid-messages
+      pagerItemsPerPage="records per page"
+      pagerItems="rows"
+    ></kendo-grid-messages>
   </kendo-grid>
 </div>
