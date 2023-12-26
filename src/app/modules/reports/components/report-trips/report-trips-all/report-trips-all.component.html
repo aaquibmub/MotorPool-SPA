@@ -16,6 +16,8 @@
     </div>
     <div class="grid-content">
       <app-grid-toolbar
+        *ngIf="grid"
+        [grid]="grid"
         [numberOfRecords]="gridData?.total"
         entity="trip"
       ></app-grid-toolbar>
@@ -40,6 +42,7 @@
           title="Trip ID رقم الرحلة"
           filter="numeric"
           [width]="200"
+          [hidden]="isHidden('tripSrNo')"
         >
           <ng-template
             kendoGridCellTemplate
@@ -54,6 +57,7 @@
           title="Date تاريخ"
           filter="date"
           [width]="200"
+          [hidden]="isHidden('tripDate')"
         >
           <ng-template
             kendoGridCellTemplate
@@ -67,6 +71,7 @@
           field="pickupTime"
           title="Pickup Time اخذ الراكب"
           [width]="200"
+          [hidden]="isHidden('pickupTime')"
         >
           <ng-template
             kendoGridCellTemplate
@@ -80,6 +85,7 @@
           field="tripRoute"
           title="Trip Type نوع الرحلة"
           [width]="200"
+          [hidden]="isHidden('tripRoute')"
         >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
@@ -111,12 +117,14 @@
           field="passengerName"
           title="Passenger Name اسم الراكب"
           [width]="200"
+          [hidden]="isHidden('passengerName')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="opm"
           title="OPM Group أو بي أيم جماعة"
           [width]="200"
+          [hidden]="isHidden('opm')"
         >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
@@ -146,6 +154,7 @@
           field="tripDestination"
           title="Destination مكان الوصول"
           [width]="200"
+          [hidden]="isHidden('tripDestination')"
         >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
@@ -177,18 +186,21 @@
           field="requestedBy"
           title="Requested By بتوصية من"
           [width]="200"
+          [hidden]="isHidden('requestedBy')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="bookedBy"
           title="Booked By تم الحجز بواسطة"
           [width]="200"
+          [hidden]="isHidden('bookedBy')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="driverStatus"
           title="Status حالة"
           [width]="200"
+          [hidden]="isHidden('driverStatus')"
         >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist

@@ -16,11 +16,13 @@ import { GridToolbarService } from './../../../../../helper/services/common/grid
   styleUrls: ['./report-trips-ongoing.component.css']
 })
 export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
+  grid: GridComponent;
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
+  hiddenColumns: string[] = [];
 
   tripRouteList: DropdownItem<TripRoute>[] = GetTripRouteForDropdownList();
   selectedTripRoute: DropdownItem<TripRoute>;
@@ -36,6 +38,7 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
 
   pageSizeSubscription: Subscription;
   gridDataSubscription: Subscription;
+  gridColumnsSubscription: Subscription;
   gridSearchQuerySubscription: Subscription;
   gridFilterSubscription: Subscription;
 
@@ -68,6 +71,13 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
         (query: string) => {
           this.searchQuery = query;
           this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.Ongoing);
+        }
+      );
+    this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
+      .subscribe(
+        (column: string) => {
+          debugger;
+          this.hideColumn(column);
         }
       );
     this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.Ongoing);
@@ -159,6 +169,20 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
     this.dataStateChange(this.state as DataStateChangeEvent);
   }
 
+  isHidden(columnName: string): boolean {
+    return this.hiddenColumns.indexOf(columnName) > -1;
+  }
+
+  hideColumn(columnName: string): void {
+    const hiddenColumns = this.hiddenColumns;
+
+    if (!this.isHidden(columnName)) {
+      hiddenColumns.push(columnName);
+    } else {
+      hiddenColumns.splice(hiddenColumns.indexOf(columnName), 1);
+    }
+  }
+
   ngOnDestroy(): void {
     if (this.pageSizeSubscription) {
       this.pageSizeSubscription.unsubscribe();
@@ -168,6 +192,9 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
     }
     if (this.gridSearchQuerySubscription) {
       this.gridSearchQuerySubscription.unsubscribe();
+    }
+    if (this.gridColumnsSubscription) {
+      this.gridColumnsSubscription.unsubscribe();
     }
     if (this.gridFilterSubscription) {
       this.gridFilterSubscription.unsubscribe();
