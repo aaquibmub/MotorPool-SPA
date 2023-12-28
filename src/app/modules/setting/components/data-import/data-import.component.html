@@ -1,0 +1,25 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>Data Import</span>
+    </div>
+    <div class="page-breadcrum">
+      <span>Settings </span> / <span> Data Import</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <kendo-panelbar [expandMode]="'single'">
+      <kendo-panelbar-item title="Passengers" [expanded]="true">
+        <ng-template kendoPanelBarContent>
+          <app-passenger-data-import></app-passenger-data-import>
+        </ng-template>
+      </kendo-panelbar-item>
+      <kendo-panelbar-item title="Addresses">
+        <ng-template kendoPanelBarContent>
+          <app-address-data-import></app-address-data-import>
+        </ng-template>
+      </kendo-panelbar-item>
+    </kendo-panelbar>
+  </div>
+</div>

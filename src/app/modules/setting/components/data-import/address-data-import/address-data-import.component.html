@@ -1,0 +1,42 @@
+<div class="card card-transparent p-24">
+  <div class="card-block">
+    <form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+      <div class="form-wrapper">
+        <div class="form-main">
+          <div class="form-section">
+            <div class="section-body">
+              <div class="fields">
+                <div class="form-group">
+                  Download and import template&nbsp;
+                  <a (click)="downloadTemplate()">Download</a>
+                </div>
+                <div class="form-group">
+                  <div class="control">
+                    <input
+                      style="margin-top: 20px"
+                      type="file"
+                      class="form-control"
+                      (change)="handleFileInput($event)"
+                    />
+                    <div
+                      *ngIf="!form.get('fileName').valid"
+                      class="invalid-feedback"
+                    >
+                      File is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- Log List -->
+    <div>
+      <app-data-import-log-grid-list
+        [entity]="entity.Address"
+      ></app-data-import-log-grid-list>
+    </div>
+  </div>
+</div>

@@ -432,3 +432,14 @@ export function GetOpmForDropdownList():
     },
   ];
 }
+
+export enum DataImportEntity {
+  Passenger = 10,
+  Address = 20
+}
+
+export enum DataImportStatus {
+  InProgress = 10,
+  Completed = 20,
+  Failed = 30
+}

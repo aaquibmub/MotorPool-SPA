@@ -1,15 +1,16 @@
-import { NotificationsComponent } from './components/notifications/notifications.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
-import { SettingComponent } from './setting.component';
-import { UserManagmentComponent } from './components/user-managment/user-managment.component';
-import { UsersComponent } from './components/user-managment/users/users.component';
-import { RolesComponent } from './components/user-managment/roles/roles.component';
-import { UserComponent } from './components/user-managment/user/user.component';
-import { UserEditComponent } from './components/user-managment/user/user-edit/user-edit.component';
-import { RoleComponent } from './components/user-managment/role/role.component';
+import { DataImportComponent } from './components/data-import/data-import.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 import { RoleEditComponent } from './components/user-managment/role/role-edit/role-edit.component';
+import { RoleComponent } from './components/user-managment/role/role.component';
+import { RolesComponent } from './components/user-managment/roles/roles.component';
+import { UserManagmentComponent } from './components/user-managment/user-managment.component';
+import { UserEditComponent } from './components/user-managment/user/user-edit/user-edit.component';
+import { UserComponent } from './components/user-managment/user/user.component';
+import { UsersComponent } from './components/user-managment/users/users.component';
+import { SettingComponent } from './setting.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,12 @@ const routes: Routes = [
           { path: 'new', component: RoleEditComponent },
           { path: ':id/edit', component: RoleEditComponent },
         ]
+      },
+
+      // data import
+      {
+        path: 'data-import',
+        component: DataImportComponent
       },
 
     ]
