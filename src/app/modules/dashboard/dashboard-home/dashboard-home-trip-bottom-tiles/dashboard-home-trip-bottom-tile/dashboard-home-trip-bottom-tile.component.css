@@ -8,18 +8,29 @@
 }
 
 .tile-top {
-  display: flex;
+  display: block;
   justify-content: space-between;
   background-color: white;
   padding: 16px;
-  flex: 3;
 }
 
 .tile-top .tile-top-info {
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: start;
-  flex: 1;
+}
+
+.tile-top-info .tile-icon {
+  display: flex;
+}
+
+.tile-top-info .tile-icon .title {
+  padding: 5px 0 0 14px;
+}
+
+.tile-top-info .tile-icon .tile-icon-inner {
+  flex:1;
+  max-width: 60px;
 }
 
 .tile-title {
@@ -34,84 +45,97 @@
 }
 
 .tile-top-count {
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: center;
-  flex: 1;
-  font-size: 80px;
+  line-height: 1;
+  font-size: 40px;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
   overflow: auto;
+  padding-left: 12px;
 }
 
 .opm-blue-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/opm-icons/ico-opm-a.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .opm-yellow-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/opm-icons/ico-opm-b.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .today-saudi-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-trip-saudi/ico-trip-saudi-a.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .month-saudi-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-trip-saudi/ico-trip-saudi-b.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .today-milage-opm-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-milage/ico-milage.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .month-milage-opm-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-milage/ico-milage-c.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .today-milage-saudi-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-milage-saudi/ico-milage-saudi.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .month-milage-saudi-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-trip-saudi/ico-trip-saudi-c-1.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .oil-change-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-oil.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .trips-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-trip-b.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .today-milage-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-milage/ico-milage-c.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .month-milage-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-milage/ico-milage-d.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
