@@ -24,6 +24,7 @@ export class AddressesAllComponent implements OnInit {
   searchQuery: string;
 
   pageSizeSubscription: Subscription;
+  gridFilterSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -33,6 +34,12 @@ export class AddressesAllComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
+      .subscribe(
+        (show: boolean) => {
+          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+        }
+      );
     this.pageSizeSubscription = this.gridToolbarService.getPageSize()
       .subscribe(
         (pageSize: number) => {
@@ -87,5 +94,8 @@ export class AddressesAllComponent implements OnInit {
 
   ngOnDestroy(): void {this.ngOnDestroy
     this.pageSizeSubscription.unsubscribe();
+    if (this.gridFilterSubscription) {
+      this.gridFilterSubscription.unsubscribe();
+    }
   }
 }
