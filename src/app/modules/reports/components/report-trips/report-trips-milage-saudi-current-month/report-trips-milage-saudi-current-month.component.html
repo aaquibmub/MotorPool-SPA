@@ -73,6 +73,9 @@
           filter="numeric"
           [width]="150"
         >
+          <ng-template kendoGridFooterTemplate>
+            Total Milage: {{ aggregateResult?.milageInKm?.sum }}
+          </ng-template>
         </kendo-grid-column>
         <kendo-grid-excel fileName="Saudi-Milage-CurrentMonth.xlsx">
         </kendo-grid-excel>

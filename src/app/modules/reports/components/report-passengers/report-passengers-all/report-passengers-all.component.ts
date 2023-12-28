@@ -48,6 +48,8 @@ export class ReportPassengersAllComponent implements OnInit, OnDestroy {
       .subscribe(
         (show: boolean) => {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+          this.state.filter = null;
+          this.reportService.fetchAllPassengerGridData(this.state, this.searchQuery);
         }
       );
 

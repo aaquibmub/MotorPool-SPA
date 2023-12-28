@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
-import { State } from '@progress/kendo-data-query';
+import { AggregateDescriptor, State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
 import { OPM, TripType } from 'src/app/helper/common/shared-types';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
@@ -19,6 +19,10 @@ export class ReportTripsMilageOpmCurrentMonthComponent implements OnInit, OnDest
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
+  aggregates: AggregateDescriptor[] = [
+    { field: 'MilageInKm', aggregate: 'sum' }
+  ];
+  aggregateResult: any[] = [];
   searchQuery: string;
   hiddenColumns: string[] = [];
 
@@ -40,6 +44,9 @@ export class ReportTripsMilageOpmCurrentMonthComponent implements OnInit, OnDest
       .subscribe(
         (show: boolean) => {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+          this.state.filter = null;
+          this.reportService.fetchTripMilageGridData(
+            this.state, this.searchQuery, this.aggregates, TripType.CurrentMonth, OPM.USSide);
         }
       );
 
@@ -47,29 +54,32 @@ export class ReportTripsMilageOpmCurrentMonthComponent implements OnInit, OnDest
       .subscribe(
         (pageSize: number) => {
           this.state.take = pageSize;
-          this.reportService.fetchTripMilageGridData(this.state, this.searchQuery, TripType.CurrentMonth, OPM.USSide);
+          this.reportService.fetchTripMilageGridData(
+            this.state, this.searchQuery, this.aggregates, TripType.CurrentMonth, OPM.USSide);
         }
       );
     this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.reportService.fetchTripMilageGridData(this.state, this.searchQuery, TripType.CurrentMonth, OPM.USSide);
+          this.reportService.fetchTripMilageGridData(
+            this.state, this.searchQuery, this.aggregates, TripType.CurrentMonth, OPM.USSide);
         }
       );
     this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
       .subscribe(
         (column: string) => {
-          debugger;
           this.hideColumn(column);
         }
       );
-    this.reportService.fetchTripMilageGridData(this.state, this.searchQuery, TripType.CurrentMonth, OPM.USSide);
+    this.reportService.fetchTripMilageGridData(
+      this.state, this.searchQuery, this.aggregates, TripType.CurrentMonth, OPM.USSide);
     this.gridDataSubscription = this.reportService.getTripMilageGridData()
       .subscribe(
         (data: any) => {
           this.gridData.data = data.data;
           this.gridData.total = data.total;
+          this.aggregateResult = data.aggregates;
         }
       );
 
@@ -77,7 +87,8 @@ export class ReportTripsMilageOpmCurrentMonthComponent implements OnInit, OnDest
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.reportService.fetchTripMilageGridData(state, this.searchQuery, TripType.CurrentMonth, OPM.USSide);
+    this.reportService.fetchTripMilageGridData(
+      state, this.searchQuery, this.aggregates, TripType.CurrentMonth, OPM.USSide);
   }
 
   exportToExcel(grid: GridComponent): void {

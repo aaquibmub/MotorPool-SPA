@@ -49,6 +49,9 @@
         <kendo-grid-column field="id" title="Driver ID  رقم السائق">
         </kendo-grid-column>
         <kendo-grid-column field="milageInKm" title="KM كم" filter="numeric">
+          <ng-template kendoGridFooterTemplate>
+            Total Milage: {{ aggregateResult?.milageInKm?.sum }}
+          </ng-template>
         </kendo-grid-column>
         <kendo-grid-excel fileName="DriverMilage.xlsx"> </kendo-grid-excel>
       </kendo-grid>

@@ -54,6 +54,8 @@ export class ReportTripsTodayComponent implements OnInit, OnDestroy {
       .subscribe(
         (show: boolean) => {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+          this.state.filter = null;
+          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.Today);
         }
       );
 

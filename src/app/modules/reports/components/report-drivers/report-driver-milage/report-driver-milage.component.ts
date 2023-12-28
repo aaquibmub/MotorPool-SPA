@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
-import { State } from '@progress/kendo-data-query';
+import { AggregateDescriptor, State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ReportService } from 'src/app/helper/services/utilities/report.service';
@@ -17,6 +17,10 @@ export class ReportDriverMilageComponent implements OnInit, OnDestroy {
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
+  aggregates: AggregateDescriptor[] = [
+    { field: 'MilageInKm', aggregate: 'sum' }
+  ];
+  aggregateResult: any[] = [];
   searchQuery: string;
 
   pageSizeSubscription: Subscription;
@@ -36,6 +40,8 @@ export class ReportDriverMilageComponent implements OnInit, OnDestroy {
       .subscribe(
         (show: boolean) => {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+          this.state.filter = null;
+          this.reportService.fetchDriverMilageGridData(this.state, this.searchQuery, this.aggregates);
         }
       );
 
@@ -43,22 +49,23 @@ export class ReportDriverMilageComponent implements OnInit, OnDestroy {
       .subscribe(
         (pageSize: number) => {
           this.state.take = pageSize;
-          this.reportService.fetchDriverMilageGridData(this.state, this.searchQuery);
+          this.reportService.fetchDriverMilageGridData(this.state, this.searchQuery, this.aggregates);
         }
       );
     this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.reportService.fetchDriverMilageGridData(this.state, this.searchQuery);
+          this.reportService.fetchDriverMilageGridData(this.state, this.searchQuery, this.aggregates);
         }
       );
-    this.reportService.fetchDriverMilageGridData(this.state, this.searchQuery);
+    this.reportService.fetchDriverMilageGridData(this.state, this.searchQuery, this.aggregates);
     this.gridDataSubscription = this.reportService.getDriverMilageGridData()
       .subscribe(
         (data: any) => {
           this.gridData.data = data.data;
           this.gridData.total = data.total;
+          this.aggregateResult = data.aggregates;
         }
       );
 
@@ -66,7 +73,7 @@ export class ReportDriverMilageComponent implements OnInit, OnDestroy {
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.reportService.fetchDriverMilageGridData(state, this.searchQuery);
+    this.reportService.fetchDriverMilageGridData(state, this.searchQuery, this.aggregates);
   }
 
   exportToExcel(grid: GridComponent): void {

@@ -45,6 +45,8 @@ export class ReportDriversAllComponent implements OnInit, OnDestroy {
       .subscribe(
         (show: boolean) => {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+          this.state.filter = null;
+          this.reportService.fetchAllDriverGridData(this.state, this.searchQuery);
         }
       );
 

@@ -54,6 +54,9 @@ export class ReportTripsSaudiCurrentMonthComponent implements OnInit, OnDestroy 
       .subscribe(
         (show: boolean) => {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+          this.state.filter = null;
+          this.reportService.fetchAllTripGridData(
+            this.state, this.searchQuery, TripType.CurrentMonth, OPM.SaudiSide);
         }
       );
 
@@ -61,7 +64,8 @@ export class ReportTripsSaudiCurrentMonthComponent implements OnInit, OnDestroy 
       .subscribe(
         (pageSize: number) => {
           this.state.take = pageSize;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.CurrentMonth, OPM.SaudiSide);
+          this.reportService.fetchAllTripGridData(
+            this.state, this.searchQuery, TripType.CurrentMonth, OPM.SaudiSide);
         }
       );
     this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()

@@ -47,6 +47,8 @@ export class ReportVehiclesAllComponent implements OnInit, OnDestroy {
       .subscribe(
         (show: boolean) => {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+          this.state.filter = null;
+          this.reportService.fetchAllVehicleGridData(this.state, this.searchQuery);
         }
       );
 

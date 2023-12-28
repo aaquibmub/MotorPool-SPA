@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GridDataResult } from '@progress/kendo-angular-grid';
+import { AggregateDescriptor } from '@progress/kendo-data-query';
 import { Observable, Subject } from 'rxjs';
 import { OPM, TripType } from '../../common/shared-types';
 import { GridList } from '../../models/common/grid/grid-list';
@@ -165,11 +166,12 @@ export class ReportService {
   fetchTripMilageGridData(
     state: any,
     search: string,
+    aggregate: AggregateDescriptor[],
     type?: TripType,
     opm?: OPM): void {
     this.http.post<GridList<ReportTripMilageGridModel>>(
       this.baseUrl + 'get-trip-milage-gridlist', {
-      gridFilters: state,
+      gridFilters: { ...state, aggregate },
       search,
       type,
       opm
@@ -240,10 +242,11 @@ export class ReportService {
 
   fetchDriverMilageGridData(
     state: any,
-    search: string): void {
+    search: string,
+    aggregate: AggregateDescriptor[]): void {
     this.http.post<GridList<ReportDriverMilageGridModel>>(
       this.baseUrl + 'get-driver-milage-gridlist', {
-      gridFilters: state,
+      gridFilters: { ...state, aggregate },
       search
     }).subscribe(
       (gridData: GridList<ReportDriverMilageGridModel>) => {

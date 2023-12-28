@@ -7,11 +7,13 @@ export class UtilityRix {
     gridData: {
       data: [],
       total: 0,
+      aggregate: null
     },
     state: {
       take: 20,
       skip: 0,
-      filter: null
+      filter: null,
+      aggregates: null,
     },
     pageable: {
       alwaysVisible: false,
