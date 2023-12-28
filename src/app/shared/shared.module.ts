@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DateFormatPipe } from './../helper/directives/date-format.pipe';
+import { NumberSuffixPipe } from '../helper/directives/number-suffix.pipe';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { DialogModule } from '@progress/kendo-angular-dialog';
@@ -28,6 +29,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     GridToolbarComponent,
     GridActionDropdownComponent,
     DateFormatPipe,
+    NumberSuffixPipe,
     TimeFormatPipe,
     AlertComponent,
     NotificationTickerComponent
@@ -49,6 +51,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     GridToolbarComponent,
     GridActionDropdownComponent,
     DateFormatPipe,
+    NumberSuffixPipe,
     TimeFormatPipe,
     AlertComponent,
     NotificationTickerComponent

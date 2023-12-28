@@ -8,40 +8,58 @@
 }
 
 .tile-top {
-  display: flex;
+  display: block;
   justify-content: space-between;
   background-color: white;
   padding: 16px;
-  flex: 3;
 }
 
 .tile-top .tile-top-info {
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: start;
-  flex: 2;
+}
+
+.tile-top-info .tile-icon {
+  display: flex;
+}
+
+.tile-top-info .tile-icon .tile-icon-inner {
+  flex:1;
+  max-width: 60px;
+}
+
+.tile-top-info .tile-icon .title {
+  flex:2;
+  padding-top: 13px;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .today-trip-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-today-trips.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .ongoing-trip-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-ongoing-trips.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .vehicles-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-vehicle.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
 
 .drivers-icon {
   background-image: url("./../../../../../../assets/icons/dashboard/ico-drivers.svg");
+  background-repeat: no-repeat;
   height: 48px;
   width: 48px;
 }
@@ -52,13 +70,14 @@
 }
 
 .tile-top-count {
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: center;
-  flex: 1;
-  font-size: 80px;
+  font-size: 45px;
+  line-height: 1;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
+  padding-left: 12px;
 }
 
 .tile-bottom {

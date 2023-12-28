@@ -3,12 +3,14 @@
     <div class="tile-top-info">
       <div class="tile-icon pb-24">
         <div [class]="iconClass"></div>
+        <div class="title">
+          <div class="tile-title pb-16">{{ title }}</div>
+          <div class="tile-sub-title pb-16">{{ subtitle }}</div>
+        </div>
       </div>
-      <div class="tile-title pb-16">{{ title }}</div>
-      <div class="tile-sub-title pb-16">{{ subtitle }}</div>
     </div>
     <div class="tile-top-count k-cursor-pointer" [routerLink]="reportLink">
-      {{ count }}
+      {{ count | numberSuffix }}
     </div>
   </div>
 </div>
