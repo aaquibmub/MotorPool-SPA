@@ -1,0 +1,45 @@
+<kendo-grid
+  [data]="gridData"
+  [pageSize]="state.take"
+  [skip]="state.skip"
+  [sort]="state.sort"
+  [sortable]="true"
+  [pageable]="pageable"
+  scrollable="none"
+  (dataStateChange)="dataStateChange($event)"
+>
+  <kendo-grid-column field="fileName" title="File Name"> </kendo-grid-column>
+  <kendo-grid-column field="startTime" title="Start Date">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{ dataItem.startTime | dateformat: "g" }}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="endTime" title="End Time">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{ dataItem.endTime | dateformat: "g" }}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="status" title="Status">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      <span class="in-progress-status" *ngIf="dataItem.status === 10">{{
+        getDataImportStatusFor(dataItem.status)
+      }}</span>
+      <span class="complete-status" *ngIf="dataItem.status === 20">{{
+        getDataImportStatusFor(dataItem.status)
+      }}</span>
+      <span class="failed-status" *ngIf="dataItem.status === 30">{{
+        getDataImportStatusFor(dataItem.status)
+      }}</span>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="summary" title="Summary">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      <span *ngIf="dataItem.summary">{{ dataItem.summary[0].errorMsg }}</span>
+      <a
+        *ngIf="dataItem.summary && dataItem.summary.length > 1"
+        (click)="downloadSummary(dataItem.summary)"
+        >...See more</a
+      >
+    </ng-template>
+  </kendo-grid-column>
+</kendo-grid>

@@ -5,7 +5,7 @@ import { IntlService } from '@progress/kendo-angular-intl';
 import { ZonedDate } from '@progress/kendo-date-math';
 import { Howl, Howler } from 'howler';
 import { LanguageKeys } from '../../common/language-keys';
-import { DriverStatus, Gender, GetBooleanStatusForDropdownList, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripRoute, TripStatus, TripType, VehicalStatus } from '../../common/shared-types';
+import { DataImportStatus, DriverStatus, Gender, GetBooleanStatusForDropdownList, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripRoute, TripStatus, TripType, VehicalStatus } from '../../common/shared-types';
 import { AuthService } from '../auth/auth.service';
 @Injectable({
   providedIn: 'root'
@@ -299,6 +299,19 @@ export class UtilityService {
           }
       }
     }
+  }
+
+  getDataImportStatusLabel(type: DataImportStatus): string {
+    if (type === DataImportStatus.InProgress) {
+      return 'InProgress';
+    }
+    if (type === DataImportStatus.Failed) {
+      return 'Failed';
+    }
+    if (type === DataImportStatus.Completed) {
+      return 'Completed';
+    }
+    return '';
   }
 
   playNotificationSound(): void {
