@@ -249,6 +249,10 @@ export class UtilityService {
               row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue);
               break;
             }
+            case 'dueDate': {
+              row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue);
+              break;
+            }
             case 'createdDate': {
               row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue);
               break;

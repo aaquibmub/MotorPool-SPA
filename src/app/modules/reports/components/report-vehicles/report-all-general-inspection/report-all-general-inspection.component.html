@@ -1,0 +1,121 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>All General Inspections</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="grid-toolbar">
+      <div class="left"></div>
+      <div class="right" style="display: flex; justify-content: space-between">
+        <button class="btn btn-orange" (click)="exportToExcel(grid)">
+          <i class="fa fa-file-excel-o"></i> Excel
+        </button>
+      </div>
+    </div>
+    <div class="grid-content">
+      <app-grid-toolbar
+        [numberOfRecords]="gridData?.total"
+        entity="inspection"
+      ></app-grid-toolbar>
+      <kendo-grid
+        #grid="kendoGrid"
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [sortable]="true"
+        [resizable]="true"
+        [reorderable]="true"
+        [pageable]="pageable"
+        [filter]="state.filter"
+        [filterable]="filterable"
+        (dataStateChange)="dataStateChange($event)"
+        (excelExport)="this.utilityService.onExcelExport($event, grid)"
+        scrollable="none"
+      >
+        <kendo-grid-column
+          field="vehicleId"
+          title="Inspection ID رقم الفحص"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="date"
+          title="Date تاريخ"
+          [width]="250"
+          filter="date"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            {{ dataItem.date | dateformat }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="vehicleId" title="Vehicle ID رقم المركبة">
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="registrationPlate"
+          title="Registration Plate رقم اللوحة"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="make"
+          title="Vehicle Make صناعة المركبات"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="model"
+          title="Vehicle Model موديل"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="type"
+          title="Vehicle Type نوع السيارة"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column field="armoured" title="Armord">
+          <ng-template kendoGridFilterCellTemplate let-value="value">
+            <kendo-dropdownlist
+              style="width: 100px"
+              class="form-control"
+              textField="text"
+              valueField="value"
+              [defaultItem]="utilityService.dropdownAllItem"
+              (valueChange)="handleArmouredValueChange($event)"
+              [data]="booleanList"
+              [(ngModel)]="selectedArmoured"
+            >
+              <ng-template kendoDropDownListItemTemplate let-dataItem>
+                <span>{{ dataItem.text | translate }}</span>
+              </ng-template>
+            </kendo-dropdownlist>
+          </ng-template>
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span *ngIf="dataItem.armoured">Yes</span>
+            <span *ngIf="!dataItem.armoured">No</span>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="driverName"
+          title="Driver Name اسم السائق"
+          [width]="200"
+        >
+        </kendo-grid-column>
+        <kendo-grid-excel fileName="VehicleDueOilChange.xlsx">
+        </kendo-grid-excel>
+      </kendo-grid>
+    </div>
+  </div>
+</div>

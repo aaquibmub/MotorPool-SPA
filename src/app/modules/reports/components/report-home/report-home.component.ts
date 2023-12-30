@@ -206,6 +206,26 @@ export class ReportHomeComponent implements OnInit {
             isExternalLink: false,
             submenu: []
           },
+          {
+            path: '/reports/vehicles/due-oil-change',
+            title: 'Vehicles Due Oil Change',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/vehicles/all-general-inspection',
+            title: 'All General Inspections',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
         ]
       },
 

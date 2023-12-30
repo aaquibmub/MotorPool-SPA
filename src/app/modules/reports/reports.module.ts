@@ -36,6 +36,8 @@ import { ReportTripsTodayComponent } from './components/report-trips/report-trip
 import { ReportTripsUpcomingComponent } from './components/report-trips/report-trips-upcoming/report-trips-upcoming.component';
 import { ReportTripsVehicleSheetComponent } from './components/report-trips/report-trips-vehicle-sheet/report-trips-vehicle-sheet.component';
 import { ReportTripsComponent } from './components/report-trips/report-trips.component';
+import { ReportAllGeneralInspectionComponent } from './components/report-vehicles/report-all-general-inspection/report-all-general-inspection.component';
+import { ReportVehicleDueOilChangeComponent } from './components/report-vehicles/report-vehicle-due-oil-change/report-vehicle-due-oil-change.component';
 import { ReportVehiclesAllComponent } from './components/report-vehicles/report-vehicles-all/report-vehicles-all.component';
 import { ReportVehiclesComponent } from './components/report-vehicles/report-vehicles.component';
 import { ReportsRoutingModule } from './reports-routing.module';
@@ -84,6 +86,8 @@ import { ReportsComponent } from './reports.component';
 
     ReportVehiclesComponent,
     ReportVehiclesAllComponent,
+    ReportVehicleDueOilChangeComponent,
+    ReportAllGeneralInspectionComponent,
 
     ReportDriversComponent,
     ReportDriversAllComponent,

@@ -16,7 +16,9 @@ import { ReportTripMilageGridModel } from '../../models/reports/trips/milages/re
 import { ReportTripPassengerSheetModel } from '../../models/reports/trips/passenger-sheet/report-trip-passenger-sheet-model';
 import { ReportTripSheetModel } from '../../models/reports/trips/trip-sheet/report-trip-sheet-model';
 import { ReportTripVehicleSheetModel } from '../../models/reports/trips/vehicle-sheet/report-trip-vehicle-sheet-model';
+import { ReportAllGeneralInspectionGridModel } from '../../models/reports/vehicles/all-vehicles/report-all-general-inspection-grid-model';
 import { ReportAllVehicleGridModel } from '../../models/reports/vehicles/all-vehicles/report-all-vehicle-grid-model';
+import { ReportVehicleDueOilChangeGridModel } from '../../models/reports/vehicles/all-vehicles/report-vehicle-due-oil-change';
 import { environment } from './../../../../environments/environment';
 
 @Injectable({
@@ -30,6 +32,8 @@ export class ReportService {
   private tripMilageGridData = new Subject<GridList<ReportTripMilageGridModel>>();
   // vehicles
   private allVehicleGridData = new Subject<GridList<ReportAllVehicleGridModel>>();
+  private vehicleDueOilChangeGridData = new Subject<GridList<ReportVehicleDueOilChangeGridModel>>();
+  private allGeneralInspectionGridData = new Subject<GridList<ReportAllGeneralInspectionGridModel>>();
   // drivers
   private allDriverGridData = new Subject<GridList<ReportAllDriverGridModel>>();
   private driverTripGridData = new Subject<GridList<ReportDriverTripGridModel>>();
@@ -196,6 +200,42 @@ export class ReportService {
     }).subscribe(
       (gridData: GridList<ReportAllVehicleGridModel>) => {
         this.allVehicleGridData.next(gridData);
+      }
+    );
+  }
+
+  getVehicleDueOilChangeGridData(): Observable<GridDataResult> {
+    return this.vehicleDueOilChangeGridData.asObservable();
+  }
+
+  fetchVehicleDueOilChangeGridData(
+    state: any,
+    search: string): void {
+    this.http.post<GridList<ReportVehicleDueOilChangeGridModel>>(
+      this.baseUrl + 'get-vehical-due-oil-change-gridlist', {
+      gridFilters: state,
+      search
+    }).subscribe(
+      (gridData: GridList<ReportVehicleDueOilChangeGridModel>) => {
+        this.vehicleDueOilChangeGridData.next(gridData);
+      }
+    );
+  }
+
+  getAllGeneralInspectionGridData(): Observable<GridDataResult> {
+    return this.allGeneralInspectionGridData.asObservable();
+  }
+
+  fetchAllGeneralInspectionGridData(
+    state: any,
+    search: string): void {
+    this.http.post<GridList<ReportAllGeneralInspectionGridModel>>(
+      this.baseUrl + 'get-all-general-inspection-gridlist', {
+      gridFilters: state,
+      search
+    }).subscribe(
+      (gridData: GridList<ReportAllGeneralInspectionGridModel>) => {
+        this.allGeneralInspectionGridData.next(gridData);
       }
     );
   }
