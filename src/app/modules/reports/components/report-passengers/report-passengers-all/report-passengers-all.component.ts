@@ -16,6 +16,7 @@ import { GridToolbarService } from './../../../../../helper/services/common/grid
   styleUrls: ['./report-passengers-all.component.css']
 })
 export class ReportPassengersAllComponent implements OnInit, OnDestroy {
+  grid: GridComponent;
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
@@ -30,11 +31,13 @@ export class ReportPassengersAllComponent implements OnInit, OnDestroy {
 
   passengerStatusList: DropdownItem<boolean>[] = GetBooleanStatusForDropdownList();
   selectedPassengerStatus: DropdownItem<boolean>;
+  hiddenColumns: string[] = [];
 
   pageSizeSubscription: Subscription;
   gridDataSubscription: Subscription;
   gridSearchQuerySubscription: Subscription;
   gridFilterSubscription: Subscription;
+  gridColumnsSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -65,6 +68,14 @@ export class ReportPassengersAllComponent implements OnInit, OnDestroy {
         (query: string) => {
           this.searchQuery = query;
           this.reportService.fetchAllPassengerGridData(this.state, this.searchQuery);
+        }
+      );
+
+    this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
+      .subscribe(
+        (column: string) => {
+          debugger;
+          this.hideColumn(column);
         }
       );
 
@@ -139,6 +150,20 @@ export class ReportPassengersAllComponent implements OnInit, OnDestroy {
     this.dataStateChange(this.state as DataStateChangeEvent);
   }
 
+  isHidden(columnName: string): boolean {
+    return this.hiddenColumns.indexOf(columnName) > -1;
+  }
+
+  hideColumn(columnName: string): void {
+    const hiddenColumns = this.hiddenColumns;
+
+    if (!this.isHidden(columnName)) {
+      hiddenColumns.push(columnName);
+    } else {
+      hiddenColumns.splice(hiddenColumns.indexOf(columnName), 1);
+    }
+  }
+
   ngOnDestroy(): void {
     if (this.pageSizeSubscription) {
       this.pageSizeSubscription.unsubscribe();
@@ -151,6 +176,9 @@ export class ReportPassengersAllComponent implements OnInit, OnDestroy {
     }
     if (this.gridFilterSubscription) {
       this.gridFilterSubscription.unsubscribe();
+    }
+    if (this.gridColumnsSubscription) {
+      this.gridColumnsSubscription.unsubscribe();
     }
 
     this.state.filter = null;

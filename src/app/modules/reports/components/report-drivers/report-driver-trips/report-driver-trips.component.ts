@@ -16,11 +16,13 @@ import { UtilityService } from './../../../../../helper/services/common/utility.
   styleUrls: ['./report-driver-trips.component.css']
 })
 export class ReportDriverTripsComponent implements OnInit, OnDestroy {
+  grid: GridComponent;
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
+  hiddenColumns: string[] = [];
 
   opmList: DropdownItem<OPM>[] = GetOpmForDropdownList();
   selectedOpm: DropdownItem<OPM>;
@@ -32,6 +34,7 @@ export class ReportDriverTripsComponent implements OnInit, OnDestroy {
   gridDataSubscription: Subscription;
   gridSearchQuerySubscription: Subscription;
   gridFilterSubscription: Subscription;
+  gridColumnsSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -62,6 +65,14 @@ export class ReportDriverTripsComponent implements OnInit, OnDestroy {
         (query: string) => {
           this.searchQuery = query;
           this.reportService.fetchDriverTripGridData(this.state, this.searchQuery);
+        }
+      );
+
+    this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
+      .subscribe(
+        (column: string) => {
+          debugger;
+          this.hideColumn(column);
         }
       );
     this.reportService.fetchDriverTripGridData(this.state, this.searchQuery);
@@ -118,6 +129,20 @@ export class ReportDriverTripsComponent implements OnInit, OnDestroy {
     this.dataStateChange(this.state as DataStateChangeEvent);
   }
 
+  isHidden(columnName: string): boolean {
+    return this.hiddenColumns.indexOf(columnName) > -1;
+  }
+
+  hideColumn(columnName: string): void {
+    const hiddenColumns = this.hiddenColumns;
+
+    if (!this.isHidden(columnName)) {
+      hiddenColumns.push(columnName);
+    } else {
+      hiddenColumns.splice(hiddenColumns.indexOf(columnName), 1);
+    }
+  }
+
   ngOnDestroy(): void {
     if (this.pageSizeSubscription) {
       this.pageSizeSubscription.unsubscribe();
@@ -130,6 +155,9 @@ export class ReportDriverTripsComponent implements OnInit, OnDestroy {
     }
     if (this.gridFilterSubscription) {
       this.gridFilterSubscription.unsubscribe();
+    }
+    if (this.gridColumnsSubscription) {
+      this.gridColumnsSubscription.unsubscribe();
     }
 
     this.state.filter = null;

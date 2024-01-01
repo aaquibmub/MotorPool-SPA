@@ -16,6 +16,8 @@
     </div>
     <div class="grid-content">
       <app-grid-toolbar
+        *ngIf="grid"
+        [grid]="grid"
         [numberOfRecords]="gridData?.total"
         entity="milage"
       ></app-grid-toolbar>
@@ -35,7 +37,7 @@
         (excelExport)="this.utilityService.onExcelExport($event, grid)"
         scrollable="none"
       >
-        <kendo-grid-column field="date" title="Date تاريخ" filter="date">
+        <kendo-grid-column field="date" title="Date تاريخ" filter="date" [hidden]="isHidden('date')">
           <ng-template
             kendoGridCellTemplate
             let-dataItem
@@ -44,16 +46,33 @@
             {{ dataItem.date | dateformat }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="name" title="Driver Name اسم السائق">
+        <kendo-grid-column field="name" title="Driver Name اسم السائق" [hidden]="isHidden('name')">
         </kendo-grid-column>
-        <kendo-grid-column field="id" title="Driver ID  رقم السائق">
+        <kendo-grid-column field="id" title="Driver ID  رقم السائق" [hidden]="isHidden('id')">
         </kendo-grid-column>
-        <kendo-grid-column field="milageInKm" title="KM كم" filter="numeric">
+        <kendo-grid-column field="milageInKm" title="KM كم" filter="numeric" [hidden]="isHidden('milageInKm')">
           <ng-template kendoGridFooterTemplate>
             Total Milage: {{ aggregateResult?.milageInKm?.sum }}
           </ng-template>
         </kendo-grid-column>
         <kendo-grid-excel fileName="DriverMilage.xlsx"> </kendo-grid-excel>
+        <ng-template
+          kendoPagerTemplate
+          let-totalPages="totalPages"
+          let-currentPage="currentPage"
+        >
+          <div class="grid-toolbar">
+            <div class="left">
+              <kendo-pager-page-sizes
+                [pageSizes]="pageable.pageSizes"
+              ></kendo-pager-page-sizes>
+            </div>
+            <div class="right">
+              <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-next-buttons></kendo-pager-next-buttons>
+            </div>
+          </div>
+        </ng-template>
       </kendo-grid>
     </div>
   </div>

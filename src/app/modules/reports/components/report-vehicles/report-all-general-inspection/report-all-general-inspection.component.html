@@ -16,6 +16,8 @@
     </div>
     <div class="grid-content">
       <app-grid-toolbar
+        *ngIf="grid"
+        [grid]="grid"
         [numberOfRecords]="gridData?.total"
         entity="inspection"
       ></app-grid-toolbar>
@@ -39,6 +41,7 @@
           field="vehicleId"
           title="Inspection ID رقم الفحص"
           [width]="200"
+          [hidden]="isHidden('vehicleId')"
         >
         </kendo-grid-column>
         <kendo-grid-column
@@ -46,6 +49,7 @@
           title="Date تاريخ"
           [width]="250"
           filter="date"
+          [hidden]="isHidden('date')"
         >
           <ng-template
             kendoGridCellTemplate
@@ -55,33 +59,37 @@
             {{ dataItem.date | dateformat }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="vehicleId" title="Vehicle ID رقم المركبة">
+        <kendo-grid-column field="vehicleId" title="Vehicle ID رقم المركبة" [hidden]="isHidden('vehicleId')">
         </kendo-grid-column>
         <kendo-grid-column
           field="registrationPlate"
           title="Registration Plate رقم اللوحة"
           [width]="200"
+          [hidden]="isHidden('registrationPlate')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="make"
           title="Vehicle Make صناعة المركبات"
           [width]="200"
+          [hidden]="isHidden('make')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="model"
           title="Vehicle Model موديل"
           [width]="200"
+          [hidden]="isHidden('model')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="type"
           title="Vehicle Type نوع السيارة"
           [width]="200"
+          [hidden]="isHidden('type')"
         >
         </kendo-grid-column>
-        <kendo-grid-column field="armoured" title="Armord">
+        <kendo-grid-column field="armoured" title="Armord" [hidden]="isHidden('armoured')">
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 100px"
@@ -111,10 +119,28 @@
           field="driverName"
           title="Driver Name اسم السائق"
           [width]="200"
+          [hidden]="isHidden('driverName')"
         >
         </kendo-grid-column>
         <kendo-grid-excel fileName="VehicleDueOilChange.xlsx">
         </kendo-grid-excel>
+        <ng-template
+          kendoPagerTemplate
+          let-totalPages="totalPages"
+          let-currentPage="currentPage"
+        >
+          <div class="grid-toolbar">
+            <div class="left">
+              <kendo-pager-page-sizes
+                [pageSizes]="pageable.pageSizes"
+              ></kendo-pager-page-sizes>
+            </div>
+            <div class="right">
+              <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-next-buttons></kendo-pager-next-buttons>
+            </div>
+          </div>
+        </ng-template>
       </kendo-grid>
     </div>
   </div>

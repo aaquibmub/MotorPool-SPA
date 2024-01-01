@@ -16,11 +16,13 @@ import { ReportService } from './../../../../../helper/services/utilities/report
   styleUrls: ['./report-drivers-all.component.css']
 })
 export class ReportDriversAllComponent implements OnInit, OnDestroy {
+  grid: GridComponent;
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
+  hiddenColumns: string[] = [];
 
   driverStatusList: DropdownItem<number>[] = [];
   selectedDriverStatus: DropdownItem<number>;
@@ -32,6 +34,7 @@ export class ReportDriversAllComponent implements OnInit, OnDestroy {
   gridDataSubscription: Subscription;
   gridSearchQuerySubscription: Subscription;
   gridFilterSubscription: Subscription;
+  gridColumnsSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -64,6 +67,14 @@ export class ReportDriversAllComponent implements OnInit, OnDestroy {
         (query: string) => {
           this.searchQuery = query;
           this.reportService.fetchAllDriverGridData(this.state, this.searchQuery);
+        }
+      );
+
+      this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
+      .subscribe(
+        (column: string) => {
+          debugger;
+          this.hideColumn(column);
         }
       );
 
@@ -104,12 +115,29 @@ export class ReportDriversAllComponent implements OnInit, OnDestroy {
     this.dataStateChange(this.state as DataStateChangeEvent);
   }
 
+  isHidden(columnName: string): boolean {
+    return this.hiddenColumns.indexOf(columnName) > -1;
+  }
+
+  hideColumn(columnName: string): void {
+    const hiddenColumns = this.hiddenColumns;
+
+    if (!this.isHidden(columnName)) {
+      hiddenColumns.push(columnName);
+    } else {
+      hiddenColumns.splice(hiddenColumns.indexOf(columnName), 1);
+    }
+  }
+
   ngOnDestroy(): void {
     if (this.pageSizeSubscription) {
       this.pageSizeSubscription.unsubscribe();
     }
     if (this.gridDataSubscription) {
       this.gridDataSubscription.unsubscribe();
+    }
+    if (this.gridColumnsSubscription) {
+      this.gridColumnsSubscription.unsubscribe();
     }
     if (this.gridSearchQuerySubscription) {
       this.gridSearchQuerySubscription.unsubscribe();
