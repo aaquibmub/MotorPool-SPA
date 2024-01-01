@@ -16,6 +16,8 @@
     </div>
     <div class="grid-content">
       <app-grid-toolbar
+        *ngIf="grid"
+        [grid]="grid"
         [numberOfRecords]="gridData?.total"
         entity="driver"
       ></app-grid-toolbar>
@@ -35,20 +37,21 @@
         (excelExport)="this.utilityService.onExcelExport($event, grid)"
         scrollable="none"
       >
-        <kendo-grid-column field="id" title="Driver ID"> </kendo-grid-column>
-        <kendo-grid-column field="name" title="Driver Name">
+        <kendo-grid-column field="id" title="Driver ID" [hidden]="isHidden('id')"> </kendo-grid-column>
+        <kendo-grid-column field="name" title="Driver Name" [hidden]="isHidden('name')">
         </kendo-grid-column>
-        <kendo-grid-column field="nationality" title="Nationality">
+        <kendo-grid-column field="nationality" title="Nationality" [hidden]="isHidden('nationality')">
         </kendo-grid-column>
-        <kendo-grid-column field="nationalId" title="National ID">
+        <kendo-grid-column field="nationalId" title="National ID" [hidden]="isHidden('nationalId')">
         </kendo-grid-column>
-        <kendo-grid-column field="mobileNumber" title="Mobile #">
+        <kendo-grid-column field="mobileNumber" title="Mobile #" [hidden]="isHidden('mobileNumber')">
         </kendo-grid-column>
         <kendo-grid-column
           field="createdDate"
           title="Driver Creation Date"
           filter="date"
           [width]="250"
+          [hidden]="isHidden('createdDate')"
         >
           <ng-template
             kendoGridCellTemplate
@@ -58,7 +61,7 @@
             {{ dataItem.createdDate | dateformat }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="driverStatus" title="Status">
+        <kendo-grid-column field="driverStatus" title="Status" [hidden]="isHidden('driverStatus')">
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 200px"
@@ -86,6 +89,23 @@
           </ng-template>
         </kendo-grid-column>
         <kendo-grid-excel fileName="AllDriver.xlsx"> </kendo-grid-excel>
+        <ng-template
+          kendoPagerTemplate
+          let-totalPages="totalPages"
+          let-currentPage="currentPage"
+        >
+          <div class="grid-toolbar">
+            <div class="left">
+              <kendo-pager-page-sizes
+                [pageSizes]="pageable.pageSizes"
+              ></kendo-pager-page-sizes>
+            </div>
+            <div class="right">
+              <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-next-buttons></kendo-pager-next-buttons>
+            </div>
+          </div>
+        </ng-template>
       </kendo-grid>
     </div>
   </div>

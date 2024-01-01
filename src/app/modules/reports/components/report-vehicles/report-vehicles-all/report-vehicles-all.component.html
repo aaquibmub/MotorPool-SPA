@@ -16,6 +16,8 @@
     </div>
     <div class="grid-content">
       <app-grid-toolbar
+        *ngIf="grid"
+        [grid]="grid"
         [numberOfRecords]="gridData?.total"
         entity="vehicle"
       ></app-grid-toolbar>
@@ -53,13 +55,13 @@
         (excelExport)="this.utilityService.onExcelExport($event, grid)"
         scrollable="none"
       >
-        <kendo-grid-column field="id" title="Vehicle ID"> </kendo-grid-column>
-        <kendo-grid-column field="registrationPlate" title="Registration Plate">
+        <kendo-grid-column field="id" title="Vehicle ID" [hidden]="isHidden('id')"> </kendo-grid-column>
+        <kendo-grid-column field="registrationPlate" title="Registration Plate" [hidden]="isHidden('registrationPlate')">
         </kendo-grid-column>
-        <kendo-grid-column field="make" title="Make"> </kendo-grid-column>
-        <kendo-grid-column field="model" title="Model"> </kendo-grid-column>
-        <kendo-grid-column field="color" title="Color"> </kendo-grid-column>
-        <kendo-grid-column field="armoured" title="Armord">
+        <kendo-grid-column field="make" title="Make" [hidden]="isHidden('make')"> </kendo-grid-column>
+        <kendo-grid-column field="model" title="Model"[hidden]="isHidden('model')"> </kendo-grid-column>
+        <kendo-grid-column field="color" title="Color" [hidden]="isHidden('color')"> </kendo-grid-column>
+        <kendo-grid-column field="armoured" title="Armord" [hidden]="isHidden('armoured')">
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 100px"
@@ -85,7 +87,7 @@
             <span *ngIf="!dataItem.armoured">No</span>
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="vehicleStatus" title="Status">
+        <kendo-grid-column field="vehicleStatus" title="Status" [hidden]="isHidden('vehicleStatus')">
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 200px"
@@ -113,6 +115,23 @@
           </ng-template>
         </kendo-grid-column>
         <kendo-grid-excel fileName="AllVehicle.xlsx"> </kendo-grid-excel>
+        <ng-template
+          kendoPagerTemplate
+          let-totalPages="totalPages"
+          let-currentPage="currentPage"
+        >
+          <div class="grid-toolbar">
+            <div class="left">
+              <kendo-pager-page-sizes
+                [pageSizes]="pageable.pageSizes"
+              ></kendo-pager-page-sizes>
+            </div>
+            <div class="right">
+              <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-next-buttons></kendo-pager-next-buttons>
+            </div>
+          </div>
+        </ng-template>
       </kendo-grid>
     </div>
   </div>

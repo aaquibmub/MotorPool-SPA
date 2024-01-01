@@ -79,6 +79,23 @@
         </kendo-grid-column>
         <kendo-grid-excel fileName="OPM-Milage-CurrentMonth.xlsx">
         </kendo-grid-excel>
+        <ng-template
+          kendoPagerTemplate
+          let-totalPages="totalPages"
+          let-currentPage="currentPage"
+        >
+          <div class="grid-toolbar">
+            <div class="left">
+              <kendo-pager-page-sizes
+                [pageSizes]="pageable.pageSizes"
+              ></kendo-pager-page-sizes>
+            </div>
+            <div class="right">
+              <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-next-buttons></kendo-pager-next-buttons>
+            </div>
+          </div>
+        </ng-template>
       </kendo-grid>
     </div>
   </div>

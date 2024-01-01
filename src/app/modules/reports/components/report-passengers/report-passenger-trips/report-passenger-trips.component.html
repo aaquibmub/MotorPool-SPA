@@ -16,6 +16,8 @@
     </div>
     <div class="grid-content">
       <app-grid-toolbar
+        *ngIf="grid"
+        [grid]="grid"
         [numberOfRecords]="gridData?.total"
         entity="trip"
       ></app-grid-toolbar>
@@ -39,9 +41,10 @@
           field="name"
           title="Passenger Name اسم الراكب"
           [width]="200"
+          [hidden]="isHidden('name')"
         >
         </kendo-grid-column>
-        <kendo-grid-column field="gender" title="Gender جنس" [width]="200">
+        <kendo-grid-column field="gender" title="Gender جنس" [width]="200" [hidden]="isHidden('gender')">
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 150px"
@@ -70,18 +73,21 @@
           field="ageGroup"
           title="Age Group الفئة العمرية"
           [width]="200"
+          [hidden]="isHidden('ageGroup')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="nationality"
           title="Nationality جنسية"
           [width]="200"
+          [hidden]="isHidden('nationality')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="opm"
           title="OPM Group أو بي أيم جماعة"
           [width]="200"
+          [hidden]="isHidden('opm')"
         >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
@@ -112,6 +118,7 @@
           title="Trip ID رقم الرحلة"
           filter="numeric"
           [width]="200"
+          [hidden]="isHidden('tripSrNo')"
         >
           <ng-template
             kendoGridCellTemplate
@@ -126,6 +133,7 @@
           title="Date تاريخ"
           filter="date"
           [width]="200"
+          [hidden]="isHidden('tripDate')"
         >
           <ng-template
             kendoGridCellTemplate
@@ -139,18 +147,21 @@
           field="driverName"
           title="Driver Name اسم السائق"
           [width]="200"
+          [hidden]="isHidden('driverName')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="driverId"
           title="Driver ID  رقم السائق"
           [width]="200"
+          [hidden]="isHidden('driverId')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="passengerStatus"
           title="Passenger Status حالة الركاب"
           [width]="200"
+          [hidden]="isHidden('passengerStatus')"
         >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
@@ -179,6 +190,23 @@
           </ng-template>
         </kendo-grid-column>
         <kendo-grid-excel fileName="AllPassenger.xlsx"> </kendo-grid-excel>
+        <ng-template
+          kendoPagerTemplate
+          let-totalPages="totalPages"
+          let-currentPage="currentPage"
+        >
+          <div class="grid-toolbar">
+            <div class="left">
+              <kendo-pager-page-sizes
+                [pageSizes]="pageable.pageSizes"
+              ></kendo-pager-page-sizes>
+            </div>
+            <div class="right">
+              <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-next-buttons></kendo-pager-next-buttons>
+            </div>
+          </div>
+        </ng-template>
       </kendo-grid>
     </div>
   </div>

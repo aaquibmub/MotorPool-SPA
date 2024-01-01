@@ -16,6 +16,7 @@ import { GridToolbarService } from './../../../../../helper/services/common/grid
   styleUrls: ['./report-all-general-inspection.component.css']
 })
 export class ReportAllGeneralInspectionComponent implements OnInit, OnDestroy {
+  grid: GridComponent;
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
@@ -24,11 +25,13 @@ export class ReportAllGeneralInspectionComponent implements OnInit, OnDestroy {
 
   booleanList: DropdownItem<boolean>[] = GetBooleanForDropdownList();
   selectedArmoured: DropdownItem<boolean>;
+  hiddenColumns: string[] = [];
 
   pageSizeSubscription: Subscription;
   gridDataSubscription: Subscription;
   gridSearchQuerySubscription: Subscription;
   gridFilterSubscription: Subscription;
+  gridColumnsSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -59,6 +62,14 @@ export class ReportAllGeneralInspectionComponent implements OnInit, OnDestroy {
         (query: string) => {
           this.searchQuery = query;
           this.reportService.fetchAllGeneralInspectionGridData(this.state, this.searchQuery);
+        }
+      );
+
+    this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
+      .subscribe(
+        (column: string) => {
+          debugger;
+          this.hideColumn(column);
         }
       );
 
@@ -99,12 +110,29 @@ export class ReportAllGeneralInspectionComponent implements OnInit, OnDestroy {
     this.dataStateChange(this.state as DataStateChangeEvent);
   }
 
+  isHidden(columnName: string): boolean {
+    return this.hiddenColumns.indexOf(columnName) > -1;
+  }
+
+  hideColumn(columnName: string): void {
+    const hiddenColumns = this.hiddenColumns;
+
+    if (!this.isHidden(columnName)) {
+      hiddenColumns.push(columnName);
+    } else {
+      hiddenColumns.splice(hiddenColumns.indexOf(columnName), 1);
+    }
+  }
+
   ngOnDestroy(): void {
     if (this.gridDataSubscription) {
       this.gridDataSubscription.unsubscribe();
     }
     if (this.gridFilterSubscription) {
       this.gridFilterSubscription.unsubscribe();
+    }
+    if (this.gridColumnsSubscription) {
+      this.gridColumnsSubscription.unsubscribe();
     }
 
     this.state.filter = null;
