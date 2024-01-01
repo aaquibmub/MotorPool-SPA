@@ -104,6 +104,26 @@ export class ReportHomeComponent implements OnInit {
             submenu: []
           },
           {
+            path: '/reports/trips/milage',
+            title: 'Trips Milage',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '',
+            title: '',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
             path: '/reports/trips/opm-milage-today',
             title: 'OPM Milage - Today',
             icon: 'bx bx-right-arrow-alt',
@@ -219,6 +239,26 @@ export class ReportHomeComponent implements OnInit {
           {
             path: '/reports/vehicles/all-general-inspection',
             title: 'All General Inspections',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/vehicles/milage',
+            title: 'Vehicle Milage',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/vehicles/body-inspection',
+            title: 'Vehicle Body Inspections',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',

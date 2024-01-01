@@ -12,6 +12,7 @@ import { ReportHomeComponent } from './components/report-home/report-home.compon
 import { ReportPassengerTripsComponent } from './components/report-passengers/report-passenger-trips/report-passenger-trips.component';
 import { ReportPassengersAllComponent } from './components/report-passengers/report-passengers-all/report-passengers-all.component';
 import { ReportPassengersComponent } from './components/report-passengers/report-passengers.component';
+import { ReportTripMilageComponent } from './components/report-trips/report-trip-milage/report-trip-milage.component';
 import { ReportTripSheetComponent } from './components/report-trips/report-trip-sheet/report-trip-sheet.component';
 import { ReportTripsAllComponent } from './components/report-trips/report-trips-all/report-trips-all.component';
 import { ReportTripsDriverSheetComponent } from './components/report-trips/report-trips-driver-sheet/report-trips-driver-sheet.component';
@@ -30,7 +31,9 @@ import { ReportTripsUpcomingComponent } from './components/report-trips/report-t
 import { ReportTripsVehicleSheetComponent } from './components/report-trips/report-trips-vehicle-sheet/report-trips-vehicle-sheet.component';
 import { ReportTripsComponent } from './components/report-trips/report-trips.component';
 import { ReportAllGeneralInspectionComponent } from './components/report-vehicles/report-all-general-inspection/report-all-general-inspection.component';
+import { ReportVehicleBodyInspectionComponent } from './components/report-vehicles/report-vehicle-body-inspection/report-vehicle-body-inspection.component';
 import { ReportVehicleDueOilChangeComponent } from './components/report-vehicles/report-vehicle-due-oil-change/report-vehicle-due-oil-change.component';
+import { ReportVehicleMilageComponent } from './components/report-vehicles/report-vehicle-milage/report-vehicle-milage.component';
 import { ReportVehiclesAllComponent } from './components/report-vehicles/report-vehicles-all/report-vehicles-all.component';
 import { ReportVehiclesComponent } from './components/report-vehicles/report-vehicles.component';
 import { ReportsComponent } from './reports.component';
@@ -60,6 +63,7 @@ const routes: Routes = [
           { path: 'opm-current-month', component: ReportTripsOpmCurrentMonthComponent },
           { path: 'saudi-today', component: ReportTripsSaudiTodayComponent },
           { path: 'saudi-current-month', component: ReportTripsSaudiCurrentMonthComponent },
+          { path: 'milage', component: ReportTripMilageComponent },
           { path: 'opm-milage-today', component: ReportTripsMilageOpmTodayComponent },
           { path: 'opm-milage-current-month', component: ReportTripsMilageOpmCurrentMonthComponent },
           { path: 'saudi-milage-today', component: ReportTripsMilageSaudiTodayComponent },
@@ -79,6 +83,8 @@ const routes: Routes = [
           { path: 'all', component: ReportVehiclesAllComponent },
           { path: 'due-oil-change', component: ReportVehicleDueOilChangeComponent },
           { path: 'all-general-inspection', component: ReportAllGeneralInspectionComponent },
+          { path: 'milage', component: ReportVehicleMilageComponent },
+          { path: 'body-inspection', component: ReportVehicleBodyInspectionComponent },
         ]
       },
       {

@@ -19,6 +19,8 @@ import { ReportTripVehicleSheetModel } from '../../models/reports/trips/vehicle-
 import { ReportAllGeneralInspectionGridModel } from '../../models/reports/vehicles/all-vehicles/report-all-general-inspection-grid-model';
 import { ReportAllVehicleGridModel } from '../../models/reports/vehicles/all-vehicles/report-all-vehicle-grid-model';
 import { ReportVehicleDueOilChangeGridModel } from '../../models/reports/vehicles/all-vehicles/report-vehicle-due-oil-change';
+import { ReportVehicleMilageGridModel } from '../../models/reports/vehicles/all-vehicles/report-vehicle-milage-grid-model';
+import { ReportVehicleBodyInspectionGridModel } from '../../models/reports/vehicles/inspections/report-vehicle-body-inspection-grid-model';
 import { environment } from './../../../../environments/environment';
 
 @Injectable({
@@ -34,6 +36,8 @@ export class ReportService {
   private allVehicleGridData = new Subject<GridList<ReportAllVehicleGridModel>>();
   private vehicleDueOilChangeGridData = new Subject<GridList<ReportVehicleDueOilChangeGridModel>>();
   private allGeneralInspectionGridData = new Subject<GridList<ReportAllGeneralInspectionGridModel>>();
+  private vehicleMilageGridData = new Subject<GridList<ReportVehicleMilageGridModel>>();
+  private vehicleBodyInspectionGridData = new Subject<GridList<ReportVehicleBodyInspectionGridModel>>();
   // drivers
   private allDriverGridData = new Subject<GridList<ReportAllDriverGridModel>>();
   private driverTripGridData = new Subject<GridList<ReportDriverTripGridModel>>();
@@ -170,7 +174,7 @@ export class ReportService {
   fetchTripMilageGridData(
     state: any,
     search: string,
-    aggregate: AggregateDescriptor[],
+    aggregate?: AggregateDescriptor[],
     type?: TripType,
     opm?: OPM): void {
     this.http.post<GridList<ReportTripMilageGridModel>>(
@@ -236,6 +240,42 @@ export class ReportService {
     }).subscribe(
       (gridData: GridList<ReportAllGeneralInspectionGridModel>) => {
         this.allGeneralInspectionGridData.next(gridData);
+      }
+    );
+  }
+
+  getVehicleMilageGridData(): Observable<GridDataResult> {
+    return this.vehicleMilageGridData.asObservable();
+  }
+
+  fetchVehicleMilageGridData(
+    state: any,
+    search: string): void {
+    this.http.post<GridList<ReportVehicleMilageGridModel>>(
+      this.baseUrl + 'get-vehical-milage-gridlist', {
+      gridFilters: state,
+      search
+    }).subscribe(
+      (gridData: GridList<ReportVehicleMilageGridModel>) => {
+        this.vehicleMilageGridData.next(gridData);
+      }
+    );
+  }
+
+  getVehicleBodyInspectionGridData(): Observable<GridDataResult> {
+    return this.vehicleBodyInspectionGridData.asObservable();
+  }
+
+  fetchVehicleBodyInspectionGridData(
+    state: any,
+    search: string): void {
+    this.http.post<GridList<ReportVehicleBodyInspectionGridModel>>(
+      this.baseUrl + 'get-vehical-body-inspection-gridlist', {
+      gridFilters: state,
+      search
+    }).subscribe(
+      (gridData: GridList<ReportVehicleBodyInspectionGridModel>) => {
+        this.vehicleBodyInspectionGridData.next(gridData);
       }
     );
   }

@@ -2,7 +2,7 @@
 <div class="page-area">
   <div class="page-header">
     <div class="page-title">
-      <span>All Trips</span>
+      <span>Trip Milage</span>
     </div>
   </div>
   <div class="page-body">
@@ -199,7 +199,7 @@
         <kendo-grid-column
           field="tripStatus"
           title="Status حالة"
-          [width]="200"
+          [width]="250"
           [hidden]="isHidden('tripStatus')"
         >
           <ng-template kendoGridFilterCellTemplate let-value="value">
@@ -228,7 +228,31 @@
             }}</span>
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-excel fileName="AllTrips.xlsx"> </kendo-grid-excel>
+        <kendo-grid-column
+          field="kmIn"
+          title="KM In كم العودة"
+          filter="numeric"
+          [width]="200"
+          [hidden]="isHidden('kmIn')"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="kmOut"
+          title="KM Out كم المغادرة"
+          filter="numeric"
+          [width]="200"
+          [hidden]="isHidden('kmOut')"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="milageInKm"
+          title="KM كم"
+          filter="numeric"
+          [width]="200"
+          [hidden]="isHidden('milageInKm')"
+        >
+        </kendo-grid-column>
+        <kendo-grid-excel fileName="TripMilage.xlsx"> </kendo-grid-excel>
       </kendo-grid>
     </div>
   </div>
