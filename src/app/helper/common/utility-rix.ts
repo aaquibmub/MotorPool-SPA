@@ -10,7 +10,7 @@ export class UtilityRix {
       aggregate: null
     },
     state: {
-      take: 20,
+      take: 10,
       skip: 0,
       filter: null,
       aggregates: null,
@@ -20,7 +20,7 @@ export class UtilityRix {
       buttonCount: 3,
       responsive: true,
       info: false,
-      pageSizes: [20, 50, 100, 200, 300]
+      pageSizes: [10, 20, 50, 100, 200, 300]
     },
     filterable: 'row',
   };

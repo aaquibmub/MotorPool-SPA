@@ -37,14 +37,35 @@
         (excelExport)="this.utilityService.onExcelExport($event, grid)"
         scrollable="none"
       >
-        <kendo-grid-column field="id" title="Driver ID" [hidden]="isHidden('id')"> </kendo-grid-column>
-        <kendo-grid-column field="name" title="Driver Name" [hidden]="isHidden('name')">
+        <kendo-grid-column
+          field="id"
+          title="Driver ID"
+          [hidden]="isHidden('id')"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="nationality" title="Nationality" [hidden]="isHidden('nationality')">
+        <kendo-grid-column
+          field="name"
+          title="Driver Name"
+          [hidden]="isHidden('name')"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="nationalId" title="National ID" [hidden]="isHidden('nationalId')">
+        <kendo-grid-column
+          field="nationality"
+          title="Nationality"
+          [hidden]="isHidden('nationality')"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="mobileNumber" title="Mobile #" [hidden]="isHidden('mobileNumber')">
+        <kendo-grid-column
+          field="nationalId"
+          title="National ID"
+          [hidden]="isHidden('nationalId')"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="mobileNumber"
+          title="Mobile #"
+          [hidden]="isHidden('mobileNumber')"
+        >
         </kendo-grid-column>
         <kendo-grid-column
           field="createdDate"
@@ -61,7 +82,11 @@
             {{ dataItem.createdDate | dateformat }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="driverStatus" title="Status" [hidden]="isHidden('driverStatus')">
+        <kendo-grid-column
+          field="driverStatus"
+          title="Status"
+          [hidden]="isHidden('driverStatus')"
+        >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 200px"
@@ -102,6 +127,9 @@
             </div>
             <div class="right">
               <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-numeric-buttons
+                [buttonCount]="pageable.buttonCount"
+              ></kendo-pager-numeric-buttons>
               <kendo-pager-next-buttons></kendo-pager-next-buttons>
             </div>
           </div>

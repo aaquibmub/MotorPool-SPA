@@ -37,7 +37,11 @@
         (excelExport)="this.utilityService.onExcelExport($event, grid)"
         scrollable="none"
       >
-        <kendo-grid-column field="vehicleId" title="Vehicle ID رقم المركبة" [hidden]="isHidden('vehicleId')">
+        <kendo-grid-column
+          field="vehicleId"
+          title="Vehicle ID رقم المركبة"
+          [hidden]="isHidden('vehicleId')"
+        >
         </kendo-grid-column>
         <kendo-grid-column
           field="registrationPlate"
@@ -45,13 +49,29 @@
           [hidden]="isHidden('id')"
         >
         </kendo-grid-column>
-        <kendo-grid-column field="make" title="Vehicle Make صناعة المركبات" [hidden]="isHidden('make')">
+        <kendo-grid-column
+          field="make"
+          title="Vehicle Make صناعة المركبات"
+          [hidden]="isHidden('make')"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="model" title="Vehicle Model موديل" [hidden]="isHidden('model')">
+        <kendo-grid-column
+          field="model"
+          title="Vehicle Model موديل"
+          [hidden]="isHidden('model')"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="type" title="Vehicle Type نوع السيارة" [hidden]="isHidden('type')">
+        <kendo-grid-column
+          field="type"
+          title="Vehicle Type نوع السيارة"
+          [hidden]="isHidden('type')"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="armoured" title="Armord" [hidden]="isHidden('armoured')">
+        <kendo-grid-column
+          field="armoured"
+          title="Armord"
+          [hidden]="isHidden('armoured')"
+        >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 100px"
@@ -115,6 +135,9 @@
             </div>
             <div class="right">
               <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-numeric-buttons
+                [buttonCount]="pageable.buttonCount"
+              ></kendo-pager-numeric-buttons>
               <kendo-pager-next-buttons></kendo-pager-next-buttons>
             </div>
           </div>

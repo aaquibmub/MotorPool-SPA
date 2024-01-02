@@ -44,7 +44,12 @@
           [hidden]="isHidden('name')"
         >
         </kendo-grid-column>
-        <kendo-grid-column field="gender" title="Gender جنس" [width]="200" [hidden]="isHidden('gender')">
+        <kendo-grid-column
+          field="gender"
+          title="Gender جنس"
+          [width]="200"
+          [hidden]="isHidden('gender')"
+        >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 150px"
@@ -113,7 +118,12 @@
             <span>{{ utilityService.getOpmLabel(dataItem.opm) }}</span>
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="address" title="Address عنوان" [width]="200" [hidden]="isHidden('address')">
+        <kendo-grid-column
+          field="address"
+          title="Address عنوان"
+          [width]="200"
+          [hidden]="isHidden('address')"
+        >
         </kendo-grid-column>
         <kendo-grid-column
           field="mobileNumber"
@@ -137,7 +147,12 @@
             {{ dataItem.createdDate | dateformat }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="passengerStatus" title="Status" [width]="200" [hidden]="isHidden('passengerStatus')">
+        <kendo-grid-column
+          field="passengerStatus"
+          title="Status"
+          [width]="200"
+          [hidden]="isHidden('passengerStatus')"
+        >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 200px"
@@ -178,6 +193,9 @@
             </div>
             <div class="right">
               <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-numeric-buttons
+                [buttonCount]="pageable.buttonCount"
+              ></kendo-pager-numeric-buttons>
               <kendo-pager-next-buttons></kendo-pager-next-buttons>
             </div>
           </div>

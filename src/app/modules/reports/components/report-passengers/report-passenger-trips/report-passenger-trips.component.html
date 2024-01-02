@@ -44,7 +44,12 @@
           [hidden]="isHidden('name')"
         >
         </kendo-grid-column>
-        <kendo-grid-column field="gender" title="Gender جنس" [width]="200" [hidden]="isHidden('gender')">
+        <kendo-grid-column
+          field="gender"
+          title="Gender جنس"
+          [width]="200"
+          [hidden]="isHidden('gender')"
+        >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 150px"
@@ -203,6 +208,9 @@
             </div>
             <div class="right">
               <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-numeric-buttons
+                [buttonCount]="pageable.buttonCount"
+              ></kendo-pager-numeric-buttons>
               <kendo-pager-next-buttons></kendo-pager-next-buttons>
             </div>
           </div>

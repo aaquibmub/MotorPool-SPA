@@ -37,7 +37,12 @@
         (excelExport)="this.utilityService.onExcelExport($event, grid)"
         scrollable="none"
       >
-        <kendo-grid-column field="date" title="Date تاريخ" filter="date" [hidden]="isHidden('date')">
+        <kendo-grid-column
+          field="date"
+          title="Date تاريخ"
+          filter="date"
+          [hidden]="isHidden('date')"
+        >
           <ng-template
             kendoGridCellTemplate
             let-dataItem
@@ -46,11 +51,24 @@
             {{ dataItem.date | dateformat }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="name" title="Driver Name اسم السائق" [hidden]="isHidden('name')">
+        <kendo-grid-column
+          field="name"
+          title="Driver Name اسم السائق"
+          [hidden]="isHidden('name')"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="id" title="Driver ID  رقم السائق" [hidden]="isHidden('id')">
+        <kendo-grid-column
+          field="id"
+          title="Driver ID  رقم السائق"
+          [hidden]="isHidden('id')"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="milageInKm" title="KM كم" filter="numeric" [hidden]="isHidden('milageInKm')">
+        <kendo-grid-column
+          field="milageInKm"
+          title="KM كم"
+          filter="numeric"
+          [hidden]="isHidden('milageInKm')"
+        >
           <ng-template kendoGridFooterTemplate>
             Total Milage: {{ aggregateResult?.milageInKm?.sum }}
           </ng-template>
@@ -69,6 +87,9 @@
             </div>
             <div class="right">
               <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-numeric-buttons
+                [buttonCount]="pageable.buttonCount"
+              ></kendo-pager-numeric-buttons>
               <kendo-pager-next-buttons></kendo-pager-next-buttons>
             </div>
           </div>

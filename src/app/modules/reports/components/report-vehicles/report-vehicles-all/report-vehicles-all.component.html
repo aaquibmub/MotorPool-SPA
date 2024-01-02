@@ -55,13 +55,41 @@
         (excelExport)="this.utilityService.onExcelExport($event, grid)"
         scrollable="none"
       >
-        <kendo-grid-column field="id" title="Vehicle ID" [hidden]="isHidden('id')"> </kendo-grid-column>
-        <kendo-grid-column field="registrationPlate" title="Registration Plate" [hidden]="isHidden('registrationPlate')">
+        <kendo-grid-column
+          field="id"
+          title="Vehicle ID"
+          [hidden]="isHidden('id')"
+        >
         </kendo-grid-column>
-        <kendo-grid-column field="make" title="Make" [hidden]="isHidden('make')"> </kendo-grid-column>
-        <kendo-grid-column field="model" title="Model"[hidden]="isHidden('model')"> </kendo-grid-column>
-        <kendo-grid-column field="color" title="Color" [hidden]="isHidden('color')"> </kendo-grid-column>
-        <kendo-grid-column field="armoured" title="Armord" [hidden]="isHidden('armoured')">
+        <kendo-grid-column
+          field="registrationPlate"
+          title="Registration Plate"
+          [hidden]="isHidden('registrationPlate')"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="make"
+          title="Make"
+          [hidden]="isHidden('make')"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="model"
+          title="Model"
+          [hidden]="isHidden('model')"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="color"
+          title="Color"
+          [hidden]="isHidden('color')"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="armoured"
+          title="Armord"
+          [hidden]="isHidden('armoured')"
+        >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 100px"
@@ -87,7 +115,11 @@
             <span *ngIf="!dataItem.armoured">No</span>
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="vehicleStatus" title="Status" [hidden]="isHidden('vehicleStatus')">
+        <kendo-grid-column
+          field="vehicleStatus"
+          title="Status"
+          [hidden]="isHidden('vehicleStatus')"
+        >
           <ng-template kendoGridFilterCellTemplate let-value="value">
             <kendo-dropdownlist
               style="width: 200px"
@@ -128,6 +160,9 @@
             </div>
             <div class="right">
               <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-numeric-buttons
+                [buttonCount]="pageable.buttonCount"
+              ></kendo-pager-numeric-buttons>
               <kendo-pager-next-buttons></kendo-pager-next-buttons>
             </div>
           </div>
