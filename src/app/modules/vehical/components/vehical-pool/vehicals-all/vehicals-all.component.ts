@@ -9,6 +9,9 @@ import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { VehicalService } from 'src/app/helper/services/vehicals/vehical.service';
 import { VehicalGridModel } from './../../../../../helper/models/vehicals/vehical-grid-model';
+import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
+import { flatten } from '@progress/kendo-angular-grid/dist/es2015/filtering/base-filter-cell.component';
+import { GetVehicalStatusForDropdownList } from 'src/app/helper/common/shared-types';
 
 @Component({
   selector: 'app-vehicals-all',
@@ -21,6 +24,9 @@ export class VehicalsAllComponent implements OnInit, OnDestroy {
   pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
+
+  vehicleStatusList: DropdownItem<number>[] = [];
+  selectedVehicleStatus: DropdownItem<number>;
 
   pageSizeSubscription: Subscription;
   gridFilterSubscription: Subscription;
@@ -54,6 +60,8 @@ export class VehicalsAllComponent implements OnInit, OnDestroy {
         }
       );
 
+    this.vehicleStatusList = GetVehicalStatusForDropdownList();
+
     this.vehicalService.fetchGridData(this.state, this.searchQuery);
     this.vehicalService.getGridData()
       .subscribe(
@@ -62,6 +70,25 @@ export class VehicalsAllComponent implements OnInit, OnDestroy {
           this.gridData.total = data.total;
         }
       );
+  }
+
+  
+
+  handleVehicleStatusValueChange(value: DropdownItem<number>): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "status");
+    if (!filter) {
+      root.filters.push({
+        field: "status",
+        operator: "eq",
+        value: value.value
+      });
+    } else {
+      filter.value = value.value;
+    }
+    this.selectedVehicleStatus = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
   }
 
   dataStateChange(state: DataStateChangeEvent): void {
