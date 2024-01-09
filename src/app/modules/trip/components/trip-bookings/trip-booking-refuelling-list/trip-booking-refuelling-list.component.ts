@@ -11,6 +11,7 @@ import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.
 import { TripService } from 'src/app/helper/services/trips/trip.service';
 import { TripStatus } from './../../../../../helper/common/shared-types';
 import { PopupConfigModel } from './../../../../../helper/models/common/popup-config-model';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-trip-booking-refuelling-list',
@@ -30,6 +31,7 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
   gridFilterSubscription: Subscription;
 
   constructor(
+    public utilityService: UtilityService,
     private tripService: TripService,
     private router: Router,
     private gridToolbarService: GridToolbarService

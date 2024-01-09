@@ -10,6 +10,7 @@ import { PopupConfigModel } from './../../../../../helper/models/common/popup-co
 import { TripGridModel } from './../../../../../helper/models/trips/enroute/trip-grid-model';
 import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
 import { TripService } from './../../../../../helper/services/trips/trip.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-trip-booking-start-now-list',
@@ -29,6 +30,7 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
   gridFilterSubscription: Subscription;
 
   constructor(
+    public utilityService: UtilityService,
     private tripService: TripService,
     private router: Router,
     private gridToolbarService: GridToolbarService
