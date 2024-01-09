@@ -36,6 +36,22 @@
     <kendo-grid-column field="registrationPlate" title="Registration Plate">
     </kendo-grid-column>
     <kendo-grid-column field="status" title="Status">
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 200px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleVehicleStatusValueChange($event)"
+          [data]="vehicleStatusList"
+          [(ngModel)]="selectedVehicleStatus"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <span>{{ utilityService.getVehicalStatusLabel(dataItem.status) }}</span>
       </ng-template>
