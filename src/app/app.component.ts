@@ -64,6 +64,8 @@ export class AppComponent implements OnInit {
     private passengerService: PassengerService) {
     translate.setDefaultLang('en');
     translate.use('en');
+    // translate.setDefaultLang('ar');
+    // translate.use('ar');
   }
 
   ngOnInit(): void {

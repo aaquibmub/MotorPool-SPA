@@ -49,7 +49,6 @@ export class NotificationRuleEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.userRoleList = GetUserRoleListForNotification();
     this.eventCategoryList = GetNotificationForDropdownList();
 

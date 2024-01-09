@@ -158,18 +158,13 @@
                 <label [for]="'inputPassengerAddress'">Address</label>
               </div>
               <div class="control">
-                <kendo-dropdownlist
+                <input
+                  type="tel"
                   class="form-control"
-                  textField="text"
-                  valueField="value"
-                  [defaultItem]="utilityService.dropdownDefaultItem"
-                  [data]="addressList"
+                  name="inputPassengerAddress"
                   formControlName="address"
-                >
-                  <ng-template kendoDropDownListItemTemplate let-dataItem>
-                    <span>{{ dataItem.text | translate }}</span>
-                  </ng-template>
-                </kendo-dropdownlist>
+                  id="inputPassengerAddress"
+                />
                 <div
                   *ngIf="
                     !form.get('address').valid && form.get('address').touched

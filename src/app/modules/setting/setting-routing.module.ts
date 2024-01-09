@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
+import { ConfigurationsComponent } from './components/configurations/configurations.component';
+import { DefaultValuesComponent } from './components/configurations/default-values/default-values.component';
 import { DataImportComponent } from './components/data-import/data-import.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { RoleEditComponent } from './components/user-managment/role/role-edit/role-edit.component';
@@ -70,6 +72,20 @@ const routes: Routes = [
       {
         path: 'data-import',
         component: DataImportComponent
+      },
+
+      // configurations
+      {
+        path: 'config',
+        component: ConfigurationsComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'default-values',
+            pathMatch: 'full'
+          },
+          { path: 'default-values', component: DefaultValuesComponent }
+        ]
       },
 
     ]

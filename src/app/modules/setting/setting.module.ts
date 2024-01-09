@@ -7,6 +7,8 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ConfigurationsComponent } from './components/configurations/configurations.component';
+import { DefaultValuesComponent } from './components/configurations/default-values/default-values.component';
 import { AddressDataImportComponent } from './components/data-import/address-data-import/address-data-import.component';
 import { DataImportLogGridListComponent } from './components/data-import/data-import-log-grid-list/data-import-log-grid-list.component';
 import { DataImportComponent } from './components/data-import/data-import.component';
@@ -37,6 +39,10 @@ import { SettingComponent } from './setting.component';
   ],
   declarations: [
     SettingComponent,
+
+    ConfigurationsComponent,
+    DefaultValuesComponent,
+
     NotificationsComponent,
 
     DataImportComponent,

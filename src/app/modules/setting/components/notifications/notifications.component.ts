@@ -83,7 +83,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     this.notificationConfigService.getGridData()
       .subscribe(
         (data: any) => {
-          this.gridData.data = data.data;
+          this.gridData.data = data.data ?? [];
           this.gridData.total = data.total;
         }
       );
