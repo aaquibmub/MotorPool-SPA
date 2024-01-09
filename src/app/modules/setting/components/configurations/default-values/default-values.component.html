@@ -1,0 +1,114 @@
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <div class="card card-grey p-24">
+    <div class="card-header display-flex justify-space-between">
+      <div class="card-title">Application Default Settings</div>
+      <div class="card-action">
+        <button type="submit" class="btn btn-green">Save</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="form-section">
+        <div class="section-body">
+          <div class="form-section">
+            <div class="section-body">
+              <div class="fields">
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputApprover">Approver</label>
+                  </div>
+                  <div class="control">
+                    <kendo-dropdownlist
+                      class="form-control"
+                      textField="text"
+                      valueField="value"
+                      [filterable]="true"
+                      [defaultItem]="utilityService.dropdownDefaultItem"
+                      (filterChange)="handleApproverFilter($event)"
+                      [data]="approverList"
+                      formControlName="approver"
+                    >
+                    </kendo-dropdownlist>
+                    <div
+                      *ngIf="
+                        !form.get('approver').valid &&
+                        form.get('approver').touched
+                      "
+                      class="invalid-feedback"
+                    >
+                      Approver is required
+                    </div>
+                    <!-- <span class="control-helper">
+                      By default all sales transactions are made against
+                      selected approver. However you can set the default
+                      approver other than ‘Default Approver’.
+                    </span> -->
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputStartingPoint">StartingPoint</label>
+                  </div>
+                  <div class="control">
+                    <kendo-dropdownlist
+                      class="form-control"
+                      textField="text"
+                      valueField="value"
+                      [filterable]="true"
+                      [defaultItem]="utilityService.dropdownDefaultItem"
+                      (filterChange)="handleStartingPointFilter($event)"
+                      [data]="startingPointList"
+                      formControlName="startingPoint"
+                    >
+                    </kendo-dropdownlist>
+                    <div
+                      *ngIf="
+                        !form.get('startingPoint').valid &&
+                        form.get('startingPoint').touched
+                      "
+                      class="invalid-feedback"
+                    >
+                      StartingPoint is required
+                    </div>
+                    <!-- <span class="control-helper">
+                      By default all purchase transactions are made against
+                      selected startingPoint. However you can set the default
+                      startingPoint other than ‘Default StartingPoint’.
+                    </span> -->
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputDropoff">Dropoff</label>
+                  </div>
+                  <div class="control">
+                    <kendo-dropdownlist
+                      class="form-control"
+                      textField="text"
+                      valueField="value"
+                      [filterable]="true"
+                      [defaultItem]="utilityService.dropdownDefaultItem"
+                      (filterChange)="handleDropoffFilter($event)"
+                      [data]="dropoffList"
+                      formControlName="dropoff"
+                    >
+                    </kendo-dropdownlist>
+                    <div
+                      *ngIf="
+                        !form.get('dropoff').valid &&
+                        form.get('dropoff').touched
+                      "
+                      class="invalid-feedback"
+                    >
+                      Dropoff is required
+                    </div>
+                    <span class="control-helper"> </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
