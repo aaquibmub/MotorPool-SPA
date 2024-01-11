@@ -4,6 +4,7 @@ import { DialogSettings } from '@progress/kendo-angular-dialog';
 import { CldrIntlService, IntlService } from '@progress/kendo-angular-intl';
 import { ResponseAction } from './helper/common/shared-types';
 import { PopupConfigModel } from './helper/models/common/popup-config-model';
+import { AddressService } from './helper/services/address/address.service';
 import { AuthService } from './helper/services/auth/auth.service';
 import { AlertService } from './helper/services/common/alert.service';
 import { OverlayService } from './helper/services/common/overlay.service';
@@ -34,6 +35,11 @@ export class AppComponent implements OnInit {
 
   // passenger
   showPassengerQuickAddPopup = false;
+  passengerQuickAddPopupArg: any;
+
+  // address
+  showAddressQuickAddPopup = false;
+  addressQuickAddPopupArg: any;
 
   // notification rule
   showNotificationRulePopupPopup: boolean;
@@ -61,7 +67,8 @@ export class AppComponent implements OnInit {
     private notificationConfigService: NotificationConfigService,
     private tripService: TripService,
     private driverService: DriverService,
-    private passengerService: PassengerService) {
+    private passengerService: PassengerService,
+    private addressService: AddressService) {
     translate.setDefaultLang('en');
     translate.use('en');
     // translate.setDefaultLang('ar');
@@ -126,10 +133,18 @@ export class AppComponent implements OnInit {
     }
     );
 
-
     this.passengerService.getQuickAddPopup().subscribe({
-      next: (flag) => {
-        this.showPassengerQuickAddPopup = flag;
+      next: (flag: PopupConfigModel) => {
+        this.showPassengerQuickAddPopup = flag.show;
+        this.passengerQuickAddPopupArg = flag.arg;
+      }
+    }
+    );
+
+    this.addressService.getQuickAddPopup().subscribe({
+      next: (flag: PopupConfigModel) => {
+        this.showAddressQuickAddPopup = flag.show;
+        this.addressQuickAddPopupArg = flag.arg;
       }
     }
     );

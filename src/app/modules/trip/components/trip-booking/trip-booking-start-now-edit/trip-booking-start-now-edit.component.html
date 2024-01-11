@@ -672,6 +672,11 @@
                             let-dataItem
                           >
                             <span>{{ dataItem.text | translate }}</span>
+                            <span
+                              *ngIf="dataItem.value == ''"
+                              class="fa fa-plus-square quick-add-icon"
+                              (click)="openAddressQuickAddPopup(true, j)"
+                            ></span>
                           </ng-template>
                         </kendo-dropdownlist>
                         <div

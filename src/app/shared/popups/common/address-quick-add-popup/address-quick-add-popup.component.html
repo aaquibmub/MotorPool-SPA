@@ -1,0 +1,62 @@
+<div class="overlay" [perfectScrollbar]>
+  <div class="overlay-wrapper" style="width: 30%">
+    <div class="overlay-content bg-white p-24 sm-padding-10">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-transparent">
+            <div class="card-header">
+              <div class="card-title">New Address</div>
+            </div>
+            <div class="card-block">
+              <form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+                <div class="form-section">
+                  <div class="row">
+                    <!-- Address -->
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <div class="label">
+                          <label for="inputAddress">Address</label>
+                        </div>
+                        <div class="control" style="max-width: none">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputAddress"
+                            formControlName="address"
+                          />
+                          <div
+                            *ngIf="
+                              !form.get('address').valid &&
+                              form.get('address').touched
+                            "
+                            class="invalid-feedback"
+                          >
+                            Address is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="pull-right">
+                    <button
+                      type="button"
+                      (click)="close()"
+                      class="btn btn-default custombtn"
+                    >
+                      Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary ml-8">
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

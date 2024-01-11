@@ -11,8 +11,14 @@
 
 <app-loader-block-ui *ngIf="showLoader"></app-loader-block-ui>
 
+<app-address-quick-add-popup
+  *ngIf="showAddressQuickAddPopup"
+  [arg]="addressQuickAddPopupArg"
+></app-address-quick-add-popup>
+
 <app-passenger-quick-add-popup
   *ngIf="showPassengerQuickAddPopup"
+  [arg]="passengerQuickAddPopupArg"
 ></app-passenger-quick-add-popup>
 
 <app-notification-rule-edit

@@ -1,19 +1,18 @@
-import { ResponseModel } from './../../../../../../helper/models/common/response-model';
-import { UtilityRix } from './../../../../../../helper/common/utility-rix';
-import { AddressService } from './../../../../../../helper/services/utilities/address.service';
-import { AlertService } from './../../../../../../helper/services/common/alert.service';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { NotificationService } from '@progress/kendo-angular-notification';
+import { GetUserRoleListForNotification, UserRoleType } from 'src/app/helper/common/shared-types';
+import { PermissionModel } from 'src/app/helper/models/settings/user-management/roles/permission-model';
 import { UserService } from 'src/app/helper/services/auth/user.service';
+import { UtilityRix } from './../../../../../../helper/common/utility-rix';
+import { DropdownItem } from './../../../../../../helper/models/common/dropdown/dropdown-item.model';
+import { ResponseModel } from './../../../../../../helper/models/common/response-model';
+import { RoleModel } from './../../../../../../helper/models/settings/user-management/roles/role-model';
+import { AlertService } from './../../../../../../helper/services/common/alert.service';
 import { CommonService } from './../../../../../../helper/services/common/common.service';
 import { UtilityService } from './../../../../../../helper/services/common/utility.service';
-import { DropdownItem } from './../../../../../../helper/models/common/dropdown/dropdown-item.model';
-import { UntypedFormArray, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { RoleModel } from './../../../../../../helper/models/settings/user-management/roles/role-model';
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
-import { GetUserRoleListForNotification, UserRoleType } from 'src/app/helper/common/shared-types';
-import { NotificationService } from '@progress/kendo-angular-notification';
-import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { PermissionModel } from 'src/app/helper/models/settings/user-management/roles/permission-model';
 
 @Component({
   selector: 'app-role-edit',

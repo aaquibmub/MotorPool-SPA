@@ -1,14 +1,15 @@
-import { CommonService } from './../../../../helper/services/common/common.service';
-import { DropdownItem } from './../../../../helper/models/common/dropdown/dropdown-item.model';
-import { UtilityRix } from './../../../../helper/common/utility-rix';
-import { ResponseModel } from './../../../../helper/models/common/response-model';
-import { AlertService } from './../../../../helper/services/common/alert.service';
-import { PassengerService } from './../../../../helper/services/trips/passenger.service';
-import { PassengerModel } from './../../../../helper/models/passengers/passenger-model';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { DropdownType } from 'src/app/helper/common/shared-types';
+import { DropdownType, OPM } from 'src/app/helper/common/shared-types';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { AgeGroupService } from 'src/app/helper/services/utilities/age-group.service';
+import { UtilityRix } from './../../../../helper/common/utility-rix';
+import { DropdownItem } from './../../../../helper/models/common/dropdown/dropdown-item.model';
+import { ResponseModel } from './../../../../helper/models/common/response-model';
+import { PassengerModel } from './../../../../helper/models/passengers/passenger-model';
+import { AlertService } from './../../../../helper/services/common/alert.service';
+import { CommonService } from './../../../../helper/services/common/common.service';
+import { PassengerService } from './../../../../helper/services/trips/passenger.service';
 
 @Component({
   selector: 'app-passenger-quick-add-popup',
@@ -16,15 +17,21 @@ import { UtilityService } from 'src/app/helper/services/common/utility.service';
   styleUrls: ['./passenger-quick-add-popup.component.css']
 })
 export class PassengerQuickAddPopupComponent implements OnInit {
+  @Input() arg: any;
+
   form: UntypedFormGroup;
   model: PassengerModel;
 
   genderList: DropdownItem<number>[];
+  ageGroupList: DropdownItem<string>[];
+  opmList: DropdownItem<OPM>[];
 
   constructor(
+    private el: ElementRef,
     public utilityService: UtilityService,
     private passengerService: PassengerService,
     private commonService: CommonService,
+    private ageGroupService: AgeGroupService,
     private alertService: AlertService
   ) { }
 
@@ -35,6 +42,15 @@ export class PassengerQuickAddPopupComponent implements OnInit {
       .subscribe((list: DropdownItem<number>[]) => {
         this.genderList = list;
       });
+    this.commonService.getDropdownList(DropdownType.Opm, '')
+      .subscribe((list: DropdownItem<number>[]) => {
+        this.opmList = list;
+      });
+
+    this.ageGroupService.getDropdownList('')
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.ageGroupList = list;
+      });
   }
 
   private initForm(): void {
@@ -44,28 +60,28 @@ export class PassengerQuickAddPopupComponent implements OnInit {
       ageGroup: new UntypedFormControl(null, [UtilityRix.dropdownRequired as ValidatorFn]),
       opm: new UntypedFormControl(null, [UtilityRix.dropdownRequired as ValidatorFn]),
       phoneNumber: new UntypedFormControl('', [Validators.required]),
-      address: new UntypedFormControl(null, [UtilityRix.dropdownRequired as ValidatorFn]),
+      address: new UntypedFormControl(null, [Validators.required]),
     });
   }
 
   submit(): void {
     if (!this.form.valid) {
+      this.utilityService.scrollToFirstInvalidControl(this.el, '.page-wrapper');
       return;
     }
     this.model = this.form.value;
     this.passengerService.addUpdate(this.model)
-      .subscribe((response: ResponseModel<PassengerModel>) => {
+      .subscribe((response: ResponseModel<string>) => {
         if (response.hasError) {
           this.alertService.setErrorAlert(response.msg);
           return;
         }
-        this.passengerService.setQuickAddPopup(false);
-        this.passengerService.setSelectedModel(response.result);
+        this.passengerService.setQuickAddPopup({ show: false, arg: this.arg, item: new DropdownItem<string>(this.model.name, response.result) });
       });
   }
 
   close(): void {
-    this.passengerService.setQuickAddPopup(false);
+    this.passengerService.setQuickAddPopup({ show: false, arg: this.arg, item: null });
   }
 
 

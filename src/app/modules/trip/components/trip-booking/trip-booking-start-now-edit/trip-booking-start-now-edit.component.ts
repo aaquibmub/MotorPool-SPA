@@ -17,6 +17,7 @@ import { DropdownItem } from './../../../../../helper/models/common/dropdown/dro
 import { ResponseModel } from './../../../../../helper/models/common/response-model';
 import { PassengerModel } from './../../../../../helper/models/passengers/passenger-model';
 import { TripBookingStartNowModel } from './../../../../../helper/models/trips/trip-bookings/trip-booking-start-now-model';
+import { AddressService } from './../../../../../helper/services/address/address.service';
 import { AlertService } from './../../../../../helper/services/common/alert.service';
 import { CommonService } from './../../../../../helper/services/common/common.service';
 import { OverlayService } from './../../../../../helper/services/common/overlay.service';
@@ -26,7 +27,6 @@ import { DriverService } from './../../../../../helper/services/drivers/driver.s
 import { ApproverService } from './../../../../../helper/services/trips/approver.service';
 import { PassengerService } from './../../../../../helper/services/trips/passenger.service';
 import { TripBookingService } from './../../../../../helper/services/trips/trip-booking.service';
-import { AddressService } from './../../../../../helper/services/utilities/address.service';
 import { AgeGroupService } from './../../../../../helper/services/utilities/age-group.service';
 import { VehicalService } from './../../../../../helper/services/vehicals/vehical.service';
 
@@ -148,18 +148,47 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
         this.ageGroupList = list;
       });
 
-    this.passengerService.getSelectedModel().subscribe(
-      (requester: PassengerModel) => {
-        if (requester) {
-          this.passengerService.getDropdownList('')
-            .subscribe((list: DropdownItem<string>[]) => {
-              this.requesterList = list;
 
-              this.form.get('requester').setValue({
-                value: requester.id,
-                text: requester.name
+    this.passengerService.getQuickAddPopup().subscribe(
+      (pcm: PopupConfigModel) => {
+        if (pcm && !pcm.show) {
+          if (pcm.arg === null || pcm.arg === undefined) {
+            this.passengerService.getDropdownList('')
+              .subscribe((list: DropdownItem<string>[]) => {
+                this.requesterList = list;
+                this.form.get('requester').setValue(pcm.item);
+                this.handleRequesterValueChange(pcm.item);
               });
-            });
+          } else {
+            this.passengerService.getDropdownList('')
+              .subscribe((list: DropdownItem<string>[]) => {
+                this.requesterList = list;
+                (this.form.get('passengers') as FormArray).controls[pcm.arg].get('passenger').setValue(pcm.item);
+                this.handlePassengerValueChange(pcm.item, pcm.arg);
+              });
+          }
+        }
+      }
+    );
+
+    this.addressService.getQuickAddPopup().subscribe(
+      (pcm: PopupConfigModel) => {
+        if (pcm && !pcm.show) {
+          if (pcm.arg === null || pcm.arg === undefined) {
+            // this.addressService.getDropdownList('')
+            //   .subscribe((list: DropdownItem<string>[]) => {
+            //     this.requesterList = list;
+            //     this.form.get('requester').setValue(pcm.item);
+            //     this.handleRequesterValueChange(pcm.item);
+            //   });
+          } else {
+            this.addressService.getDropdownList('')
+              .subscribe((list: DropdownItem<string>[]) => {
+                this.requesterList = list;
+                (this.form.get('destinations') as FormArray).controls[pcm.arg].get('address').setValue(pcm.item);
+                // this.handlePassengerValueChange(pcm.item, pcm.arg);
+              });
+          }
         }
       }
     );
@@ -383,7 +412,7 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
   }
 
   openPassengerQuickAddPopup(flag: boolean): void {
-    this.passengerService.setQuickAddPopup(true);
+    this.passengerService.setQuickAddPopup({ show: true });
   }
 
   handleNumberOfPassengerChange(control: any): void {
@@ -662,6 +691,10 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
     if (dropoff) {
       (this.form?.get('dropoffs') as UntypedFormArray).removeAt(index);
     }
+  }
+
+  openAddressQuickAddPopup(flag: boolean, index?: number): void {
+    this.addressService.setQuickAddPopup({ show: true, arg: index });
   }
 
   handleAddressFilter(text: string): void {

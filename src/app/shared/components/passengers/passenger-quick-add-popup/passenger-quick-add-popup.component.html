@@ -11,6 +11,7 @@
               <form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
                 <div class="form-section">
                   <div class="row">
+                    <!-- Name -->
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="label">
@@ -35,6 +36,7 @@
                         </div>
                       </div>
                     </div>
+                    <!-- Gender -->
                     <div class="col-md-6">
                       <div class="form-group">
                         <div class="label">
@@ -64,6 +66,131 @@
                             class="invalid-feedback"
                           >
                             Gender is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- Age Group -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="label">
+                          <label [for]="'inputPassengerAgeGroup'"
+                            >Age Group</label
+                          >
+                        </div>
+                        <div class="control">
+                          <kendo-dropdownlist
+                            class="form-control"
+                            textField="text"
+                            valueField="value"
+                            [defaultItem]="utilityService.dropdownDefaultItem"
+                            [data]="ageGroupList"
+                            formControlName="ageGroup"
+                          >
+                            <ng-template
+                              kendoDropDownListItemTemplate
+                              let-dataItem
+                            >
+                              <span>{{ dataItem.text | translate }}</span>
+                            </ng-template>
+                          </kendo-dropdownlist>
+                          <div
+                            *ngIf="
+                              !form.get('ageGroup').valid &&
+                              form.get('ageGroup').touched
+                            "
+                            class="invalid-feedback"
+                          >
+                            Age group is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- OPM -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="label">
+                          <label [for]="'inputPassengerOpm'">OPM</label>
+                        </div>
+                        <div class="control">
+                          <kendo-dropdownlist
+                            class="form-control"
+                            textField="text"
+                            valueField="value"
+                            [defaultItem]="utilityService.dropdownDefaultItem"
+                            [data]="opmList"
+                            formControlName="opm"
+                          >
+                            <ng-template
+                              kendoDropDownListItemTemplate
+                              let-dataItem
+                            >
+                              <span>{{ dataItem.text | translate }}</span>
+                            </ng-template>
+                          </kendo-dropdownlist>
+                          <div
+                            *ngIf="
+                              !form.get('opm').valid && form.get('opm').touched
+                            "
+                            class="invalid-feedback"
+                          >
+                            OPM is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- Phone number -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="label">
+                          <label for="inputPhoneNumber">Phone Number</label>
+                        </div>
+                        <div class="control">
+                          <input
+                            type="tel"
+                            class="form-control"
+                            name="inputPhoneNumber"
+                            formControlName="phoneNumber"
+                            id="inputPhoneNumber"
+                          />
+                          <div
+                            *ngIf="
+                              !form.get('phoneNumber').valid &&
+                              form.get('phoneNumber').touched
+                            "
+                            class="invalid-feedback"
+                          >
+                            Phone Number is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Address -->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <div class="label">
+                          <label [for]="'inputPassengerAddress'">Address</label>
+                        </div>
+                        <div class="control">
+                          <input
+                            type="tel"
+                            class="form-control"
+                            name="inputPassengerAddress"
+                            formControlName="address"
+                            id="inputPassengerAddress"
+                          />
+                          <div
+                            *ngIf="
+                              !form.get('address').valid &&
+                              form.get('address').touched
+                            "
+                            class="invalid-feedback"
+                          >
+                            Address is required
                           </div>
                         </div>
                       </div>

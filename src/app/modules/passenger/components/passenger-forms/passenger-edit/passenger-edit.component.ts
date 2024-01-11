@@ -8,11 +8,11 @@ import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
 import { ResponseModel } from 'src/app/helper/models/common/response-model';
 import { PassengerModel } from 'src/app/helper/models/passengers/passenger-model';
+import { AddressService } from 'src/app/helper/services/address/address.service';
 import { AlertService } from 'src/app/helper/services/common/alert.service';
 import { CommonService } from 'src/app/helper/services/common/common.service';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { PassangerService } from 'src/app/helper/services/passanger/passanger.service';
-import { AddressService } from 'src/app/helper/services/utilities/address.service';
 import { AgeGroupService } from 'src/app/helper/services/utilities/age-group.service';
 
 @Component({
@@ -30,7 +30,6 @@ export class PassengerEditComponent implements OnInit {
   genderList: DropdownItem<number>[];
   ageGroupList: DropdownItem<string>[];
   opmList: DropdownItem<OPM>[];
-  addressList: DropdownItem<string>[];
 
   constructor(
     private renderer: Renderer2,
@@ -75,11 +74,6 @@ export class PassengerEditComponent implements OnInit {
       .subscribe((list: DropdownItem<string>[]) => {
         this.ageGroupList = list;
       });
-
-    this.addressService.getDropdownList('')
-      .subscribe((list: DropdownItem<string>[]) => {
-        this.addressList = list;
-      });
   }
 
   private initForm(): void {
@@ -112,7 +106,7 @@ export class PassengerEditComponent implements OnInit {
       phoneNumber: new UntypedFormControl(
         phoneNumber, [Validators.required]),
       address: new UntypedFormControl(
-        address, [UtilityRix.dropdownRequired as ValidatorFn]),
+        address, [Validators.required]),
     });
 
   }

@@ -1,13 +1,14 @@
-import { environment } from './../../../../environments/environment';
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
 import { HttpClient } from '@angular/common/http';
-import { PassengerModel } from '../../models/passengers/passenger-model';
-import { ResponseModel } from '../../models/common/response-model';
+import { Injectable } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
 import { guid } from '@progress/kendo-angular-common';
+import { Observable, Subject } from 'rxjs';
 import { UtilityRix } from '../../common/utility-rix';
+import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
+import { PopupConfigModel } from '../../models/common/popup-config-model';
+import { ResponseModel } from '../../models/common/response-model';
+import { PassengerModel } from '../../models/passengers/passenger-model';
+import { environment } from './../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,12 @@ import { UtilityRix } from '../../common/utility-rix';
 export class PassengerService {
   baseUrl = environment.apiUrl + 'passenger/';
 
-  private showQuickAddPopup = new Subject<boolean>();
-  private selectedModel = new Subject<PassengerModel>();
+  private showQuickAddPopup = new Subject<PopupConfigModel>();
 
   constructor(
     private http: HttpClient) { }
 
-    // Form Groups
+  // Form Groups
   createPassengerFormGroup(model: PassengerModel): UntypedFormGroup {
     return new UntypedFormGroup({
       id: new UntypedFormControl(model && model.id ? model.id : guid()),
@@ -41,23 +41,15 @@ export class PassengerService {
     return this.http.get<PassengerModel>(this.baseUrl + id);
   }
 
-  addUpdate(model: PassengerModel): Observable<ResponseModel<PassengerModel>> {
-    return this.http.post<ResponseModel<PassengerModel>>(this.baseUrl, model);
+  addUpdate(model: PassengerModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl, model);
   }
 
-  getSelectedModel(): Observable<PassengerModel> {
-    return this.selectedModel.asObservable();
-  }
-  setSelectedModel(model: PassengerModel): void {
-    this.selectedModel.next(model);
-  }
-
-
-  getQuickAddPopup(): Observable<boolean> {
+  getQuickAddPopup(): Observable<PopupConfigModel> {
     return this.showQuickAddPopup.asObservable();
   }
-  setQuickAddPopup(flag: boolean): void {
-    this.showQuickAddPopup.next(flag);
+  setQuickAddPopup(model: PopupConfigModel): void {
+    this.showQuickAddPopup.next(model);
   }
 
 }
