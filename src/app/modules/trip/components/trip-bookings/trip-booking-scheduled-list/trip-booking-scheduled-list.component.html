@@ -16,19 +16,19 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="serialNumber" title="Trip ID">
+    <kendo-grid-column field="serialNumber" title="{{ utilityService.language.tripId | translate }}">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <a routerLink="/trips/view/{{ dataItem.id }}/detail">{{
           dataItem.tripId
         }}</a>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="requester" title="Trip Requester">
+    <kendo-grid-column field="requester" title="{{ utilityService.language.tripRequester | translate }}">
     </kendo-grid-column>
     <kendo-grid-column field="type" title="Trip Type"> </kendo-grid-column>
-    <kendo-grid-column field="destination" title="Destination">
+    <kendo-grid-column field="destination" title="{{ utilityService.language.destination | translate }}">
     </kendo-grid-column>
-    <kendo-grid-column field="createdDate" title="Date Created" filter="date">
+    <kendo-grid-column field="createdDate" title="{{ utilityService.language.dateCreated | translate }}" filter="date">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         {{ dataItem.createdDate | dateformat : "g" }}
       </ng-template>
@@ -66,7 +66,7 @@
       </div>
     </ng-template>
     <kendo-grid-messages
-      pagerItemsPerPage="records per page"
+      pagerItemsPerPage="{{ utilityService.language.recordsPerPage | translate }}"
       pagerItems="rows"
     ></kendo-grid-messages>
   </kendo-grid>

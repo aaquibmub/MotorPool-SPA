@@ -2,6 +2,7 @@ export class LanguageKeys {
 
   // A.
   address = "Address";
+  addNewDestination = "Add New Destination";
   addressRequired = "Address is required";
   approvedBy = "Approved By";
   approverRequired = "Approver is required";
@@ -10,10 +11,12 @@ export class LanguageKeys {
 
   // B.
   bookedBy = "Booked By";
+  booking = "Booking";
 
   //C
   create = "Create";
   cancel = "Cancel";
+  createExecute = "Create & Execute";
 
   //D.
   daySunday = "Sunday";
@@ -26,6 +29,8 @@ export class LanguageKeys {
   defaultStartingPoint = "Default Starting Point";
   driverAndTransportation = "Driver & Transportation";
   driver = "Driver";
+  destination = "Destination";
+  dateCreated = "Date Created";
 
   // E.
   endDate = "End Date";
@@ -33,6 +38,7 @@ export class LanguageKeys {
 
   //G
   gender = "Gender";
+  genderRequired = "Gender is required";
 
   //N
   notes= "Notes";
@@ -48,10 +54,17 @@ export class LanguageKeys {
   passangerRequired = "Passenger is required";
   pickupTime = "Pickup Time";
   pickupTimeRequired = "Pickup time is required";
+  pickupDateTime = "Pickup Date & Time";
+  pickupDate = "Pickup Date";
+  pickupDateRequired = "Pickup date is required";
 
   //R
   range ="Range";
   registrationPlate = "Registration Plate";
+  requester = "Requester";
+  requesterPhone = "Reqester Phone";
+  requesterRequired = "Requester is required";
+  recordsPerPage = "records per page";
 
   //I
   isRequesterTravelling = "is requester travelling";
@@ -64,11 +77,7 @@ export class LanguageKeys {
   specialServiceRequired = "is special service required";
   startDate ="Start Date";
   startDateRequired = "Start Date is required";
-
-  //R
-  requester = "Requester";
-  requesterPhone = "Reqester Phone";
-  requesterRequired = "Requester is required";
+  status = "Status";
 
   //T
   trip = "Trip";
@@ -76,6 +85,9 @@ export class LanguageKeys {
   tripRequester = "Trip Requester";
   tripDestination = "Trip Destination";
   tripDestinationRequired = "Trip destination is required";
+  tripId = "Trip ID";
+  tripType = "Trip Type";
+
 
   //V.
   vehical = "Vehical";

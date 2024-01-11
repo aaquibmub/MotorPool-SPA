@@ -9,6 +9,7 @@ import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { TripGridModel } from 'src/app/helper/models/trips/enroute/trip-grid-model';
 import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { TripService } from 'src/app/helper/services/trips/trip.service';
 
 @Component({
@@ -29,6 +30,7 @@ export class TripTodayListComponent implements OnInit, OnDestroy {
   gridFilterSubscription: Subscription;
 
   constructor(
+    public utilityService: UtilityService,
     private tripService: TripService,
     private router: Router,
     private gridToolbarService: GridToolbarService
