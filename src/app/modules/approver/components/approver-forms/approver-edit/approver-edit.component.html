@@ -3,7 +3,7 @@
     <div class="page-area">
       <div class="page-header">
         <div class="page-title">
-          <span>Address</span>
+          <span>{{ utilityService.language.address | translate }}</span>
         </div>
       </div>
       <div class="page-body">
@@ -13,7 +13,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputAddress">Name</label>
+                  <label for="inputAddress">{{ utilityService.language.address | translate }}</label>
                 </div>
                 <div class="control">
                   <input
@@ -29,7 +29,7 @@
                     "
                     class="invalid-feedback"
                   >
-                    Name is required
+                    {{ utilityService.language.nameRequired | translate }}
                   </div>
                 </div>
               </div>
@@ -47,7 +47,7 @@
                       ></kendo-switch>
                     </div>
                     <div class="label">
-                      <label for="inputStatus">is active</label>
+                      <label for="inputStatus">{{ utilityService.language.isActive | translate }}</label>
                     </div>
                   </div>
                 </div>
@@ -66,13 +66,13 @@
                   type="button"
                   (click)="cancel()"
                 >
-                  Cancel
+                  {{ utilityService.language.cancel | translate }}
                 </button>
                 <button *ngIf="!editMode" class="btn btn-primary" type="submit">
-                  Create
+                  {{ utilityService.language.create | translate }}
                 </button>
                 <button *ngIf="editMode" class="btn btn-primary" type="submit">
-                  Update
+                  {{ utilityService.language.update | translate }}
                 </button>
               </div>
             </div>

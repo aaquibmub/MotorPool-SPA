@@ -14,7 +14,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputName">Name</label>
+                <label for="inputName">{{ utilityService.language.name | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -28,7 +28,7 @@
                   *ngIf="!form.get('name').valid && form.get('name').touched"
                   class="invalid-feedback"
                 >
-                  Name is required
+                  {{ utilityService.language.nameRequired | translate }}
                 </div>
               </div>
             </div>
@@ -37,7 +37,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerGender'">Gender</label>
+                <label [for]="'inputPassengerGender'">{{ utilityService.language.gender | translate }}</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -58,7 +58,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Gender is required
+                  {{ utilityService.language.genderRequired | translate }}
                 </div>
               </div>
             </div>
@@ -69,7 +69,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerAgeGroup'">Age Group</label>
+                <label [for]="'inputPassengerAgeGroup'">{{ utilityService.language.ageGroup | translate }}</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -90,7 +90,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Age group is required
+                  {{ utilityService.language.ageGroupRequired | translate }}
                 </div>
               </div>
             </div>
@@ -99,7 +99,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerOpm'">OPM</label>
+                <label [for]="'inputPassengerOpm'">{{ utilityService.language.opm | translate }}</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -118,7 +118,7 @@
                   *ngIf="!form.get('opm').valid && form.get('opm').touched"
                   class="invalid-feedback"
                 >
-                  OPM is required
+                  {{ utilityService.language.opmRequired | translate }}
                 </div>
               </div>
             </div>
@@ -127,7 +127,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputPhoneNumber">Phone Number</label>
+                <label for="inputPhoneNumber">{{ utilityService.language.phoneNumber | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -144,7 +144,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Phone Number is required
+                  {{ utilityService.language.phoneNumberRequired | translate }}
                 </div>
               </div>
             </div>
@@ -155,7 +155,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerAddress'">Address</label>
+                <label [for]="'inputPassengerAddress'">{{ utilityService.language.address | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -171,7 +171,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Address is required
+                  {{ utilityService.language.addressRequired | translate }}
                 </div>
               </div>
             </div>
