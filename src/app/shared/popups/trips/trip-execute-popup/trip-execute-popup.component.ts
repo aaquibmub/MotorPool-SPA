@@ -22,6 +22,7 @@ export class TripExecutePopupComponent implements OnInit {
   model: TripExecuteModel;
 
   driverList: DropdownItem<string>[];
+  vehicalList: VehicalModel[];
 
   constructor(
     public utilityService: UtilityService,
@@ -67,21 +68,24 @@ export class TripExecutePopupComponent implements OnInit {
 
     this.vehicalService.getVehicalByDriverId(value.value)
       .subscribe(
-        (response: ResponseModel<VehicalModel>) => {
+        (response: ResponseModel<VehicalModel[]>) => {
           if (response.hasError) {
             return;
           }
+          this.vehicalList = response.result;
+          const vehcial = response.result[0];
 
-          const vehcial = response.result as VehicalModel;
+          if (vehcial) {
 
-          this.form.get('vehical').setValue({
-            text: vehcial.make + ' '
-              + vehcial.model + ' '
-              + vehcial.modelYear.toString(),
-            value: vehcial.id
-          });
+            this.form.get('vehical').setValue({
+              text: vehcial.make + ' '
+                + vehcial.model + ' '
+                + vehcial.modelYear.toString(),
+              value: vehcial.id
+            });
 
-          this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
+            this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
+          }
 
         }
       );

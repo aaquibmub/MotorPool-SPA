@@ -1,12 +1,11 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ResponseModel } from './../../../../helper/models/common/response-model';
-import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { AllocateVehicalModel } from './../../../../helper/models/drivers/allocate-vehical-model';
 import { AlertService } from './../../../../helper/services/common/alert.service';
 import { CommonService } from './../../../../helper/services/common/common.service';
 import { DriverService } from './../../../../helper/services/drivers/driver.service';
-import { UtilityService } from 'src/app/helper/services/common/utility.service';
-import { AllocateVehicalModel } from './../../../../helper/models/drivers/allocate-vehical-model';
-import { Component, Input, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-deallocate-vehical-popup',
@@ -41,7 +40,7 @@ export class DeallocateVehicalPopupComponent implements OnInit {
   private initForm(): void {
     this.form = new UntypedFormGroup({
       vehical: new UntypedFormControl(
-        this.model.vehical
+        // this.model.vehical
       ),
       notes: new UntypedFormControl(null)
     });

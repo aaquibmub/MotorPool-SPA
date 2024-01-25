@@ -58,7 +58,7 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
   destinationButtons: ActionButton[][] = [];
 
   driverList: DropdownItem<string>[];
-  vehicalList: DropdownItem<string>[];
+  vehicalList: VehicalModel[];
 
   tripExecutePopupSubscription: Subscription;
 
@@ -203,10 +203,10 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
         this.driverList = list;
       });
 
-    this.vehicalService.getDropdownList('')
-      .subscribe((list: DropdownItem<string>[]) => {
-        this.vehicalList = list;
-      });
+    // this.vehicalService.getDropdownList('')
+    //   .subscribe((list: DropdownItem<string>[]) => {
+    //     this.vehicalList = list;
+    //   });
 
   }
 
@@ -711,22 +711,22 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
 
     this.vehicalService.getVehicalByDriverId(value.value)
       .subscribe(
-        (response: ResponseModel<VehicalModel>) => {
+        (response: ResponseModel<VehicalModel[]>) => {
           if (response.hasError) {
             return;
           }
+          this.vehicalList = response.result;
+          const vehcial = response.result[0];
+          if (vehcial) {
+            this.form.get('vehical').setValue({
+              text: vehcial.make + ' '
+                + vehcial.model + ' '
+                + vehcial.modelYear.toString(),
+              value: vehcial.id
+            });
 
-
-          const vehcial = response.result as VehicalModel;
-
-          this.form.get('vehical').setValue({
-            text: vehcial.make + ' '
-              + vehcial.model + ' '
-              + vehcial.modelYear.toString(),
-            value: vehcial.id
-          });
-
-          this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
+            this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
+          }
 
         }
       );

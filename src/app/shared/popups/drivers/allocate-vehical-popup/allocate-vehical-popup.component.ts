@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
-import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ResponseModel } from './../../../../helper/models/common/response-model';
 import { AllocateVehicalModel } from './../../../../helper/models/drivers/allocate-vehical-model';
@@ -41,7 +40,7 @@ export class AllocateVehicalPopupComponent implements OnInit {
         }
       );
 
-    this.vehicalService.getTableList('', true)
+    this.vehicalService.getTableList('')
       .subscribe((list: VehicalModel[]) => {
         this.vehicalList = list;
       });
@@ -49,9 +48,7 @@ export class AllocateVehicalPopupComponent implements OnInit {
 
   private initForm(): void {
     this.form = new UntypedFormGroup({
-      vehical: new UntypedFormControl(
-        this.model.vehical, [UtilityRix.dropdownRequired as ValidatorFn]
-      ),
+      vehicals: new UntypedFormControl(this.model.vehicals),
       notes: new UntypedFormControl(null)
     });
   }

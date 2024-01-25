@@ -8,12 +8,12 @@ import { GridList } from '../../models/common/grid/grid-list';
 import { ResponseModel } from '../../models/common/response-model';
 import { VehicalGridModel } from '../../models/vehicals/vehical-grid-model';
 import { VehicalModel } from '../../models/vehicals/vehical-model';
-import { environment } from './../../../../environments/environment';
-import { VehicalViewModel } from '../../models/vehicals/vehical-view-model';
 import { VehicalViewDetailModel } from '../../models/vehicals/vehical-view-detail-model';
-import { VehicalViewInspectionModel } from '../../models/vehicals/vehical-view-inspection-model';
-import { VehicalViewTripModel } from '../../models/vehicals/vehical-view-trip-model';
 import { VehicalViewDriverModel } from '../../models/vehicals/vehical-view-driver-model';
+import { VehicalViewInspectionModel } from '../../models/vehicals/vehical-view-inspection-model';
+import { VehicalViewModel } from '../../models/vehicals/vehical-view-model';
+import { VehicalViewTripModel } from '../../models/vehicals/vehical-view-trip-model';
+import { environment } from './../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -48,8 +48,8 @@ export class VehicalService {
     return this.http.get<VehicalModel>(this.baseUrl + id);
   }
 
-  getVehicalByDriverId(id: string): Observable<ResponseModel<VehicalModel>> {
-    return this.http.get<ResponseModel<VehicalModel>>(this.baseUrl + 'get-vehical-by-driver-id/' + id);
+  getVehicalByDriverId(id: string): Observable<ResponseModel<VehicalModel[]>> {
+    return this.http.get<ResponseModel<VehicalModel[]>>(this.baseUrl + 'get-vehical-by-driver-id/' + id);
   }
 
   addUpdate(model: any): Observable<ResponseModel<string>> {
