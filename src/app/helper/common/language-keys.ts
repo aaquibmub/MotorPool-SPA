@@ -8,6 +8,7 @@ export class LanguageKeys {
   approverRequired = "Approver is required";
   ageGroup = "Age Group";
   ageGroupRequired = "Age group is required";
+  active = "Active";
 
   // B.
   bookedBy = "Booked By";
@@ -17,6 +18,9 @@ export class LanguageKeys {
   create = "Create";
   cancel = "Cancel";
   createExecute = "Create & Execute";
+  createPassanger = "Create New Passenger";
+  createAddress = "Create New Address";
+  createApprover = "Create New Approver";
 
   //D.
   daySunday = "Sunday";
@@ -31,6 +35,7 @@ export class LanguageKeys {
   driver = "Driver";
   destination = "Destination";
   dateCreated = "Date Created";
+  disabled = "Disabled";
 
   // E.
   endDate = "End Date";
@@ -42,9 +47,12 @@ export class LanguageKeys {
 
   //N
   notes= "Notes";
+  name="Name";
+  nameRequired = "Name is required";
 
   //O
   opm = "OPM";
+  opmRequired = "OPM is required";
 
   //P
   passanger = "Passenger";
@@ -57,6 +65,8 @@ export class LanguageKeys {
   pickupDateTime = "Pickup Date & Time";
   pickupDate = "Pickup Date";
   pickupDateRequired = "Pickup date is required";
+  phoneNumber = "Phone Number";
+  phoneNumberRequired = "Phone Number is required";
 
   //R
   range ="Range";
@@ -68,6 +78,7 @@ export class LanguageKeys {
 
   //I
   isRequesterTravelling = "is requester travelling";
+  isActive = "is active";
 
   // S.
   scheduledTrip = "Scheduled Trip";
@@ -87,6 +98,9 @@ export class LanguageKeys {
   tripDestinationRequired = "Trip destination is required";
   tripId = "Trip ID";
   tripType = "Trip Type";
+
+  //U
+  update = "Update";
 
 
   //V.
