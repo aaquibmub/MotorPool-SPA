@@ -1,0 +1,63 @@
+.inspection-side-image {
+  width: 280px;
+  height: 280px;
+}
+
+.map {
+  margin: 10px;
+  align-self: center;
+  position: relative;
+  display: inline-block;
+}
+
+.map img {
+  max-width: 100%;
+  display: block;
+}
+
+.box {
+  width: 5px;
+  height: 5px;
+  background-color: #000;
+  border-radius: 50%;
+  /* background-image: url(http://www.clker.com/cliparts/W/0/g/a/W/E/map-pin-red.svg); */
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+}
+
+#pin-1 {
+  top: 49px;
+  left: 36px;
+}
+
+.box:hover > .pin-text {
+  display: block;
+}
+
+.pin-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 75%;
+  white-space: nowrap;
+  display: none;
+}
+
+.pin-text h3 {
+  color: white;
+  text-shadow: 1px 1px 1px #000;
+}
+
+area:-webkit-any-link {
+  background-color: black;
+}
+
+/* area {
+  display: block;
+  width: 5px;
+  background: black;
+  height: 5px;
+  border-radius: 50%;
+} */

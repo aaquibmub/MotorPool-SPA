@@ -32,7 +32,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputApprovedBy">{{ utilityService.language.approvedBy | translate }}</label>
+                <label for="inputApprovedBy">{{
+                  utilityService.language.approvedBy | translate
+                }}</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -56,7 +58,7 @@
                   "
                   class="invalid-feedback"
                 >
-                {{ utilityService.language.approverRequired | translate }}
+                  {{ utilityService.language.approverRequired | translate }}
                 </div>
               </div>
             </div>
@@ -65,14 +67,18 @@
       </div>
       <!-- Trip Requester -->
       <div class="form-section">
-        <div class="section-header">{{ utilityService.language.tripRequester | translate }}</div>
+        <div class="section-header">
+          {{ utilityService.language.tripRequester | translate }}
+        </div>
         <div class="section-body">
           <!-- Requester Info -->
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputRequester">{{ utilityService.language.requester | translate }}</label>
+                  <label for="inputRequester">{{
+                    utilityService.language.requester | translate
+                  }}</label>
                 </div>
                 <div class="control">
                   <kendo-dropdownlist
@@ -110,7 +116,9 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputRequestPhone">{{ utilityService.language.requesterPhone | translate }}</label>
+                  <label for="inputRequestPhone">{{
+                    utilityService.language.requesterPhone | translate
+                  }}</label>
                 </div>
                 <div class="control">
                   <input
@@ -127,7 +135,9 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputRequestOpm">{{ utilityService.language.opm | translate }}</label>
+                  <label for="inputRequestOpm">{{
+                    utilityService.language.opm | translate
+                  }}</label>
                 </div>
                 <div class="control">
                   <input
@@ -156,9 +166,10 @@
                       ></kendo-switch>
                     </div>
                     <div class="label">
-                      <label for="inputRequesterTraveling"
-                        >{{ utilityService.language.isRequesterTravelling | translate }}</label
-                      >
+                      <label for="inputRequesterTraveling">{{
+                        utilityService.language.isRequesterTravelling
+                          | translate
+                      }}</label>
                     </div>
                   </div>
                 </div>
@@ -169,20 +180,26 @@
       </div>
       <!-- Passengers -->
       <div class="form-section">
-        <div class="section-header">{{ utilityService.language.passangers | translate }}</div>
+        <div class="section-header">
+          {{ utilityService.language.passangers | translate }}
+        </div>
         <div class="section-body">
           <!-- Requester as Passenger -->
           <div
             class="form-section blue-section"
             *ngIf="form.get('isRequesterTraveling').value"
           >
-            <div class="section-header">{{ utilityService.language.passanger1 | translate }}</div>
+            <div class="section-header">
+              {{ utilityService.language.passanger1 | translate }}
+            </div>
             <div class="section-body">
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="label">
-                      <label [for]="'inputPassengerName'">{{ utilityService.language.passangerName | translate }}</label>
+                      <label [for]="'inputPassengerName'">{{
+                        utilityService.language.passangerName | translate
+                      }}</label>
                     </div>
                     <div class="control">
                       <input
@@ -199,7 +216,9 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="label">
-                      <label [for]="'inputPassengerGender'">{{ utilityService.language.gender | translate }}</label>
+                      <label [for]="'inputPassengerGender'">{{
+                        utilityService.language.gender | translate
+                      }}</label>
                     </div>
                     <div class="control">
                       <input
@@ -216,7 +235,9 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="label">
-                      <label [for]="'inputPassengerAgeGroup'">{{ utilityService.langauge.ageGroup | translate }}</label>
+                      <label [for]="'inputPassengerAgeGroup'">{{
+                        utilityService.language.ageGroup | translate
+                      }}</label>
                     </div>
                     <div class="control">
                       <input
@@ -278,9 +299,9 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
-                        <label [for]="'inputPassengerName' + j"
-                          >{{ utilityService.language.passangerName | translate }}</label
-                        >
+                        <label [for]="'inputPassengerName' + j">{{
+                          utilityService.language.passangerName | translate
+                        }}</label>
                       </div>
                       <div class="control">
                         <kendo-dropdownlist
@@ -313,7 +334,10 @@
                           "
                           class="invalid-feedback"
                         >
-                          {{ utilityService.language.passangerRequired | translate }}
+                          {{
+                            utilityService.language.passangerRequired
+                              | translate
+                          }}
                         </div>
                       </div>
                     </div>
@@ -321,7 +345,9 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
-                        <label [for]="'inputPassengerGender' + j">{{ utilityService.language.gender | translate }}</label>
+                        <label [for]="'inputPassengerGender' + j">{{
+                          utilityService.language.gender | translate
+                        }}</label>
                       </div>
                       <div class="control">
                         <kendo-dropdownlist
@@ -346,7 +372,9 @@
                           "
                           class="invalid-feedback"
                         >
-                          {{ utilityService.languge.genderRequired | translate }}
+                          {{
+                            utilityService.language.genderRequired | translate
+                          }}
                         </div>
                       </div>
                     </div>
@@ -354,9 +382,9 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
-                        <label [for]="'inputPassengerAgeGroup' + j"
-                          >{{ utilityService.language.ageGroup | translate }}</label
-                        >
+                        <label [for]="'inputPassengerAgeGroup' + j">{{
+                          utilityService.language.ageGroup | translate
+                        }}</label>
                       </div>
                       <div class="control">
                         <kendo-dropdownlist
@@ -381,7 +409,9 @@
                           "
                           class="invalid-feedback"
                         >
-                          {{ utilityService.language.ageGroupRequired | translate }}
+                          {{
+                            utilityService.language.ageGroupRequired | translate
+                          }}
                         </div>
                       </div>
                     </div>
@@ -394,7 +424,9 @@
       </div>
       <!-- Special Services -->
       <div class="form-section">
-        <div class="section-header">{{ utilityService.language.specialServices | translate }}</div>
+        <div class="section-header">
+          {{ utilityService.language.specialServices | translate }}
+        </div>
         <div class="section-body">
           <!-- Is Special Service Required -->
           <div class="row">
@@ -410,9 +442,10 @@
                       ></kendo-switch>
                     </div>
                     <div class="label">
-                      <label for="inputRequesterTraveling"
-                        >{{ utilityService.language.specialServiceRequired | translate }}</label
-                      >
+                      <label for="inputRequesterTraveling">{{
+                        utilityService.language.specialServiceRequired
+                          | translate
+                      }}</label>
                     </div>
                   </div>
                 </div>
@@ -466,17 +499,23 @@
       </div>
       <!-- Booking -->
       <div class="form-section">
-        <div class="section-header">{{ utilityService.language.booking | translate }}</div>
+        <div class="section-header">
+          {{ utilityService.language.booking | translate }}
+        </div>
         <div class="section-body">
           <!-- Pickup Time -->
           <div class="form-section blue-section">
-            <div class="section-header">{{ utilityService.language.pickupDateTime | translate }}</div>
+            <div class="section-header">
+              {{ utilityService.language.pickupDateTime | translate }}
+            </div>
             <div class="section-body">
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="label">
-                      <label for="inputPickupDate">{{ utilityService.language.pickupDate | translate }}</label>
+                      <label for="inputPickupDate">{{
+                        utilityService.language.pickupDate | translate
+                      }}</label>
                     </div>
                     <div class="control">
                       <kendo-datepicker
@@ -492,7 +531,10 @@
                         "
                         class="invalid-feedback"
                       >
-                        {{ utilityService.language.pickupDateRequired || translate }}.
+                        {{
+                          utilityService.language.pickupDateRequired ||
+                            translate
+                        }}.
                       </div>
                     </div>
                   </div>
@@ -502,7 +544,9 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <div class="label">
-                      <label for="inputPickupTime">{{ utilityService.language.pickupTime | translate }}</label>
+                      <label for="inputPickupTime">{{
+                        utilityService.language.pickupTime | translate
+                      }}</label>
                     </div>
                     <div class="control">
                       <kendo-timepicker
@@ -518,7 +562,9 @@
                         "
                         class="invalid-feedback"
                       >
-                        {{ utilityService.language.pickupTimeRequired | translate }}
+                        {{
+                          utilityService.language.pickupTimeRequired | translate
+                        }}
                       </div>
                     </div>
                   </div>
@@ -530,13 +576,17 @@
       </div>
       <!-- Trip Destination -->
       <div class="form-section">
-        <div class="section-header">{{ utilityService.language.tripDestination | translate }}</div>
+        <div class="section-header">
+          {{ utilityService.language.tripDestination | translate }}
+        </div>
         <div class="section-body">
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputTripType">{{ utilityService.language.trip | translate }}</label>
+                  <label for="inputTripType">{{
+                    utilityService.language.trip | translate
+                  }}</label>
                 </div>
                 <div class="control">
                   <kendo-dropdownlist
@@ -567,7 +617,9 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputTripDestination">{{ utilityService.language.tripDestination | translate }}</label>
+                  <label for="inputTripDestination">{{
+                    utilityService.language.tripDestination | translate
+                  }}</label>
                 </div>
                 <div class="control">
                   <kendo-dropdownlist
@@ -589,7 +641,10 @@
                     "
                     class="invalid-feedback"
                   >
-                    {{ utilityService.language.tripDestinationRequired | translate }}
+                    {{
+                      utilityService.language.tripDestinationRequired
+                        | translate
+                    }}
                   </div>
                 </div>
               </div>
@@ -597,13 +652,17 @@
           </div>
           <!-- Starting Point -->
           <div class="form-section green-section">
-            <div class="section-header">{{ utilityService.language.defaultStartingPoint | translate }}</div>
+            <div class="section-header">
+              {{ utilityService.language.defaultStartingPoint | translate }}
+            </div>
             <div class="section-body">
               <div class="row">
                 <div class="col-md-8">
                   <div class="form-group">
                     <div class="label">
-                      <label for="inputStartingPointAddress">{{ utilityService.language.address | translate }}</label>
+                      <label for="inputStartingPointAddress">{{
+                        utilityService.language.address | translate
+                      }}</label>
                     </div>
                     <div class="control">
                       <kendo-dropdownlist
@@ -654,7 +713,9 @@
                   <div class="col-md-8">
                     <div class="form-group">
                       <div class="label">
-                        <label [for]="'inputPickupAddress' + j">{{ utilityService.language.address | translate }}</label>
+                        <label [for]="'inputPickupAddress' + j">{{
+                          utilityService.language.address | translate
+                        }}</label>
                       </div>
                       <div class="control">
                         <kendo-dropdownlist
@@ -686,7 +747,9 @@
                           "
                           class="invalid-feedback"
                         >
-                          {{ utilityService.language.addressRequired | translate }}
+                          {{
+                            utilityService.language.addressRequired | translate
+                          }}
                         </div>
                       </div>
                     </div>
@@ -703,9 +766,9 @@
                           popupClass: 'et-dropdown-menu'
                         }"
                       >
-                        {{ utilityService.language.addNewDestination | translate }}<i
-                          class="k-button-icon k-icon k-i-arrow-s"
-                        ></i>
+                        {{
+                          utilityService.language.addNewDestination | translate
+                        }}<i class="k-button-icon k-icon k-i-arrow-s"></i>
                         <ng-template
                           kendoDropDownButtonItemTemplate
                           let-dataItem
@@ -734,13 +797,17 @@
       </div>
       <!-- Driver and Transportation -->
       <div class="form-section">
-        <div class="section-header">{{ utilityService.language.driverAndTransportation | translate }}</div>
+        <div class="section-header">
+          {{ utilityService.language.driverAndTransportation | translate }}
+        </div>
         <div class="section-body">
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputDriver">{{ utilityService.language.driver | translate }}</label>
+                  <label for="inputDriver">{{
+                    utilityService.language.driver | translate
+                  }}</label>
                 </div>
                 <div class="control">
                   <kendo-dropdownlist
@@ -762,24 +829,33 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputVehical">{{ utilityService.language.vehical | translate }}</label>
+                  <label for="inputVehical">{{
+                    utilityService.language.vehical | translate
+                  }}</label>
                 </div>
                 <div class="control">
-                  <input
-                    type="text"
+                  <kendo-dropdownlist
                     class="form-control"
-                    name="inputVehical"
-                    [value]="form.get('vehical').value?.text"
-                    readonly
-                    id=""
-                  />
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (valueChange)="handlVehicleValueChange($event)"
+                    [data]="vehicalList"
+                    formControlName="vehical"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
                 </div>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputRegistrationPlate">{{ utilityService.language.registrationPlate | translate }}</label>
+                  <label for="inputRegistrationPlate">{{
+                    utilityService.language.registrationPlate | translate
+                  }}</label>
                 </div>
                 <div class="control">
                   <input
@@ -798,7 +874,9 @@
       </div>
       <!-- Notes -->
       <div class="form-section">
-        <div class="section-header">{{ utilityService.language.notes | translate }}</div>
+        <div class="section-header">
+          {{ utilityService.language.notes | translate }}
+        </div>
         <div class="section-body">
           <div class="row">
             <div class="col-md-12">
@@ -829,7 +907,7 @@
                 type="button"
                 (click)="cancel()"
               >
-              {{ utilityService.language.cancel | translate }}
+                {{ utilityService.language.cancel | translate }}
               </button>
               <button class="btn btn-primary mr-16" type="submit">
                 {{ utilityService.language.create | translate }}
@@ -839,7 +917,7 @@
                 type="button"
                 (click)="submit(true)"
               >
-              {{ utilityService.language.createExecute | translate }}
+                {{ utilityService.language.createExecute | translate }}
               </button>
             </div>
           </div>

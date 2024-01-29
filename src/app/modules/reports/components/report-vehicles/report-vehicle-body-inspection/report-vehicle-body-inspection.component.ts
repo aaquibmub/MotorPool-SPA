@@ -1,89 +1,77 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
-import { State } from '@progress/kendo-data-query';
-import { Subscription } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
+import { ReportVehicleBodyInspectionModel } from 'src/app/helper/models/reports/vehicles/inspections/report-vehicle-body-inspection-model';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ReportService } from 'src/app/helper/services/utilities/report.service';
-import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
+import { VehicalService } from 'src/app/helper/services/vehicals/vehical.service';
 
 @Component({
   selector: 'app-report-vehicle-body-inspection',
   templateUrl: './report-vehicle-body-inspection.component.html',
   styleUrls: ['./report-vehicle-body-inspection.component.css']
 })
-export class ReportVehicleBodyInspectionComponent implements OnInit, OnDestroy {
-  gridData: GridDataResult = UtilityRix.gridConfig.gridData;
-  state: State = UtilityRix.gridConfig.state;
-  pageable = UtilityRix.gridConfig.pageable;
-  filterable = UtilityRix.gridConfig.filterable;
-  searchQuery: string;
+export class ReportVehicleBodyInspectionComponent implements OnInit {
+  side = UtilityRix.bodyInspectionSide;
+  selectedVehicle: DropdownItem<string>;
+  vehicleList: DropdownItem<string>[];
 
-  pageSizeSubscription: Subscription;
-  gridDataSubscription: Subscription;
-  gridSearchQuerySubscription: Subscription;
-  gridFilterSubscription: Subscription;
+  selectedDate: Date = new Date();
+
+  model: ReportVehicleBodyInspectionModel[];
 
   constructor(
     public utilityService: UtilityService,
-    private reportService: ReportService,
-    private gridToolbarService: GridToolbarService
+    private vehicleService: VehicalService,
+    private reportService: ReportService
   ) { }
 
-  ngOnInit(): void {
-
-    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
+  ngOnInit() {
+    this.vehicleService.getDropdownList('')
       .subscribe(
-        (show: boolean) => {
-          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
-          this.state.filter = null;
-          this.reportService.fetchVehicleBodyInspectionGridData(this.state, this.searchQuery);
-        }
-      );
-
-    this.pageSizeSubscription = this.gridToolbarService.getPageSize()
-      .subscribe(
-        (pageSize: number) => {
-          this.state.take = pageSize;
-          this.reportService.fetchVehicleBodyInspectionGridData(this.state, this.searchQuery);
-        }
-      );
-    this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
-      .subscribe(
-        (query: string) => {
-          this.searchQuery = query;
-          this.reportService.fetchVehicleBodyInspectionGridData(this.state, this.searchQuery);
-        }
-      );
-
-    this.reportService.fetchVehicleBodyInspectionGridData(this.state, this.searchQuery);
-    this.gridDataSubscription = this.reportService.getVehicleBodyInspectionGridData()
-      .subscribe(
-        (data: any) => {
-          this.gridData.data = data.data;
-          this.gridData.total = data.total;
-        }
-      );
-
+        (list: DropdownItem<string>[]) => {
+          this.vehicleList = list;
+          this.handleVehicleValueChange(this.vehicleList[0]);
+        });
   }
 
-  dataStateChange(state: DataStateChangeEvent): void {
-    this.state = state;
-    this.reportService.fetchVehicleBodyInspectionGridData(state, this.searchQuery);
+  handleVehicleValueChange(value: DropdownItem<string>): void {
+    this.selectedVehicle = value;
+    this.fetchReport();
   }
 
-  exportToExcel(grid: GridComponent): void {
-    grid.saveAsExcel();
+  handleDateValueChange(value: Date): void {
+    this.selectedDate = value;
+    this.fetchReport();
   }
 
-  ngOnDestroy(): void {
-    if (this.gridDataSubscription) {
-      this.gridDataSubscription.unsubscribe();
-    }
-    if (this.gridFilterSubscription) {
-      this.gridFilterSubscription.unsubscribe();
-    }
-
-    this.state.filter = null;
+  fetchReport(): void {
+    this.reportService.getVehicleBodyInspectionModel(
+      this.selectedDate,
+      this.selectedVehicle?.value,
+    )
+      .subscribe(
+        (model: ReportVehicleBodyInspectionModel[]) => {
+          this.model = model;
+        }
+      );
   }
+
+  private downloadFile = (data: HttpResponse<Blob>) => {
+    const downloadedFile = new Blob([data.body as BlobPart], { type: data.body?.type });
+    const a = document.createElement('a');
+    a.setAttribute('style', 'display:none;');
+    document.body.appendChild(a);
+    a.download = 'Vehicle Body Inspection - (' +
+      this.selectedVehicle?.text +
+      '-' +
+      this.selectedDate.toDateString().toString() +
+      ').xlsx';
+    a.href = URL.createObjectURL(downloadedFile);
+    a.target = '_blank';
+    a.click();
+    document.body.removeChild(a);
+  }
+
 }

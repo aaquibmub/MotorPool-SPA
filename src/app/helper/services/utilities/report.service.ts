@@ -21,6 +21,7 @@ import { ReportAllVehicleGridModel } from '../../models/reports/vehicles/all-veh
 import { ReportVehicleDueOilChangeGridModel } from '../../models/reports/vehicles/all-vehicles/report-vehicle-due-oil-change';
 import { ReportVehicleMilageGridModel } from '../../models/reports/vehicles/all-vehicles/report-vehicle-milage-grid-model';
 import { ReportVehicleBodyInspectionGridModel } from '../../models/reports/vehicles/inspections/report-vehicle-body-inspection-grid-model';
+import { ReportVehicleBodyInspectionModel } from '../../models/reports/vehicles/inspections/report-vehicle-body-inspection-model';
 import { environment } from './../../../../environments/environment';
 
 @Injectable({
@@ -93,6 +94,14 @@ export class ReportService {
       observe: 'events',
       responseType: 'blob'
     });
+  }
+
+  getVehicleBodyInspectionModel(
+    date: Date,
+    vehicleId?: string,
+  ): Observable<ReportVehicleBodyInspectionModel[]> {
+    return this.http.post<ReportVehicleBodyInspectionModel[]>(
+      this.baseUrl + 'get-report-vehicle-body-inspection-model', { vehicleId, date });
   }
 
   getTripPassengerSheetModel(

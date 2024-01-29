@@ -58,7 +58,7 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
   destinationButtons: ActionButton[][] = [];
 
   driverList: DropdownItem<string>[];
-  vehicalList: VehicalModel[];
+  vehicalList: DropdownItem<string>[];
 
   tripExecutePopupSubscription: Subscription;
 
@@ -704,6 +704,7 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
       });
   }
 
+
   handleDriverValueChange(value: DropdownItem<string>): void {
     if (!value) {
       return;
@@ -715,21 +716,43 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
           if (response.hasError) {
             return;
           }
-          this.vehicalList = response.result;
+
+          const vList = [];
+          response.result?.forEach(v => {
+            vList.push({
+              text: v.make + ' '
+                + v.model + ' '
+                + v.modelYear.toString(),
+              value: v.id,
+              textEx: v.registrationPlate
+            });
+          });
+
+          this.vehicalList = vList;
           const vehcial = response.result[0];
+          let vehicleVal = null;
           if (vehcial) {
-            this.form.get('vehical').setValue({
+            vehicleVal = {
               text: vehcial.make + ' '
                 + vehcial.model + ' '
                 + vehcial.modelYear.toString(),
-              value: vehcial.id
-            });
-
-            this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
+              value: vehcial.id,
+              textEx: vehcial.registrationPlate
+            };
+            this.form.get('vehical').setValue(vehicleVal);
           }
+          this.handlVehicleValueChange(vehicleVal);
 
         }
       );
+  }
+
+  handlVehicleValueChange(value: DropdownItem<string>): void {
+    let regPlateNumber = null;
+    if (value) {
+      regPlateNumber = value.textEx;
+    }
+    this.form.get('registrationPlate').setValue(regPlateNumber);
   }
 
   getDestinationTypeCount(destination: TripDestinationModel): number {

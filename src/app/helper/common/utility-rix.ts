@@ -3,6 +3,14 @@ import { NotificationSettings } from '@progress/kendo-angular-notification';
 
 export class UtilityRix {
 
+  static bodyInspectionSide = {
+    frontId: 'b6bfcb18-00b6-4a59-84e5-6e0e87c61a7a',
+    backId: '1f84df08-ed57-482c-8b33-8961a3b783fa',
+    roofId: 'b9077876-7883-4ac6-bb35-a315d861e1be',
+    leftId: '3bd60e05-e22d-4e61-94b4-a600e0e6e645',
+    rightId: 'ae5ab2d4-409c-4b7e-a3a8-9b6a2c2953bc',
+  }
+
   static gridConfig = {
     gridData: {
       data: [],

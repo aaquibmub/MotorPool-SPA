@@ -357,51 +357,15 @@
                 <div class="control">
                   <kendo-dropdownlist
                     class="form-control"
-                    textField="make"
-                    valueField="id"
-                    [defaultItem]="{
-                      id: null,
-                      make: 'Please select'
-                    }"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (valueChange)="handlVehicleValueChange($event)"
                     [data]="vehicalList"
                     formControlName="vehical"
                   >
-                    <ng-template kendoDropDownListValueTemplate let-dataItem>
-                      {{ dataItem ? dataItem.make : "None" }}
-                    </ng-template>
-                    <ng-template kendoDropDownListHeaderTemplate>
-                      <div class="display-flex dropdown-header-padding">
-                        <div class="flex-1 k-font-weight-bold">Make</div>
-                        <div class="flex-1 k-font-weight-bold">Model</div>
-                        <div class="flex-1 k-font-weight-bold">Model Year</div>
-                        <div class="flex-1 k-font-weight-bold">
-                          Registration Plate
-                        </div>
-                        <div class="flex-1 k-font-weight-bold">Status</div>
-                      </div>
-                    </ng-template>
                     <ng-template kendoDropDownListItemTemplate let-dataItem>
-                      <div class="flex-1 display-flex">
-                        <div class="flex-1">
-                          {{ dataItem.make }}
-                        </div>
-                        <div class="flex-1">
-                          {{ dataItem.model }}
-                        </div>
-                        <div class="flex-1">
-                          {{ dataItem.modelYear }}
-                        </div>
-                        <div class="flex-1">
-                          {{ dataItem.registrationPlate }}
-                        </div>
-                        <div class="flex-1">
-                          {{
-                            utilityService.getVehicalStatusLabel(
-                              dataItem.status?.value
-                            )
-                          }}
-                        </div>
-                      </div>
+                      <span>{{ dataItem.text | translate }}</span>
                     </ng-template>
                   </kendo-dropdownlist>
                 </div>
