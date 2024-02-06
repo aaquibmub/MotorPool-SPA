@@ -54,6 +54,27 @@ area:-webkit-any-link {
   background-color: black;
 }
 
+.coordinates-container {
+  position: absolute;
+  // background-color: rgba(0, 0, 0, 0.1);
+  height: 280px;
+  width: 280px;
+
+  .area {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.1s;
+    // border: 1px solid black;
+    border-radius: 50%;
+    // box-shadow: 0 0px 5px black;
+    // &:hover {
+    //   // border: 1px solid lightgray;
+    //   // box-shadow: 0 0px 5px darkgray;
+    // }
+    z-index: 1;
+  }
+}
+
 /* area {
   display: block;
   width: 5px;

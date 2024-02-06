@@ -15,6 +15,58 @@
         <button
           class="btn btn-orange"
           [useExistingCss]="true"
+          [printStyle]="{
+            '#backSideOverlay': {
+              top:
+                (
+                  getNumberWithoutPx(backSideOverlay?.top) - printTop
+                ).toString() + 'px !important',
+              left:
+                (
+                  getNumberWithoutPx(backSideOverlay?.left) - printLeft
+                ).toString() + 'px !important'
+            },
+            '#leftSideOverlay': {
+              top:
+                (
+                  getNumberWithoutPx(leftSideOverlay?.top) - printTop
+                ).toString() + 'px !important',
+              left:
+                (
+                  getNumberWithoutPx(leftSideOverlay?.left) - printLeft
+                ).toString() + 'px !important'
+            },
+            '#rightSideOverlay': {
+              top:
+                (
+                  getNumberWithoutPx(rightSideOverlay?.top) - printTop
+                ).toString() + 'px !important',
+              left:
+                (
+                  getNumberWithoutPx(rightSideOverlay?.left) - printLeft
+                ).toString() + 'px !important'
+            },
+            '#frontSideOverlay': {
+              top:
+                (
+                  getNumberWithoutPx(frontSideOverlay?.top) - printTop
+                ).toString() + 'px !important',
+              left:
+                (
+                  getNumberWithoutPx(frontSideOverlay?.left) - printLeft
+                ).toString() + 'px !important'
+            },
+            '#roofSideOverlay': {
+              top:
+                (
+                  getNumberWithoutPx(roofSideOverlay?.top) - printTop
+                ).toString() + 'px !important',
+              left:
+                (
+                  getNumberWithoutPx(roofSideOverlay?.left) - printLeft
+                ).toString() + 'px !important'
+            }
+          }"
           [printTitle]="
             'Vehicle Sheet - (' +
             selectedVehicle?.text +
@@ -70,15 +122,11 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="display-flex justify-content-center" id="print-section">
         <div class="col-12" *ngIf="!(model && model.length > 0)">
           <p class="p-24 text-center">No Data</p>
         </div>
-        <div
-          class="col-12"
-          id="print-section"
-          *ngIf="model && model.length > 0"
-        >
+        <div style="width: 1024px" *ngIf="model && model.length > 0">
           <!-- Vehicle Information -->
           <div
             class="form-section form-section-border"
@@ -130,24 +178,7 @@
                 <div class="section-header">{{ v.driver }}</div>
                 <div class="section-body">
                   <div class="row">
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <div class="label">
-                          <label for="totalMilage">Driver</label>
-                        </div>
-                        <div class="control">
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="totalMilage"
-                            [value]="v.driver"
-                            readonly
-                            id="totalMilage"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                       <!-- Trips -->
                       <div class="row">
                         <div class="col-12">
@@ -159,107 +190,130 @@
                               {{ t.inspectionId }}
                             </div>
                             <div class="section-body">
-                              <div class="display-flex flex-column">
-                                <div class="sides" *ngFor="let s of t.sides">
+                              <div class="row">
+                                <div
+                                  class="sides col-4"
+                                  *ngFor="let s of t.sides"
+                                >
                                   <div class="side display-flex flex-column">
-                                    <h5 class="text-center">
-                                      {{ s.side.text }}
-                                    </h5>
-                                    <img
-                                      class="inspection-side-image center-content"
-                                      *ngIf="s.side.value === side.frontId"
-                                      usemap="#front"
-                                      src="./../../../../../../assets/images/vehicles/inspections/body-front.png"
-                                      alt=""
-                                    />
-                                    <map name="front">
-                                      <area
-                                        *ngFor="let item of s.items"
-                                        shape="circle"
-                                        [coords]="
-                                          item.xaxis + ',' + item.yaxis + ',20'
-                                        "
+                                    <div class="">
+                                      <h5 class="text-center">
+                                        {{ s.side.text }}
+                                      </h5>
+                                      <img
+                                        id="back"
+                                        class="inspection-side-image center-content"
+                                        *ngIf="s.side.value === side.backId"
+                                        src="./../../../../../../assets/images/vehicles/inspections/body-back.png"
+                                        alt=""
                                       />
-                                    </map>
-                                    <img
-                                      class="inspection-side-image center-content"
-                                      *ngIf="s.side.value === side.backId"
-                                      usemap="#back"
-                                      src="./../../../../../../assets/images/vehicles/inspections/body-back.png"
-                                      alt=""
-                                    />
-                                    <map name="back">
-                                      <area
-                                        *ngFor="let item of s.items"
-                                        shape="circle"
-                                        [coords]="
-                                          item.xaxis + ',' + item.yaxis + ',20'
+                                      <div
+                                        id="backSideOverlay"
+                                        *ngIf="
+                                          backSideOverlay &&
+                                          s.side.value === side.backId
                                         "
-                                        href="coffee.htm"
-                                      />
-                                    </map>
-                                    <img
-                                      class="inspection-side-image center-content"
-                                      *ngIf="s.side.value === side.leftId"
-                                      usemap="#left"
-                                      src="./../../../../../../assets/images/vehicles/inspections/body-left.png"
-                                      alt=""
-                                    />
-                                    <map name="left">
-                                      <area
-                                        *ngFor="let item of s.items"
-                                        shape="circle"
-                                        [coords]="
-                                          item.xaxis + ',' + item.yaxis + ',5'
-                                        "
-                                      />
-                                    </map>
-                                    <img
-                                      class="inspection-side-image center-content"
-                                      *ngIf="s.side.value === side.rightId"
-                                      usemap="#right"
-                                      src="./../../../../../../assets/images/vehicles/inspections/body-right.png"
-                                      alt=""
-                                    />
-                                    <map name="right">
-                                      <area
-                                        *ngFor="let item of s.items"
-                                        shape="circle"
-                                        [coords]="
-                                          item.xaxis + ',' + item.yaxis + ',5'
-                                        "
-                                      />
-                                    </map>
-                                    <img
-                                      class="inspection-side-image center-content"
-                                      *ngIf="s.side.value === side.roofId"
-                                      usemap="#roof"
-                                      src="./../../../../../../assets/images/vehicles/inspections/body-roof.png"
-                                      alt=""
-                                    />
-                                    <map name="roof">
-                                      <area
-                                        *ngFor="let item of s.items"
-                                        shape="circle"
-                                        [coords]="
-                                          item.xaxis + ',' + item.yaxis + ',5'
-                                        "
-                                      />
-                                    </map>
-                                    <!-- <div
-                                        *ngFor="let item of s.items"
-                                        [ngStyle]="{
-                                          top: item.yaxis,
-                                          left: item.xaxis
-                                        }"
-                                        class="box"
+                                        class="coordinates-container"
+                                        [ngStyle]="backSideOverlay"
                                       >
-                                        <div class="pin-text">
-                                          <h3>
-                                            {{ item.xaxis + "x" + item.yaxis }}
-                                          </h3>
-                                        </div>
-                                      </div> -->
+                                        <div
+                                          class="area"
+                                          [ngStyle]="getCoordinateStyle(item)"
+                                          *ngFor="let item of s.items"
+                                        ></div>
+                                      </div>
+                                      <img
+                                        id="left"
+                                        class="inspection-side-image center-content"
+                                        *ngIf="s.side.value === side.leftId"
+                                        usemap="#left"
+                                        src="./../../../../../../assets/images/vehicles/inspections/body-left.png"
+                                        alt=""
+                                      />
+                                      <div
+                                        id="leftSideOverlay"
+                                        *ngIf="
+                                          leftSideOverlay &&
+                                          s.side.value === side.leftId
+                                        "
+                                        class="coordinates-container"
+                                        [ngStyle]="leftSideOverlay"
+                                      >
+                                        <div
+                                          class="area"
+                                          [ngStyle]="getCoordinateStyle(item)"
+                                          *ngFor="let item of s.items"
+                                        ></div>
+                                      </div>
+                                      <img
+                                        id="right"
+                                        class="inspection-side-image center-content"
+                                        *ngIf="s.side.value === side.rightId"
+                                        usemap="#right"
+                                        src="./../../../../../../assets/images/vehicles/inspections/body-right.png"
+                                        alt=""
+                                      />
+                                      <div
+                                        id="rightSideOverlay"
+                                        *ngIf="
+                                          rightSideOverlay &&
+                                          s.side.value === side.rightId
+                                        "
+                                        class="coordinates-container"
+                                        [ngStyle]="rightSideOverlay"
+                                      >
+                                        <div
+                                          class="area"
+                                          [ngStyle]="getCoordinateStyle(item)"
+                                          *ngFor="let item of s.items"
+                                        ></div>
+                                      </div>
+                                      <img
+                                        id="front"
+                                        class="inspection-side-image center-content mapper"
+                                        *ngIf="s.side.value === side.frontId"
+                                        usemap="#front"
+                                        src="./../../../../../../assets/images/vehicles/inspections/body-front.png"
+                                        alt=""
+                                      />
+                                      <div
+                                        id="frontSideOverlay"
+                                        *ngIf="
+                                          frontSideOverlay &&
+                                          s.side.value === side.frontId
+                                        "
+                                        class="coordinates-container"
+                                        [ngStyle]="frontSideOverlay"
+                                      >
+                                        <div
+                                          class="area"
+                                          [ngStyle]="getCoordinateStyle(item)"
+                                          *ngFor="let item of s.items"
+                                        ></div>
+                                      </div>
+                                      <img
+                                        id="roof"
+                                        class="inspection-side-image center-content"
+                                        *ngIf="s.side.value === side.roofId"
+                                        src="./../../../../../../assets/images/vehicles/inspections/body-roof.png"
+                                        alt=""
+                                      />
+                                      <div
+                                        id="roofSideOverlay"
+                                        *ngIf="
+                                          roofSideOverlay &&
+                                          s.side.value === side.roofId
+                                        "
+                                        class="coordinates-container"
+                                        [ngStyle]="roofSideOverlay"
+                                      >
+                                        <div
+                                          class="area"
+                                          [ngStyle]="getCoordinateStyle(item)"
+                                          *ngFor="let item of s.items"
+                                        ></div>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
