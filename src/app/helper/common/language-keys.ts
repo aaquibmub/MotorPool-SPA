@@ -19,7 +19,6 @@ export class LanguageKeys {
   activeDrivers = "Active Drivers";
   assignedDate = "Assigned Date";
   activityBy = "Activity By";
-  active = "Active";
 
   // B.
   bookedBy = "Booked By";
@@ -128,8 +127,6 @@ export class LanguageKeys {
   noDateAvail = "No data available";
   no = "No";
   notifications = "Notifications";
-  nameRequired = "Name is required";
-  name= "Name";
   newDriver = "New Driver";
   nationalId = "National ID #";
 
@@ -140,7 +137,6 @@ export class LanguageKeys {
   odoMeter = "ODO Meter";
   odoMeterEnd = "ODO Meter End";
   operation = "Operation";
-  opmRequired = "OPM is required";
 
   //P
   pass= "Pass";
@@ -156,7 +152,6 @@ export class LanguageKeys {
   pickupDateRequired = "Pickup date is required";
   phoneNumber = "Phone Number";
   phoneNumberRequired = "Phone Number is required";
-  phoneNumber = "Phone Number";
   phoneRequired = "Phone Number is required";
   password = "Password";
 
@@ -217,7 +212,6 @@ export class LanguageKeys {
 
   //U
   userRole = "UserRole";
-  update= "Update";
   underMantainance = "Under Maintenance";
   userId = "User ID";
   userIdReq = "User ID is required";
