@@ -1,89 +1,181 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
-import { State } from '@progress/kendo-data-query';
-import { Subscription } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
+import { ReportVehicleBodyInspectionModel } from 'src/app/helper/models/reports/vehicles/inspections/report-vehicle-body-inspection-model';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ReportService } from 'src/app/helper/services/utilities/report.service';
-import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
+import { VehicalService } from 'src/app/helper/services/vehicals/vehical.service';
 
 @Component({
   selector: 'app-report-vehicle-body-inspection',
   templateUrl: './report-vehicle-body-inspection.component.html',
-  styleUrls: ['./report-vehicle-body-inspection.component.css']
+  styleUrls: ['./report-vehicle-body-inspection.component.scss']
 })
-export class ReportVehicleBodyInspectionComponent implements OnInit, OnDestroy {
-  gridData: GridDataResult = UtilityRix.gridConfig.gridData;
-  state: State = UtilityRix.gridConfig.state;
-  pageable = UtilityRix.gridConfig.pageable;
-  filterable = UtilityRix.gridConfig.filterable;
-  searchQuery: string;
+export class ReportVehicleBodyInspectionComponent implements OnInit {
+  backSideOverlay: any;
+  leftSideOverlay: any;
+  rightSideOverlay: any;
+  frontSideOverlay: any;
+  roofSideOverlay: any;
+  printTop = 315;
+  printLeft = 305;
+  side = UtilityRix.bodyInspectionSide;
+  selectedVehicle: DropdownItem<string>;
+  vehicleList: DropdownItem<string>[];
 
-  pageSizeSubscription: Subscription;
-  gridDataSubscription: Subscription;
-  gridSearchQuerySubscription: Subscription;
-  gridFilterSubscription: Subscription;
+  selectedDate: Date = new Date();
+
+  model: ReportVehicleBodyInspectionModel[];
 
   constructor(
     public utilityService: UtilityService,
-    private reportService: ReportService,
-    private gridToolbarService: GridToolbarService
+    private vehicleService: VehicalService,
+    private reportService: ReportService
   ) { }
 
-  ngOnInit(): void {
-
-    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
-      .subscribe(
-        (show: boolean) => {
-          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
-          this.state.filter = null;
-          this.reportService.fetchVehicleBodyInspectionGridData(this.state, this.searchQuery);
-        }
-      );
-
-    this.pageSizeSubscription = this.gridToolbarService.getPageSize()
-      .subscribe(
-        (pageSize: number) => {
-          this.state.take = pageSize;
-          this.reportService.fetchVehicleBodyInspectionGridData(this.state, this.searchQuery);
-        }
-      );
-    this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
-      .subscribe(
-        (query: string) => {
-          this.searchQuery = query;
-          this.reportService.fetchVehicleBodyInspectionGridData(this.state, this.searchQuery);
-        }
-      );
-
-    this.reportService.fetchVehicleBodyInspectionGridData(this.state, this.searchQuery);
-    this.gridDataSubscription = this.reportService.getVehicleBodyInspectionGridData()
-      .subscribe(
-        (data: any) => {
-          this.gridData.data = data.data;
-          this.gridData.total = data.total;
-        }
-      );
-
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    debugger;
+    this.positionOverlays();
   }
 
-  dataStateChange(state: DataStateChangeEvent): void {
-    this.state = state;
-    this.reportService.fetchVehicleBodyInspectionGridData(state, this.searchQuery);
+  ngOnInit() {
+
+    this.vehicleService.getDropdownList('')
+      .subscribe(
+        (list: DropdownItem<string>[]) => {
+          this.vehicleList = list;
+          this.handleVehicleValueChange(this.vehicleList[0]);
+        });
   }
 
-  exportToExcel(grid: GridComponent): void {
-    grid.saveAsExcel();
+  handleVehicleValueChange(value: DropdownItem<string>): void {
+    this.selectedVehicle = value;
+    this.fetchReport();
   }
 
-  ngOnDestroy(): void {
-    if (this.gridDataSubscription) {
-      this.gridDataSubscription.unsubscribe();
+  handleDateValueChange(value: Date): void {
+    this.selectedDate = value;
+    this.fetchReport();
+  }
+
+  fetchReport(): void {
+    this.reportService.getVehicleBodyInspectionModel(
+      this.selectedDate,
+      this.selectedVehicle?.value,
+    )
+      .subscribe(
+        (model: ReportVehicleBodyInspectionModel[]) => {
+          this.model = model;
+
+          this.positionOverlays();
+
+        }
+      );
+  }
+
+  private downloadFile = (data: HttpResponse<Blob>) => {
+    const downloadedFile = new Blob([data.body as BlobPart], { type: data.body?.type });
+    const a = document.createElement('a');
+    a.setAttribute('style', 'display:none;');
+    document.body.appendChild(a);
+    a.download = 'Vehicle Body Inspection - (' +
+      this.selectedVehicle?.text +
+      '-' +
+      this.selectedDate.toDateString().toString() +
+      ').xlsx';
+    a.href = URL.createObjectURL(downloadedFile);
+    a.target = '_blank';
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  setImageMapperStyle(image?: string): void {
+    if (image == 'back') {
+      let backImage = $('#back')[0] as any;
+      if (backImage) {
+        this.backSideOverlay = {
+          top: `${backImage.offsetTop}px`,
+          bottom: 0,
+          right: 0,
+          left: `${backImage.offsetLeft}px`,
+        };
+      }
     }
-    if (this.gridFilterSubscription) {
-      this.gridFilterSubscription.unsubscribe();
+    if (image == 'left') {
+      let leftImage = $('#left')[0] as any;
+      if (leftImage) {
+        this.leftSideOverlay = {
+          top: `${leftImage.offsetTop}px`,
+          bottom: 0,
+          right: 0,
+          left: `${leftImage.offsetLeft}px`,
+        };
+      }
     }
-
-    this.state.filter = null;
+    if (image == 'right') {
+      let rightImage = $('#right')[0] as any;
+      if (rightImage) {
+        this.rightSideOverlay = {
+          top: `${rightImage.offsetTop}px`,
+          bottom: 0,
+          right: 0,
+          left: `${rightImage.offsetLeft}px`,
+        };
+      }
+    }
+    if (image == 'front') {
+      let frontImage = $('#front')[0] as any;
+      if (frontImage) {
+        this.frontSideOverlay = {
+          top: `${frontImage.offsetTop}px`,
+          bottom: 0,
+          right: 0,
+          left: `${frontImage.offsetLeft}px`,
+        }
+      }
+    }
+    if (image == 'roof') {
+      let roofImage = $('#roof')[0] as any;
+      if (roofImage) {
+        this.roofSideOverlay = {
+          top: `${roofImage.offsetTop}px`,
+          bottom: 0,
+          right: 0,
+          left: `${roofImage.offsetLeft}px`,
+        };
+      }
+    }
   }
+
+  getCoordinateStyle(coordinate: any): object {
+    return {
+      top: `${coordinate.yaxis}px`,
+      left: `${coordinate.xaxis}px`,
+      background: `${coordinate.hexColor ?? '#000'}`,
+      height: `5px`,
+      width: `5px`
+    };
+  }
+
+  positionOverlays(): void {
+
+    setTimeout(() => {
+      this.setImageMapperStyle('back');
+      this.setImageMapperStyle('left');
+      this.setImageMapperStyle('right');
+      this.setImageMapperStyle('front');
+      this.setImageMapperStyle('roof');
+    }, 2000);
+  }
+
+  getNumberWithoutPx(str: string): number {
+    if (str) {
+      const numPart = str.substring(0, str.length - 2);
+      return +numPart;
+    }
+    return 0;
+  }
+
 }

@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  // baseDomain: '135.125.212.110:8095',
-  // baseUrl: 'http://135.125.212.110:8095/',
-  // apiUrl: 'http://135.125.212.110:8095/api/',
+  // baseDomain: '135.125.212.110:8090',
+  // baseUrl: 'http://135.125.212.110:8090/',
+  // apiUrl: 'http://135.125.212.110:8090/api/',
   baseDomain: 'localhost:9000',
   baseUrl: 'http://localhost:9000/',
   apiUrl: 'http://localhost:9000/api/',

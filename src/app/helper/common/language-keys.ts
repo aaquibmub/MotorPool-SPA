@@ -19,6 +19,7 @@ export class LanguageKeys {
   activeDrivers = "Active Drivers";
   assignedDate = "Assigned Date";
   activityBy = "Activity By";
+  active = "Active";
 
   // B.
   bookedBy = "Booked By";
@@ -35,6 +36,9 @@ export class LanguageKeys {
   createNewVehical = "Create New Vehical";
   createNewPass= "Create New Passenger";
   createNewDriver = "Create New Driver";
+  createPassanger = "Create New Passenger";
+  createAddress = "Create New Address";
+  createApprover = "Create New Approver";
 
   //D.
   daySunday = "Sunday";
@@ -58,6 +62,7 @@ export class LanguageKeys {
   dropoffReq = "Dropoff is required";
   downloadAndImport = "Download and import template";
   download = "Download";
+  disabled = "Disabled";
 
   // E.
   endDate = "End Date";
@@ -114,6 +119,8 @@ export class LanguageKeys {
 
   //N
   notes= "Notes";
+  name="Name";
+  nameRequired = "Name is required";
   noDriverInfo = "No Driver Information available";
   nationality = "Nationality";
   noVehicalInfo = "No Vehicle Information available";
@@ -128,6 +135,7 @@ export class LanguageKeys {
 
   //O
   opm = "OPM";
+  opmRequired = "OPM is required";
   odoMeterStartup = "ODO Meter Startup";
   odoMeter = "ODO Meter";
   odoMeterEnd = "ODO Meter End";
@@ -146,6 +154,8 @@ export class LanguageKeys {
   pickupDateTime = "Pickup Date & Time";
   pickupDate = "Pickup Date";
   pickupDateRequired = "Pickup date is required";
+  phoneNumber = "Phone Number";
+  phoneNumberRequired = "Phone Number is required";
   phoneNumber = "Phone Number";
   phoneRequired = "Phone Number is required";
   password = "Password";
@@ -166,6 +176,7 @@ export class LanguageKeys {
 
   //I
   isRequesterTravelling = "is requester travelling";
+  isActive = "is active";
   inspection = "Inspection";
 
   // S.
@@ -200,6 +211,9 @@ export class LanguageKeys {
   tripNo = "Trip No";
   tripRoutex = "Trip Routex";
   tripDispatcher = "Trip Dispatcher";
+
+  //U
+  update = "Update";
 
   //U
   userRole = "UserRole";

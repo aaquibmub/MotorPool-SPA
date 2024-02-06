@@ -128,10 +128,10 @@ export class TripBookingRefuellingEditComponent implements OnInit, OnDestroy {
         this.driverList = list;
       });
 
-    this.vehicalService.getDropdownList('')
-      .subscribe((list: DropdownItem<string>[]) => {
-        this.vehicalList = list;
-      });
+    // this.vehicalService.getDropdownList('')
+    //   .subscribe((list: DropdownItem<string>[]) => {
+    //     this.vehicalList = list;
+    //   });
 
   }
 
@@ -314,25 +314,47 @@ export class TripBookingRefuellingEditComponent implements OnInit, OnDestroy {
 
     this.vehicalService.getVehicalByDriverId(value.value)
       .subscribe(
-        (response: ResponseModel<VehicalModel>) => {
+        (response: ResponseModel<VehicalModel[]>) => {
           if (response.hasError) {
             return;
           }
 
-
-          const vehcial = response.result as VehicalModel;
-
-          this.form.get('vehical').setValue({
-            text: vehcial.make + ' '
-              + vehcial.model + ' '
-              + vehcial.modelYear.toString(),
-            value: vehcial.id
+          const vList = [];
+          response.result?.forEach(v => {
+            vList.push({
+              text: v.make + ' '
+                + v.model + ' '
+                + v.modelYear.toString(),
+              value: v.id,
+              textEx: v.registrationPlate
+            });
           });
 
-          this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
+          this.vehicalList = vList;
+          const vehcial = response.result[0];
+          let vehicleVal = null;
+          if (vehcial) {
+            vehicleVal = {
+              text: vehcial.make + ' '
+                + vehcial.model + ' '
+                + vehcial.modelYear.toString(),
+              value: vehcial.id,
+              textEx: vehcial.registrationPlate
+            };
+            this.form.get('vehical').setValue(vehicleVal);
+          }
+          this.handlVehicleValueChange(vehicleVal);
 
         }
       );
+  }
+
+  handlVehicleValueChange(value: DropdownItem<string>): void {
+    let regPlateNumber = null;
+    if (value) {
+      regPlateNumber = value.textEx;
+    }
+    this.form.get('registrationPlate').setValue(regPlateNumber);
   }
 
   ngOnDestroy(): void {

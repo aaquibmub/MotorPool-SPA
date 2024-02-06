@@ -2,120 +2,333 @@
 <div class="page-area">
   <div class="page-header">
     <div class="page-title">
-      <span>Vehicle Milage</span>
+      <span>Vehicle Body Inspection</span>
+    </div>
+    <div class="page-breadcrum">
+      <span>Reports </span> / <span> Vehicle Body Inspection</span>
     </div>
   </div>
   <div class="page-body">
     <div class="grid-toolbar">
       <div class="left"></div>
       <div class="right" style="display: flex; justify-content: space-between">
-        <button class="btn btn-orange" (click)="exportToExcel(grid)">
-          <i class="fa fa-file-excel-o"></i> Excel
+        <button
+          class="btn btn-orange"
+          [useExistingCss]="true"
+          [printStyle]="{
+            '#backSideOverlay': {
+              top:
+                (
+                  getNumberWithoutPx(backSideOverlay?.top) - printTop
+                ).toString() + 'px !important',
+              left:
+                (
+                  getNumberWithoutPx(backSideOverlay?.left) - printLeft
+                ).toString() + 'px !important'
+            },
+            '#leftSideOverlay': {
+              top:
+                (
+                  getNumberWithoutPx(leftSideOverlay?.top) - printTop
+                ).toString() + 'px !important',
+              left:
+                (
+                  getNumberWithoutPx(leftSideOverlay?.left) - printLeft
+                ).toString() + 'px !important'
+            },
+            '#rightSideOverlay': {
+              top:
+                (
+                  getNumberWithoutPx(rightSideOverlay?.top) - printTop
+                ).toString() + 'px !important',
+              left:
+                (
+                  getNumberWithoutPx(rightSideOverlay?.left) - printLeft
+                ).toString() + 'px !important'
+            },
+            '#frontSideOverlay': {
+              top:
+                (
+                  getNumberWithoutPx(frontSideOverlay?.top) - printTop
+                ).toString() + 'px !important',
+              left:
+                (
+                  getNumberWithoutPx(frontSideOverlay?.left) - printLeft
+                ).toString() + 'px !important'
+            },
+            '#roofSideOverlay': {
+              top:
+                (
+                  getNumberWithoutPx(roofSideOverlay?.top) - printTop
+                ).toString() + 'px !important',
+              left:
+                (
+                  getNumberWithoutPx(roofSideOverlay?.left) - printLeft
+                ).toString() + 'px !important'
+            }
+          }"
+          [printTitle]="
+            'Vehicle Sheet - (' +
+            selectedVehicle?.text +
+            '-' +
+            (selectedDate | dateformat) +
+            ')'
+          "
+          printSectionId="print-section"
+          ngxPrint
+        >
+          <i class="fa fa-print"></i> Print
         </button>
       </div>
     </div>
     <div class="grid-content">
-      <app-grid-toolbar
-        [numberOfRecords]="gridData?.total"
-        entity="vehicle"
-      ></app-grid-toolbar>
-      <!-- <div class="example-config">
-        <p class="k-form-hint">
-          Click the button below to filter the Grid from an external Filter
-          component
-        </p>
-        <button kendoButton (click)="open()">Filter the Grid</button>
-      </div>
-
-      <kendo-window *ngIf="opened" (close)="close()" [width]="620" [top]="300">
-        <div class="window-content">
-          <kendo-filter #filter [filters]="filters" [value]="filterValue">
-          </kendo-filter>
-
-          <button kendoButton (click)="applyFilter(filter.value)">
-            Apply filter
-          </button>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <div class="label">
+              <label for="vehicle">Vehicle</label>
+            </div>
+            <div class="control">
+              <kendo-dropdownlist
+                class="form-control"
+                textField="text"
+                valueField="value"
+                [defaultItem]="utilityService.dropdownAllItem"
+                (valueChange)="handleVehicleValueChange($event)"
+                [data]="vehicleList"
+                [(ngModel)]="selectedVehicle"
+              >
+                <ng-template kendoDropDownListItemTemplate let-dataItem>
+                  <span>{{ dataItem.text | translate }}</span>
+                </ng-template>
+              </kendo-dropdownlist>
+            </div>
+          </div>
         </div>
-      </kendo-window> -->
-      <kendo-grid
-        #grid="kendoGrid"
-        [data]="gridData"
-        [pageSize]="state.take"
-        [skip]="state.skip"
-        [sort]="state.sort"
-        [sortable]="true"
-        [resizable]="true"
-        [reorderable]="true"
-        [pageable]="pageable"
-        [filter]="state.filter"
-        [filterable]="filterable"
-        (dataStateChange)="dataStateChange($event)"
-        (excelExport)="this.utilityService.onExcelExport($event, grid)"
-        scrollable="none"
-      >
-        <kendo-grid-column field="id" title="Vehicle ID"> </kendo-grid-column>
-        <kendo-grid-column field="registrationPlate" title="Registration Plate">
-        </kendo-grid-column>
-        <kendo-grid-column field="make" title="Make"> </kendo-grid-column>
-        <kendo-grid-column field="model" title="Model"> </kendo-grid-column>
-        <kendo-grid-column field="color" title="Color"> </kendo-grid-column>
-        <kendo-grid-column field="armoured" title="Armord">
-          <ng-template kendoGridFilterCellTemplate let-value="value">
-            <kendo-dropdownlist
-              style="width: 100px"
-              class="form-control"
-              textField="text"
-              valueField="value"
-              [defaultItem]="utilityService.dropdownAllItem"
-              (valueChange)="handleArmouredValueChange($event)"
-              [data]="booleanList"
-              [(ngModel)]="selectedArmoured"
-            >
-              <ng-template kendoDropDownListItemTemplate let-dataItem>
-                <span>{{ dataItem.text | translate }}</span>
-              </ng-template>
-            </kendo-dropdownlist>
-          </ng-template>
-          <ng-template
-            kendoGridCellTemplate
-            let-dataItem
-            let-rowIndex="rowIndex"
+        <div class="col-3">
+          <div class="form-group">
+            <div class="label">
+              <label for="date">Date</label>
+            </div>
+            <div class="control">
+              <kendo-datepicker
+                class="form-control"
+                id="date"
+                (valueChange)="handleDateValueChange($event)"
+                [(ngModel)]="selectedDate"
+              >
+              </kendo-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="display-flex justify-content-center" id="print-section">
+        <div class="col-12" *ngIf="!(model && model.length > 0)">
+          <p class="p-24 text-center">No Data</p>
+        </div>
+        <div style="width: 1024px" *ngIf="model && model.length > 0">
+          <!-- Vehicle Information -->
+          <div
+            class="form-section form-section-border"
+            *ngFor="let vh of model"
           >
-            <span *ngIf="dataItem.armoured">Yes</span>
-            <span *ngIf="!dataItem.armoured">No</span>
-          </ng-template>
-        </kendo-grid-column>
-        <kendo-grid-column field="vehicleStatus" title="Status">
-          <ng-template kendoGridFilterCellTemplate let-value="value">
-            <kendo-dropdownlist
-              style="width: 200px"
-              class="form-control"
-              textField="text"
-              valueField="value"
-              [defaultItem]="utilityService.dropdownAllItem"
-              (valueChange)="handleVehicleStatusValueChange($event)"
-              [data]="vehicleStatusList"
-              [(ngModel)]="selectedVehicleStatus"
-            >
-              <ng-template kendoDropDownListItemTemplate let-dataItem>
-                <span>{{ dataItem.text | translate }}</span>
-              </ng-template>
-            </kendo-dropdownlist>
-          </ng-template>
-          <ng-template
-            kendoGridCellTemplate
-            let-dataItem
-            let-rowIndex="rowIndex"
-          >
-            <span>{{
-              utilityService.getVehicalStatusLabel(dataItem.vehicleStatus)
-            }}</span>
-          </ng-template>
-        </kendo-grid-column>
-        <kendo-grid-column field="milageInKm" title="KM كم" filter="numeric">
-        </kendo-grid-column>
-        <kendo-grid-excel fileName="VehicleMilage.xlsx"> </kendo-grid-excel>
-      </kendo-grid>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="vehicleId">Vehicle Id</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="vehicleId"
+                        [value]="vh.vehicleId"
+                        readonly
+                        id="vehicleId"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputName">Plate Number</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="inputName"
+                        [value]="vh.vehiclePlateNumber"
+                        readonly
+                        id="inputName"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Drivers -->
+              <div
+                class="form-section form-section-border"
+                *ngFor="let v of vh.drivers"
+              >
+                <div class="section-header">{{ v.driver }}</div>
+                <div class="section-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <!-- Trips -->
+                      <div class="row">
+                        <div class="col-12">
+                          <div
+                            class="form-section form-section-border"
+                            *ngFor="let t of v.inspections"
+                          >
+                            <div class="section-header">
+                              {{ t.inspectionId }}
+                            </div>
+                            <div class="section-body">
+                              <div class="row">
+                                <div
+                                  class="sides col-4"
+                                  *ngFor="let s of t.sides"
+                                >
+                                  <div class="side display-flex flex-column">
+                                    <div class="">
+                                      <h5 class="text-center">
+                                        {{ s.side.text }}
+                                      </h5>
+                                      <img
+                                        id="back"
+                                        class="inspection-side-image center-content"
+                                        *ngIf="s.side.value === side.backId"
+                                        src="./../../../../../../assets/images/vehicles/inspections/body-back.png"
+                                        alt=""
+                                      />
+                                      <div
+                                        id="backSideOverlay"
+                                        *ngIf="
+                                          backSideOverlay &&
+                                          s.side.value === side.backId
+                                        "
+                                        class="coordinates-container"
+                                        [ngStyle]="backSideOverlay"
+                                      >
+                                        <div
+                                          class="area"
+                                          [ngStyle]="getCoordinateStyle(item)"
+                                          *ngFor="let item of s.items"
+                                        ></div>
+                                      </div>
+                                      <img
+                                        id="left"
+                                        class="inspection-side-image center-content"
+                                        *ngIf="s.side.value === side.leftId"
+                                        usemap="#left"
+                                        src="./../../../../../../assets/images/vehicles/inspections/body-left.png"
+                                        alt=""
+                                      />
+                                      <div
+                                        id="leftSideOverlay"
+                                        *ngIf="
+                                          leftSideOverlay &&
+                                          s.side.value === side.leftId
+                                        "
+                                        class="coordinates-container"
+                                        [ngStyle]="leftSideOverlay"
+                                      >
+                                        <div
+                                          class="area"
+                                          [ngStyle]="getCoordinateStyle(item)"
+                                          *ngFor="let item of s.items"
+                                        ></div>
+                                      </div>
+                                      <img
+                                        id="right"
+                                        class="inspection-side-image center-content"
+                                        *ngIf="s.side.value === side.rightId"
+                                        usemap="#right"
+                                        src="./../../../../../../assets/images/vehicles/inspections/body-right.png"
+                                        alt=""
+                                      />
+                                      <div
+                                        id="rightSideOverlay"
+                                        *ngIf="
+                                          rightSideOverlay &&
+                                          s.side.value === side.rightId
+                                        "
+                                        class="coordinates-container"
+                                        [ngStyle]="rightSideOverlay"
+                                      >
+                                        <div
+                                          class="area"
+                                          [ngStyle]="getCoordinateStyle(item)"
+                                          *ngFor="let item of s.items"
+                                        ></div>
+                                      </div>
+                                      <img
+                                        id="front"
+                                        class="inspection-side-image center-content mapper"
+                                        *ngIf="s.side.value === side.frontId"
+                                        usemap="#front"
+                                        src="./../../../../../../assets/images/vehicles/inspections/body-front.png"
+                                        alt=""
+                                      />
+                                      <div
+                                        id="frontSideOverlay"
+                                        *ngIf="
+                                          frontSideOverlay &&
+                                          s.side.value === side.frontId
+                                        "
+                                        class="coordinates-container"
+                                        [ngStyle]="frontSideOverlay"
+                                      >
+                                        <div
+                                          class="area"
+                                          [ngStyle]="getCoordinateStyle(item)"
+                                          *ngFor="let item of s.items"
+                                        ></div>
+                                      </div>
+                                      <img
+                                        id="roof"
+                                        class="inspection-side-image center-content"
+                                        *ngIf="s.side.value === side.roofId"
+                                        src="./../../../../../../assets/images/vehicles/inspections/body-roof.png"
+                                        alt=""
+                                      />
+                                      <div
+                                        id="roofSideOverlay"
+                                        *ngIf="
+                                          roofSideOverlay &&
+                                          s.side.value === side.roofId
+                                        "
+                                        class="coordinates-container"
+                                        [ngStyle]="roofSideOverlay"
+                                      >
+                                        <div
+                                          class="area"
+                                          [ngStyle]="getCoordinateStyle(item)"
+                                          *ngFor="let item of s.items"
+                                        ></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

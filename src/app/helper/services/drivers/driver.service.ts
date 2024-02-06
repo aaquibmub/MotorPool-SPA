@@ -9,9 +9,9 @@ import { PopupConfigModel } from '../../models/common/popup-config-model';
 import { ResponseModel } from '../../models/common/response-model';
 import { AllocateVehicalModel } from '../../models/drivers/allocate-vehical-model';
 import { DriverGridModel } from '../../models/drivers/driver-grid-model';
-import { DriverViewModel } from '../../models/drivers/driver-view/driver-view-model';
 import { DriverViewDetailModel } from '../../models/drivers/driver-view/driver-view-detail-model';
 import { DriverViewInspectionModel } from '../../models/drivers/driver-view/driver-view-inspection-model';
+import { DriverViewModel } from '../../models/drivers/driver-view/driver-view-model';
 import { DriverViewTripModel } from '../../models/drivers/driver-view/driver-view-trip-model';
 import { DriverViewVehicleModel } from '../../models/drivers/driver-view/driver-view-vehicle-model';
 

@@ -150,25 +150,13 @@ export class DriversAllComponent implements OnInit, OnDestroy {
     ];
     if (item.driverStatus != DriverStatus.Busy
       && item.driverStatus != DriverStatus.OffDuty) {
-      if (item.vehicalAllocated) {
-        actions.push({
-          handle: () => {
-            this.driverService.setDeallocateVehicalPopup(true, item.id);
-          },
-          icon: '',
-          label: 'Deallocate Vehical'
-        });
-
-      } else {
-        actions.push({
-          handle: () => {
-            this.driverService.setAllocateVehicalPopup(true, item.id);
-          },
-          icon: '',
-          label: 'Allocate Vehical'
-        });
-
-      }
+      actions.push({
+        handle: () => {
+          this.driverService.setAllocateVehicalPopup(true, item.id);
+        },
+        icon: '',
+        label: 'Allocate Vehical'
+      });
     }
 
     return actions;

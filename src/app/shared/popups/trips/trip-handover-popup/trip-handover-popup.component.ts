@@ -22,6 +22,7 @@ export class TripHandoverPopupComponent implements OnInit {
   model: TripHandoverModel;
 
   driverList: DropdownItem<string>[];
+  vehicalList: VehicalModel[];
 
   constructor(
     public utilityService: UtilityService,
@@ -67,19 +68,20 @@ export class TripHandoverPopupComponent implements OnInit {
 
     this.vehicalService.getVehicalByDriverId(value.value)
       .subscribe(
-        (response: ResponseModel<VehicalModel>) => {
+        (response: ResponseModel<VehicalModel[]>) => {
           if (response.hasError) {
             return;
           }
-
-          const vehcial = response.result as VehicalModel;
-
-          this.form.get('newVehical').setValue({
-            text: vehcial.make + ' '
-              + vehcial.model + ' '
-              + vehcial.modelYear.toString(),
-            value: vehcial.id
-          });
+          this.vehicalList = response.result;
+          const vehcial = response.result[0];
+          if (vehcial) {
+            this.form.get('newVehical').setValue({
+              text: vehcial.make + ' '
+                + vehcial.model + ' '
+                + vehcial.modelYear.toString(),
+              value: vehcial.id
+            });
+          }
 
           // this.form.get('registrationPlate').setValue(vehcial.registrationPlate);
 

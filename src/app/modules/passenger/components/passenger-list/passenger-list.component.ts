@@ -15,6 +15,7 @@ export class PassengerListComponent implements OnInit {
   constructor(
     public utilityService: UtilityService,
     private location: Location,
+    public utilityService: UtilityService,
     private router: Router) {
     router.events.subscribe((event) => {
       const path = location.path();

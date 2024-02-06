@@ -80,24 +80,15 @@
                             <label for="inputVehical">Vehical</label>
                           </div>
                           <div class="control">
-                            <kendo-dropdownlist
+                            <kendo-multiselect
+                              [data]="vehicalList"
                               class="form-control"
                               textField="make"
                               valueField="id"
-                              [defaultItem]="{
-                                id: null,
-                                make: 'Please select'
-                              }"
-                              [data]="vehicalList"
-                              formControlName="vehical"
+                              formControlName="vehicals"
+                              [valuePrimitive]="true"
                             >
-                              <ng-template
-                                kendoDropDownListValueTemplate
-                                let-dataItem
-                              >
-                                {{ dataItem ? dataItem.make : "None" }}
-                              </ng-template>
-                              <ng-template kendoDropDownListHeaderTemplate>
+                              <ng-template kendoMultiSelectHeaderTemplate>
                                 <div
                                   class="display-flex dropdown-header-padding"
                                 >
@@ -119,7 +110,7 @@
                                 </div>
                               </ng-template>
                               <ng-template
-                                kendoDropDownListItemTemplate
+                                kendoMultiSelectItemTemplate
                                 let-dataItem
                               >
                                 <div class="flex-1 display-flex">
@@ -144,16 +135,16 @@
                                   </div>
                                 </div>
                               </ng-template>
-                            </kendo-dropdownlist>
-                            <div
+                            </kendo-multiselect>
+                            <!-- <div
                               *ngIf="
-                                !form.get('vehical').valid &&
-                                form.get('vehical').touched
+                                !form.get('vehicals').valid &&
+                                form.get('vehicals').touched
                               "
                               class="invalid-feedback"
                             >
                               Vehical is required
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
