@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-driver-pool',
@@ -13,6 +14,7 @@ export class DriverPoolComponent implements OnInit {
   pageTitle: string;
 
   constructor(
+    public utilityService: UtilityService,
     private location: Location,
     private router: Router) {
     router.events.subscribe((event) => {

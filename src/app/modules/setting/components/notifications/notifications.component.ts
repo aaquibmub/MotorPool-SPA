@@ -12,6 +12,7 @@ import { AlertService } from 'src/app/helper/services/common/alert.service';
 import { NotificationConfigService } from 'src/app/helper/services/utilities/notification-config.service';
 import { ResponseModel } from './../../../../helper/models/common/response-model';
 import { GridToolbarService } from './../../../../helper/services/common/grid-toolbar.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-notifications',
@@ -50,7 +51,8 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     private notificationConfigService: NotificationConfigService,
     private router: Router,
-    private gridToolbarService: GridToolbarService
+    private gridToolbarService: GridToolbarService,
+    public utilityService: UtilityService,
   ) { }
 
   ngOnInit(): void {

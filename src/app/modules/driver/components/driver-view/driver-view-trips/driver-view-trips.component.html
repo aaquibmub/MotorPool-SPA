@@ -15,19 +15,19 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="tripIdStr" title="Trip No"> </kendo-grid-column>
-    <kendo-grid-column field="route" title="Trip Routex"> </kendo-grid-column>
-    <kendo-grid-column field="dispatcher" title="Trip Dispatcher">
+    <kendo-grid-column field="tripIdStr" title="{{ utilityService.language.tripNo | translate }}"> </kendo-grid-column>
+    <kendo-grid-column field="route" title="{{ utilityService.language.tripRoutex | translate }}"> </kendo-grid-column>
+    <kendo-grid-column field="dispatcher" title="{{ utilityService.language.tripDispatcher | translate }}">
     </kendo-grid-column>
-    <kendo-grid-column field="passenger" title="Passanger"> </kendo-grid-column>
-    <kendo-grid-column field="registrationNumber" title="Reg Vehicle">
+    <kendo-grid-column field="passenger" title="{{ utilityService.language.passanger | translate }}"> </kendo-grid-column>
+    <kendo-grid-column field="registrationNumber" title="{{ utilityService.language.regVehical | translate }}">
     </kendo-grid-column>
-    <kendo-grid-column field="creationDate" title="Date Created" filter="date">
+    <kendo-grid-column field="creationDate" title="{{ utilityService.language.dateCreated | translate }}" filter="date">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         {{ dataItem.creationDate | dateformat : "g" }}
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="status" title="Status">
+    <kendo-grid-column field="status" title="{{ utilityService.language.status | translate }}">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <span>{{ utilityService.getTripStatusLabel(dataItem.status) }}</span>
       </ng-template>

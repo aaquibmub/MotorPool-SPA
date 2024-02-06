@@ -13,13 +13,13 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="createdTime" title="Log Time">
+    <kendo-grid-column field="createdTime" title="{{ utilityService.language.logTime | translate }}">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         {{ dataItem.createdTime | dateformat : "g" }}
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="message" title="Message"> </kendo-grid-column>
-    <kendo-grid-column field="activityBy" title="Activity By">
+    <kendo-grid-column field="message" title="{{ utilityService.language.message | translate }}"> </kendo-grid-column>
+    <kendo-grid-column field="activityBy" title="{{ utilityService.language.activityBy | translate }}">
     </kendo-grid-column>
   </kendo-grid>
 </div>

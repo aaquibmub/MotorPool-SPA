@@ -7,8 +7,8 @@
             <div class="section-body">
               <div class="fields">
                 <div class="form-group">
-                  Download and import template&nbsp;
-                  <a (click)="downloadTemplate()">Download</a>
+                  {{ utilityService.language.downloadAndImport | translate }}&nbsp;
+                  <a (click)="downloadTemplate()">{{ utilityService.language.download | translate }}</a>
                 </div>
                 <div class="form-group">
                   <div class="control">
@@ -22,7 +22,7 @@
                       *ngIf="!form.get('fileName').valid"
                       class="invalid-feedback"
                     >
-                      File is required
+                      {{ utilityService.language.fileRequired | translate }}
                     </div>
                   </div>
                 </div>

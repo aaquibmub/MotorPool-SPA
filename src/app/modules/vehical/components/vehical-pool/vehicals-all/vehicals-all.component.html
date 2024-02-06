@@ -16,26 +16,26 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="vehicalId" title="ID">
+    <kendo-grid-column field="vehicalId" title="{{ utilityService.language.id | translate }}">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <a routerLink="/vehicals/view/{{ dataItem.id }}/detail">{{
           dataItem.vehicalIdStr
         }}</a>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="make" title="Make"> </kendo-grid-column>
-    <kendo-grid-column field="model" title="Model"> </kendo-grid-column>
-    <kendo-grid-column field="modelYear" title="Model Year">
+    <kendo-grid-column field="make" title="{{ utilityService.language.make | translate }}"> </kendo-grid-column>
+    <kendo-grid-column field="model" title="{{ utilityService.language.model | translate }}"> </kendo-grid-column>
+    <kendo-grid-column field="modelYear" title="{{ utilityService.language.modelYear | translate }}">
     </kendo-grid-column>
-    <kendo-grid-column field="armoured" title="Armord">
+    <kendo-grid-column field="armoured" title="{{ utilityService.language.armored | translate }}">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <span *ngIf="dataItem.armoured">Yes</span>
-        <span *ngIf="!dataItem.armoured">No</span>
+        <span *ngIf="dataItem.armoured">{{ utilityService.language.yes | translate }}</span>
+        <span *ngIf="!dataItem.armoured">{{ utilityService.language.no | translate }}</span>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="registrationPlate" title="Registration Plate">
+    <kendo-grid-column field="registrationPlate" title="{{ utilityService.language.registrationPlate | translate }}">
     </kendo-grid-column>
-    <kendo-grid-column field="status" title="Status">
+    <kendo-grid-column field="status" title="{{ utilityService.language.status | translate }}">
       <ng-template kendoGridFilterCellTemplate let-value="value">
         <kendo-dropdownlist
           style="width: 200px"
@@ -56,7 +56,7 @@
         <span>{{ utilityService.getVehicalStatusLabel(dataItem.status) }}</span>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="driver" title="Driver"> </kendo-grid-column>
+    <kendo-grid-column field="driver" title="{{ utilityService.language.driver | translate }}"> </kendo-grid-column>
     <kendo-grid-column headerClass="action-column">
       <ng-template kendoGridHeaderTemplate>
         <span><i class="action-column-icon"></i></span>
@@ -90,7 +90,7 @@
       </div>
     </ng-template>
     <kendo-grid-messages
-      pagerItemsPerPage="records per page"
+      pagerItemsPerPage="{{ utilityService.language.recordsPerPage | translate }}"
       pagerItems="rows"
     ></kendo-grid-messages>
   </kendo-grid>

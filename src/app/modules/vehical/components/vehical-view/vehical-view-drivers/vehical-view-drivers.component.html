@@ -15,13 +15,13 @@
       scrollable="none"
       (dataStateChange)="dataStateChange($event)"
     >
-      <kendo-grid-column field="driverIdStr" title="ID">
+      <kendo-grid-column field="driverIdStr" title="{{ utilityService.language.id | translate }}">
       </kendo-grid-column>
-      <kendo-grid-column field="driverName" title="Driver Name">
+      <kendo-grid-column field="driverName" title="{{ utilityService.language.driverName | translate }}">
       </kendo-grid-column>
-      <kendo-grid-column field="allocated" title="Allocated">
+      <kendo-grid-column field="allocated" title="{{ utilityService.language.allocated | translate }}">
       </kendo-grid-column>
-      <kendo-grid-column field="date" title="Date" filter="date">
+      <kendo-grid-column field="date" title="{{ utilityService.language.date | translate }}" filter="date">
         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
           {{ dataItem.date | dateformat : "g" }}
         </ng-template>

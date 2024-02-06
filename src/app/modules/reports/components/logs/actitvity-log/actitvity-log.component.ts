@@ -7,6 +7,7 @@ import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { LogService } from 'src/app/helper/services/utilities/log.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-actitvity-log',
@@ -21,7 +22,8 @@ export class ActitvityLogComponent implements OnInit, OnDestroy {
   getGridDataForActivityLogSub: Subscription;
 
   constructor(
-    private logService: LogService
+    private logService: LogService,
+    public utilityService: UtilityService,
   ) { }
 
   ngOnInit() {

@@ -8,6 +8,7 @@ import { ImportResponseModel } from 'src/app/helper/models/settings/data-import/
 import { ImportService } from 'src/app/helper/services/utilities/import.service';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
 import { AlertService } from './../../../../../helper/services/common/alert.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-address-data-import',
@@ -21,6 +22,7 @@ export class AddressDataImportComponent implements OnInit {
   file: File;
 
   constructor(
+    public utilityService: UtilityService,
     private importService: ImportService,
     private notificationService: NotificationService,
     private alertService: AlertService

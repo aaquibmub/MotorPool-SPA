@@ -16,13 +16,13 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
-    <kendo-grid-column field="gender" title="Gender"> </kendo-grid-column>
-    <kendo-grid-column field="ageGroup" title="Age Group"> </kendo-grid-column>
-    <kendo-grid-column field="opm" title="Opm"> </kendo-grid-column>
-    <kendo-grid-column field="phoneNumber" title="Phone Number">
+    <kendo-grid-column field="name" title="{{ utilityService.language.name | translate }}"> </kendo-grid-column>
+    <kendo-grid-column field="gender" title="{{ utilityService.language.gender | translate }}"> </kendo-grid-column>
+    <kendo-grid-column field="ageGroup" title="{{ utilityService.language.ageGroup | translate }}"> </kendo-grid-column>
+    <kendo-grid-column field="opm" title="{{ utilityService.language.opm | translate }}"> </kendo-grid-column>
+    <kendo-grid-column field="phoneNumber" title="{{ utilityService.language.phoneNumber | translate }}">
     </kendo-grid-column>
-    <kendo-grid-column field="address" title="Address"> </kendo-grid-column>
+    <kendo-grid-column field="address" title="{{ utilityService.language.address | translate }}"> </kendo-grid-column>
     <kendo-grid-column headerClass="action-column">
       <ng-template kendoGridHeaderTemplate>
         <span><i class="action-column-icon"></i></span>
@@ -53,7 +53,7 @@
       </div>
     </ng-template>
     <kendo-grid-messages
-      pagerItemsPerPage="records per page"
+      pagerItemsPerPage="{{ utilityService.language.recordsPerPage | translate }}"
       pagerItems="rows"
     ></kendo-grid-messages>
   </kendo-grid>

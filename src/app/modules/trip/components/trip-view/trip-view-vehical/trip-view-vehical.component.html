@@ -1,18 +1,18 @@
 <div *ngIf="!model">
   <div class="form-section form-section-border">
-    <div class="section-header" style="text-align: center; display: block;">No Vehicle Information available</div>
+    <div class="section-header" style="text-align: center; display: block;">{{ utilityService.language.noVehicalInfo | translate }}</div>
   </div>
 </div>
 <div *ngIf="model">
   <!-- General Information -->
   <div class="form-section form-section-border">
-    <div class="section-header">Vehical Information</div>
+    <div class="section-header">{{ utilityService.language.vehicalInfo | translate }}</div>
     <div class="section-body">
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
             <div class="label">
-              <label for="inputMake">Make</label>
+              <label for="inputMake">{{ utilityService.language.make | translate }}</label>
             </div>
             <div class="control">
               <input
@@ -29,7 +29,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <div class="label">
-              <label for="inputModel">Model</label>
+              <label for="inputModel">{{ utilityService.language.model | translate }}</label>
             </div>
             <div class="control">
               <input
@@ -51,7 +51,7 @@
           <div class="col-md-6">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputModelYear">Model Year</label>
+                  <label for="inputModelYear">{{ utilityService.language.modelYear | translate }}</label>
                 </div>
                 <div class="control">
                   <input
@@ -68,7 +68,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <div class="label">
-              <label for="inputRegistrationPlate">Registration Plate</label>
+              <label for="inputRegistrationPlate">{{utilityService.language.registrationPlate | translate }}</label>
             </div>
             <div class="control">
               <input
