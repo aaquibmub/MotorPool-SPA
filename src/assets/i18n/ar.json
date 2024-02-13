@@ -1,6 +1,6 @@
 {
   "Address": "Address",
-  "Add New Destination":"Add New Destination",
+  "Add New Destination": "Add New Destination",
   "Address is required": "Address is required",
   "Approved By": "تمت الموافقة عليه من قبل",
   "Approver is required": "Approver is required",
@@ -14,7 +14,7 @@
   "Cancel": "Cancel",
   "Create & Execute": "Create & Execute",
   "Create New Address": "Create New Address",
-  "Disabled" : "Disabled",
+  "Disabled": "Disabled",
   "Default Starting Point": "Default Starting Point",
   "Driver": "Driver",
   "Destination": "Destination",
@@ -73,5 +73,4 @@
   "Registration Plate": "Registration Plate",
   "records per page": "records per page",
   "Wednesday": "Wednesday"
-
 }

@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { NotificationListModel } from './../../helper/models/common/notifications/notification-list-model';
 import { AuthService } from './../../helper/services/auth/auth.service';
 import { AlertService } from './../../helper/services/common/alert.service';
@@ -27,6 +28,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    private translate: TranslateService,
     public sidebarservice: SidebarService,
     private overlayService: OverlayService,
     // private userService: UserService,
@@ -57,6 +59,17 @@ export class NavbarComponent implements OnInit {
     this.authService.currentUser = null;
     // this.alertify.message('logged out');
     this.router.navigate(['/auth/sign-in']);
+  }
+
+  handleLanguageValueChange(value: boolean): void {
+    if (value) {
+      this.translate.setDefaultLang('en');
+      this.translate.use('en');
+    } else {
+
+      this.translate.setDefaultLang('ar');
+      this.translate.use('ar');
+    }
   }
 
   showExpiryPopup(): void {

@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DateFormatPipe } from './../helper/directives/date-format.pipe';
 import { NumberSuffixPipe } from '../helper/directives/number-suffix.pipe';
+import { DateFormatPipe } from './../helper/directives/date-format.pipe';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { DropDownListModule } from '@progress/kendo-angular-dropdowns';
 import { InputsModule } from '@progress/kendo-angular-inputs';
+import { LabelModule } from '@progress/kendo-angular-label';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { NumericFormatPipe } from '../helper/directives/numeric-format.pipe';
 import { TimeFormatPipe } from '../helper/directives/time-format.pipe';
@@ -39,6 +40,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     CommonModule,
     DialogModule,
     DropDownListModule,
+    LabelModule,
     InputsModule,
     PerfectScrollbarModule,
     TranslateModule.forChild()

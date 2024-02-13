@@ -15,6 +15,15 @@
       <span class="nav-bar-icon" (click)="toggleSettingsMenu()">
         <i class="topbar-icon setting-icon"></i
       ></span>
+      <kendo-label
+        ><kendo-switch
+          [size]="'small'"
+          class="nav-bar-icon"
+          (valueChange)="handleLanguageValueChange($event)"
+          onLabel="EN"
+          offLabel="AR"
+        ></kendo-switch
+      ></kendo-label>
       <div class="settings-menu et-dropdown-menu" *ngIf="showSettingsMenu">
         <ul>
           <li>

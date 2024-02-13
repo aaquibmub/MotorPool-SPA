@@ -199,6 +199,16 @@ export const ROUTES: RouteInfo[] = [
             submenu: []
           },
           {
+            path: '/trips/booking/new-start-now',
+            title: 'New Trip',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
             path: '/trips/bookings/all',
             title: 'All Trip Bookings',
             icon: 'bx bx-right-arrow-alt',
@@ -208,26 +218,26 @@ export const ROUTES: RouteInfo[] = [
             isExternalLink: false,
             submenu: []
           },
-          {
-            path: '/trips/bookings/start-now',
-            title: 'New Trip Bookings',
-            icon: 'bx bx-right-arrow-alt',
-            class: '',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            submenu: []
-          },
-          {
-            path: '/trips/bookings/scheduled',
-            title: 'Scheduled Trip Bookings',
-            icon: 'bx bx-right-arrow-alt',
-            class: '',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            submenu: []
-          },
+          // {
+          //   path: '/trips/bookings/start-now',
+          //   title: 'New Trip Bookings',
+          //   icon: 'bx bx-right-arrow-alt',
+          //   class: '',
+          //   badge: '',
+          //   badgeClass: '',
+          //   isExternalLink: false,
+          //   submenu: []
+          // },
+          // {
+          //   path: '/trips/bookings/scheduled',
+          //   title: 'Scheduled Trip Bookings',
+          //   icon: 'bx bx-right-arrow-alt',
+          //   class: '',
+          //   badge: '',
+          //   badgeClass: '',
+          //   isExternalLink: false,
+          //   submenu: []
+          // },
         ]
       },
 

@@ -14,6 +14,7 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { IntlModule } from '@progress/kendo-angular-intl';
+import { LabelModule } from '@progress/kendo-angular-label';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { AppRoutingModule } from './app-routing.module';
@@ -77,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     DialogsModule,
     GridModule,
+    LabelModule,
     InputsModule,
     NotificationModule,
     IndicatorsModule,
