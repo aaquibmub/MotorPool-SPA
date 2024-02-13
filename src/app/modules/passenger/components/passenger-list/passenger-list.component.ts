@@ -13,8 +13,8 @@ export class PassengerListComponent implements OnInit {
   pageTitle: string;
 
   constructor(
-    private location: Location,
     public utilityService: UtilityService,
+    private location: Location,
     private router: Router) {
     router.events.subscribe((event) => {
       const path = location.path();

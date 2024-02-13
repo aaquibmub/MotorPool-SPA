@@ -18,18 +18,18 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="userId" title="ID" filter="numeric" [width]="200">
+    <kendo-grid-column field="userId" title="{{ utilityService.language.id | translate }}" filter="numeric" [width]="200">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <a routerLink="/drivers/view/{{ dataItem.id }}/detail">{{
           dataItem.userIdStr
         }}</a>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="fullName" title="Full Name" [width]="200">
+    <kendo-grid-column field="fullName" title="{{ utilityService.language.fullName | translate }}" [width]="200">
     </kendo-grid-column>
-    <kendo-grid-column field="nationalId" title="National ID #" [width]="200">
+    <kendo-grid-column field="nationalId" title="{{ utilityService.language.nationalId | translate }}" [width]="200">
     </kendo-grid-column>
-    <kendo-grid-column field="mobileNumber" title="Mobile #" [width]="200">
+    <kendo-grid-column field="mobileNumber" title="{{ utilityService.language.mobileNumber | translate }}" [width]="200">
     </kendo-grid-column>
     <kendo-grid-column
       field="vehicalAllocated"
@@ -37,7 +37,7 @@
       [width]="200"
     >
     </kendo-grid-column>
-    <kendo-grid-column field="active" title="Active" [width]="150">
+    <kendo-grid-column field="active" title="{{ utilityService.language.active | translate }}" [width]="150">
       <ng-template kendoGridFilterCellTemplate let-value="value">
         <kendo-dropdownlist
           style="width: 100px"
@@ -55,11 +55,11 @@
         </kendo-dropdownlist>
       </ng-template>
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <span *ngIf="dataItem.active">Yes</span>
-        <span *ngIf="!dataItem.active">No</span>
+        <span *ngIf="dataItem.active">{{ utilityService.language.yes | translate }}</span>
+        <span *ngIf="!dataItem.active">{{ utilityService.language.no | translate }}</span>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="driverStatus" title="Status" [width]="250">
+    <kendo-grid-column field="driverStatus" title="{{ utilityService.language.status | translate }}" [width]="250">
       <ng-template kendoGridFilterCellTemplate let-value="value">
         <kendo-dropdownlist
           style="width: 200px"
@@ -84,7 +84,7 @@
     </kendo-grid-column>
     <kendo-grid-column
       field="createdDate"
-      title="Date Created"
+      title="{{ utilityService.language.dateCreated | translate }}"
       [width]="250"
       filter="date"
     >
@@ -125,7 +125,7 @@
       </div>
     </ng-template>
     <kendo-grid-messages
-      pagerItemsPerPage="records per page"
+      pagerItemsPerPage="{{ utilityService.language.recordsPerPage | translate }}"
       pagerItems="rows"
     ></kendo-grid-messages>
   </kendo-grid>

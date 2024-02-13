@@ -15,11 +15,11 @@
       scrollable="none"
       (dataStateChange)="dataStateChange($event)"
     >
-      <kendo-grid-column field="inspectionIdStr" title="ID">
+      <kendo-grid-column field="inspectionIdStr" title="{{ utilityService.language.id | translate }}">
       </kendo-grid-column>
-      <kendo-grid-column field="driver" title="Driver Name">
+      <kendo-grid-column field="driver" title="{{ utilityService.language.driverName | translate }}">
       </kendo-grid-column>
-      <kendo-grid-column field="creationDate" title="Date Created" filter="date">
+      <kendo-grid-column field="creationDate" title="{{ utilityService.language.dateCreated | translate }}" filter="date">
         <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
           {{ dataItem.creationDate | dateformat : "g" }}
         </ng-template>

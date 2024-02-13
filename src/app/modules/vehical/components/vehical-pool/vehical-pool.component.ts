@@ -2,6 +2,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-vehical-pool',
@@ -12,6 +13,7 @@ export class VehicalPoolComponent implements OnInit {
   pageTitle: string;
 
   constructor(
+    public utilityService: UtilityService,
     private location: Location,
     private router: Router) {
     router.events.subscribe((event) => {

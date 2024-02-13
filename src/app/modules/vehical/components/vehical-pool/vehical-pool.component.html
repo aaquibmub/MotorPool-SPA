@@ -10,7 +10,7 @@
       <div class="left"></div>
       <div class="right">
         <button class="btn btn-green" (click)="handleCreateNewButtonClick()">
-          Create New Vehical
+          {{ utilityService.language.createNewVehical | translate }}
         </button>
       </div>
     </div>
@@ -20,31 +20,31 @@
           class="tab-left-item"
           routerLinkActive="active"
           routerLink="/vehicals/pool/all"
-          >All Vehicles</a
+          >{{ utilityService.language.allVehicals | translate }}</a
         >
         <a
           class="tab-left-item"
           routerLinkActive="active"
           routerLink="/vehicals/pool/active"
-          >Active Vehicles</a
+          >{{ utilityService.language.activeVehicals | translate }}</a
         >
         <a
           class="tab-left-item"
           routerLinkActive="active"
           routerLink="/vehicals/pool/inactive"
-          >Inactive Vehicles</a
+          >{{ utilityService.language.inactiveVehicals | translate }}</a
         >
         <a
           class="tab-left-item"
           routerLinkActive="active"
           routerLink="/vehicals/pool/maintenance"
-          >Under Maintenance</a
+          >{{ utilityService.language.underMantainance | translate }}</a
         >
         <a
           class="tab-left-item"
           routerLinkActive="active"
           routerLink="/vehicals/pool/gripped"
-          >Gripped Vehicles</a
+          >{{ utilityService.language.grippedVehicals | translate }}</a
         >
       </div>
       <div class="tab-content">

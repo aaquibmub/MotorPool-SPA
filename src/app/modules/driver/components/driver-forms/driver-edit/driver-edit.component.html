@@ -3,7 +3,7 @@
   <div class="page-area">
     <div class="page-header">
       <div class="page-title">
-        <span>New Driver</span>
+        <span>{{ utilityService.language.newDriver | translate }}</span>
       </div>
     </div>
     <div class="page-body">
@@ -14,7 +14,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="firstName">First Name</label>
+                <label for="firstName">{{ utilityService.language.firstName | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -31,7 +31,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  First Name is required
+                  {{ utilityService.language.firstNameReq | translate }}
                 </div>
               </div>
             </div>
@@ -40,7 +40,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="middleName">Middle Name</label>
+                <label for="middleName">{{ utilityService.language.middleName | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -57,7 +57,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Middle Name is required
+                  {{ utilityService.language.middleNameReq | translate }}
                 </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="driverLastName">Last Name</label>
+                <label for="driverLastName">{{ utilityService.language.lastName | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -82,7 +82,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Last Name is required
+                  {{ utilityService.language.lastNameReq | translate }}
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label>Nationality</label>
+                <label>{{ utilityService.language.nationality | translate }}</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -112,7 +112,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="idNumber">ID Number</label>
+                <label for="idNumber">{{ utilityService.language.idNumber | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -128,7 +128,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  ID Number is required
+                  {{ utilityService.language.idNumberReq | translate }}
                 </div>
               </div>
             </div>
@@ -158,7 +158,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="mobileNumber">Mobile Number</label>
+                <label for="mobileNumber">{{ utilityService.language.mobileNumber | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -175,7 +175,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Mobile Number is required
+                  {{ utilityService.language.mobileNumberReq | translate }}
                 </div>
               </div>
             </div>
@@ -184,7 +184,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="emailAddress">Email address</label>
+                <label for="emailAddress">{{ utilityService.language.emailAddress | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -201,7 +201,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Email Address is required
+                  {{ utilityService.language.emailAddressReq | translate }}
                 </div>
               </div>
             </div>
@@ -362,7 +362,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="userID">User ID</label>
+                  <label for="userID">{{ utilityService.language.userId | translate }}</label>
                 </div>
                 <div class="control">
                   <input
@@ -378,7 +378,7 @@
                     "
                     class="invalid-feedback"
                   >
-                    User ID is required
+                    {{ utilityService.language.userIdReq | translate }}
                   </div>
                 </div>
               </div>
@@ -387,7 +387,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="password">Password</label>
+                  <label for="password">{{ utilityService.language.password | translate }}</label>
                 </div>
                 <div class="control">
                   <input
@@ -404,7 +404,7 @@
                     "
                     class="invalid-feedback"
                   >
-                    User ID is required
+                  {{ utilityService.language.userIdReq | translate }}
                   </div>
                 </div>
               </div>
@@ -424,13 +424,13 @@
                 type="button"
                 (click)="cancel()"
               >
-                Cancel
+                {{ utilityService.language.cancel | translate }}
               </button>
               <button *ngIf="!editMode" class="btn btn-primary" type="submit">
-                Create
+                {{ utilityService.language.create | translate }}
               </button>
               <button *ngIf="editMode" class="btn btn-primary" type="submit">
-                Update
+                {{ utilityService.language.update | translate }}
               </button>
             </div>
           </div>

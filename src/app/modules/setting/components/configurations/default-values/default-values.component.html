@@ -1,9 +1,9 @@
 <form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
   <div class="card card-grey p-24">
     <div class="card-header display-flex justify-space-between">
-      <div class="card-title">Application Default Settings</div>
+      <div class="card-title">{{ utilityService.language.applicationDefaultSetting | translate }}</div>
       <div class="card-action">
-        <button type="submit" class="btn btn-green">Save</button>
+        <button type="submit" class="btn btn-green">{{ utilityService.language.save | translate }}</button>
       </div>
     </div>
     <div class="card-body">
@@ -14,7 +14,7 @@
               <div class="fields">
                 <div class="form-group">
                   <div class="label">
-                    <label for="inputApprover">Approver</label>
+                    <label for="inputApprover">{{ utilityService.language.approver | translate }}</label>
                   </div>
                   <div class="control">
                     <kendo-dropdownlist
@@ -35,7 +35,7 @@
                       "
                       class="invalid-feedback"
                     >
-                      Approver is required
+                      {{ utilityService.language.approverRequired | translate}}
                     </div>
                     <!-- <span class="control-helper">
                       By default all sales transactions are made against
@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                   <div class="label">
-                    <label for="inputStartingPoint">StartingPoint</label>
+                    <label for="inputStartingPoint">{{ utilityService.language.startingPoint | translate}}</label>
                   </div>
                   <div class="control">
                     <kendo-dropdownlist
@@ -67,7 +67,7 @@
                       "
                       class="invalid-feedback"
                     >
-                      StartingPoint is required
+                    {{ utilityService.language.startingPointReq | translate}}
                     </div>
                     <!-- <span class="control-helper">
                       By default all purchase transactions are made against
@@ -78,7 +78,7 @@
                 </div>
                 <div class="form-group">
                   <div class="label">
-                    <label for="inputDropoff">Dropoff</label>
+                    <label for="inputDropoff">{{ utilityService.language.dropOff | translate }}</label>
                   </div>
                   <div class="control">
                     <kendo-dropdownlist
@@ -99,7 +99,7 @@
                       "
                       class="invalid-feedback"
                     >
-                      Dropoff is required
+                      {{ utilityService.language.dropoffReq | translate}}
                     </div>
                     <span class="control-helper"> </span>
                   </div>

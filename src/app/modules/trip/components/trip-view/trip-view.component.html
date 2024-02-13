@@ -64,25 +64,25 @@
             class="tab-left-item"
             routerLinkActive="active"
             routerLink="/trips/view/{{ model.id }}/detail"
-            >Trip Details</a
+            >{{ utilityService.language.tripDetails | translate }}</a
           >
           <a
             class="tab-left-item"
             routerLinkActive="active"
             routerLink="/trips/view/{{ model.id }}/log"
-            >Trip Log</a
+            >{{ utilityService.language.tripLog | translate }}</a
           >
           <a
             class="tab-left-item"
             routerLinkActive="active"
             routerLink="/trips/view/{{ model.id }}/vehicle"
-            >Vehicle</a
+            >{{ utilityService.language.vehical | translate }}</a
           >
           <a
             class="tab-left-item"
             routerLinkActive="active"
             routerLink="/trips/view/{{ model.id }}/driver"
-            >Driver</a
+            >{{ utilityService.language.driver | translate }}</a
           >
         </div>
         <div class="tab-content" style="background-color: white; padding: 8px">

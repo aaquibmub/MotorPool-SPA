@@ -3,7 +3,7 @@
   <div class="page-area">
     <div class="page-header">
       <div class="page-title">
-        <span>Passanger</span>
+        <span>{{ utilityService.language.Passanger | translate }}</span>
       </div>
     </div>
     <div class="page-body">
@@ -28,7 +28,11 @@
                   *ngIf="!form.get('name').valid && form.get('name').touched"
                   class="invalid-feedback"
                 >
+<<<<<<< HEAD
+                  {{ utilityService.language.nameRequired || translate }}
+=======
                   {{ utilityService.language.nameRequired | translate }}
+>>>>>>> origin/master
                 </div>
               </div>
             </div>
@@ -58,7 +62,11 @@
                   "
                   class="invalid-feedback"
                 >
+<<<<<<< HEAD
+                {{ utilityService.language.genderRequired | translate }}
+=======
                   {{ utilityService.language.genderRequired | translate }}
+>>>>>>> origin/master
                 </div>
               </div>
             </div>
@@ -144,7 +152,11 @@
                   "
                   class="invalid-feedback"
                 >
+<<<<<<< HEAD
+                  {{ utilityService.language.phoneRequired | translate }}
+=======
                   {{ utilityService.language.phoneNumberRequired | translate }}
+>>>>>>> origin/master
                 </div>
               </div>
             </div>
@@ -171,7 +183,11 @@
                   "
                   class="invalid-feedback"
                 >
+<<<<<<< HEAD
+                {{ utilityService.language.addressRequired | translate }}
+=======
                   {{ utilityService.language.addressRequired | translate }}
+>>>>>>> origin/master
                 </div>
               </div>
             </div>
@@ -189,13 +205,33 @@
                 type="button"
                 (click)="cancel()"
               >
-                Cancel
+              {{ utilityService.language.cancel | translate }}
               </button>
               <button *ngIf="!editMode" class="btn btn-primary" type="submit">
-                Create
+                {{ utilityService.language.create | translate }}
               </button>
               <button *ngIf="editMode" class="btn btn-primary" type="submit">
-                Update
+                {{ utilityService.language.update | translate }}
+        <span>{{ utilityService.language.Passanger | translate }}</span>
+                <label for="inputName">{{ utilityService.language.name | translate }}</label>
+                  {{ utilityService.language.nameRequired || translate }}
+                  {{ utilityService.language.nameRequired | translate }}
+                <label [for]="'inputPassengerGender'">{{ utilityService.language.gender | translate }}</label>
+                {{ utilityService.language.genderRequired | translate }}
+                  {{ utilityService.language.genderRequired | translate }}
+                <label [for]="'inputPassengerAgeGroup'">{{ utilityService.language.ageGroup | translate }}</label>
+                  {{ utilityService.language.ageGroupRequired | translate }}
+                <label [for]="'inputPassengerOpm'">{{ utilityService.language.opm | translate }}</label>
+                  {{ utilityService.language.opmRequired | translate }}
+                <label for="inputPhoneNumber">{{ utilityService.language.phoneNumber | translate }}</label>
+                  {{ utilityService.language.phoneRequired | translate }}
+                  {{ utilityService.language.phoneNumberRequired | translate }}
+                <label [for]="'inputPassengerAddress'">{{ utilityService.language.address | translate }}</label>
+                {{ utilityService.language.addressRequired | translate }}
+                  {{ utilityService.language.addressRequired | translate }}
+              {{ utilityService.language.cancel | translate }}
+                {{ utilityService.language.create | translate }}
+                {{ utilityService.language.update | translate }}
               </button>
             </div>
           </div>

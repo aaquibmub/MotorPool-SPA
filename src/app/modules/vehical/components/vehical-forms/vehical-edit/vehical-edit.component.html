@@ -3,7 +3,7 @@
   <div class="page-area">
     <div class="page-header">
       <div class="page-title">
-        <span>Vehical</span>
+        <span>{{ utilityService.language.vehical | translate }}</span>
       </div>
     </div>
     <div class="page-body">
@@ -14,7 +14,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputVehicalId">Vehical ID</label>
+                <label for="inputVehicalId">{{ utilityService.language.vehicalId | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -32,7 +32,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputRegistrationPlate">Registration Plate</label>
+                <label for="inputRegistrationPlate">{{ utilityService.language.registrationPlate | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -49,7 +49,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Registration plate is required
+                  {{ utilityService.language.registrationPlateRequired | translate }}
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputStatus">Status</label>
+                <label for="inputStatus">{{ utilityService.language.status | translate }}</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -79,7 +79,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Status is required
+                  {{ utilityService.language.statusRequired | translate }}
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputMake">Make</label>
+                <label for="inputMake">{{ utilityService.language.make | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -104,7 +104,7 @@
                   *ngIf="!form.get('make').valid && form.get('make').touched"
                   class="invalid-feedback"
                 >
-                  Make is required
+                  {{ utilityService.language.makeRequired | translate }}
                 </div>
               </div>
             </div>
@@ -113,7 +113,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputModel">Model</label>
+                <label for="inputModel">{{ utilityService.language.model | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -127,7 +127,7 @@
                   *ngIf="!form.get('model').valid && form.get('model').touched"
                   class="invalid-feedback"
                 >
-                  Model is required
+                  {{ utilityService.language.modelRequired | translate }}
                 </div>
               </div>
             </div>
@@ -136,7 +136,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputModelYear">Model Year</label>
+                <label for="inputModelYear">{{ utilityService.language.modelYear | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -153,7 +153,7 @@
                   "
                   class="invalid-feedback"
                 >
-                  Model Year is required
+                  {{ utilityService.language.modelRequired | translate }}
                 </div>
               </div>
             </div>
@@ -164,7 +164,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputType">Type</label>
+                <label for="inputType">{{ utilityService.language.type | translate }}</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -183,7 +183,7 @@
                   *ngIf="!form.get('type').valid && form.get('type').touched"
                   class="invalid-feedback"
                 >
-                  Type is required
+                  {{ utilityService.language.typeRequired | translate }}
                 </div>
               </div>
             </div>
@@ -191,7 +191,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputColor">Color</label>
+                <label for="inputColor">{{ utilityService.language.color | translate }}</label>
               </div>
               <div class="control">
                 <input
@@ -205,7 +205,7 @@
                   *ngIf="!form.get('color').valid && form.get('color').touched"
                   class="invalid-feedback"
                 >
-                  Color is required
+                  {{ utilityService.langugae.colorRequired | translate }}
                 </div>
               </div>
             </div>
@@ -223,7 +223,7 @@
                     ></kendo-switch>
                   </div>
                   <div class="label">
-                    <label for="inputArmoured">is armoured</label>
+                    <label for="inputArmoured">{{ utilityService.language.isArmoured | translate }}</label>
                   </div>
                 </div>
               </div>
@@ -237,31 +237,31 @@
             class="tab-left-item"
             [ngClass]="{ active: activeTab == 1 }"
             (click)="setActiveTab(1)"
-            >Engine Oil
+            >{{ utilityService.language.engineOil | translate }}
           </a>
           <a
             class="tab-left-item"
             [ngClass]="{ active: activeTab == 2 }"
             (click)="setActiveTab(2)"
-            >Wheels & Tires</a
+            >{{ utilityService.language.wheelsTyres | translate }}</a
           >
           <a
             class="tab-left-item"
             [ngClass]="{ active: activeTab == 3 }"
             (click)="setActiveTab(3)"
-            >ODO Meter</a
+            >{{ utilityService.language.odoMeter | translate }}</a
           >
           <a
             class="tab-left-item"
             [ngClass]="{ active: activeTab == 4 }"
             (click)="setActiveTab(4)"
-            >General Inspection</a
+            >{{ utilityService.language.generalInspection | translate }}</a
           >
           <a
             class="tab-left-item"
             [ngClass]="{ active: activeTab == 5 }"
             (click)="setActiveTab(5)"
-            >Body</a
+            >{{ utilityService.language.body | translate }}</a
           >
         </div>
         <div class="tab-content" style="background-color: white">
@@ -269,14 +269,14 @@
           <div *ngIf="activeTab == 1">
             <!-- General -->
             <div class="form-section">
-              <div class="section-header">General</div>
+              <div class="section-header">{{ utilityService.language.general | translate }}</div>
               <div class="section-body">
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
                         <label for="inputEngineCapacity"
-                          >Engine Capacity (Liters)</label
+                          >{{ utilityService.language.engineCapacity | translate }}</label
                         >
                       </div>
                       <div class="control">
@@ -294,7 +294,7 @@
                     <div class="form-group">
                       <div class="label">
                         <label for="inputOilBrand"
-                          >Recommended Engine Oil Brand</label
+                          >{{ utilityService.language.recommendedEngineOil | translate }}</label
                         >
                       </div>
                       <div class="control">
@@ -313,13 +313,13 @@
             </div>
             <!-- Next Due -->
             <div class="form-section">
-              <div class="section-header">Next Due</div>
+              <div class="section-header">{{ utilityService.language.nextDue | translate }}</div>
               <div class="section-body">
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
-                        <label for="inputOilNextDueMilage">Milage (KM)</label>
+                        <label for="inputOilNextDueMilage">{{ utilityService.language.millage | translate }}</label>
                       </div>
                       <div class="control">
                         <input
@@ -335,7 +335,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
-                        <label for="inputOilNextDueDate">Date</label>
+                        <label for="inputOilNextDueDate">{{ utilityService.language.date | translate }}</label>
                       </div>
                       <div class="control">
                         <kendo-datepicker
@@ -358,7 +358,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <div class="label">
-                        <label for="inputOilComments">Comments</label>
+                        <label for="inputOilComments">{{ utilityService.language.comments | translate }}</label>
                       </div>
                       <div class="control">
                         <textarea
@@ -379,13 +379,13 @@
           <!-- Wheels & Tires -->
           <div *ngIf="activeTab == 2">
             <div class="form-section">
-              <div class="section-header">General</div>
+              <div class="section-header">{{ utilityService.language.general | translate }}</div>
               <div class="section-body">
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
-                        <label for="inputRimSize">RIM Size</label>
+                        <label for="inputRimSize">{{ utilityService.language.rimSize | translate }}</label>
                       </div>
                       <div class="control">
                         <input
@@ -401,7 +401,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
-                        <label for="inputTyreSize">Tyre Size</label>
+                        <label for="inputTyreSize">{{ utilityService.language.tyreSize | translate }}</label>
                       </div>
                       <div class="control">
                         <input
@@ -420,7 +420,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
-                        <label for="inputTireBrand">Recommended Brand</label>
+                        <label for="inputTireBrand">{{ utilityService.language.recommendedBrands | translate}}</label>
                       </div>
                       <div class="control">
                         <input
@@ -436,7 +436,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
-                        <label for="inputTyreExpiryDate">Expiry Date</label>
+                        <label for="inputTyreExpiryDate">{{ utilityService.language.expiryDate | translate }}</label>
                       </div>
                       <div class="control">
                         <kendo-datepicker
@@ -457,7 +457,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <div class="label">
-                        <label for="inputTyreComments">Comments</label>
+                        <label for="inputTyreComments">{{ utilityService.language.comments | translate }}</label>
                       </div>
                       <div class="control">
                         <textarea
@@ -478,13 +478,13 @@
           <!-- ODO Meter -->
           <div *ngIf="activeTab == 3">
             <div class="form-section">
-              <div class="section-header">Milage on ODO Meter</div>
+              <div class="section-header">{{ utilityService.language.milageOnODO | translate }}</div>
               <div class="section-body">
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
                       <div class="label">
-                        <label for="inputOdoMeter">Milage (KM)</label>
+                        <label for="inputOdoMeter">{{ utilityService.language.millage | translate }}</label>
                       </div>
                       <div class="control">
                         <input
@@ -507,7 +507,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <div class="label">
-                        <label for="inputOdoComments">Comments</label>
+                        <label for="inputOdoComments">{{ utilityService.language.comments | translate }}</label>
                       </div>
                       <div class="control">
                         <textarea
@@ -580,8 +580,8 @@
                             let-dataItem
                             let-rowIndex="rowIndex"
                           >
-                            <span *ngIf="dataItem.answer">Pass</span>
-                            <span *ngIf="!dataItem.answer">Fail</span>
+                            <span *ngIf="dataItem.answer">{{ utilityService.language.pass | translate }}</span>
+                            <span *ngIf="!dataItem.answer">{{ utilityService.language.fail | translate }}</span>
                           </ng-template>
                         </kendo-grid-column>
                       </kendo-grid>
@@ -590,7 +590,7 @@
                       class="display-flex justify-content-center"
                       *ngIf="!hasGeneralInspection()"
                     >
-                      <p style="margin-bottom: 0">No data available</p>
+                      <p style="margin-bottom: 0">{{ utilityService.language.noDateAvail | translate }}</p>
                     </div>
                   </div>
                 </div>
@@ -646,7 +646,7 @@
                       class="display-flex justify-content-center"
                       *ngIf="!hasBodyInspection()"
                     >
-                      <p style="margin-bottom: 0">No data available</p>
+                      <p style="margin-bottom: 0">{{ utilityService.language.noDateAvail | translate }}</p>
                     </div>
                   </div>
                 </div>
@@ -666,13 +666,13 @@
                 type="button"
                 (click)="cancel()"
               >
-                Cancel
+                {{ utilityService.language.cancel | translate }}
               </button>
               <button *ngIf="!editMode" class="btn btn-primary" type="submit">
-                Create
+                {{ utilityService.language.create | translate }}
               </button>
               <button *ngIf="editMode" class="btn btn-primary" type="submit">
-                Update
+                {{ utilityService.language.update | translate }}
               </button>
             </div>
           </div>

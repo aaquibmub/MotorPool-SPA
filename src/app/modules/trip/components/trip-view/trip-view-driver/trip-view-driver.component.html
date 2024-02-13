@@ -1,19 +1,19 @@
 <div *ngIf="!model">
   <div class="form-section form-section-border">
-    <div class="section-header" style="text-align: center; display: block;">No Driver Information available</div>
+    <div class="section-header" style="text-align: center; display: block;">{{ utilityService.language.noDriverInfo | translate }}</div>
   </div>
 </div>
 
 <div *ngIf="model">
   <!-- General Information -->
   <div class="form-section form-section-border">
-    <div class="section-header">General Information</div>
+    <div class="section-header">{{ utilityService.language.generalInfo | translate }}</div>
     <div class="section-body">
       <div class="row">
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputFirstName">First Name</label>
+              <label for="inputFirstName">{{ utilityService.language.firstName | translate }}</label>
             </div>
             <div class="control">
               <input
@@ -30,7 +30,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputMiddleName">Middle Name</label>
+              <label for="inputMiddleName">{{ utilityService.language.middleName | translate }}</label>
             </div>
             <div class="control">
               <input
@@ -47,7 +47,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputLastName">Last Name</label>
+              <label for="inputLastName">{{ utilityService.language.lastName | translate }}</label>
             </div>
             <div class="control">
               <input
@@ -73,7 +73,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputNationality">Nationality</label>
+                  <label for="inputNationality">{{ utilityService.language.nationality | translate }}</label>
                 </div>
                 <div class="control">
                   <input
@@ -90,7 +90,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputID">ID #</label>
+                  <label for="inputID">{{ utilityService.language.id | translate }} #</label>
                 </div>
                 <div class="control">
                   <input
