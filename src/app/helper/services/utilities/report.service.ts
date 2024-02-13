@@ -108,8 +108,8 @@ export class ReportService {
     passengerId: string,
     fromDate: Date,
     toDate: Date,
-  ): Observable<ReportTripPassengerSheetModel> {
-    return this.http.post<ReportTripPassengerSheetModel>(
+  ): Observable<ReportTripPassengerSheetModel[]> {
+    return this.http.post<ReportTripPassengerSheetModel[]>(
       this.baseUrl + 'get-report-trip-passenger-sheet-model', { passengerId, fromDate, toDate });
   }
 

@@ -40,7 +40,7 @@ export class AllocateVehicalPopupComponent implements OnInit {
         }
       );
 
-    this.vehicalService.getTableList('')
+    this.vehicalService.getTableList('', this.driverId, false)
       .subscribe((list: VehicalModel[]) => {
         this.vehicalList = list;
       });

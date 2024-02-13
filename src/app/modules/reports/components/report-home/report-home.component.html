@@ -32,7 +32,6 @@
               <a
                 [routerLink]="[menuSubItem.path]"
                 *ngIf="!menuSubItem.isExternalLink; else externalSubLinkBlock"
-                (click)="showHideSubMenu(false)"
               >
                 <i [ngClass]="[menuSubItem.icon]"></i>
                 <span class="sub-menu-title">{{ menuSubItem.title }}</span>

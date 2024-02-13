@@ -18,7 +18,7 @@ export class ReportTripsPassengerSheetComponent implements OnInit {
   selectedDate: Date = new Date();
   selectedToDate: Date = new Date();
 
-  model: ReportTripPassengerSheetModel;
+  model: ReportTripPassengerSheetModel[];
 
   constructor(
     public utilityService: UtilityService,
@@ -57,7 +57,7 @@ export class ReportTripsPassengerSheetComponent implements OnInit {
       this.selectedToDate,
     )
       .subscribe(
-        (model: ReportTripPassengerSheetModel) => {
+        (model: ReportTripPassengerSheetModel[]) => {
           this.model = model;
         }
       );
@@ -84,7 +84,7 @@ export class ReportTripsPassengerSheetComponent implements OnInit {
     a.setAttribute('style', 'display:none;');
     document.body.appendChild(a);
     a.download = 'Passenger Sheet - (' +
-      this.model?.passengerName +
+      this.selectedPassenger?.text +
       '-' +
       this.selectedDate.toDateString().toString() +
       '-' +

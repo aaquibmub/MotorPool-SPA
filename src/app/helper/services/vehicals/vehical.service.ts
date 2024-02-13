@@ -36,9 +36,14 @@ export class VehicalService {
 
   getTableList(
     text: string,
+    driverId?: string,
     allocated?: boolean): Observable<VehicalModel[]> {
     let url = this.baseUrl + 'get-table-list?text=' + text;
-    if (allocated) {
+    if (driverId) {
+      url += '&driverId=' + driverId;
+    }
+    if (allocated == true
+      || allocated == false) {
       url += '&allocated=' + allocated;
     }
     return this.http.get<VehicalModel[]>(url);

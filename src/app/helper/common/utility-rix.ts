@@ -43,7 +43,7 @@ export class UtilityRix {
   static getWarningNotification(msg: string): NotificationSettings {
     return {
       hideAfter: 1000,
-      position: { horizontal: 'center', vertical: 'bottom' },
+      position: { horizontal: 'right', vertical: 'bottom' },
       animation: { type: 'fade', duration: 400 },
       type: { style: 'warning', icon: true },
       content: msg
@@ -52,7 +52,7 @@ export class UtilityRix {
   static getErrorNotification(msg: string): NotificationSettings {
     return {
       hideAfter: 1000,
-      position: { horizontal: 'center', vertical: 'bottom' },
+      position: { horizontal: 'right', vertical: 'bottom' },
       animation: { type: 'fade', duration: 400 },
       type: { style: 'error', icon: true },
       content: msg
@@ -61,7 +61,7 @@ export class UtilityRix {
   static getSuccsessNotification(msg: string): NotificationSettings {
     return {
       hideAfter: 1000,
-      position: { horizontal: 'center', vertical: 'bottom' },
+      position: { horizontal: 'right', vertical: 'bottom' },
       animation: { type: 'fade', duration: 400 },
       type: { style: 'success', icon: true },
       content: msg
