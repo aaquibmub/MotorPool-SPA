@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouteInfo } from './../../../../shared/sidebar/sidebar.metadata';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-report-home',
@@ -9,7 +10,9 @@ import { RouteInfo } from './../../../../shared/sidebar/sidebar.metadata';
 export class ReportHomeComponent implements OnInit {
   menuItems: RouteInfo[] = [];
 
-  constructor() { }
+  constructor(
+    public utilityService : UtilityService,
+  ) { }
 
   ngOnInit() {
     this.menuItems = [

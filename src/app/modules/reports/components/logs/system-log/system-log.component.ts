@@ -20,7 +20,7 @@ export class SystemLogComponent implements OnInit, OnDestroy {
   getGridDataForSystemLogSub: Subscription;
   constructor(
     private logService: LogService,
-    private utilityService: UtilityService
+    public utilityService: UtilityService
   ) { }
 
   ngOnInit() {

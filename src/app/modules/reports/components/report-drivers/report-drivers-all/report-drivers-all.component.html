@@ -2,7 +2,7 @@
 <div class="page-area">
   <div class="page-header">
     <div class="page-title">
-      <span>All Drivers</span>
+      <span>{{ utilityService.language.allDriver | translate }}</span>
     </div>
   </div>
   <div class="page-body">
@@ -10,7 +10,7 @@
       <div class="left"></div>
       <div class="right" style="display: flex; justify-content: space-between">
         <button class="btn btn-orange" (click)="exportToExcel(grid)">
-          <i class="fa fa-file-excel-o"></i> Excel
+          <i class="fa fa-file-excel-o"></i> {{ utilityService.language.excel | translate }}
         </button>
       </div>
     </div>
@@ -39,37 +39,37 @@
       >
         <kendo-grid-column
           field="id"
-          title="Driver ID"
+          title="{{ utilityService.language.driverId | translate }}"
           [hidden]="isHidden('id')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="name"
-          title="Driver Name"
+          title="{{ utilityService.language.driverName | translate }}"
           [hidden]="isHidden('name')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="nationality"
-          title="Nationality"
+          title="{{ utilityService.language.nationality | translate }}"
           [hidden]="isHidden('nationality')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="nationalId"
-          title="National ID"
+          title="{{ utilityService.language.nationalId | translate }}"
           [hidden]="isHidden('nationalId')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="mobileNumber"
-          title="Mobile #"
+          title="{{ utilityService.language.mobileNumber | translate }}"
           [hidden]="isHidden('mobileNumber')"
         >
         </kendo-grid-column>
         <kendo-grid-column
           field="createdDate"
-          title="Driver Creation Date"
+          title="{{ utilityService.language.driverCreationDate | translate }}"
           filter="date"
           [width]="250"
           [hidden]="isHidden('createdDate')"
@@ -84,7 +84,7 @@
         </kendo-grid-column>
         <kendo-grid-column
           field="driverStatus"
-          title="Status"
+          title="{{ utilityService.language.status | translate }}"
           [hidden]="isHidden('driverStatus')"
         >
           <ng-template kendoGridFilterCellTemplate let-value="value">
