@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-logs',
@@ -13,6 +14,7 @@ export class LogsComponent implements OnInit {
 
   constructor(
     private location: Location,
+    public utilityService: UtilityService,
     private router: Router) {
 
     router.events.subscribe((event) => {

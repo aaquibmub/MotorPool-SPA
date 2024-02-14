@@ -2,7 +2,7 @@
 <div class="page-area">
   <div class="page-header">
     <div class="page-title">
-      <span>Driver vs Trips</span>
+      <span>{{ utilityService.language.driverVsTrips | translate }}</span>
     </div>
   </div>
   <div class="page-body">
@@ -10,7 +10,7 @@
       <div class="left"></div>
       <div class="right" style="display: flex; justify-content: space-between">
         <button class="btn btn-orange" (click)="exportToExcel(grid)">
-          <i class="fa fa-file-excel-o"></i> Excel
+          <i class="fa fa-file-excel-o"></i> {{ utilityService.language.excel | translate }}
         </button>
       </div>
     </div>

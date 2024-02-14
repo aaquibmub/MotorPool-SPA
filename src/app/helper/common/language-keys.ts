@@ -19,6 +19,8 @@ export class LanguageKeys {
   activeDrivers = "Active Drivers";
   assignedDate = "Assigned Date";
   activityBy = "Activity By";
+  activityLog = "Activity Log";
+  allPassangers = "All Passengers";
 
   // B.
   bookedBy = "Booked By";
@@ -62,6 +64,10 @@ export class LanguageKeys {
   downloadAndImport = "Download and import template";
   download = "Download";
   disabled = "Disabled";
+  driverDailyMileage = "Driver's Daily Milage";
+  driverVsTrips = "Driver vs Trips";
+  driverId = "Driver ID";
+  driverCreationDate = "Driver Creation Date";
 
   // E.
   endDate = "End Date";
@@ -72,6 +78,7 @@ export class LanguageKeys {
   expiryDate = "Expiry Date";
   emailAddress = "Email address";
   emailAddressReq = "Email Address is required";
+  excel = "Excel";
 
   //F
   firstName = "First Name";
@@ -101,6 +108,8 @@ export class LanguageKeys {
   lastName= "Last Name";
   lastNameReq = "Last Name is required";
   logTime = "Log Time";
+  logBy = "Log By";
+  logs = "Logs";
 
   //M
   millage = "Millage KM";
@@ -154,6 +163,7 @@ export class LanguageKeys {
   phoneNumberRequired = "Phone Number is required";
   phoneRequired = "Phone Number is required";
   password = "Password";
+  passangerVsTrip = "Passenger vs Trips";
 
   //R
   range ="Range";
@@ -168,6 +178,7 @@ export class LanguageKeys {
   recommendedBrands = "Recommended Brand";
   route = "Route";
   regVehical = "Reg Vehicle";
+  reports = "Reports";
 
   //I
   isRequesterTravelling = "is requester travelling";
@@ -187,6 +198,7 @@ export class LanguageKeys {
   save = "Save";
   startingPoint = "StartingPoint";
   startingPointReq = "StartingPoint is required";
+  systemLog = "System Log";
 
   //T
   trip = "Trip";
