@@ -11,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ActitvityLogComponent } from './components/logs/actitvity-log/actitvity-log.component';
 import { LogsComponent } from './components/logs/logs.component';
 import { SystemLogComponent } from './components/logs/system-log/system-log.component';
+import { ReportDriverDutiesComponent } from './components/report-drivers/report-driver-duties/report-driver-duties.component';
 import { ReportDriverMilageComponent } from './components/report-drivers/report-driver-milage/report-driver-milage.component';
 import { ReportDriverTripsComponent } from './components/report-drivers/report-driver-trips/report-driver-trips.component';
 import { ReportDriversAllComponent } from './components/report-drivers/report-drivers-all/report-drivers-all.component';
@@ -99,6 +100,7 @@ import { ReportsComponent } from './reports.component';
     ReportDriversAllComponent,
     ReportDriverTripsComponent,
     ReportDriverMilageComponent,
+    ReportDriverDutiesComponent,
 
     ReportPassengersComponent,
     ReportPassengersAllComponent,

@@ -1,0 +1,127 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>Driver Duties</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="grid-toolbar">
+      <div class="left"></div>
+      <div class="right" style="display: flex; justify-content: space-between">
+        <button class="btn btn-orange" (click)="exportToExcel(grid)">
+          <i class="fa fa-file-excel-o"></i> Excel
+        </button>
+      </div>
+    </div>
+    <div class="grid-content">
+      <app-grid-toolbar
+        *ngIf="grid"
+        [grid]="grid"
+        [numberOfRecords]="gridData?.total"
+        entity="duty"
+      ></app-grid-toolbar>
+      <kendo-grid
+        #grid="kendoGrid"
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [sortable]="true"
+        [resizable]="true"
+        [reorderable]="true"
+        [pageable]="pageable"
+        [filter]="state.filter"
+        [filterable]="filterable"
+        (dataStateChange)="dataStateChange($event)"
+        (excelExport)="this.utilityService.onExcelExport($event, grid)"
+        scrollable="none"
+      >
+        <kendo-grid-column
+          field="driverName"
+          title="Driver Name اسم السائق"
+          [width]="200"
+          [hidden]="isHidden('driverName')"
+        >
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="driverId"
+          title="Driver ID  رقم السائق"
+          [width]="200"
+          [hidden]="isHidden('driverId')"
+        >
+        </kendo-grid-column
+        ><kendo-grid-column
+          field="dateTime"
+          title="Date تاريخ"
+          filter="date"
+          [width]="200"
+          [hidden]="isHidden('dateTime')"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            {{ dataItem.dateTime | dateformat }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
+          field="active"
+          title="{{ utilityService.language.onDuty | translate }}"
+          [width]="150"
+        >
+          <ng-template kendoGridFilterCellTemplate let-value="value">
+            <kendo-dropdownlist
+              style="width: 100px"
+              class="form-control"
+              textField="text"
+              valueField="value"
+              [defaultItem]="utilityService.dropdownAllItem"
+              (valueChange)="handleOnDutyValueChange($event)"
+              [data]="booleanList"
+              [(ngModel)]="selectedOnDuty"
+            >
+              <ng-template kendoDropDownListItemTemplate let-dataItem>
+                <span>{{ dataItem.text | translate }}</span>
+              </ng-template>
+            </kendo-dropdownlist>
+          </ng-template>
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span *ngIf="dataItem.onDuty">{{
+              utilityService.language.yes | translate
+            }}</span>
+            <span *ngIf="!dataItem.onDuty">{{
+              utilityService.language.no | translate
+            }}</span>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-excel fileName="DriverDuties.xlsx"> </kendo-grid-excel>
+        <ng-template
+          kendoPagerTemplate
+          let-totalPages="totalPages"
+          let-currentPage="currentPage"
+        >
+          <div class="grid-toolbar">
+            <div class="left">
+              <kendo-pager-page-sizes
+                [pageSizes]="pageable.pageSizes"
+              ></kendo-pager-page-sizes>
+            </div>
+            <div class="right">
+              <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+              <kendo-pager-numeric-buttons
+                [buttonCount]="pageable.buttonCount"
+              ></kendo-pager-numeric-buttons>
+              <kendo-pager-next-buttons></kendo-pager-next-buttons>
+            </div>
+          </div>
+        </ng-template>
+      </kendo-grid>
+    </div>
+  </div>
+</div>

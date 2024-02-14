@@ -29,11 +29,11 @@ export class LanguageKeys {
   create = "Create";
   cancel = "Cancel";
   createExecute = "Create & Execute";
-  color="Color";
+  color = "Color";
   colorRequired = "Color is required";
   comments = "Comments";
   createNewVehical = "Create New Vehical";
-  createNewPass= "Create New Passenger";
+  createNewPass = "Create New Passenger";
   createNewDriver = "Create New Driver";
   createPassanger = "Create New Passenger";
   createAddress = "Create New Address";
@@ -52,11 +52,11 @@ export class LanguageKeys {
   driver = "Driver";
   destination = "Destination";
   dateCreated = "Date Created";
-  date= "Date";
+  date = "Date";
   driverName = "Driver Name";
   dispatcher = "Dispatcher";
-  details= "Details";
-  drivers= "Drivers";
+  details = "Details";
+  drivers = "Drivers";
   dropOff = "Dropoff";
   dropoffReq = "Dropoff is required";
   downloadAndImport = "Download and import template";
@@ -87,10 +87,10 @@ export class LanguageKeys {
   general = "General";
   generalInfo = "General Information";
   generalInspection = "General Inspection";
-  grippedVehicals= "Gripped Vehicles";
+  grippedVehicals = "Gripped Vehicles";
 
   //I
-  id="ID";
+  id = "ID";
   idNumber = "ID Number";
   idNumberReq = "ID Number is required";
   isArmoured = "is armoured";
@@ -98,14 +98,14 @@ export class LanguageKeys {
   inactiveDrivers = "Inactive Drivers";
 
   //L
-  lastName= "Last Name";
+  lastName = "Last Name";
   lastNameReq = "Last Name is required";
   logTime = "Log Time";
 
   //M
   millage = "Millage KM";
   milageOnODO = "Milage on ODO Meter";
-  middleName= "Middle Name";
+  middleName = "Middle Name";
   middleNameReq = "Middle Name is required";
   make = "Make";
   makeRequired = "Make is required";
@@ -117,8 +117,8 @@ export class LanguageKeys {
   message = "Message";
 
   //N
-  notes= "Notes";
-  name="Name";
+  notes = "Notes";
+  name = "Name";
   nameRequired = "Name is required";
   noDriverInfo = "No Driver Information available";
   nationality = "Nationality";
@@ -137,9 +137,10 @@ export class LanguageKeys {
   odoMeter = "ODO Meter";
   odoMeterEnd = "ODO Meter End";
   operation = "Operation";
+  onDuty = "On-Duty";
 
   //P
-  pass= "Pass";
+  pass = "Pass";
   passanger = "Passenger";
   passangers = "Passengers";
   passangerName = "Passenger Name";
@@ -156,7 +157,7 @@ export class LanguageKeys {
   password = "Password";
 
   //R
-  range ="Range";
+  range = "Range";
   registrationPlate = "Registration Plate";
   requester = "Requester";
   requesterPhone = "Reqester Phone";
@@ -180,7 +181,7 @@ export class LanguageKeys {
   scheduling = "Scheduling";
   specialServices = "Special Services";
   specialServiceRequired = "is special service required";
-  startDate ="Start Date";
+  startDate = "Start Date";
   startDateRequired = "Start Date is required";
   status = "Status";
   statusRequired = "Status is required";
@@ -195,14 +196,14 @@ export class LanguageKeys {
   tripDestination = "Trip Destination";
   tripDestinationRequired = "Trip destination is required";
   tripId = "Trip ID";
-  type="Type";
+  type = "Type";
   typeRequired = "Type is required";
   tripType = "Trip Type";
   tripMillage = "Trip Millage";
   tripDetails = "Trip Details";
   tripLog = "Trip Log";
-  tyreSize= "Tyre Size";
-  trips= "Trips";
+  tyreSize = "Tyre Size";
+  trips = "Trips";
   tripNo = "Trip No";
   tripRoutex = "Trip Routex";
   tripDispatcher = "Trip Dispatcher";
@@ -220,7 +221,7 @@ export class LanguageKeys {
   vehical = "Vehical";
   vehicalInfo = "Vehical Information";
   vehicalId = "Vehical ID";
-  vehicalName=  "Vehical Name";
+  vehicalName = "Vehical Name";
   vehicalPlate = "Vehicle Plate";
 
   //W

@@ -309,6 +309,16 @@ export class ReportHomeComponent implements OnInit {
             isExternalLink: false,
             submenu: []
           },
+          {
+            path: '/reports/drivers/duties',
+            title: 'Driver Duties',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
         ]
       },
 
