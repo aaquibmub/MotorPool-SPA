@@ -26,6 +26,7 @@ export class LanguageKeys {
   bookedBy = "Booked By";
   booking = "Booking";
   body = "Body";
+  busy = "Busy";
 
   //C
   create = "Create";
@@ -103,6 +104,10 @@ export class LanguageKeys {
   isArmoured = "is armoured";
   inactiveVehicals = "Inactive Vehicles";
   inactiveDrivers = "Inactive Drivers";
+  inQueue = "In Queue";
+  inDQ = "In DQ";
+  idle = "Idle";
+
 
   //L
   lastName = "Last Name";
@@ -147,6 +152,9 @@ export class LanguageKeys {
   odoMeterEnd = "ODO Meter End";
   operation = "Operation";
   onDuty = "On-Duty";
+  ongoingTrips = "Ongoing Trips";
+  ongoing= "Ongoing";
+  outDQ = "Out DQ";
 
   //P
   pass = "Pass";
@@ -219,9 +227,12 @@ export class LanguageKeys {
   tripNo = "Trip No";
   tripRoutex = "Trip Routex";
   tripDispatcher = "Trip Dispatcher";
+  todaysTrips = "Today Trips";
+  time = "Time";
 
   //U
   update = "Update";
+  unallocated = "Unallocated";
 
   //U
   userRole = "UserRole";
@@ -231,6 +242,7 @@ export class LanguageKeys {
 
   //V.
   vehical = "Vehical";
+  vehicals = "Vehicles";
   vehicalInfo = "Vehical Information";
   vehicalId = "Vehical ID";
   vehicalName = "Vehical Name";

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TripCountModel } from 'src/app/helper/models/dashboard/trip-count-model';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { DashboardService } from 'src/app/helper/services/utilities/dashboard.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class DashboardHomeTripTilesComponent implements OnInit {
   countModel: TripCountModel;
 
   constructor(
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    public utilityService: UtilityService,
   ) { }
 
   ngOnInit() {

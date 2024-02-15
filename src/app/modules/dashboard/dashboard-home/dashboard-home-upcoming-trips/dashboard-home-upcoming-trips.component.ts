@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/helper/services/utilities/dashboard.service';
 import { DashboardTripListModel } from './../../../../helper/models/dashboard/dashboard-trip-list-model';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-dashboard-home-upcoming-trips',
@@ -11,7 +12,8 @@ export class DashboardHomeUpcomingTripsComponent implements OnInit {
   list: DashboardTripListModel[];
 
   constructor(
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    public utilityService: UtilityService,
   ) { }
 
   ngOnInit() {

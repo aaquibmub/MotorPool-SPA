@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TripTypeChartModel } from './../../../../helper/models/dashboard/trip-type-chart-model';
 import { DashboardService } from './../../../../helper/services/utilities/dashboard.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-dashboard-home-trip-type-chart',
@@ -24,7 +25,8 @@ export class DashboardHomeTripTypeChartComponent implements OnInit {
   ]
 
   constructor(
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    public utilityService: UtilityService,
   ) { }
 
   ngOnInit() {

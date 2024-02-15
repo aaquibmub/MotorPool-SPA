@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-6">
       <div class="dashboard-widget" style="padding-top: 64px">
-        <div class="header">Trips</div>
+        <div class="header">{{ utilityService.language.trips | translate }}</div>
         <div class="widget-content">
           <div class="trip-counts">
             <div class="item" *ngFor="let item of data">
@@ -18,7 +18,7 @@
       <kendo-chart *ngIf="data && data.length > 0">
         <ng-template kendoChartDonutCenterTemplate>
           <h6>{{ totalTrips }}</h6>
-          Trips
+          {{ utilityService.language.trips | translate }}
         </ng-template>
         <kendo-chart-area background="#FFF2E8"></kendo-chart-area>
         <kendo-chart-series>

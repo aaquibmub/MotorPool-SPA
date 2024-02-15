@@ -14,13 +14,14 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
 import { ChartsModule } from "@progress/kendo-angular-charts";
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     DashboardRoutingModule,
-
+    TranslateModule.forChild(),
     ChartsModule
   ],
   declarations: [
