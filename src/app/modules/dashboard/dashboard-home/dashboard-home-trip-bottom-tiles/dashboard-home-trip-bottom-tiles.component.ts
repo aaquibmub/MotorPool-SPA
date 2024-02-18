@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/helper/services/utilities/dashboard.service';
 import { TripDetailCountModel } from './../../../../helper/models/dashboard/trip-detail-count-model';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-dashboard-home-trip-bottom-tiles',
@@ -12,7 +13,8 @@ export class DashboardHomeTripBottomTilesComponent implements OnInit {
   countModel: TripDetailCountModel;
 
   constructor(
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    public utilityService: UtilityService,
   ) { }
 
   ngOnInit() {

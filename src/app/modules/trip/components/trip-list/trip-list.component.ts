@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-trip-list',
@@ -12,7 +13,9 @@ export class TripListComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private router: Router) {
+    private router: Router,
+    public utilityService: UtilityService
+    ) {
     router.events.subscribe((event) => {
       const path = location.path();
       if (path === '/trips/list/today') {

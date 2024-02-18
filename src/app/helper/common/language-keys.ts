@@ -21,6 +21,7 @@ export class LanguageKeys {
   activityBy = "Activity By";
   activityLog = "Activity Log";
   allPassangers = "All Passengers";
+  allTripBookings = "All Trip Bookings";
 
   // B.
   bookedBy = "Booked By";
@@ -41,6 +42,7 @@ export class LanguageKeys {
   createPassanger = "Create New Passenger";
   createAddress = "Create New Address";
   createApprover = "Create New Approver";
+  createTrip = "Create New Trip";
 
   //D.
   daySunday = "Sunday";
@@ -129,6 +131,9 @@ export class LanguageKeys {
   mobileNumber = "Mobile Number";
   mobileNumberReq = "Mobile Number is required";
   message = "Message";
+  milageOPM ="Milage OPM";
+  milageSaudi = "Milage Saudi";
+  milage= "Milage";
 
   //N
   notes = "Notes";
@@ -143,6 +148,7 @@ export class LanguageKeys {
   notifications = "Notifications";
   newDriver = "New Driver";
   nationalId = "National ID #";
+  newTrips = "New Trips";
 
   //O
   opm = "OPM";
@@ -155,6 +161,7 @@ export class LanguageKeys {
   ongoingTrips = "Ongoing Trips";
   ongoing= "Ongoing";
   outDQ = "Out DQ";
+  oilChange = "Oil Change";
 
   //P
   pass = "Pass";
@@ -188,6 +195,7 @@ export class LanguageKeys {
   route = "Route";
   regVehical = "Reg Vehicle";
   reports = "Reports";
+  refuelingTrips = "Refuelling Trips";
 
   //I
   isRequesterTravelling = "is requester travelling";
@@ -208,6 +216,7 @@ export class LanguageKeys {
   startingPoint = "StartingPoint";
   startingPointReq = "StartingPoint is required";
   systemLog = "System Log";
+  scheduleTrips= "Scheduled Trips";
 
   //T
   trip = "Trip";
@@ -229,6 +238,9 @@ export class LanguageKeys {
   tripDispatcher = "Trip Dispatcher";
   todaysTrips = "Today Trips";
   time = "Time";
+  tripsOPM = "Trips OPM";
+  today = "Today";
+  tripsSaudi = "Trips Saudi";
 
   //U
   update = "Update";
