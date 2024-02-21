@@ -1,15 +1,19 @@
 <div class="dashboard-widget">
-  <div class="header">Ongoing Trips</div>
-  <div class="caption">Trips ongoing right now</div>
+  <div class="header">
+    {{ utilityService.language.ongoingTrips | translate }}
+  </div>
+  <div class="caption">
+    {{ utilityService.language.tripsOngoingRightNow | translate }}
+  </div>
   <div class="table" *ngIf="list">
     <table>
       <thead>
         <tr>
-          <th>Time</th>
-          <th>Trip ID</th>
-          <th>Passenger</th>
-          <th>Driver</th>
-          <th>Vehicle</th>
+          <th>{{ utilityService.language.time | translate }}</th>
+          <th>{{ utilityService.language.tripId | translate }}</th>
+          <th>{{ utilityService.language.passanger | translate }}</th>
+          <th>{{ utilityService.language.driver | translate }}</th>
+          <th>{{ utilityService.language.vehical | translate }}</th>
         </tr>
       </thead>
       <tbody>

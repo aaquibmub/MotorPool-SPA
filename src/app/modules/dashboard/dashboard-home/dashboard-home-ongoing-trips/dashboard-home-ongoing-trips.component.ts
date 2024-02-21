@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { DashboardService } from 'src/app/helper/services/utilities/dashboard.service';
 import { DashboardTripListModel } from './../../../../helper/models/dashboard/dashboard-trip-list-model';
 
@@ -11,6 +12,7 @@ export class DashboardHomeOngoingTripsComponent implements OnInit {
   list: DashboardTripListModel[];
 
   constructor(
+    public utilityService: UtilityService,
     private dashboardService: DashboardService
   ) { }
 

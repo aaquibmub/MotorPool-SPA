@@ -9,8 +9,8 @@ export class LanguageKeys {
   ageGroup = "Age Group";
   ageGroupRequired = "Age group is required";
   armored = "Armord";
-  allVehicals = "All Vehicals";
-  activeVehicals = "Active Vehicals";
+  allVehicals = "All Vehicles";
+  activeVehicals = "Active Vehicles";
   allocated = "Allocated";
   applicationDefaultSetting = "Application Default Settings";
   approver = "Approver";
@@ -64,7 +64,7 @@ export class LanguageKeys {
   downloadAndImport = "Download and import template";
   download = "Download";
   disabled = "Disabled";
-  driverDailyMileage = "Driver's Daily Milage";
+  driverDailyMileage = "Driver's Daily Mileage";
   driverVsTrips = "Driver vs Trips";
   driverId = "Driver ID";
   driverCreationDate = "Driver Creation Date";
@@ -112,8 +112,11 @@ export class LanguageKeys {
   logs = "Logs";
 
   //M
-  millage = "Millage KM";
-  milageOnODO = "Milage on ODO Meter";
+  mileage = "Mileage";
+  milageKm = "Mileage KM";
+  mileageOpm = "Mileage OPM";
+  mileageSaudi = "Mileage Saudi";
+  milageOnODO = "Mileage on ODO Meter";
   middleName = "Middle Name";
   middleNameReq = "Middle Name is required";
   make = "Make";
@@ -140,6 +143,7 @@ export class LanguageKeys {
   nationalId = "National ID #";
 
   //O
+  oilChange = "Oil Change";
   opm = "OPM";
   opmRequired = "OPM is required";
   odoMeterStartup = "ODO Meter Startup";
@@ -147,6 +151,7 @@ export class LanguageKeys {
   odoMeterEnd = "ODO Meter End";
   operation = "Operation";
   onDuty = "On-Duty";
+  ongoingTrips = "Ongoing Trips";
 
   //P
   pass = "Pass";
@@ -202,6 +207,8 @@ export class LanguageKeys {
   systemLog = "System Log";
 
   //T
+  time = "Time";
+  today: "Today";
   trip = "Trip";
   tripRequired = "Trip is required";
   tripRequester = "Trip Requester";
@@ -219,6 +226,9 @@ export class LanguageKeys {
   tripNo = "Trip No";
   tripRoutex = "Trip Routex";
   tripDispatcher = "Trip Dispatcher";
+  tripsOngoingRightNow = "Trips ongoing right now";
+  tripsOpm = "Trips OPM";
+  tripsSaudi = "Trips Saudi";
 
   //U
   update = "Update";
@@ -230,10 +240,11 @@ export class LanguageKeys {
   userIdReq = "User ID is required";
 
   //V.
-  vehical = "Vehical";
-  vehicalInfo = "Vehical Information";
-  vehicalId = "Vehical ID";
-  vehicalName = "Vehical Name";
+  vehical = "Vehicle";
+  vehicles = "Vehicles";
+  vehicalInfo = "Vehicle Information";
+  vehicalId = "Vehicle ID";
+  vehicalName = "Vehicle Name";
   vehicalPlate = "Vehicle Plate";
 
   //W

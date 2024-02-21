@@ -13,6 +13,7 @@ import { DashboardHomeComponent } from './dashboard-home/dashboard-home.componen
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
+import { TranslateModule } from '@ngx-translate/core';
 import { ChartsModule } from "@progress/kendo-angular-charts";
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ChartsModule } from "@progress/kendo-angular-charts";
     CommonModule,
     SharedModule,
     DashboardRoutingModule,
+    TranslateModule.forChild(),
 
     ChartsModule
   ],

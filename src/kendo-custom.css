@@ -115,12 +115,13 @@ kendo-grid-date-filter-cell {
 .k-i-more-vertical {
   color: white;
 }
-.k-switch-label-on,
-.k-switch-label-off {
+.nav-bar-icon .k-switch-label-on,
+.nav-bar-icon .k-switch-label-off {
   display: block !important;
 }
 .k-switch-label-on {
   padding-left: 8px;
+  color: white;
 }
 .k-switch-label-off {
   padding-left: 16px;

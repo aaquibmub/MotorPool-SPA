@@ -10,7 +10,8 @@
       <div class="left"></div>
       <div class="right" style="display: flex; justify-content: space-between">
         <button class="btn btn-orange" (click)="exportToExcel(grid)">
-          <i class="fa fa-file-excel-o"></i> {{ utilityService.language.excel | translate }}
+          <i class="fa fa-file-excel-o"></i>
+          {{ utilityService.language.excel | translate }}
         </button>
       </div>
     </div>
@@ -73,7 +74,12 @@
             Total Milage: {{ aggregateResult?.milageInKm?.sum }}
           </ng-template>
         </kendo-grid-column>
-        <kendo-grid-excel fileName="DriverMilage.xlsx"> </kendo-grid-excel>
+        <kendo-grid-excel
+          fileName="{{
+            utilityService.language.driverDailyMileage | translate
+          }}"
+        >
+        </kendo-grid-excel>
         <ng-template
           kendoPagerTemplate
           let-totalPages="totalPages"

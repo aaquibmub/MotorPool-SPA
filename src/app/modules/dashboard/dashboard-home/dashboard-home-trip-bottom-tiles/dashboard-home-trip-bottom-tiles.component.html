@@ -2,7 +2,7 @@
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="opm-blue-icon"
-      title="Trips OPM"
+      [title]="utilityService.language.tripsOpm | translate"
       subtitle="Today"
       [count]="countModel?.todayOpmTrips"
       [reportLink]="'/reports/trips/opm-today'"
@@ -11,7 +11,7 @@
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="opm-yellow-icon"
-      title="Trips OPM"
+      [title]="utilityService.language.tripsOpm | translate"
       [subtitle]="currentMonth"
       [count]="countModel?.currentMonthOpmTrips"
       [reportLink]="'/reports/trips/opm-current-month'"
@@ -20,8 +20,8 @@
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="today-saudi-icon"
-      title="Trips Saudi"
-      subtitle="Today"
+      [title]="utilityService.language.tripsSaudi | translate"
+      [subtitle]="utilityService.language.today | translate"
       [count]="countModel?.todaySaudiTrips"
       [reportLink]="'/reports/trips/saudi-today'"
     ></app-dashboard-home-trip-bottom-tile>
@@ -29,7 +29,7 @@
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="month-saudi-icon"
-      title="Trips Saudi"
+      [title]="utilityService.language.tripsSaudi | translate"
       [subtitle]="currentMonth"
       [count]="countModel?.currentMonthSaudiTrips"
       [reportLink]="'/reports/trips/saudi-current-month'"
@@ -40,8 +40,8 @@
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="today-milage-opm-icon"
-      title="Milage OPM"
-      [subtitle]="'Today'"
+      [title]="utilityService.language.mileageOpm | translate"
+      [subtitle]="utilityService.language.today | translate"
       [count]="countModel?.todayOpmMilage"
       [reportLink]="'/reports/trips/opm-milage-today'"
     ></app-dashboard-home-trip-bottom-tile>
@@ -49,7 +49,7 @@
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="month-milage-opm-icon"
-      title="Milage OPM"
+      [title]="utilityService.language.mileageOpm | translate"
       [subtitle]="currentMonth"
       [count]="countModel?.currentMonthOpmMilage"
       [reportLink]="'/reports/trips/opm-milage-current-month'"
@@ -58,8 +58,8 @@
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="today-milage-saudi-icon"
-      title="Milage Saudi"
-      subtitle="Today"
+      [title]="utilityService.language.mileageSaudi | translate"
+      [subtitle]="utilityService.language.today | translate"
       [count]="countModel?.todaySaudiMilage"
       [reportLink]="'/reports/trips/saudi-milage-today'"
     ></app-dashboard-home-trip-bottom-tile>
@@ -67,7 +67,7 @@
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="month-milage-saudi-icon"
-      title="Milage Saudi"
+      [title]="utilityService.language.mileageSaudi | translate"
       [subtitle]="currentMonth"
       [count]="countModel?.currentMonthSaudiMilage"
       [reportLink]="'/reports/trips/saudi-milage-current-month'"
@@ -78,15 +78,15 @@
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="oil-change-icon"
-      title="Oil Change"
-      [subtitle]="'Vehicles'"
+      [title]="utilityService.language.oilChange | translate"
+      [subtitle]="utilityService.language.vehicles | translate"
       [count]="countModel?.oilChange"
     ></app-dashboard-home-trip-bottom-tile>
   </div>
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="trips-icon"
-      title="Trips"
+      [title]="utilityService.language.trips | translate"
       [subtitle]="currentMonth"
       [count]="countModel?.currentMonthTrips"
     ></app-dashboard-home-trip-bottom-tile>
@@ -94,15 +94,15 @@
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="today-milage-icon"
-      title="Milage"
-      subtitle="Today"
+      [title]="utilityService.language.mileage | translate"
+      [subtitle]="utilityService.language.today | translate"
       [count]="countModel?.todayMilage"
     ></app-dashboard-home-trip-bottom-tile>
   </div>
   <div class="col-3">
     <app-dashboard-home-trip-bottom-tile
       iconClass="month-milage-icon"
-      title="Milage"
+      [title]="utilityService.language.mileage | translate"
       [subtitle]="currentMonth"
       [count]="countModel?.currentMonthMilage"
     ></app-dashboard-home-trip-bottom-tile>

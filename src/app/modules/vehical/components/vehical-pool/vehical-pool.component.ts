@@ -19,19 +19,19 @@ export class VehicalPoolComponent implements OnInit {
     router.events.subscribe((event) => {
       const path = location.path();
       if (path === '/vehicals/pool/all') {
-        this.pageTitle = 'All Vehicals';
+        this.pageTitle = 'All Vehicles';
       }
       if (path === '/vehicals/pool/active') {
-        this.pageTitle = 'Active Vehicals';
+        this.pageTitle = 'Active Vehicles';
       }
       if (path === '/vehicals/pool/inactive') {
-        this.pageTitle = 'Inactive Vehicals';
+        this.pageTitle = 'Inactive Vehicles';
       }
       if (path === '/vehicals/pool/maintenance') {
         this.pageTitle = 'Under Maintenance';
       }
       if (path === '/vehicals/pool/gripped') {
-        this.pageTitle = 'Gripped Vehicals';
+        this.pageTitle = 'Gripped Vehicles';
       }
     });
   }

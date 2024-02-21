@@ -63,12 +63,12 @@ export class NavbarComponent implements OnInit {
 
   handleLanguageValueChange(value: boolean): void {
     if (value) {
-      this.translate.setDefaultLang('en');
-      this.translate.use('en');
-    } else {
-
       this.translate.setDefaultLang('ar');
       this.translate.use('ar');
+    } else {
+
+      this.translate.setDefaultLang('en');
+      this.translate.use('en');
     }
   }
 
