@@ -165,7 +165,6 @@ export class LanguageKeys {
   ongoingTrips = "Ongoing Trips";
   ongoing = "Ongoing";
   outDQ = "Out DQ";
-  oilChange = "Oil Change";
 
   //P
   pass = "Pass";
@@ -243,13 +242,10 @@ export class LanguageKeys {
   tripRoutex = "Trip Routex";
   tripDispatcher = "Trip Dispatcher";
   todaysTrips = "Today Trips";
-  time = "Time";
   tripsOPM = "Trips OPM";
-  today = "Today";
   tripsSaudi = "Trips Saudi";
   tripsOngoingRightNow = "Trips ongoing right now";
   tripsOpm = "Trips OPM";
-  tripsSaudi = "Trips Saudi";
 
   //U
   update = "Update";
