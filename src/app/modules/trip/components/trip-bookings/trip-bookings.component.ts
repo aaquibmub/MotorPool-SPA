@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionButton } from './../../../../helper/models/common/grid/action-button';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-trip-bookings',
@@ -38,7 +39,9 @@ export class TripBookingsComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private router: Router) {
+    private router: Router,
+    public utilityService: UtilityService,
+    ) {
     router.events.subscribe((event) => {
       const path = location.path();
       if (path === '/trips/bookings/all') {

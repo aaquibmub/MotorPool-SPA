@@ -2,48 +2,48 @@
   <div class="col-3">
     <app-dashboard-home-trip-tile
       iconClass="today-trip-icon"
-      title="Today Trips"
+      title="{{ utilityService.language.todaysTrips | translate }}"
       [count]="countModel?.todayTrips"
-      [reportLink]="'/reports/trips/today'"
-      bottomLeftLable="Ongoing"
+      [reportLink]="'/reports/trips/today'"admin
+      bottomLeftLable="{{ utilityService.language.ongoing | translate }}"
       [bottomLeftValue]="countModel?.todayOngoing"
-      bottomRightLable="In Queue"
+      bottomRightLable="{{ utilityService.language.inQueue | translate }}"
       [bottomRightValue]="countModel?.todayInQueue"
     ></app-dashboard-home-trip-tile>
   </div>
   <div class="col-3">
     <app-dashboard-home-trip-tile
       iconClass="ongoing-trip-icon"
-      title="Ongoing Trips"
+      title="{{ utilityService.language.ongoingTrips | translate }}"
       [count]="countModel?.ongoingTrips"
       [reportLink]="'/reports/trips/ongoing'"
-      bottomLeftLable="In DQ"
+      bottomLeftLable="{{ utilityService.language.inDQ | translate }}"
       [bottomLeftValue]="countModel?.ongoingInDq"
-      bottomRightLable="Out DQ"
+      bottomRightLable="{{ utilityService.language.outDQ | translate }}"
       [bottomRightValue]="countModel?.ongoingOutDq"
     ></app-dashboard-home-trip-tile>
   </div>
   <div class="col-3">
     <app-dashboard-home-trip-tile
       iconClass="vehicles-icon"
-      title="Vehicles"
+      title="{{ utilityService.language.vehicals | translate }}"
       [count]="countModel?.activeVehicles"
       [reportLink]="'/reports/vehicles/all'"
-      bottomLeftLable="Allocated"
+      bottomLeftLable="{{ utilityService.language.allocated | translate }}"
       [bottomLeftValue]="countModel?.allocatedVehicles"
-      bottomRightLable="Unallocated"
+      bottomRightLable="{{ utilityService.language.unallocated | translate }}"
       [bottomRightValue]="countModel?.unallocatedVehicles"
     ></app-dashboard-home-trip-tile>
   </div>
   <div class="col-3">
     <app-dashboard-home-trip-tile
       iconClass="drivers-icon"
-      title="Drivers"
+      title="{{ utilityService.language.drivers | translate }}"
       [count]="countModel?.activeDrivers"
       [reportLink]="'/reports/drivers/all'"
-      bottomLeftLable="Busy"
+      bottomLeftLable="{{ utilityService.language.busy | translate }}"
       [bottomLeftValue]="countModel?.busyDrivers"
-      bottomRightLable="Idle"
+      bottomRightLable="{{ utilityService.language.idle | translate }}"
       [bottomRightValue]="countModel?.idleDrivers"
     ></app-dashboard-home-trip-tile>
   </div>
