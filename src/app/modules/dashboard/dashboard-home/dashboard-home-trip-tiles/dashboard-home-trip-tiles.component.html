@@ -4,7 +4,8 @@
       iconClass="today-trip-icon"
       title="{{ utilityService.language.todaysTrips | translate }}"
       [count]="countModel?.todayTrips"
-      [reportLink]="'/reports/trips/today'"admin
+      [reportLink]="'/reports/trips/today'"
+      admin
       bottomLeftLable="{{ utilityService.language.ongoing | translate }}"
       [bottomLeftValue]="countModel?.todayOngoing"
       bottomRightLable="{{ utilityService.language.inQueue | translate }}"
@@ -26,7 +27,7 @@
   <div class="col-3">
     <app-dashboard-home-trip-tile
       iconClass="vehicles-icon"
-      title="{{ utilityService.language.vehicals | translate }}"
+      title="{{ utilityService.language.vehicles | translate }}"
       [count]="countModel?.activeVehicles"
       [reportLink]="'/reports/vehicles/all'"
       bottomLeftLable="{{ utilityService.language.allocated | translate }}"
