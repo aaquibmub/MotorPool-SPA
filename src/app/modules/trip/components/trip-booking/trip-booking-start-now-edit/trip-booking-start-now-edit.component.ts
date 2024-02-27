@@ -756,7 +756,6 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
   }
 
   getDestinationTypeCount(destination: TripDestinationModel): number {
-    debugger;
     var destinations = this.form.get('destinations').value as TripDestinationModel[];
     var destinationsByType = destinations.filter(f => f.type.value == destination.type.value);
     return destinationsByType.findIndex(f => f.id == destination.id);

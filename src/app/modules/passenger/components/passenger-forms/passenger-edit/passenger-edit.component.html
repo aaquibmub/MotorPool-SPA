@@ -14,7 +14,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputName">{{ utilityService.language.name | translate }}</label>
+                <label for="inputName">{{
+                  utilityService.language.name | translate
+                }}</label>
               </div>
               <div class="control">
                 <input
@@ -28,11 +30,7 @@
                   *ngIf="!form.get('name').valid && form.get('name').touched"
                   class="invalid-feedback"
                 >
-<<<<<<< HEAD
                   {{ utilityService.language.nameRequired || translate }}
-=======
-                  {{ utilityService.language.nameRequired | translate }}
->>>>>>> origin/master
                 </div>
               </div>
             </div>
@@ -41,7 +39,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerGender'">{{ utilityService.language.gender | translate }}</label>
+                <label [for]="'inputPassengerGender'">{{
+                  utilityService.language.gender | translate
+                }}</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -62,11 +62,7 @@
                   "
                   class="invalid-feedback"
                 >
-<<<<<<< HEAD
-                {{ utilityService.language.genderRequired | translate }}
-=======
                   {{ utilityService.language.genderRequired | translate }}
->>>>>>> origin/master
                 </div>
               </div>
             </div>
@@ -77,7 +73,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerAgeGroup'">{{ utilityService.language.ageGroup | translate }}</label>
+                <label [for]="'inputPassengerAgeGroup'">{{
+                  utilityService.language.ageGroup | translate
+                }}</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -107,7 +105,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerOpm'">{{ utilityService.language.opm | translate }}</label>
+                <label [for]="'inputPassengerOpm'">{{
+                  utilityService.language.opm | translate
+                }}</label>
               </div>
               <div class="control">
                 <kendo-dropdownlist
@@ -135,7 +135,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label for="inputPhoneNumber">{{ utilityService.language.phoneNumber | translate }}</label>
+                <label for="inputPhoneNumber">{{
+                  utilityService.language.phoneNumber | translate
+                }}</label>
               </div>
               <div class="control">
                 <input
@@ -152,11 +154,7 @@
                   "
                   class="invalid-feedback"
                 >
-<<<<<<< HEAD
-                  {{ utilityService.language.phoneRequired | translate }}
-=======
                   {{ utilityService.language.phoneNumberRequired | translate }}
->>>>>>> origin/master
                 </div>
               </div>
             </div>
@@ -167,7 +165,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <div class="label">
-                <label [for]="'inputPassengerAddress'">{{ utilityService.language.address | translate }}</label>
+                <label [for]="'inputPassengerAddress'">{{
+                  utilityService.language.address | translate
+                }}</label>
               </div>
               <div class="control">
                 <input
@@ -183,11 +183,7 @@
                   "
                   class="invalid-feedback"
                 >
-<<<<<<< HEAD
-                {{ utilityService.language.addressRequired | translate }}
-=======
                   {{ utilityService.language.addressRequired | translate }}
->>>>>>> origin/master
                 </div>
               </div>
             </div>
@@ -205,32 +201,12 @@
                 type="button"
                 (click)="cancel()"
               >
-              {{ utilityService.language.cancel | translate }}
+                {{ utilityService.language.cancel | translate }}
               </button>
               <button *ngIf="!editMode" class="btn btn-primary" type="submit">
                 {{ utilityService.language.create | translate }}
               </button>
               <button *ngIf="editMode" class="btn btn-primary" type="submit">
-                {{ utilityService.language.update | translate }}
-        <span>{{ utilityService.language.Passanger | translate }}</span>
-                <label for="inputName">{{ utilityService.language.name | translate }}</label>
-                  {{ utilityService.language.nameRequired || translate }}
-                  {{ utilityService.language.nameRequired | translate }}
-                <label [for]="'inputPassengerGender'">{{ utilityService.language.gender | translate }}</label>
-                {{ utilityService.language.genderRequired | translate }}
-                  {{ utilityService.language.genderRequired | translate }}
-                <label [for]="'inputPassengerAgeGroup'">{{ utilityService.language.ageGroup | translate }}</label>
-                  {{ utilityService.language.ageGroupRequired | translate }}
-                <label [for]="'inputPassengerOpm'">{{ utilityService.language.opm | translate }}</label>
-                  {{ utilityService.language.opmRequired | translate }}
-                <label for="inputPhoneNumber">{{ utilityService.language.phoneNumber | translate }}</label>
-                  {{ utilityService.language.phoneRequired | translate }}
-                  {{ utilityService.language.phoneNumberRequired | translate }}
-                <label [for]="'inputPassengerAddress'">{{ utilityService.language.address | translate }}</label>
-                {{ utilityService.language.addressRequired | translate }}
-                  {{ utilityService.language.addressRequired | translate }}
-              {{ utilityService.language.cancel | translate }}
-                {{ utilityService.language.create | translate }}
                 {{ utilityService.language.update | translate }}
               </button>
             </div>

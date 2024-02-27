@@ -28,6 +28,7 @@ export class TripViewDetailComponent implements OnInit {
           this.tripService.getTripViewDetailModel(params.id)
             .subscribe((model: TripViewDetailModel) => {
               this.model = model;
+              debugger;
             })
         }
       });

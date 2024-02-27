@@ -117,6 +117,18 @@ export class TripBookingService {
       index++;
     });
 
+    index = 0;
+    formValue.passengers.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'passengers[' + index + ']');
+      index++;
+    });
+
+    index = 0;
+    formValue.specialSevices.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'specialSevices[' + index + ']');
+      index++;
+    });
+
     return formData;
 
   }

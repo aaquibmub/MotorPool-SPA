@@ -121,7 +121,7 @@
                           <div class="control" style="max-width: none">
                             <kendo-dropdownlist
                               class="form-control"
-                              textField="text"
+                              textField="textEx"
                               valueField="value"
                               [defaultItem]="utilityService.dropdownDefaultItem"
                               (valueChange)="handlVehicleValueChange($event)"
@@ -132,7 +132,7 @@
                                 kendoDropDownListItemTemplate
                                 let-dataItem
                               >
-                                <span>{{ dataItem.text | translate }}</span>
+                                <span>{{ dataItem.textEx | translate }}</span>
                               </ng-template>
                             </kendo-dropdownlist>
                           </div>

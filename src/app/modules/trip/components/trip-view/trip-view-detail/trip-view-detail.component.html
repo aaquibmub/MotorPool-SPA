@@ -1,13 +1,17 @@
 <div *ngIf="model">
   <!-- Trip Milage -->
   <div class="form-section form-section-border">
-    <div class="section-header">{{ utilityService.language.tripMillage | translate }}</div>
+    <div class="section-header">
+      {{ utilityService.language.tripMillage | translate }}
+    </div>
     <div class="section-body">
       <div class="row">
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputOdoStart">{{ utilityService.language.odoMeterStartup | translate }}</label>
+              <label for="inputOdoStart">{{
+                utilityService.language.odoMeterStartup | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -24,7 +28,9 @@
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputOdoEnd">{{ utilityService.language.odoMeterEnd | translate }}</label>
+              <label for="inputOdoEnd">{{
+                utilityService.language.odoMeterEnd | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -41,7 +47,9 @@
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputMilageKm">{{ utilityService.language.millage | translate }}</label>
+              <label for="inputMilageKm">{{
+                utilityService.language.millage | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -83,7 +91,9 @@
       <div class="col-md-4">
         <div class="form-group">
           <div class="label">
-            <label for="inputApprovedBy">{{ utilityService.language.approvedBy | translate }}</label>
+            <label for="inputApprovedBy">{{
+              utilityService.language.approvedBy | translate
+            }}</label>
           </div>
           <div class="control">
             <input
@@ -100,7 +110,9 @@
       <div class="col-md-4">
         <div class="form-group">
           <div class="label">
-            <label for="inputExecutedBy">{{ utilityService.language.executedBy | translate }}</label>
+            <label for="inputExecutedBy">{{
+              utilityService.language.executedBy | translate
+            }}</label>
           </div>
           <div class="control">
             <input
@@ -118,14 +130,18 @@
   </div>
   <!-- Trip Requester -->
   <div class="form-section form-section-border" *ngIf="model.requester">
-    <div class="section-header">{{ utilityService.language.tripRequester | translate }}</div>
+    <div class="section-header">
+      {{ utilityService.language.tripRequester | translate }}
+    </div>
     <div class="section-body">
       <!-- Requester Info -->
       <div class="row">
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputRequester">{{ utilityService.language.requester | translate }}</label>
+              <label for="inputRequester">{{
+                utilityService.language.requester | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -142,7 +158,9 @@
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputRequestPhone">{{ utilityService.language.requesterPhone | translate }}</label>
+              <label for="inputRequestPhone">{{
+                utilityService.language.requesterPhone | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -159,7 +177,9 @@
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputRequestOpm">{{ utilityService.language.opm | translate }}</label>
+              <label for="inputRequestOpm">{{
+                utilityService.language.opm | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -181,7 +201,9 @@
     class="form-section form-section-border"
     *ngIf="model.passengers && model.passengers.length > 0"
   >
-    <div class="section-header">{{ utilityService.language.passangers | translate }}</div>
+    <div class="section-header">
+      {{ utilityService.language.passangers | translate }}
+    </div>
     <div class="section-body">
       <!-- Requester as Passenger -->
       <!-- <div class="form-section blue-section">
@@ -283,9 +305,9 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <div class="label">
-                    <label [for]="'inputPassengerName' + j"
-                      >{{ utilityService.language.passangerName | translate }}</label
-                    >
+                    <label [for]="'inputPassengerName' + j">{{
+                      utilityService.language.passangerName | translate
+                    }}</label>
                   </div>
                   <div class="control">
                     <input
@@ -300,7 +322,9 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <div class="label">
-                    <label [for]="'inputPassengerGender' + j"> {{ utilityService.language.gender | translate }}</label>
+                    <label [for]="'inputPassengerGender' + j">
+                      {{ utilityService.language.gender | translate }}</label
+                    >
                   </div>
                   <div class="control">
                     <input
@@ -315,9 +339,9 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <div class="label">
-                    <label [for]="'inputPassengerAgeGroup' + j"
-                      >{{ utilityService.language.ageGroup | translate }}</label
-                    >
+                    <label [for]="'inputPassengerAgeGroup' + j">{{
+                      utilityService.language.ageGroup | translate
+                    }}</label>
                   </div>
                   <div class="control">
                     <input
@@ -340,7 +364,9 @@
     class="form-section form-section-border"
     *ngIf="model.isSpecialServicesRequired"
   >
-    <div class="section-header">{{ utilityService.language.specialServices | translate }}</div>
+    <div class="section-header">
+      {{ utilityService.language.specialServices | translate }}
+    </div>
     <div class="section-body">
       <!-- Special Services -->
       <div class="row">
@@ -383,17 +409,23 @@
   </div>
   <!-- Booking -->
   <div class="form-section form-section-border">
-    <div class="section-header">{{ utilityService.language.booking | translate }}</div>
+    <div class="section-header">
+      {{ utilityService.language.booking | translate }}
+    </div>
     <div class="section-body">
       <!-- Pickup Time -->
       <div class="form-section blue-section">
-        <div class="section-header">{{ utilityService.language.pickupDateTime | translate }}</div>
+        <div class="section-header">
+          {{ utilityService.language.pickupDateTime | translate }}
+        </div>
         <div class="section-body">
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputPickupDate">{{ utilityService.language.pickupDate | translate }}</label>
+                  <label for="inputPickupDate">{{
+                    utilityService.language.pickupDate | translate
+                  }}</label>
                 </div>
                 <div class="control">
                   <input
@@ -412,14 +444,15 @@
             <div class="col-md-4">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputPickupTime">{{ utilityService.language.pickupTime | translate }}</label>
+                  <label for="inputPickupTime">{{
+                    utilityService.language.pickupTime | translate
+                  }}</label>
                 </div>
                 <div class="control">
                   <input
                     type="text"
                     class="form-control"
-                    name="requesterOpm"
-                    [value]="model.pickupTime | timeformat"
+                    [value]="model.pickupTime"
                     readonly
                     id=""
                   />
@@ -433,13 +466,17 @@
   </div>
   <!-- Trip Destination -->
   <div class="form-section">
-    <div class="section-header">{{ utilityService.language.tripDestination | translate }}</div>
+    <div class="section-header">
+      {{ utilityService.language.tripDestination | translate }}
+    </div>
     <div class="section-body">
       <div class="row">
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputTripType">{{ utilityService.language.trip | translate }}</label>
+              <label for="inputTripType">{{
+                utilityService.language.trip | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -456,7 +493,9 @@
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputTripDestination">{{ utilityService.language.tripDestination | translate }}</label>
+              <label for="inputTripDestination">{{
+                utilityService.language.tripDestination | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -472,13 +511,17 @@
       </div>
       <!-- Starting Point -->
       <div class="form-section green-section">
-        <div class="section-header">{{ utilityService.language.defaultStartingPoint | translate }}</div>
+        <div class="section-header">
+          {{ utilityService.language.defaultStartingPoint | translate }}
+        </div>
         <div class="section-body">
           <div class="row">
             <div class="col-md-8">
               <div class="form-group">
                 <div class="label">
-                  <label for="inputStartingPointAddress">{{ utilityService.language.address | translate }}</label>
+                  <label for="inputStartingPointAddress">{{
+                    utilityService.language.address | translate
+                  }}</label>
                 </div>
                 <div class="control">
                   <input
@@ -512,7 +555,9 @@
               <div class="col-md-8">
                 <div class="form-group">
                   <div class="label">
-                    <label [for]="'inputPickupAddress' + j">{{ utilityService.language.address | translate }}</label>
+                    <label [for]="'inputPickupAddress' + j">{{
+                      utilityService.language.address | translate
+                    }}</label>
                   </div>
                   <div class="control">
                     <input
@@ -533,13 +578,17 @@
   </div>
   <!-- Driver and Transportation -->
   <div class="form-section">
-    <div class="section-header">{{ utilityService.language.driverAndTransportation | translate }}</div>
+    <div class="section-header">
+      {{ utilityService.language.driverAndTransportation | translate }}
+    </div>
     <div class="section-body">
       <div class="row">
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputDriver">{{ utilityService.language.driver | translate }}</label>
+              <label for="inputDriver">{{
+                utilityService.language.driver | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -556,7 +605,9 @@
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputVehical">{{ utilityService.language.vehical | translate }}</label>
+              <label for="inputVehical">{{
+                utilityService.language.vehical | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -573,7 +624,9 @@
         <div class="col-md-4">
           <div class="form-group">
             <div class="label">
-              <label for="inputRegistrationPlate">{{ utilityService.language.registrationPlate | translate }}</label>
+              <label for="inputRegistrationPlate">{{
+                utilityService.language.registrationPlate | translate
+              }}</label>
             </div>
             <div class="control">
               <input
@@ -592,7 +645,9 @@
   </div>
   <!-- Notes -->
   <div class="form-section">
-    <div class="section-header">{{ utilityService.language.notes | translate }}</div>
+    <div class="section-header">
+      {{ utilityService.language.notes | translate }}
+    </div>
     <div class="section-body">
       <div class="row">
         <div class="col-md-12">
