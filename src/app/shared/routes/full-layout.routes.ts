@@ -48,6 +48,12 @@ export const Full_ROUTES: Routes = [
       .then(m => m.PassengerModule)
   },
   {
+    path: 'incident',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../modules/incident/incident.module')
+      .then(m => m.IncidentModule)
+  },
+  {
     path: 'addresses',
     canActivate: [AuthGuard],
     loadChildren: () => import('../../modules/address/address.module')

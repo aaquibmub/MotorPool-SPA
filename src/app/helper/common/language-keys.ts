@@ -43,6 +43,7 @@ export class LanguageKeys {
   createAddress = "Create New Address";
   createApprover = "Create New Approver";
   createTrip = "Create New Trip";
+  createIncidentCategory = "Create New Category";
 
   //D.
   daySunday = "Sunday";
@@ -109,6 +110,7 @@ export class LanguageKeys {
   inQueue = "In Queue";
   inDQ = "In DQ";
   idle = "Idle";
+  incidentCategory = "Incident Category";
 
 
   //L

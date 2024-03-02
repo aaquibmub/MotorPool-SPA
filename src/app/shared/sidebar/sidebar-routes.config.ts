@@ -317,6 +317,39 @@ export const ROUTES: RouteInfo[] = [
         ]
       },
 
+      // incident
+      {
+        path: '/incident/list/all',
+        title: 'Incident Categories',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            path: '/incident/category/new',
+            title: 'Add New Category',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/incident/list/all',
+            title: 'All Categories',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
+
       // Address
       {
         path: '/addresses/list/',
