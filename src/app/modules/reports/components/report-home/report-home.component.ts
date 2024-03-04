@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteInfo } from './../../../../shared/sidebar/sidebar.metadata';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { RouteInfo } from './../../../../shared/sidebar/sidebar.metadata';
 
 @Component({
   selector: 'app-report-home',
@@ -11,7 +11,7 @@ export class ReportHomeComponent implements OnInit {
   menuItems: RouteInfo[] = [];
 
   constructor(
-    public utilityService : UtilityService,
+    public utilityService: UtilityService,
   ) { }
 
   ngOnInit() {
@@ -262,6 +262,16 @@ export class ReportHomeComponent implements OnInit {
           {
             path: '/reports/vehicles/body-inspection',
             title: 'Vehicle Body Inspections',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            path: '/reports/drivers/incidents',
+            title: 'Vehicle Incidents',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',

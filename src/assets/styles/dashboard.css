@@ -20,6 +20,8 @@
 
 .dashboard-widget .table {
   display: flex;
+  height: 250px;
+  overflow: auto;
 }
 
 .dashboard-widget .table table {

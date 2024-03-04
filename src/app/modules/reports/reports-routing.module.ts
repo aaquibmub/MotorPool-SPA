@@ -5,6 +5,7 @@ import { ActitvityLogComponent } from './components/logs/actitvity-log/actitvity
 import { LogsComponent } from './components/logs/logs.component';
 import { SystemLogComponent } from './components/logs/system-log/system-log.component';
 import { ReportDriverDutiesComponent } from './components/report-drivers/report-driver-duties/report-driver-duties.component';
+import { ReportDriverIncidentsComponent } from './components/report-drivers/report-driver-incidents/report-driver-incidents.component';
 import { ReportDriverMilageComponent } from './components/report-drivers/report-driver-milage/report-driver-milage.component';
 import { ReportDriverTripsComponent } from './components/report-drivers/report-driver-trips/report-driver-trips.component';
 import { ReportDriversAllComponent } from './components/report-drivers/report-drivers-all/report-drivers-all.component';
@@ -97,6 +98,7 @@ const routes: Routes = [
           { path: 'trips', component: ReportDriverTripsComponent },
           { path: 'milage', component: ReportDriverMilageComponent },
           { path: 'duties', component: ReportDriverDutiesComponent },
+          { path: 'incidents', component: ReportDriverIncidentsComponent },
         ]
       },
       {

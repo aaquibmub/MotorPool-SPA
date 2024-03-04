@@ -7,6 +7,7 @@ import { OPM, TripType } from '../../common/shared-types';
 import { GridList } from '../../models/common/grid/grid-list';
 import { ReportAllDriverGridModel } from '../../models/reports/drivers/all-drivers/report-all-driver-grid-model';
 import { ReportDriverDutyGridModel } from '../../models/reports/drivers/duties/report-driver-duty-grid-model';
+import { ReportDriverIncidentGridModel } from '../../models/reports/drivers/incidents/report-driver-incident-grid-model';
 import { ReportDriverMilageGridModel } from '../../models/reports/drivers/milages/report-driver-milage-grid-model';
 import { ReportDriverTripGridModel } from '../../models/reports/drivers/trips/report-driver-trip-grid-model';
 import { ReportAllPassengerGridModel } from '../../models/reports/passengers/all-passengers/report-all-passenger-grid-model';
@@ -45,6 +46,7 @@ export class ReportService {
   private driverTripGridData = new Subject<GridList<ReportDriverTripGridModel>>();
   private driverMilageGridData = new Subject<GridList<ReportDriverMilageGridModel>>();
   private driverDutyGridData = new Subject<GridList<ReportDriverDutyGridModel>>();
+  private driverIncidentGridData = new Subject<GridList<ReportDriverIncidentGridModel>>();
   //passengers
   private allPassengerGridData = new Subject<GridList<ReportAllPassengerGridModel>>();
   private passengerTripGridData = new Subject<GridList<ReportPassengerTripGridModel>>();
@@ -341,6 +343,24 @@ export class ReportService {
     }).subscribe(
       (gridData: GridList<ReportDriverDutyGridModel>) => {
         this.driverDutyGridData.next(gridData);
+      }
+    );
+  }
+
+  getDriverIncidentGridData(): Observable<GridDataResult> {
+    return this.driverIncidentGridData.asObservable();
+  }
+
+  fetchDriverIncidentGridData(
+    state: any,
+    search: string): void {
+    this.http.post<GridList<ReportDriverIncidentGridModel>>(
+      this.baseUrl + 'get-driver-incident-gridlist', {
+      gridFilters: state,
+      search
+    }).subscribe(
+      (gridData: GridList<ReportDriverIncidentGridModel>) => {
+        this.driverIncidentGridData.next(gridData);
       }
     );
   }
