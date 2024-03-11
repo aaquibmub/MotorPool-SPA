@@ -1,0 +1,380 @@
+<div *ngIf="model">
+  <!-- Trip Status -->
+  <div class="form-section form-section-border">
+    <div class="section-header">
+      {{ utilityService.language.tripStatus | translate }}
+    </div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputOdoStart">{{
+                utilityService.language.status | translate
+              }}</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="inputOdoStart"
+                [value]="utilityService.getTripStatusLabel(model.tripStatus)"
+                readonly
+                id="inputOdoStart"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputOdoStart">{{
+                utilityService.language.driver | translate
+              }}</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="inputOdoStart"
+                [value]="model.driver"
+                readonly
+                id="inputOdoStart"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputOdoStart">{{
+                utilityService.language.vehicle | translate
+              }}</label>
+            </div>
+            <div class="control">
+              <input
+                type="text"
+                class="form-control"
+                name="inputOdoStart"
+                [value]="model.vehicle"
+                readonly
+                id="inputOdoStart"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Trip Journey -->
+  <div
+    class="form-section form-section-border"
+    *ngIf="model.tripStatus >= tripStatus.AssignedToDriver"
+  >
+    <div class="section-header">
+      {{ utilityService.language.journeyStatus | translate }}
+    </div>
+    <div class="section-body">
+      <!-- Start Trip -->
+      <div
+        class="form-section blue-section"
+        *ngIf="model.tripStatus == tripStatus.AssignedToDriver"
+      >
+        <div class="section-header">
+          {{ utilityService.language.startTrip | translate }}
+        </div>
+        <div class="section-body">
+          <div class="description sm-hide"></div>
+          <div class="fields">
+            <div class="form-group">
+              <button
+                class="btn btn-default mr-16"
+                type="button"
+                (click)="cancel()"
+              >
+                {{ utilityService.language.cancel | translate }}
+              </button>
+              <button
+                class="btn btn-primary mr-16"
+                type="button"
+                (click)="startTrip()"
+              >
+                {{ utilityService.language.start | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ODO Meter at Start -->
+      <div
+        class="form-section blue-section"
+        *ngIf="model.tripStatus == tripStatus.TripStarted"
+      >
+        <div class="section-header">
+          {{ utilityService.language.startingOdoMeterReading | translate }}
+        </div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputPickupDate">{{
+                    utilityService.language.odoMeter | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="number"
+                    class="form-control"
+                    [(ngModel)]="meterReadingStart"
+                    [readOnly]="model.tripStatus >= tripStatus.OdoMeterAtStart"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="model.tripStatus == tripStatus.TripStarted">
+            <div class="col-md-4">
+              <div class="form-group">
+                <button
+                  class="btn btn-default mr-16"
+                  type="button"
+                  (click)="cancel()"
+                >
+                  {{ utilityService.language.cancel | translate }}
+                </button>
+                <button
+                  class="btn btn-primary mr-16"
+                  type="button"
+                  (click)="startOdoMeter()"
+                >
+                  {{ utilityService.language.start | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Journey -->
+      <div *ngIf="model.tripStatus >= tripStatus.OdoMeterAtStart">
+        <div class="form-section blue-section" *ngFor="let item of model.items">
+          <div class="section-header">
+            {{ item.title | translate }}
+          </div>
+          <div class="section-body">
+            <!-- Meter Started -->
+            <div class="row" *ngIf="item.status == tripStatus.OdoMeterAtStart">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputPickupDate">{{
+                      utilityService.language.odoMeter | translate
+                    }}</label>
+                  </div>
+                  <div class="control">
+                    <input
+                      type="number"
+                      class="form-control"
+                      [(ngModel)]="meterReadingStart"
+                      [readOnly]="
+                        model.tripStatus >= tripStatus.OdoMeterAtStart
+                      "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Vehicle Dispatched -->
+            <div
+              class="row"
+              *ngIf="item.status == tripStatus.VehicalDispatched"
+            >
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputPickupDate">{{
+                      utilityService.language.location | translate
+                    }}</label>
+                  </div>
+                  <div class="control">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="item.location?.text"
+                      readonly="true"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Arrivals -->
+            <div
+              class="row"
+              *ngIf="
+                item.status == tripStatus.ArrivedAtPickupLocation ||
+                item.status == tripStatus.ArrivedAtStop ||
+                item.status == tripStatus.ArrivedAtAddress ||
+                item.status == tripStatus.ArrivedAtDropoff
+              "
+            >
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputPickupDate">{{
+                      utilityService.language.location | translate
+                    }}</label>
+                  </div>
+                  <div class="control">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="item.location?.text"
+                      readonly="true"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Trip Resumed -->
+            <div
+              class="row"
+              *ngIf="
+                item.status == tripStatus.PassengerOnboarded ||
+                item.status == tripStatus.TripResumedAfterStop ||
+                item.status == tripStatus.TripResumedAfterAddress
+              "
+            >
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputPickupDate">{{
+                      utilityService.language.location | translate
+                    }}</label>
+                  </div>
+                  <div class="control">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="item.location?.text"
+                      readonly="true"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Next Destinations -->
+            <div class="row" *ngIf="item.status == null">
+              <div class="col-md-6">
+                <div class="form-group" *ngIf="item.location">
+                  <div class="label">
+                    <label for="inputPickupDate">{{
+                      utilityService.language.location | translate
+                    }}</label>
+                  </div>
+                  <div class="control">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="item.location?.text"
+                      readonly="true"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button
+                    class="btn btn-default mr-16"
+                    type="button"
+                    (click)="cancel()"
+                  >
+                    {{ utilityService.language.cancel | translate }}
+                  </button>
+                  <button
+                    class="btn btn-primary mr-16"
+                    type="button"
+                    (click)="proceed()"
+                  >
+                    {{ actionLable | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Meter End -->
+            <div class="row" *ngIf="item.status == tripStatus.OdoMeterAtEnd">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputPickupDate">{{
+                      utilityService.language.odoMeter | translate
+                    }}</label>
+                  </div>
+                  <div class="control">
+                    <input
+                      type="number"
+                      class="form-control"
+                      [(ngModel)]="meterReadingEnd"
+                      [readOnly]="true"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Completed -->
+            <div class="row" *ngIf="item.status == tripStatus.Completed">
+              <div class="col-md-4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ODO Meter at End -->
+      <div
+        class="form-section blue-section"
+        *ngIf="nextStatus == tripStatus.OdoMeterAtEnd"
+      >
+        <div class="section-header">
+          {{ utilityService.language.endingOdoMeterReading | translate }}
+        </div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputPickupDate">{{
+                    utilityService.language.odoMeter | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="number"
+                    class="form-control"
+                    [(ngModel)]="meterReadingEnd"
+                    [readOnly]="model.tripStatus >= tripStatus.OdoMeterAtEnd"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="nextStatus == tripStatus.OdoMeterAtEnd">
+            <div class="col-md-4">
+              <div class="form-group">
+                <button
+                  class="btn btn-default mr-16"
+                  type="button"
+                  (click)="cancel()"
+                >
+                  {{ utilityService.language.cancel | translate }}
+                </button>
+                <button
+                  class="btn btn-primary mr-16"
+                  type="button"
+                  (click)="endOdoMeter()"
+                >
+                  {{ utilityService.language.end | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,13 +1,14 @@
-import { UserGridModel } from './../../../../../helper/models/settings/user-management/users/user-grid-model';
-import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
-import { UserService } from './../../../../../helper/services/auth/user.service';
-import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
-import { UtilityRix } from './../../../../../helper/common/utility-rix';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { UtilityRix } from './../../../../../helper/common/utility-rix';
+import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
+import { UserGridModel } from './../../../../../helper/models/settings/user-management/users/user-grid-model';
+import { UserService } from './../../../../../helper/services/auth/user.service';
+import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
 
 @Component({
   selector: 'app-users',
@@ -38,6 +39,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   // userType = UserType;
 
   constructor(
+    public utilityService: UtilityService,
     private userService: UserService,
     private router: Router,
     private gridToolbarService: GridToolbarService

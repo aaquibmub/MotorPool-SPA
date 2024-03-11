@@ -16,17 +16,38 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="serialNumber" title="{{ utilityService.language.tripId | translate }}">
+    <kendo-grid-column
+      field="serialNumber"
+      title="{{ utilityService.language.tripId | translate }}"
+    >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <a routerLink="/trips/view/{{ dataItem.id }}/detail">{{
           dataItem.tripId
         }}</a>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="type" title="{{ utilityService.language.tripType | translate }}"> </kendo-grid-column>
-    <kendo-grid-column field="destination" title="{{ utilityService.language.destination | translate }}">
+    <kendo-grid-column
+      field="type"
+      title="{{ utilityService.language.tripType | translate }}"
+      ><ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span>{{ utilityService.getTripTypeLabel(dataItem.type) }}</span>
+      </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="createdDate" title="{{ utilityService.language.dateCreated | translate }}" filter="date">
+    <kendo-grid-column
+      field="destination"
+      title="{{ utilityService.language.destination | translate }}"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span>{{
+          utilityService.getTripDestinationLabel(dataItem.destination)
+        }}</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="createdDate"
+      title="{{ utilityService.language.dateCreated | translate }}"
+      filter="date"
+    >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         {{ dataItem.createdDate | dateformat : "g" }}
       </ng-template>
@@ -64,7 +85,9 @@
       </div>
     </ng-template>
     <kendo-grid-messages
-      pagerItemsPerPage="{{ utilityService.language.recordsPerPage | translate }}"
+      pagerItemsPerPage="{{
+        utilityService.language.recordsPerPage | translate
+      }}"
       pagerItems="rows"
     ></kendo-grid-messages>
   </kendo-grid>

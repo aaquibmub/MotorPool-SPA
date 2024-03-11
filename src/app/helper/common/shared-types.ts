@@ -147,6 +147,13 @@ export function GetUserRoleListForNotification():
       value: UserRoleType.All,
       text: 'All'
     },
+    ...GetUserRoleTypeForDropdownList()
+  ];
+}
+
+export function GetUserRoleTypeForDropdownList():
+  DropdownItem<UserRoleType>[] {
+  return [
     {
       value: UserRoleType.Admin,
       text: 'Admin'
@@ -257,63 +264,63 @@ export function GetTripStatusForDropdownList():
     },
     {
       value: TripStatus.AssignedToDriver,
-      text: 'AssignedToDriver'
+      text: 'Assigned To Driver'
     },
     {
       value: TripStatus.TripStarted,
-      text: 'TripStarted'
+      text: 'Trip Started'
     },
     {
       value: TripStatus.OdoMeterAtStart,
-      text: 'OdoMeterAtStart'
+      text: 'ODO Meter At Start'
     },
     {
       value: TripStatus.VehicalDispatched,
-      text: 'VehicalDispatched'
+      text: 'Vehical Dispatched'
     },
     {
       value: TripStatus.ArrivedAtPickupLocation,
-      text: 'ArrivedAtPickupLocation'
+      text: 'Arrived At Pickup Location'
     },
     {
       value: TripStatus.WaitingForPassenger,
-      text: 'WaitingForPassenger'
+      text: 'Waiting For Passenger'
     },
     {
       value: TripStatus.PassengerOnboarded,
-      text: 'PassengerOnboarded'
+      text: 'Passenger Onboarded'
     },
     {
       value: TripStatus.ArrivedAtStop,
-      text: 'ArrivedAtStop'
+      text: 'Arrived At Stop'
     },
     {
       value: TripStatus.WaitingForStopActivity,
-      text: 'WaitingForStopActivity'
+      text: 'Waiting For Stop Activity'
     },
     {
       value: TripStatus.TripResumedAfterStop,
-      text: 'TripResumedAfterStop'
+      text: 'Trip Resumed After Stop'
     },
     {
       value: TripStatus.ArrivedAtAddress,
-      text: 'ArrivedAtAddress'
+      text: 'Arrived At Address'
     },
     {
       value: TripStatus.WaitingForAddressActivity,
-      text: 'WaitingForAddressActivity'
+      text: 'Waiting For Address Activity'
     },
     {
       value: TripStatus.TripResumedAfterAddress,
-      text: 'TripResumedAfterAddress'
+      text: 'Trip Resumed After Address'
     },
     {
       value: TripStatus.ArrivedAtDropoff,
-      text: 'ArrivedAtDropoff'
+      text: 'Arrived At Dropoff'
     },
     {
       value: TripStatus.OdoMeterAtEnd,
-      text: 'OdoMeterAtEnd'
+      text: 'ODO Meter At End'
     },
     {
       value: TripStatus.Completed,

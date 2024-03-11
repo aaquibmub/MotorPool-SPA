@@ -20,7 +20,11 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="type" title="Type"> </kendo-grid-column>
+    <kendo-grid-column field="type" title="Type">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span>{{ utilityService.getUserRoleTypeLabel(dataItem.type) }}</span>
+      </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
     <kendo-grid-column title="Status">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">

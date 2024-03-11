@@ -10,6 +10,10 @@ import { TripBookingRefuellingListComponent } from './components/trip-bookings/t
 import { TripBookingScheduledListComponent } from './components/trip-bookings/trip-booking-scheduled-list/trip-booking-scheduled-list.component';
 import { TripBookingStartNowListComponent } from './components/trip-bookings/trip-booking-start-now-list/trip-booking-start-now-list.component';
 import { TripBookingsComponent } from './components/trip-bookings/trip-bookings.component';
+import { TripEditDestinationListComponent } from './components/trip-edit/trip-edit-destination-list/trip-edit-destination-list.component';
+import { TripEditJourneyComponent } from './components/trip-edit/trip-edit-journey/trip-edit-journey.component';
+import { TripEditPassengerListComponent } from './components/trip-edit/trip-edit-passenger-list/trip-edit-passenger-list.component';
+import { TripEditComponent } from './components/trip-edit/trip-edit.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { TripOngoingListComponent } from './components/trip-list/trip-ongoing-list/trip-ongoing-list.component';
 import { TripTodayListComponent } from './components/trip-list/trip-today-list/trip-today-list.component';
@@ -33,7 +37,7 @@ const routes: Routes = [
         pathMatch: 'full'
       },
 
-      // trip booking
+      // new trip booking
       {
         path: 'booking',
         component: TripBookingComponent,
@@ -48,6 +52,7 @@ const routes: Routes = [
           { path: 'new-refuelling', component: TripBookingRefuellingEditComponent },
         ]
       },
+      // trip booking lists
       {
         path: 'bookings',
         component: TripBookingsComponent,
@@ -59,6 +64,7 @@ const routes: Routes = [
           { path: 'refuelling', component: TripBookingRefuellingListComponent }
         ]
       },
+      // trip view
       {
         path: 'view/:id',
         component: TripViewComponent,
@@ -74,6 +80,22 @@ const routes: Routes = [
           { path: 'driver', component: TripViewDriverComponent },
         ]
       },
+      // trip edit
+      {
+        path: 'edit/:id',
+        component: TripEditComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: '/trips/edit/:id/journey',
+            pathMatch: 'full'
+          },
+          { path: 'journey', component: TripEditJourneyComponent },
+          { path: 'passengers', component: TripEditPassengerListComponent },
+          { path: 'destinations', component: TripEditDestinationListComponent },
+        ]
+      },
+      // trip list
       {
         path: 'list',
         component: TripListComponent,

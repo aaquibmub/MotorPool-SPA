@@ -5,7 +5,7 @@ import { IntlService } from '@progress/kendo-angular-intl';
 import { ZonedDate } from '@progress/kendo-date-math';
 import { Howl, Howler } from 'howler';
 import { LanguageKeys } from '../../common/language-keys';
-import { DataImportStatus, DriverStatus, Gender, GetBooleanStatusForDropdownList, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripRoute, TripStatus, TripType, VehicalStatus } from '../../common/shared-types';
+import { DataImportStatus, DriverStatus, Gender, GetBooleanStatusForDropdownList, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetUserRoleTypeForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripRoute, TripStatus, TripType, UserRoleType, VehicalStatus } from '../../common/shared-types';
 import { AuthService } from '../auth/auth.service';
 @Injectable({
   providedIn: 'root'
@@ -120,6 +120,12 @@ export class UtilityService {
     }
     return '';
 
+  }
+
+  getUserRoleTypeLabel(value: UserRoleType): string {
+    var statusList = GetUserRoleTypeForDropdownList();
+    var status = statusList.find(f => f.value == value);
+    return status != null ? status.text : '';
   }
 
   getVehicalStatusLabel(value: VehicalStatus): string {

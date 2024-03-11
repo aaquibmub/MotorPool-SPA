@@ -1,13 +1,14 @@
-import { RoleGridModel } from './../../../../../helper/models/settings/user-management/roles/role-grid-model';
-import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
-import { UserService } from 'src/app/helper/services/auth/user.service';
-import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
-import { UtilityRix } from './../../../../../helper/common/utility-rix';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { UserService } from 'src/app/helper/services/auth/user.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { UtilityRix } from './../../../../../helper/common/utility-rix';
+import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
+import { RoleGridModel } from './../../../../../helper/models/settings/user-management/roles/role-grid-model';
+import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
 
 @Component({
   selector: 'app-roles',
@@ -38,6 +39,7 @@ export class RolesComponent implements OnInit, OnDestroy {
   // roleType = RoleType;
 
   constructor(
+    public utilityService: UtilityService,
     private userService: UserService,
     private router: Router,
     private gridToolbarService: GridToolbarService

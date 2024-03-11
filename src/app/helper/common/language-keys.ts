@@ -54,9 +54,11 @@ export class LanguageKeys {
   dayFriday = "Friday";
   daySaturday = "Saturday";
   defaultStartingPoint = "Default Starting Point";
+  dispatch = "Dispatch";
   driverAndTransportation = "Driver & Transportation";
   driver = "Driver";
   destination = "Destination";
+  destinations = "Destinations";
   dateCreated = "Date Created";
   date = "Date";
   driverName = "Driver Name";
@@ -73,7 +75,8 @@ export class LanguageKeys {
   driverId = "Driver ID";
   driverCreationDate = "Driver Creation Date";
 
-  // E.
+  //E.
+  end = "End";
   endDate = "End Date";
   endDateRequired = "End Date is required";
   executedBy = "Executed By";
@@ -83,6 +86,7 @@ export class LanguageKeys {
   emailAddress = "Email address";
   emailAddressReq = "Email Address is required";
   excel = "Excel";
+  endingOdoMeterReading = "Ending ODO Meter Reading";
 
   //F
   firstName = "First Name";
@@ -112,8 +116,13 @@ export class LanguageKeys {
   idle = "Idle";
   incidentCategory = "Incident Category";
 
+  //J
+  journey = "Journey";
+  journeyStatus = "Journey Status";
+
 
   //L
+  location = "Location";
   lastName = "Last Name";
   lastNameReq = "Last Name is required";
   logTime = "Log Time";
@@ -185,6 +194,7 @@ export class LanguageKeys {
   phoneRequired = "Phone Number is required";
   password = "Password";
   passangerVsTrip = "Passenger vs Trips";
+  proceed = "Proceed";
 
   //R
   range = "Range";
@@ -207,7 +217,7 @@ export class LanguageKeys {
   isActive = "is active";
   inspection = "Inspection";
 
-  // S.
+  //S
   scheduledTrip = "Scheduled Trip";
   scheduledDays = "Scheduled Days";
   scheduling = "Scheduling";
@@ -222,6 +232,9 @@ export class LanguageKeys {
   startingPointReq = "StartingPoint is required";
   systemLog = "System Log";
   scheduleTrips = "Scheduled Trips";
+  startingOdoMeterReading = "Starting ODO Meter Reading";
+  startTrip = "Start Trip";
+  start = "Start";
 
   //T
   time = "Time";
@@ -232,6 +245,9 @@ export class LanguageKeys {
   tripDestination = "Trip Destination";
   tripDestinationRequired = "Trip destination is required";
   tripId = "Trip ID";
+  tripInfo = "Trip Info";
+  tripRoute = "Trip Route";
+  tripStatus = "Trip Status";
   type = "Type";
   typeRequired = "Type is required";
   tripType = "Trip Type";
@@ -261,6 +277,7 @@ export class LanguageKeys {
 
   //V.
   vehical = "Vehicle";
+  vehicle = "Vehicle";
   vehicles = "Vehicles";
   vehicalInfo = "Vehicle Information";
   vehicalId = "Vehicle ID";

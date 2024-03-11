@@ -29,7 +29,13 @@
     </kendo-grid-column>
     <kendo-grid-column field="lastName" title="Last Name"> </kendo-grid-column>
     <kendo-grid-column field="login" title="Login"> </kendo-grid-column>
-    <kendo-grid-column field="roleType" title="Role"> </kendo-grid-column>
+    <kendo-grid-column field="roleType" title="Role">
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span>{{
+          utilityService.getUserRoleTypeLabel(dataItem.roleType)
+        }}</span>
+      </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column title="Status">
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <span *ngIf="dataItem.active == true">Enabled</span>

@@ -11,10 +11,13 @@ import { TripGridModel } from '../../models/trips/enroute/trip-grid-model';
 import { TripHandoverModel } from '../../models/trips/enroute/trip-handover-model';
 import { TripStatusDetailModel } from '../../models/trips/enroute/trip-status-detail-model';
 import { TripStatusModel } from '../../models/trips/enroute/trip-status-model';
+import { TripVehicleMeterModel } from '../../models/trips/enroute/trip-vehicle-meter-model';
+import { TripJourneyModel } from '../../models/trips/trip-edit/trip-journey-model';
+import { TripModel } from '../../models/trips/trip-edit/trip-model';
 import { TripViewDetailModel } from '../../models/trips/trip-view/trip-view-detail-model';
+import { TripViewLogModel } from '../../models/trips/trip-view/trip-view-log-model';
 import { TripViewModel } from '../../models/trips/trip-view/trip-view-model';
 import { environment } from './../../../../environments/environment';
-import { TripViewLogModel } from '../../models/trips/trip-view/trip-view-log-model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +53,14 @@ export class TripService {
         this.gridData.next(gridData);
       }
     );
+  }
+
+  getTripModel(id: string): Observable<TripModel> {
+    return this.http.get<TripModel>(this.baseUrl + 'get-trip-model/' + id);
+  }
+
+  getTripJourneyModel(id: string): Observable<TripJourneyModel> {
+    return this.http.get<TripJourneyModel>(this.baseUrl + 'get-trip-journey-model/' + id);
   }
 
   getTripViewModel(id: string): Observable<TripViewModel> {
@@ -106,6 +117,10 @@ export class TripService {
 
   updateTripStatus(model: TripStatusModel): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-status', model);
+  }
+
+  updateTripVehicleMeter(model: TripVehicleMeterModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-vehical-meter', model);
   }
 
   getTripLogGridData(): Observable<GridDataResult> {

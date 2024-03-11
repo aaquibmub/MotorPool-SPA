@@ -1,7 +1,7 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { exhaustMap, finalize, map, take, tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { OverlayService } from '../services/common/overlay.service';
 
 @Injectable({
@@ -14,17 +14,30 @@ export class HttpInterceptorService implements HttpInterceptor {
     private overlayService: OverlayService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.count === 0) {
+    var showLoader = this.showLoader(req);
+    if (showLoader && this.count === 0) {
+      // debugger;
       this.overlayService.setShowHideLoader(true);
     }
-    this.count++;
+    if (showLoader) {
+      this.count++;
+    }
     return next.handle(req).pipe(
       finalize(() => {
-        this.count--;
+
+        if (this.showLoader(req)) {
+          this.count--;
+        }
         if (this.count === 0) {
+          // debugger;
           this.overlayService.setShowHideLoader(false);
         }
       })
     );
+  }
+
+  showLoader(req: HttpRequest<any>): boolean {
+    return !(req.url.includes('getnotificationlist')
+      || req.url.includes('getdropdownlist'));
   }
 }
