@@ -2,6 +2,7 @@
   <app-grid-toolbar
     [numberOfRecords]="gridData?.total"
     entity="trip"
+    [hideColumnDropdown]="true"
   ></app-grid-toolbar>
   <kendo-grid
     [data]="gridData"
@@ -15,14 +16,56 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="operation" title="{{ utilityService.language.operation | translate }}"> </kendo-grid-column>
-    <kendo-grid-column field="user" title="User">
+    <kendo-grid-column
+      field="operation"
+      title="{{ utilityService.language.operation | translate }}"
+    >
     </kendo-grid-column>
-    <kendo-grid-column field="userRole" title="{{utilityService.language.userRole | translate}}"> </kendo-grid-column>
-    <kendo-grid-column field="date" title="{{ utilityService.language.date | translate }}" filter="date">
+    <kendo-grid-column field="user" title="User"> </kendo-grid-column>
+    <kendo-grid-column
+      field="userRole"
+      title="{{ utilityService.language.userRole | translate }}"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span>{{
+          utilityService.getUserRoleTypeLabel(dataItem.userRole)
+        }}</span>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="date"
+      title="{{ utilityService.language.date | translate }}"
+      filter="date"
+    >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         {{ dataItem.date | dateformat : "g" }}
       </ng-template>
     </kendo-grid-column>
+    <ng-template
+      kendoPagerTemplate
+      let-totalPages="totalPages"
+      let-currentPage="currentPage"
+    >
+      <div class="grid-toolbar">
+        <div class="left">
+          <kendo-pager-page-sizes
+            [pageSizes]="pageable.pageSizes"
+          ></kendo-pager-page-sizes>
+        </div>
+        <div class="right">
+          <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+          <kendo-pager-numeric-buttons
+            [buttonCount]="pageable.buttonCount"
+          ></kendo-pager-numeric-buttons>
+          <kendo-pager-next-buttons></kendo-pager-next-buttons>
+        </div>
+      </div>
+    </ng-template>
+    <kendo-grid-messages
+      pagerItemsPerPage="{{
+        utilityService.language.recordsPerPage | translate
+      }}"
+      pagerItems="rows"
+    ></kendo-grid-messages>
   </kendo-grid>
 </div>

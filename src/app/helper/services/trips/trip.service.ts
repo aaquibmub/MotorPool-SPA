@@ -14,6 +14,7 @@ import { TripStatusModel } from '../../models/trips/enroute/trip-status-model';
 import { TripVehicleMeterModel } from '../../models/trips/enroute/trip-vehicle-meter-model';
 import { TripJourneyModel } from '../../models/trips/trip-edit/trip-journey-model';
 import { TripModel } from '../../models/trips/trip-edit/trip-model';
+import { TripPassengerGridModel } from '../../models/trips/trip-edit/trip-passenger-grid-model';
 import { TripViewDetailModel } from '../../models/trips/trip-view/trip-view-detail-model';
 import { TripViewLogModel } from '../../models/trips/trip-view/trip-view-log-model';
 import { TripViewModel } from '../../models/trips/trip-view/trip-view-model';
@@ -31,6 +32,7 @@ export class TripService {
   private showTripCancelPopup = new Subject<PopupConfigModel>();
 
   private gridLogData = new Subject<GridList<TripViewLogModel>>();
+  private gridTripPassengerData = new Subject<GridList<TripPassengerGridModel>>();
 
   constructor(
     private http: HttpClient) { }
@@ -61,6 +63,26 @@ export class TripService {
 
   getTripJourneyModel(id: string): Observable<TripJourneyModel> {
     return this.http.get<TripJourneyModel>(this.baseUrl + 'get-trip-journey-model/' + id);
+  }
+
+  getTripPassengerGridData(): Observable<GridDataResult> {
+    return this.gridTripPassengerData.asObservable();
+  }
+
+  fetchTripPassengerGridData(
+    state: any,
+    query: string,
+    tripId: string): void {
+    this.http.post<GridList<TripPassengerGridModel>>(
+      this.baseUrl + 'get-trip-passenger-gridlist', {
+      gridFilters: state,
+      search: query,
+      tripId
+    }).subscribe(
+      (gridTripPassengerData: GridList<TripPassengerGridModel>) => {
+        this.gridTripPassengerData.next(gridTripPassengerData);
+      }
+    );
   }
 
   getTripViewModel(id: string): Observable<TripViewModel> {

@@ -1,3 +1,51 @@
-<p>
-  trip-edit-passenger-list works!
-</p>
+<div class="grid-content">
+  <app-grid-toolbar
+    [numberOfRecords]="gridData?.total"
+    entity="passenger"
+    [hideColumnDropdown]="true"
+  ></app-grid-toolbar>
+  <kendo-grid
+    [data]="gridData"
+    [pageSize]="state.take"
+    [skip]="state.skip"
+    [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
+    scrollable="none"
+    (dataStateChange)="dataStateChange($event)"
+  >
+    <kendo-grid-column
+      field="name"
+      title="{{ utilityService.language.name | translate }}"
+    >
+    </kendo-grid-column>
+    <ng-template
+      kendoPagerTemplate
+      let-totalPages="totalPages"
+      let-currentPage="currentPage"
+    >
+      <div class="grid-toolbar">
+        <div class="left">
+          <kendo-pager-page-sizes
+            [pageSizes]="pageable.pageSizes"
+          ></kendo-pager-page-sizes>
+        </div>
+        <div class="right">
+          <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+          <kendo-pager-numeric-buttons
+            [buttonCount]="pageable.buttonCount"
+          ></kendo-pager-numeric-buttons>
+          <kendo-pager-next-buttons></kendo-pager-next-buttons>
+        </div>
+      </div>
+    </ng-template>
+    <kendo-grid-messages
+      pagerItemsPerPage="{{
+        utilityService.language.recordsPerPage | translate
+      }}"
+      pagerItems="rows"
+    ></kendo-grid-messages>
+  </kendo-grid>
+</div>

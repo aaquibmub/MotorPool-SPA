@@ -23,6 +23,7 @@ export class TripViewLogComponent implements OnInit {
   id: string;
 
   pageSizeSubscription: Subscription;
+  gridFilterSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -38,6 +39,13 @@ export class TripViewLogComponent implements OnInit {
           this.id = params.id;
         }
       });
+
+    this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
+      .subscribe(
+        (show: boolean) => {
+          this.filterable = show ? UtilityRix.gridConfig.filterable : '';
+        }
+      );
 
     this.pageSizeSubscription = this.gridToolbarService.getPageSize()
       .subscribe(
