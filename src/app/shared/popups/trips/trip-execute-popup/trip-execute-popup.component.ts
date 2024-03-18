@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
+import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { VehicalModel } from 'src/app/helper/models/vehicals/vehical-model';
 import { VehicalService } from 'src/app/helper/services/vehicals/vehical.service';
@@ -29,6 +30,7 @@ export class TripExecutePopupComponent implements OnInit {
     private tripService: TripService,
     private driverService: DriverService,
     private vehicalService: VehicalService,
+    private dialogService: DialogService,
     private alertService: AlertService
   ) { }
 
@@ -120,16 +122,28 @@ export class TripExecutePopupComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    this.model = this.form.value;
-    this.model.id = this.tripId;
-    this.tripService.executeTrip(this.model)
-      .subscribe((response: ResponseModel<string>) => {
-        if (response.hasError) {
-          this.alertService.setErrorAlert(response.msg);
-          return;
-        }
-        this.tripService.setTripExecutePopup(false);
-      });
+    const primaryAction = 'Assign';
+    const successAction = 'Assigned';
+    const primaryMsg = 'Do you want to ' + primaryAction + ' this trip?';
+
+    const dialog: DialogRef = this.dialogService
+      .open(this.alertService.getConfirmDialougeConfig(
+        'Confirm ' + primaryAction, primaryMsg, primaryAction));
+
+    dialog.result.subscribe((result: any) => {
+      if (result.text === primaryAction) {
+        this.model = this.form.value;
+        this.model.id = this.tripId;
+        this.tripService.executeTrip(this.model)
+          .subscribe((response: ResponseModel<string>) => {
+            if (response.hasError) {
+              this.alertService.setErrorAlert(response.msg);
+              return;
+            }
+            this.tripService.setTripExecutePopup(false);
+          });
+      }
+    });
   }
 
   close(): void {

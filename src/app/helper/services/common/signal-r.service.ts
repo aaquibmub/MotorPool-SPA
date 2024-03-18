@@ -6,6 +6,7 @@ import { Observable, from } from 'rxjs';
 import { UtilityRix } from '../../common/utility-rix';
 import { ActivityLogModel } from '../../models/reports/log/activity-log-model';
 import { AuthService } from '../auth/auth.service';
+import { DashboardService } from '../utilities/dashboard.service';
 import { environment } from './../../../../environments/environment';
 import { AlertService } from './alert.service';
 import { NotificationTickerService } from './notification.service';
@@ -25,6 +26,7 @@ export class SignalRService {
     private authService: AuthService,
     private notificationTickerService: NotificationTickerService,
     private notificationService: NotificationService,
+    private dashboardService: DashboardService,
     private alertService: AlertService) { }
 
   public connect = () => {
@@ -58,6 +60,9 @@ export class SignalRService {
     this.hubConnection.on('updateNotificationList', () => {
       console.log('message received from API Controller');
       this.notificationTickerService.setNotificationList();
+    });
+    this.hubConnection.on('RefreshDashboard', () => {
+      this.dashboardService.setRefreshDashboard(true);
     });
     this.hubConnection.on('ActivityNotification', (model: ActivityLogModel) => {
 

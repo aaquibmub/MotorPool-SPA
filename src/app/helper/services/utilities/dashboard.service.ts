@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { DashboardTripListModel } from '../../models/dashboard/dashboard-trip-list-model';
 import { TripCountModel } from '../../models/dashboard/trip-count-model';
 import { TripDetailCountModel } from '../../models/dashboard/trip-detail-count-model';
@@ -13,9 +13,14 @@ import { environment } from './../../../../environments/environment';
 })
 export class DashboardService {
   baseUrl = environment.apiUrl + 'dashboard/';
+  refreshDashboard = new Subject<boolean>();
 
   constructor(
     private http: HttpClient) { }
+
+  setRefreshDashboard(flag: boolean): void {
+    this.refreshDashboard.next(flag);
+  }
 
   getTripCountModel(): Observable<TripCountModel> {
     return this.http.get<TripCountModel>(
