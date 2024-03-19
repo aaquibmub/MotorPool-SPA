@@ -2,6 +2,7 @@
   <app-grid-toolbar
     [numberOfRecords]="gridData?.total"
     entity="Activity Log"
+    [hideColumnDropdown]="true"
   ></app-grid-toolbar>
   <kendo-grid
     [data]="gridData"
@@ -10,16 +11,29 @@
     [sort]="state.sort"
     [sortable]="true"
     [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="createdTime" title="{{ utilityService.language.logTime | translate }}">
+    <kendo-grid-column
+      field="createdTime"
+      title="{{ utilityService.language.logTime | translate }}"
+      filter="date"
+    >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         {{ dataItem.createdTime | dateformat : "g" }}
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="message" title="{{ utilityService.language.message | translate }}"> </kendo-grid-column>
-    <kendo-grid-column field="activityBy" title="{{ utilityService.language.activityBy | translate }}">
+    <kendo-grid-column
+      field="message"
+      title="{{ utilityService.language.message | translate }}"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="activityBy"
+      title="{{ utilityService.language.activityBy | translate }}"
+    >
     </kendo-grid-column>
   </kendo-grid>
 </div>

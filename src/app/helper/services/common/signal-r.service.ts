@@ -61,8 +61,8 @@ export class SignalRService {
       console.log('message received from API Controller');
       this.notificationTickerService.setNotificationList();
     });
-    this.hubConnection.on('RefreshDashboard', () => {
-      this.dashboardService.setRefreshDashboard(true);
+    this.hubConnection.on('RefreshData', () => {
+      this.utilityService.setRefreshData();
     });
     this.hubConnection.on('ActivityNotification', (model: ActivityLogModel) => {
 

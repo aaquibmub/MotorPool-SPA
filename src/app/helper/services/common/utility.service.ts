@@ -4,6 +4,7 @@ import { ExcelExportEvent, GridComponent } from '@progress/kendo-angular-grid';
 import { IntlService } from '@progress/kendo-angular-intl';
 import { ZonedDate } from '@progress/kendo-date-math';
 import { Howl, Howler } from 'howler';
+import { Subject } from 'rxjs';
 import { LanguageKeys } from '../../common/language-keys';
 import { DataImportStatus, DriverStatus, Gender, GetBooleanStatusForDropdownList, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetUserRoleTypeForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripRoute, TripStatus, TripType, UserRoleType, VehicalStatus } from '../../common/shared-types';
 import { AuthService } from '../auth/auth.service';
@@ -15,12 +16,17 @@ export class UtilityService {
   language: LanguageKeys = new LanguageKeys();
   dropdownDefaultItem = { text: 'Please select..', value: '' };
   dropdownAllItem = { text: 'All', value: null };
+  refreshData = new Subject<boolean>();
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private intl: IntlService,
   ) { }
+
+  setRefreshData(): void {
+    this.refreshData.next(true);
+  }
 
   scrollToFirstInvalidControl(
     element: ElementRef,

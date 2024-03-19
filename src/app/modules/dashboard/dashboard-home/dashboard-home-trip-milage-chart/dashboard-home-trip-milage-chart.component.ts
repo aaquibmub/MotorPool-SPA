@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { DashboardService } from 'src/app/helper/services/utilities/dashboard.service';
 import { TripTypeMilageChartModel } from './../../../../helper/models/dashboard/trip-type-milage-chart-model';
@@ -23,6 +24,7 @@ export class DashboardHomeTripMilageChartComponent implements OnInit {
     'yellow',
     'purple'
   ]
+  refreshScreenSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -30,6 +32,21 @@ export class DashboardHomeTripMilageChartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
+      next: (flag: boolean) => {
+        if (flag) {
+          this.loadData();
+        }
+      },
+      error: (err) => console.error(err)
+    });
+
+    this.loadData();
+  }
+
+  loadData(): void {
+
     this.dashboardService.getTripTypeMilageChartListModel()
       .subscribe(
         (list: TripTypeMilageChartModel[]) => {
@@ -45,6 +62,13 @@ export class DashboardHomeTripMilageChartComponent implements OnInit {
 
         }
       );
+
+  }
+
+  ngOnDestroy(): void {
+    if (this.refreshScreenSubscription) {
+      this.refreshScreenSubscription.unsubscribe();
+    }
   }
 
 

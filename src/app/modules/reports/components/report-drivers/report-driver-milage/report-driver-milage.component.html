@@ -20,7 +20,7 @@
         *ngIf="grid"
         [grid]="grid"
         [numberOfRecords]="gridData?.total"
-        entity="milage"
+        entity="mileage"
       ></app-grid-toolbar>
       <kendo-grid
         #grid="kendoGrid"
@@ -71,7 +71,7 @@
           [hidden]="isHidden('milageInKm')"
         >
           <ng-template kendoGridFooterTemplate>
-            Total Milage: {{ aggregateResult?.milageInKm?.sum }}
+            Total Mileage: {{ aggregateResult?.milageInKm?.sum }}
           </ng-template>
         </kendo-grid-column>
         <kendo-grid-excel

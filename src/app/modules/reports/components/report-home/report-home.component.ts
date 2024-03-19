@@ -108,7 +108,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/trips/milage',
-            title: 'Trips Milage',
+            title: 'Trips Mileage',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -128,7 +128,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/trips/opm-milage-today',
-            title: 'OPM Milage - Today',
+            title: 'OPM Mileage - Today',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -138,7 +138,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/trips/opm-milage-current-month',
-            title: 'OPM Milage - Current Month',
+            title: 'OPM Mileage - Current Month',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -148,7 +148,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/trips/saudi-milage-today',
-            title: 'Saudi Milage - Today',
+            title: 'Saudi Mileage - Today',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -158,7 +158,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/trips/saudi-milage-current-month',
-            title: 'Saudi Milage - Current Month',
+            title: 'Saudi Mileage - Current Month',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -251,7 +251,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/vehicles/milage',
-            title: 'Vehicle Milage',
+            title: this.utilityService.language.vehicleMileage,
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -314,7 +314,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/drivers/milage',
-            title: 'Driver`s Daily Milage',
+            title: this.utilityService.language.driverDailyMileage,
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',

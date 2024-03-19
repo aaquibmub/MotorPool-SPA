@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { TripStatus, TripType } from './../../../../../helper/common/shared-types';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
 import { ActionButton } from './../../../../../helper/models/common/grid/action-button';
@@ -10,7 +11,6 @@ import { PopupConfigModel } from './../../../../../helper/models/common/popup-co
 import { TripGridModel } from './../../../../../helper/models/trips/enroute/trip-grid-model';
 import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
 import { TripService } from './../../../../../helper/services/trips/trip.service';
-import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-trip-booking-start-now-list',
@@ -28,6 +28,7 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
   tripExecutePopupSubscription: Subscription;
   tripCancelPopupSubscription: Subscription;
   gridFilterSubscription: Subscription;
+  refreshScreenSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -37,6 +38,15 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
+    this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
+      next: (flag: boolean) => {
+        if (flag) {
+          this.tripService.fetchGridData(this.state, this.searchQuery);
+        }
+      },
+      error: (err) => console.error(err)
+    });
     this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
       .subscribe(
         (show: boolean) => {
@@ -148,6 +158,9 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
     }
     if (this.gridFilterSubscription) {
       this.gridFilterSubscription.unsubscribe();
+    }
+    if (this.refreshScreenSubscription) {
+      this.refreshScreenSubscription.unsubscribe();
     }
   }
 }

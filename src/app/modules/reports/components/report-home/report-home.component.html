@@ -15,7 +15,9 @@
               *ngIf="!menuSectionItem.isExternalLink"
             >
               <i [ngClass]="[menuSectionItem.icon]"></i>
-              <span class="sub-menu-title">{{ menuSectionItem.title }}</span>
+              <span class="sub-menu-title">{{
+                menuSectionItem.title | translate
+              }}</span>
               <span
                 *ngIf="menuSectionItem.badge != ''"
                 [ngClass]="[menuSectionItem.badgeClass]"
@@ -44,7 +46,9 @@
               <ng-template #externalSubLinkBlock>
                 <a [href]="[menuSubItem.path]" target="_blank">
                   <i [ngClass]="[menuSubItem.icon]"></i>
-                  <span class="sub-menu-title">{{ menuSubItem.title }}</span>
+                  <span class="sub-menu-title">{{
+                    menuSubItem.title | translate
+                  }}</span>
                   <span
                     *ngIf="menuSubItem.badge != ''"
                     [ngClass]="[menuSubItem.badgeClass]"

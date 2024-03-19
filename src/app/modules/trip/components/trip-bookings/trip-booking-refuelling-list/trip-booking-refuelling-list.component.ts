@@ -8,10 +8,10 @@ import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { TripGridModel } from 'src/app/helper/models/trips/enroute/trip-grid-model';
 import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.service';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { TripService } from 'src/app/helper/services/trips/trip.service';
 import { TripStatus } from './../../../../../helper/common/shared-types';
 import { PopupConfigModel } from './../../../../../helper/models/common/popup-config-model';
-import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-trip-booking-refuelling-list',
@@ -29,6 +29,7 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
   tripExecutePopupSubscription: Subscription;
   tripCancelPopupSubscription: Subscription;
   gridFilterSubscription: Subscription;
+  refreshScreenSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -38,6 +39,16 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
+    this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
+      next: (flag: boolean) => {
+        if (flag) {
+          this.tripService.fetchGridData(this.state, this.searchQuery);
+        }
+      },
+      error: (err) => console.error(err)
+    });
+
     this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
       .subscribe(
         (show: boolean) => {
@@ -150,6 +161,9 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
     }
     if (this.gridFilterSubscription) {
       this.gridFilterSubscription.unsubscribe();
+    }
+    if (this.refreshScreenSubscription) {
+      this.refreshScreenSubscription.unsubscribe();
     }
   }
 }

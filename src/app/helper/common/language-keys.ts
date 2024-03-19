@@ -36,7 +36,7 @@ export class LanguageKeys {
   color = "Color";
   colorRequired = "Color is required";
   comments = "Comments";
-  createNewVehical = "Create New Vehical";
+  createNewVehical = "Create New Vehicle";
   createNewPass = "Create New Passenger";
   createNewDriver = "Create New Driver";
   createPassanger = "Create New Passenger";
@@ -145,9 +145,9 @@ export class LanguageKeys {
   mobileNumber = "Mobile Number";
   mobileNumberReq = "Mobile Number is required";
   message = "Message";
-  milageOPM = "Milage OPM";
-  milageSaudi = "Milage Saudi";
-  milage = "Milage";
+  milageOPM = "Mileage OPM";
+  milageSaudi = "Mileage Saudi";
+  milage = "Mileage";
 
   //N
   notes = "Notes";
@@ -281,6 +281,7 @@ export class LanguageKeys {
   vehicles = "Vehicles";
   vehicalInfo = "Vehicle Information";
   vehicalId = "Vehicle ID";
+  vehicleMileage = "Vehicle Mileage";
   vehicalName = "Vehicle Name";
   vehicalPlate = "Vehicle Plate";
 

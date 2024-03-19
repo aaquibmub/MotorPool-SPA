@@ -1,11 +1,11 @@
-import { environment } from './../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Observable, Subject } from 'rxjs';
 import { GridList } from '../../models/common/grid/grid-list';
-import { SystemLogModel } from '../../models/reports/log/system-log-model';
 import { ActivityLogModel } from '../../models/reports/log/activity-log-model';
-import { HttpClient } from '@angular/common/http';
-import { GridDataResult } from '@progress/kendo-angular-grid';
+import { SystemLogModel } from '../../models/reports/log/system-log-model';
+import { environment } from './../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,9 @@ export class LogService {
   getGridDataForActivityLog(): Observable<GridDataResult> {
     return this.gridDataForActivityLog.asObservable();
   }
-  fetchGridDataForActivityLog(state: any): void {
+  fetchGridDataForActivityLog(
+    state: any,
+    query: string): void {
     this.http.post<GridList<ActivityLogModel>>(
       this.baseUrl + 'get-activity-log-list', { gridFilters: state })
       .subscribe(

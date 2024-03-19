@@ -35,6 +35,7 @@ export class DriversInactiveComponent implements OnInit {
 
   pageSizeSubscription: Subscription;
   gridFilterSubscription: Subscription;
+  refreshScreenSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -48,6 +49,15 @@ export class DriversInactiveComponent implements OnInit {
   ngOnInit(): void {
 
     this.driverStatusList = GetDriverStatusForDropdownList();
+
+    this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
+      next: (flag: boolean) => {
+        if (flag) {
+          this.driverService.fetchGridData(this.state, this.searchQuery);
+        }
+      },
+      error: (err) => console.error(err)
+    });
 
     this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
       .subscribe(
@@ -195,6 +205,9 @@ export class DriversInactiveComponent implements OnInit {
     this.pageSizeSubscription.unsubscribe();
     if (this.gridFilterSubscription) {
       this.gridFilterSubscription.unsubscribe();
+    }
+    if (this.refreshScreenSubscription) {
+      this.refreshScreenSubscription.unsubscribe();
     }
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { TripTypeChartModel } from './../../../../helper/models/dashboard/trip-type-chart-model';
 import { DashboardService } from './../../../../helper/services/utilities/dashboard.service';
-import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
   selector: 'app-dashboard-home-trip-type-chart',
@@ -23,6 +24,7 @@ export class DashboardHomeTripTypeChartComponent implements OnInit {
     'yellow',
     'purple'
   ]
+  refreshScreenSubscription: Subscription;
 
   constructor(
     private dashboardService: DashboardService,
@@ -30,6 +32,19 @@ export class DashboardHomeTripTypeChartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
+      next: (flag: boolean) => {
+        if (flag) {
+          this.loadData();
+        }
+      },
+      error: (err) => console.error(err)
+    });
+    this.loadData();
+  }
+
+  loadData(): void {
     this.dashboardService.getTripTypeChartListModel()
       .subscribe(
         (list: TripTypeChartModel[]) => {
@@ -45,6 +60,13 @@ export class DashboardHomeTripTypeChartComponent implements OnInit {
 
         }
       );
+
+  }
+
+  ngOnDestroy(): void {
+    if (this.refreshScreenSubscription) {
+      this.refreshScreenSubscription.unsubscribe();
+    }
   }
 
 

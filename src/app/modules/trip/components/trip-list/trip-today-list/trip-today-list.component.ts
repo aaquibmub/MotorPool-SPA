@@ -28,6 +28,7 @@ export class TripTodayListComponent implements OnInit, OnDestroy {
   tripExecutePopupSubscription: Subscription;
   tripCancelPopupSubscription: Subscription;
   gridFilterSubscription: Subscription;
+  refreshScreenSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -37,6 +38,15 @@ export class TripTodayListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
+    this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
+      next: (flag: boolean) => {
+        if (flag) {
+          this.tripService.fetchGridData(this.state, this.searchQuery, TripType.Today);
+        }
+      },
+      error: (err) => console.error(err)
+    });
     this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
       .subscribe(
         (show: boolean) => {
@@ -145,6 +155,9 @@ export class TripTodayListComponent implements OnInit, OnDestroy {
     }
     if (this.gridFilterSubscription) {
       this.gridFilterSubscription.unsubscribe();
+    }
+    if (this.refreshScreenSubscription) {
+      this.refreshScreenSubscription.unsubscribe();
     }
   }
 }
