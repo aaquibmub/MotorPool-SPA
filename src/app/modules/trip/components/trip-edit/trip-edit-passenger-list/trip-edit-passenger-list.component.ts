@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
+import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
 import { GridToolbarService } from './../../../../../helper/services/common/grid-toolbar.service';
 import { UtilityService } from './../../../../../helper/services/common/utility.service';
@@ -24,6 +25,7 @@ export class TripEditPassengerListComponent implements OnInit {
 
   pageSizeSubscription: Subscription;
   gridFilterSubscription: Subscription;
+  tripPassengerPopupSubscription: Subscription;
 
   constructor(
     public utilityService: UtilityService,
@@ -39,6 +41,15 @@ export class TripEditPassengerListComponent implements OnInit {
           this.id = params.id;
         }
       });
+
+    this.tripPassengerPopupSubscription = this.tripService.getTripPassengerPopup()
+      .subscribe(
+        (config: PopupConfigModel) => {
+          if (!config.show) {
+            this.tripService.fetchTripPassengerGridData(this.state, this.searchQuery, this.id);
+          }
+        }
+      );
 
     this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
       .subscribe(
@@ -68,6 +79,10 @@ export class TripEditPassengerListComponent implements OnInit {
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
     this.tripService.fetchTripPassengerGridData(state, this.searchQuery, this.id);
+  }
+
+  handleCreateNewButtonClick(): void {
+    this.tripService.setTripPassengerPopup({ show: true, arg: this.id, });
   }
 
   ngOnDestroy(): void {

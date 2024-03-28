@@ -3,6 +3,7 @@ export class LanguageKeys {
   // A.
   address = "Address";
   addNewDestination = "Add New Destination";
+  addPassanger = "Add Passenger";
   addressRequired = "Address is required";
   approvedBy = "Approved By";
   approverRequired = "Approver is required";

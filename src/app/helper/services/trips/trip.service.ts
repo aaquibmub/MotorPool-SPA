@@ -15,6 +15,7 @@ import { TripVehicleMeterModel } from '../../models/trips/enroute/trip-vehicle-m
 import { TripJourneyModel } from '../../models/trips/trip-edit/trip-journey-model';
 import { TripModel } from '../../models/trips/trip-edit/trip-model';
 import { TripPassengerGridModel } from '../../models/trips/trip-edit/trip-passenger-grid-model';
+import { TripPassengerModel } from '../../models/trips/trip-edit/trip-passenger-model';
 import { TripViewDetailModel } from '../../models/trips/trip-view/trip-view-detail-model';
 import { TripViewLogModel } from '../../models/trips/trip-view/trip-view-log-model';
 import { TripViewModel } from '../../models/trips/trip-view/trip-view-model';
@@ -33,6 +34,7 @@ export class TripService {
 
   private gridLogData = new Subject<GridList<TripViewLogModel>>();
   private gridTripPassengerData = new Subject<GridList<TripPassengerGridModel>>();
+  private showTripPassengerPopup = new Subject<PopupConfigModel>();
 
   constructor(
     private http: HttpClient) { }
@@ -83,6 +85,17 @@ export class TripService {
         this.gridTripPassengerData.next(gridTripPassengerData);
       }
     );
+  }
+
+  addPassenger(model: TripPassengerModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'add-passenger', model);
+  }
+
+  getTripPassengerPopup(): Observable<PopupConfigModel> {
+    return this.showTripPassengerPopup.asObservable();
+  }
+  setTripPassengerPopup(model: PopupConfigModel): void {
+    this.showTripPassengerPopup.next(model);
   }
 
   getTripViewModel(id: string): Observable<TripViewModel> {

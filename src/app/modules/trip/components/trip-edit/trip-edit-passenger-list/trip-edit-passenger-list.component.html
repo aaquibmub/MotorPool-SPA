@@ -1,4 +1,12 @@
 <div class="grid-content">
+  <div class="grid-toolbar">
+    <div class="left"></div>
+    <div class="right">
+      <button class="btn btn-green" (click)="handleCreateNewButtonClick()">
+        {{ utilityService.language.addPassanger | translate }}
+      </button>
+    </div>
+  </div>
   <app-grid-toolbar
     [numberOfRecords]="gridData?.total"
     entity="passenger"

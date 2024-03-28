@@ -23,6 +23,7 @@ import { ErrorInterceptorProvider } from './helper/intercepters/error.intercepto
 import { HttpInterceptorService } from './helper/intercepters/http.interceptor';
 import { ContentLayoutComponent } from './layouts/content/content-layout.component';
 import { FullLayoutComponent } from './layouts/full/full-layout.component';
+import { TripEditPassengerAddNewPopupComponent } from './modules/trip/components/trip-edit/trip-edit-passenger-list/trip-edit-passenger-add-new-popup/trip-edit-passenger-add-new-popup.component';
 import { LoaderBlockUiComponent } from './shared/components/loader-block-ui/loader-block-ui.component';
 import { PassengerQuickAddPopupComponent } from './shared/components/passengers/passenger-quick-add-popup/passenger-quick-add-popup.component';
 import { NotificationRuleEditComponent } from './shared/components/settings/notifications/notification-rule-edit/notification-rule-edit.component';
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     TripExecutePopupComponent,
     TripHandoverPopupComponent,
     TripCancelPopupComponent,
+    TripEditPassengerAddNewPopupComponent,
 
     AllocateVehicalPopupComponent,
     DeallocateVehicalPopupComponent,

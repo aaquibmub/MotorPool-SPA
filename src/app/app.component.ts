@@ -36,6 +36,8 @@ export class AppComponent implements OnInit {
   // passenger
   showPassengerQuickAddPopup = false;
   passengerQuickAddPopupArg: any;
+  showTripPassengerPopup = false;
+  tripPassengerPopupArg: any;
 
   // address
   showAddressQuickAddPopup = false;
@@ -137,6 +139,14 @@ export class AppComponent implements OnInit {
       next: (flag: PopupConfigModel) => {
         this.showPassengerQuickAddPopup = flag.show;
         this.passengerQuickAddPopupArg = flag.arg;
+      }
+    }
+    );
+
+    this.tripService.getTripPassengerPopup().subscribe({
+      next: (flag: PopupConfigModel) => {
+        this.showTripPassengerPopup = flag.show;
+        this.tripPassengerPopupArg = flag.arg;
       }
     }
     );

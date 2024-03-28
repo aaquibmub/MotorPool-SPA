@@ -7,6 +7,7 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { InputsModule } from '@progress/kendo-angular-inputs';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TripBookingRefuellingEditComponent } from './components/trip-booking/trip-booking-refuelling-edit/trip-booking-refuelling-edit.component';
 import { TripBookingScheduledEditComponent } from './components/trip-booking/trip-booking-scheduled-edit/trip-booking-scheduled-edit.component';
@@ -37,6 +38,7 @@ import { TripComponent } from './trip.component';
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
+    PerfectScrollbarModule,
     FormsModule,
     DropDownsModule,
     DateInputsModule,

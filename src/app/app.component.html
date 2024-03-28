@@ -21,6 +21,11 @@
   [arg]="passengerQuickAddPopupArg"
 ></app-passenger-quick-add-popup>
 
+<app-trip-edit-passenger-add-new-popup
+  *ngIf="showTripPassengerPopup"
+  [arg]="tripPassengerPopupArg"
+></app-trip-edit-passenger-add-new-popup>
+
 <app-notification-rule-edit
   *ngIf="showNotificationRulePopupPopup"
   [ruleId]="ruleId"
