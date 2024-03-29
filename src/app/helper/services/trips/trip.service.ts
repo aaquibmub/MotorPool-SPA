@@ -12,6 +12,7 @@ import { TripHandoverModel } from '../../models/trips/enroute/trip-handover-mode
 import { TripStatusDetailModel } from '../../models/trips/enroute/trip-status-detail-model';
 import { TripStatusModel } from '../../models/trips/enroute/trip-status-model';
 import { TripVehicleMeterModel } from '../../models/trips/enroute/trip-vehicle-meter-model';
+import { TripDestinationDetailModel } from '../../models/trips/trip-edit/trip-destination-detail-model';
 import { TripJourneyModel } from '../../models/trips/trip-edit/trip-journey-model';
 import { TripModel } from '../../models/trips/trip-edit/trip-model';
 import { TripPassengerGridModel } from '../../models/trips/trip-edit/trip-passenger-grid-model';
@@ -96,6 +97,14 @@ export class TripService {
   }
   setTripPassengerPopup(model: PopupConfigModel): void {
     this.showTripPassengerPopup.next(model);
+  }
+
+  getTripDestinationDetailModel(id: string): Observable<TripDestinationDetailModel> {
+    return this.http.get<TripDestinationDetailModel>(this.baseUrl + 'get-trip-destination-detail-model/' + id);
+  }
+
+  updateTripDestinations(model: TripDestinationDetailModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-destinations', model);
   }
 
   getTripViewModel(id: string): Observable<TripViewModel> {

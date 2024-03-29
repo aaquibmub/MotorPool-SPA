@@ -1,3 +1,153 @@
-<p>
-  trip-edit-destination-list works!
-</p>
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <!-- Trip Destination -->
+  <div class="form-section">
+    <div class="section-body">
+      <!-- Starting Point -->
+      <div class="form-section green-section">
+        <div class="section-header">
+          {{ utilityService.language.defaultStartingPoint | translate }}
+        </div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputStartingPointAddress">{{
+                    utilityService.language.address | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [filterable]="true"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (filterChange)="handleAddressFilter($event)"
+                    [data]="addressList"
+                    formControlName="startingPoint"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Destinations -->
+      <div formArrayName="destinations">
+        <div
+          class="form-section blue-section"
+          *ngFor="
+            let destination of form.get('destinations').controls;
+            let j = index
+          "
+          [formGroupName]="j"
+        >
+          <div class="section-header">
+            <div class="header-title">
+              {{ destination.get("type").value.text }}
+              {{ getDestinationTypeCount(destination.value) + 1 }}
+            </div>
+            <div class="header-actions">
+              <span
+                class="clickable"
+                (click)="removeDestination(j)"
+                class="fa fa-times"
+              ></span>
+            </div>
+          </div>
+          <div class="section-body">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <div class="label">
+                    <label [for]="'inputPickupAddress' + j">{{
+                      utilityService.language.address | translate
+                    }}</label>
+                  </div>
+                  <div class="control">
+                    <kendo-dropdownlist
+                      class="form-control"
+                      textField="text"
+                      valueField="value"
+                      [filterable]="true"
+                      [defaultItem]="utilityService.dropdownDefaultItem"
+                      (filterChange)="handleAddressFilter($event)"
+                      [data]="addressList"
+                      formControlName="address"
+                    >
+                      <ng-template kendoDropDownListItemTemplate let-dataItem>
+                        <span>{{ dataItem.text | translate }}</span>
+                        <span
+                          *ngIf="dataItem.value == ''"
+                          class="fa fa-plus-square quick-add-icon"
+                          (click)="openAddressQuickAddPopup(true, j)"
+                        ></span>
+                      </ng-template>
+                    </kendo-dropdownlist>
+                    <div
+                      *ngIf="
+                        !destination.get('address').valid &&
+                        destination.get('address').touched
+                      "
+                      class="invalid-feedback"
+                    >
+                      {{ utilityService.language.addressRequired | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="display-flex justify-content-center">
+                  <kendo-dropdownbutton
+                    [data]="destinationButtons[j]"
+                    class="btn"
+                    style="margin-left: 8px"
+                    [popupSettings]="{
+                      popupClass: 'et-dropdown-menu'
+                    }"
+                  >
+                    Add New Destination<i
+                      class="k-button-icon k-icon k-i-arrow-s"
+                    ></i>
+                    <ng-template kendoDropDownButtonItemTemplate let-dataItem>
+                      <div
+                        style="width: 100%"
+                        (click)="handleAddDestinationButtonClick(j, dataItem)"
+                      >
+                        <span
+                          class="{{ dataItem.icon }}"
+                          *ngIf="dataItem.icon"
+                        ></span>
+                        <span>{{ dataItem.label }}</span>
+                      </div>
+                    </ng-template>
+                  </kendo-dropdownbutton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Actions -->
+  <div class="form-section transparent-section">
+    <div class="section-body">
+      <div class="description sm-hide"></div>
+      <div class="fields">
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit">
+            {{ utilityService.language.save | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
