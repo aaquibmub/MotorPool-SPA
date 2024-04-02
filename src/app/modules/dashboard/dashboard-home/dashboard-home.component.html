@@ -13,7 +13,7 @@
         <app-dashboard-home-ongoing-trips></app-dashboard-home-ongoing-trips>
       </div>
     </div>
-    <div class="row pb-24">
+    <div class="row pb-24" *ngIf="user?.roleType != roleType.Dispatcher">
       <div class="col-6">
         <app-dashboard-home-trip-type-chart></app-dashboard-home-trip-type-chart>
       </div>
@@ -21,7 +21,7 @@
         <app-dashboard-home-trip-milage-chart></app-dashboard-home-trip-milage-chart>
       </div>
     </div>
-    <div class="row pb-24">
+    <div class="row pb-24" *ngIf="user?.roleType != roleType.Dispatcher">
       <div class="col-12">
         <app-dashboard-home-trip-bottom-tiles></app-dashboard-home-trip-bottom-tiles>
       </div>

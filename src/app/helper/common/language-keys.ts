@@ -133,7 +133,7 @@ export class LanguageKeys {
   //M
   mileage = "Mileage";
   milageKm = "Mileage KM";
-  mileageOpm = "Mileage OPM";
+  mileageOpm = "Mileage PTC";
   mileageSaudi = "Mileage Saudi";
   milageOnODO = "Mileage on ODO Meter";
   middleName = "Middle Name";
@@ -146,7 +146,7 @@ export class LanguageKeys {
   mobileNumber = "Mobile Number";
   mobileNumberReq = "Mobile Number is required";
   message = "Message";
-  milageOPM = "Mileage OPM";
+  milageOPM = "Mileage PTC";
   milageSaudi = "Mileage Saudi";
   milage = "Mileage";
 
@@ -167,8 +167,8 @@ export class LanguageKeys {
 
   //O
   oilChange = "Oil Change";
-  opm = "OPM";
-  opmRequired = "OPM is required";
+  opm = "PTC";
+  opmRequired = "PTC is required";
   odoMeterStartup = "ODO Meter Startup";
   odoMeter = "ODO Meter";
   odoMeterEnd = "ODO Meter End";
@@ -261,10 +261,10 @@ export class LanguageKeys {
   tripRoutex = "Trip Routex";
   tripDispatcher = "Trip Dispatcher";
   todaysTrips = "Today Trips";
-  tripsOPM = "Trips OPM";
+  tripsOPM = "Trips PTC";
   tripsSaudi = "Trips Saudi";
   tripsOngoingRightNow = "Trips ongoing right now";
-  tripsOpm = "Trips OPM";
+  tripsOpm = "Trips PTC";
 
   //U
   update = "Update";

@@ -431,11 +431,11 @@ export function GetOpmForDropdownList():
   return [
     {
       value: OPM.SaudiSide,
-      text: 'Saudi Side'
+      text: 'PTC-SA'
     },
     {
       value: OPM.USSide,
-      text: 'US Side'
+      text: 'PTC-US'
     },
   ];
 }

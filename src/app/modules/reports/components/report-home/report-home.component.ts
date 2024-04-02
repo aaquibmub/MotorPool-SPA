@@ -68,7 +68,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/trips/opm-today',
-            title: 'OPM Trips - Today',
+            title: 'PTC Trips - Today',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -78,7 +78,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/trips/opm-current-month',
-            title: 'OPM Trips - Current Month',
+            title: 'PTC Trips - Current Month',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -128,7 +128,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/trips/opm-milage-today',
-            title: 'OPM Mileage - Today',
+            title: 'PTC Mileage - Today',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -138,7 +138,7 @@ export class ReportHomeComponent implements OnInit {
           },
           {
             path: '/reports/trips/opm-milage-current-month',
-            title: 'OPM Mileage - Current Month',
+            title: 'PTC Mileage - Current Month',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
