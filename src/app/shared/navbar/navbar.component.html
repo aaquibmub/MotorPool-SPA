@@ -10,9 +10,18 @@
       >
       <span class="nav-bar-icon" (click)="toggleNotificationTicker()">
         <i class="topbar-icon notification-icon"></i>
-        <span *ngIf="notifications?.length > 0" class="has-notification"></span>
+        <span
+          *ngIf="notifications?.length > 0"
+          [ngStyle]="{ right: settingMenuItems.length > 0 ? '200px' : '160px' }"
+          class="has-notification"
+        ></span>
+        <!-- <span *ngIf="notifications?.length > 0" class="has-notification"></span> -->
       </span>
-      <span class="nav-bar-icon" (click)="toggleSettingsMenu()">
+      <span
+        class="nav-bar-icon"
+        *ngIf="settingMenuItems.length > 0"
+        (click)="toggleSettingsMenu()"
+      >
         <i class="topbar-icon setting-icon"></i
       ></span>
       <kendo-label
@@ -26,33 +35,10 @@
       ></kendo-label>
       <div class="settings-menu et-dropdown-menu" *ngIf="showSettingsMenu">
         <ul>
-          <li>
-            <a
-              routerLink="/setting/notifications"
-              (click)="showHideSettingsMenu(false)"
-              >Notifications</a
-            >
-          </li>
-          <li>
-            <a
-              routerLink="/setting/user-management"
-              (click)="showHideSettingsMenu(false)"
-              >User Management</a
-            >
-          </li>
-          <li>
-            <a
-              routerLink="/setting/data-import"
-              (click)="showHideSettingsMenu(false)"
-              >Data Import</a
-            >
-          </li>
-          <li>
-            <a
-              routerLink="/setting/config"
-              (click)="showHideSettingsMenu(false)"
-              >Configurations</a
-            >
+          <li *ngFor="let item of settingMenuItems">
+            <a [routerLink]="item.path" (click)="showHideSettingsMenu(false)">{{
+              item.title
+            }}</a>
           </li>
         </ul>
       </div>

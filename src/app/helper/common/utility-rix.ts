@@ -1,7 +1,68 @@
 import { UntypedFormControl } from '@angular/forms';
 import { NotificationSettings } from '@progress/kendo-angular-notification';
+import { RouteInfo } from 'src/app/shared/sidebar/sidebar.metadata';
 
 export class UtilityRix {
+
+  static operations = {
+    opDashboard: "Dashboard",
+    opUsers: "Users",
+    opVehicals: "Vehicals",
+    opPassenger: "Passengers",
+    opAddresss: "Addresses",
+    opApprovers: "Approvers",
+    opDrivers: "Drivers",
+    opVehicalInspections: "Vehical Inspections",
+    opIncidents: "Incidents",
+
+    opTripBookings: "Trip Bookings",
+    opNotifications: "Notifications",
+  }
+
+  static settingMenuItems: RouteInfo[] = [
+    {
+      operation: UtilityRix.operations.opNotifications,
+      path: '/setting/notifications',
+      title: 'Notifications',
+      icon: 'home-icon',
+      class: '',
+      badge: '',
+      badgeClass: '',
+      isExternalLink: false,
+      submenu: []
+    },
+    {
+      operation: UtilityRix.operations.opUsers,
+      path: '/setting/user-management',
+      title: 'User Management',
+      icon: 'home-icon',
+      class: '',
+      badge: '',
+      badgeClass: '',
+      isExternalLink: false,
+      submenu: []
+    },
+    {
+      path: '/setting/data-import',
+      title: 'Data Import',
+      icon: 'home-icon',
+      class: '',
+      badge: '',
+      badgeClass: '',
+      isExternalLink: false,
+      submenu: []
+    },
+    {
+      path: '/setting/config',
+      title: 'Configurations',
+      icon: 'home-icon',
+      class: '',
+      badge: '',
+      badgeClass: '',
+      isExternalLink: false,
+      submenu: []
+    },
+  ];
 
   static bodyInspectionSide = {
     frontId: 'b6bfcb18-00b6-4a59-84e5-6e0e87c61a7a',

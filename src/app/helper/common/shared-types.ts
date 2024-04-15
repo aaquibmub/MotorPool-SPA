@@ -137,7 +137,8 @@ export enum UserRoleType {
   Admin = 5,
   Dispatcher = 10,
   Driver = 20,
-  Maintainance = 30
+  Maintainance = 30,
+  Dashboard = 40
 }
 
 export function GetUserRoleListForNotification():
@@ -169,6 +170,10 @@ export function GetUserRoleTypeForDropdownList():
     {
       value: UserRoleType.Driver,
       text: 'Driver'
+    },
+    {
+      value: UserRoleType.Dashboard,
+      text: 'Dashboard'
     }
   ];
 }

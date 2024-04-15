@@ -5,8 +5,12 @@ import { IntlService } from '@progress/kendo-angular-intl';
 import { ZonedDate } from '@progress/kendo-date-math';
 import { Howl, Howler } from 'howler';
 import { Subject } from 'rxjs';
+import { ROUTES } from 'src/app/shared/sidebar/sidebar-routes.config';
+import { RouteInfo } from 'src/app/shared/sidebar/sidebar.metadata';
 import { LanguageKeys } from '../../common/language-keys';
 import { DataImportStatus, DriverStatus, Gender, GetBooleanStatusForDropdownList, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetUserRoleTypeForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripRoute, TripStatus, TripType, UserRoleType, VehicalStatus } from '../../common/shared-types';
+import { UtilityRix } from '../../common/utility-rix';
+import { CurrentUserModel } from '../../models/auth/current-user-model';
 import { AuthService } from '../auth/auth.service';
 @Injectable({
   providedIn: 'root'
@@ -339,6 +343,31 @@ export class UtilityService {
 
     Howler.volume(1);
 
+  }
+
+  getRoleBasedMenuItems(user: CurrentUserModel, allItems: boolean): RouteInfo[] {
+
+    let allRouteItems: RouteInfo[] = [];
+    let roleBaseMenuItems: RouteInfo[] = [];
+
+    const sideBarItems = ROUTES.filter(f => f);
+    allRouteItems.push(...sideBarItems);
+
+    if (allItems) {
+      allRouteItems.push(...UtilityRix.settingMenuItems);
+    }
+
+    roleBaseMenuItems.push(...allRouteItems.filter(f => user.permissions
+      .findIndex(fi => fi.name === f.operation
+        && fi.canView == true) !== -1));
+
+    const adminPermissions = user.roleType == UserRoleType.Admin ?
+      allRouteItems.filter(f => f.operation == null || f.operation == undefined || f.operation == '')
+      : [];
+
+    roleBaseMenuItems.push(...adminPermissions);
+
+    return roleBaseMenuItems;
   }
 
 }

@@ -18,7 +18,10 @@ export class UserBasedDefaultRouteComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.loggedIn()) {
-      this.router.navigate(['/dashboard']);
+      const user = this.authService.getCurrentUser();
+      const roleBasedMenuItems = this.utilityService.getRoleBasedMenuItems(user, true);
+      const path = roleBasedMenuItems[0]?.path;
+      this.router.navigate([path]);
     } else {
       this.utilityService.redirectToUrl('/auth/login');
       // this.router.navigate([]);

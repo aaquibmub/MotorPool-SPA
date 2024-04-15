@@ -2,11 +2,13 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { UtilityService } from 'src/app/helper/services/common/utility.service';
+import { RouteInfo } from '../sidebar/sidebar.metadata';
 import { NotificationListModel } from './../../helper/models/common/notifications/notification-list-model';
 import { AuthService } from './../../helper/services/auth/auth.service';
 import { AlertService } from './../../helper/services/common/alert.service';
 import { NotificationTickerService } from './../../helper/services/common/notification.service';
-import { OverlayService } from './../../helper/services/common/overlay.service';
 import { SidebarService } from './../../helper/services/common/sidebar.service';
 
 @Component({
@@ -25,12 +27,13 @@ export class NavbarComponent implements OnInit {
   notifications: NotificationListModel[];
   showUserMenu = false;
   showSettingsMenu = false;
+  settingMenuItems: RouteInfo[] = UtilityRix.settingMenuItems;
 
   constructor(
     public authService: AuthService,
     private translate: TranslateService,
     public sidebarservice: SidebarService,
-    private overlayService: OverlayService,
+    private utilityService: UtilityService,
     // private userService: UserService,
     private notificationService: NotificationTickerService,
     private location: Location,
@@ -80,6 +83,18 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const user = this.authService.getCurrentUser();
+
+    const roleBasedMenuItems = this.utilityService.getRoleBasedMenuItems(user, true);
+
+    const settingMenuItems = this.settingMenuItems;
+    settingMenuItems.forEach(f => {
+      const index = roleBasedMenuItems.findIndex(fi => fi.path === f.path);
+      const found = index !== -1;
+      if (!found) {
+        this.settingMenuItems = this.settingMenuItems.filter(fff => fff.path !== f.path);
+      }
+    });
 
     this.sidebarservice.getUserMenuState().subscribe(
       (flag) => {
