@@ -5,7 +5,7 @@
         <app-dashboard-home-trip-tiles></app-dashboard-home-trip-tiles>
       </div>
     </div>
-    <div class="row pb-24">
+    <div class="row pb-24" *ngIf="user?.roleType != roleType.Dashboard">
       <div class="col-6">
         <app-dashboard-home-upcoming-trips></app-dashboard-home-upcoming-trips>
       </div>
@@ -13,7 +13,13 @@
         <app-dashboard-home-ongoing-trips></app-dashboard-home-ongoing-trips>
       </div>
     </div>
-    <div class="row pb-24" *ngIf="user?.roleType != roleType.Dispatcher">
+    <div
+      class="row pb-24"
+      *ngIf="
+        user?.roleType != roleType.Dispatcher &&
+        user?.roleType != roleType.Dashboard
+      "
+    >
       <div class="col-6">
         <app-dashboard-home-trip-type-chart></app-dashboard-home-trip-type-chart>
       </div>

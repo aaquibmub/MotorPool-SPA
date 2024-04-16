@@ -350,6 +350,10 @@ export class UtilityService {
     let allRouteItems: RouteInfo[] = [];
     let roleBaseMenuItems: RouteInfo[] = [];
 
+    if (!(user && user.permissions)) {
+      return roleBaseMenuItems;
+    }
+
     const sideBarItems = ROUTES.filter(f => f);
     allRouteItems.push(...sideBarItems);
 
