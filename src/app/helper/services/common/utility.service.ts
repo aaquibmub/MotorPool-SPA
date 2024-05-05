@@ -359,6 +359,13 @@ export class UtilityService {
 
     if (allItems) {
       allRouteItems.push(...UtilityRix.settingMenuItems);
+
+      sideBarItems.forEach(f => {
+        f.submenu.forEach(s => {
+          allRouteItems.push(s);
+        });
+      });
+
     }
 
     roleBaseMenuItems.push(...allRouteItems.filter(f => user.permissions
@@ -368,7 +375,6 @@ export class UtilityService {
     const adminPermissions = user.roleType == UserRoleType.Admin ?
       allRouteItems.filter(f => f.operation == null || f.operation == undefined || f.operation == '')
       : [];
-
     roleBaseMenuItems.push(...adminPermissions);
 
     return roleBaseMenuItems;

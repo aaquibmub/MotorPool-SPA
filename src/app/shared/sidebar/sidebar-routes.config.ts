@@ -509,6 +509,7 @@ export const ROUTES: RouteInfo[] = [
   // reports
   {
     path: '/reports',
+    operation: null,
     title: 'Reports',
     icon: 'reports-icon',
     class: '',

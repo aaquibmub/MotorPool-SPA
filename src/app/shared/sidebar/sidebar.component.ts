@@ -82,6 +82,7 @@ export class SidebarComponent implements OnInit {
       const mi = menuItems.find(f => f.path === '/public-feedback');
       roleBaseMenuItems.push(mi);
     }
+
     this.menuItems = roleBaseMenuItems;
     // $.getScript('./assets/js/app-sidebar.js');
 
