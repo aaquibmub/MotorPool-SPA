@@ -5,6 +5,7 @@ export class LanguageKeys {
   addNewDestination = "Add New Destination";
   addPassanger = "Add Passenger";
   addressRequired = "Address is required";
+  allInspections = "All Inspections";
   approvedBy = "Approved By";
   approverRequired = "Approver is required";
   ageGroup = "Age Group";
@@ -37,6 +38,7 @@ export class LanguageKeys {
   color = "Color";
   colorRequired = "Color is required";
   comments = "Comments";
+  completedInspections = "Completed Inspections";
   createNewVehical = "Create New Vehicle";
   createNewPass = "Create New Passenger";
   createNewDriver = "Create New Driver";
@@ -75,6 +77,7 @@ export class LanguageKeys {
   driverVsTrips = "Driver vs Trips";
   driverId = "Driver ID";
   driverCreationDate = "Driver Creation Date";
+  dueInspections = "Due Inspections";
 
   //E.
   end = "End";
@@ -90,6 +93,7 @@ export class LanguageKeys {
   endingOdoMeterReading = "Ending ODO Meter Reading";
 
   //F
+  failedInspections = "Failed Inspections";
   firstName = "First Name";
   firstNameReq = "First Name is required";
   fail = "Fail";
@@ -112,6 +116,8 @@ export class LanguageKeys {
   isArmoured = "is armoured";
   inactiveVehicals = "Inactive Vehicles";
   inactiveDrivers = "Inactive Drivers";
+  inspectionBy = "Inspection By";
+  incompleteInspections = "Incomplete Inspections";
   inQueue = "In Queue";
   inDQ = "In DQ";
   idle = "Idle";
@@ -133,8 +139,8 @@ export class LanguageKeys {
   //M
   mileage = "Mileage";
   milageKm = "Mileage KM";
-  mileageOpm = "Mileage PTC";
-  mileageSaudi = "Mileage Saudi";
+  mileageOpm = "Mileage PTC-US";
+  mileageSaudi = "Mileage PTC-SA";
   milageOnODO = "Mileage on ODO Meter";
   middleName = "Middle Name";
   middleNameReq = "Middle Name is required";
@@ -261,10 +267,10 @@ export class LanguageKeys {
   tripRoutex = "Trip Routex";
   tripDispatcher = "Trip Dispatcher";
   todaysTrips = "Today Trips";
-  tripsOPM = "Trips PTC";
-  tripsSaudi = "Trips Saudi";
+  tripsOPM = "Trips PTC-US";
+  tripsSaudi = "Trips PTC-SA";
   tripsOngoingRightNow = "Trips ongoing right now";
-  tripsOpm = "Trips PTC";
+  tripsOpm = "Trips PTC-US";
 
   //U
   update = "Update";

@@ -126,7 +126,7 @@ export const ROUTES: RouteInfo[] = [
       // Vehicle Inspection
       {
         operation: UtilityRix.operations.opVehicalInspections,
-        path: '/vehicles/inspection',
+        path: '/vehicals/inspections',
         title: 'Inspections',
         icon: 'bx bx-right-arrow-alt',
         class: '',
@@ -136,7 +136,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [
           {
             operation: UtilityRix.operations.opVehicalInspections,
-            path: '/vehicla/inspection/all',
+            path: '/vehicals/inspections/all',
             title: 'All Inspections',
             icon: 'bx bx-right-arrow-alt',
             class: '',
@@ -147,7 +147,7 @@ export const ROUTES: RouteInfo[] = [
           },
           {
             operation: UtilityRix.operations.opVehicalInspections,
-            path: '/vehicle/inspection/due',
+            path: '/vehicals/inspections/due',
             title: 'Due Inspections',
             icon: 'bx bx-right-arrow-alt',
             class: '',
@@ -158,19 +158,8 @@ export const ROUTES: RouteInfo[] = [
           },
           {
             operation: UtilityRix.operations.opVehicalInspections,
-            path: '/vehicle/inspection/failed',
-            title: 'Failed Inspections',
-            icon: 'bx bx-right-arrow-alt',
-            class: '',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            submenu: []
-          },
-          {
-            operation: UtilityRix.operations.opVehicalInspections,
-            path: '/vehicle/inspection/incomplete',
-            title: 'Incomplete Inspections',
+            path: '/vehicals/inspections/completed',
+            title: 'Completed Inspections',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -383,7 +372,7 @@ export const ROUTES: RouteInfo[] = [
 
       // Address
       {
-        operation: UtilityRix.operations.opIncidents,
+        operation: UtilityRix.operations.opAddresss,
         path: '/addresses/list/',
         title: 'Addresses',
         icon: 'bx bx-right-arrow-alt',
@@ -393,7 +382,7 @@ export const ROUTES: RouteInfo[] = [
         isExternalLink: false,
         submenu: [
           {
-            operation: UtilityRix.operations.opIncidents,
+            operation: UtilityRix.operations.opAddresss,
             path: '/addresses/address/new',
             title: 'Add New Address',
             icon: 'bx bx-right-arrow-alt',
@@ -404,7 +393,7 @@ export const ROUTES: RouteInfo[] = [
             submenu: []
           },
           {
-            operation: UtilityRix.operations.opIncidents,
+            operation: UtilityRix.operations.opAddresss,
             path: '/addresses/list/all',
             title: 'All Addresses',
             icon: 'bx bx-right-arrow-alt',
@@ -418,7 +407,7 @@ export const ROUTES: RouteInfo[] = [
       },
 
 
-      // Address
+      // Approvers
       {
         operation: UtilityRix.operations.opApprovers,
         path: '/approvers/list/',

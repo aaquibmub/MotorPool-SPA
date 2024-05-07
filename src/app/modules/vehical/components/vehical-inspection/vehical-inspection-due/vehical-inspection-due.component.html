@@ -1,0 +1,88 @@
+<div class="grid-content">
+  <app-grid-toolbar
+    [numberOfRecords]="gridData?.total"
+    entity="inspection"
+    [hideColumnDropdown]="true"
+  ></app-grid-toolbar>
+  <kendo-grid
+    [data]="gridData"
+    [pageSize]="state.take"
+    [skip]="state.skip"
+    [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
+    scrollable="none"
+    (dataStateChange)="dataStateChange($event)"
+  >
+    <kendo-grid-column
+      field="inspectionId"
+      title="{{ utilityService.language.id | translate }}"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <a routerLink="/vehicals/inspections/view/{{ dataItem.id }}/body">{{
+          dataItem.inspectionId
+        }}</a>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="inspectionDate"
+      title="{{ utilityService.language.date | translate }}"
+      filter="date"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        {{ dataItem.inspectionDate | dateformat : "g" }}
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column
+      field="registrationPlate"
+      title="{{ utilityService.language.registrationPlate | translate }}"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="inspectionBy"
+      title="{{ utilityService.language.inspectionBy | translate }}"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column headerClass="action-column">
+      <ng-template kendoGridHeaderTemplate>
+        <span><i class="action-column-icon"></i></span>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <app-grid-action-dropdown
+          [actions]="getGridActions(dataItem)"
+          [index]="rowIndex"
+          [states]="getGridActionMenuState()"
+        ></app-grid-action-dropdown>
+      </ng-template>
+    </kendo-grid-column>
+    <ng-template
+      kendoPagerTemplate
+      let-totalPages="totalPages"
+      let-currentPage="currentPage"
+    >
+      <div class="grid-toolbar">
+        <div class="left">
+          <kendo-pager-page-sizes
+            [pageSizes]="pageable.pageSizes"
+          ></kendo-pager-page-sizes>
+        </div>
+        <div class="right">
+          <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+          <kendo-pager-numeric-buttons
+            [buttonCount]="pageable.buttonCount"
+          ></kendo-pager-numeric-buttons>
+          <kendo-pager-next-buttons></kendo-pager-next-buttons>
+        </div>
+      </div>
+    </ng-template>
+    <kendo-grid-messages
+      pagerItemsPerPage="{{
+        utilityService.language.recordsPerPage | translate
+      }}"
+      pagerItems="rows"
+    ></kendo-grid-messages>
+  </kendo-grid>
+</div>

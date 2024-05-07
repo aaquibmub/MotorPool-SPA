@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 import { ROUTES } from 'src/app/shared/sidebar/sidebar-routes.config';
 import { RouteInfo } from 'src/app/shared/sidebar/sidebar.metadata';
 import { LanguageKeys } from '../../common/language-keys';
-import { DataImportStatus, DriverStatus, Gender, GetBooleanStatusForDropdownList, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetUserRoleTypeForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripRoute, TripStatus, TripType, UserRoleType, VehicalStatus } from '../../common/shared-types';
+import { DataImportStatus, DriverStatus, Gender, GetBooleanStatusForDropdownList, GetDriverStatusForDropdownList, GetGenderForDropdownList, GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, GetUserRoleTypeForDropdownList, GetVehicalInspectionStatusForDropdownList, GetVehicalStatusForDropdownList, OPM, SystemLogType, TripDestination, TripRoute, TripStatus, TripType, UserRoleType, VehicalInspectionStatus, VehicalStatus } from '../../common/shared-types';
 import { UtilityRix } from '../../common/utility-rix';
 import { CurrentUserModel } from '../../models/auth/current-user-model';
 import { AuthService } from '../auth/auth.service';
@@ -140,6 +140,12 @@ export class UtilityService {
 
   getVehicalStatusLabel(value: VehicalStatus): string {
     var statusList = GetVehicalStatusForDropdownList();
+    var status = statusList.find(f => f.value == value);
+    return status != null ? status.text : '';
+  }
+
+  getVehicalInspectionStatusLabel(value: VehicalInspectionStatus): string {
+    var statusList = GetVehicalInspectionStatusForDropdownList();
     var status = statusList.find(f => f.value == value);
     return status != null ? status.text : '';
   }

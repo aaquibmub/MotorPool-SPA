@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Observable, Subject } from 'rxjs';
-import { VehicalStatus } from '../../common/shared-types';
+import { VehicalInspectionStatus, VehicalStatus } from '../../common/shared-types';
 import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
 import { GridList } from '../../models/common/grid/grid-list';
 import { ResponseModel } from '../../models/common/response-model';
+import { VehicalInspectionGridModel } from '../../models/vehicals/inspections/vehical-inspection-grid-model';
 import { VehicalGridModel } from '../../models/vehicals/vehical-grid-model';
 import { VehicalModel } from '../../models/vehicals/vehical-model';
 import { VehicalViewDetailModel } from '../../models/vehicals/vehical-view-detail-model';
@@ -25,6 +26,7 @@ export class VehicalService {
   private gridInspectionData = new Subject<GridList<VehicalViewInspectionModel>>();
   private gridTripData = new Subject<GridList<VehicalViewTripModel>>();
   private gridDriverData = new Subject<GridList<VehicalViewDriverModel>>();
+  private gridVehicalInspectionData = new Subject<GridList<VehicalInspectionGridModel>>();
 
   constructor(
     private http: HttpClient) { }
@@ -86,6 +88,25 @@ export class VehicalService {
 
   getVehicalViewDetailModel(id: string): Observable<VehicalViewDetailModel> {
     return this.http.get<VehicalViewDetailModel>(this.baseUrl + 'get-view-detail-model/' + id);
+  }
+
+  getVehicalInspectionByStatusGridData(): Observable<GridDataResult> {
+    return this.gridVehicalInspectionData.asObservable();
+  }
+  fetchVehicalInspectionByStatusGridData(
+    state: any,
+    query: string,
+    status?: VehicalInspectionStatus): void {
+    this.http.post<GridList<VehicalInspectionGridModel>>(
+      this.baseUrl + 'get-vehical-inspection-gridlist', {
+      gridFilters: state,
+      search: query,
+      status
+    }).subscribe(
+      (gridData: GridList<VehicalInspectionGridModel>) => {
+        this.gridVehicalInspectionData.next(gridData);
+      }
+    );
   }
 
   getVehicalInspectionGridData(): Observable<GridDataResult> {

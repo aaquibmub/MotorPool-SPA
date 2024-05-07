@@ -367,6 +367,30 @@ export function GetVehicalStatusForDropdownList():
   ];
 }
 
+export enum VehicalInspectionStatus {
+  Due = 10,
+  Incomplete = 20,
+  Completed = 30
+}
+
+export function GetVehicalInspectionStatusForDropdownList():
+  DropdownItem<VehicalInspectionStatus>[] {
+  return [
+    {
+      value: VehicalInspectionStatus.Due,
+      text: 'Due'
+    },
+    {
+      value: VehicalInspectionStatus.Incomplete,
+      text: 'Incomplete'
+    },
+    {
+      value: VehicalInspectionStatus.Completed,
+      text: 'Completed'
+    },
+  ];
+}
+
 export function GetBooleanForDropdownList():
   DropdownItem<boolean>[] {
   return [
