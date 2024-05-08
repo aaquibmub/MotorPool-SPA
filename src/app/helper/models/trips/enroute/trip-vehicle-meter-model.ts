@@ -4,4 +4,5 @@ export class TripVehicleMeterModel {
   tripId: string;
   meterReading: number;
   status: TripStatus;
+  time?: Date;
 }

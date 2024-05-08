@@ -1,0 +1,113 @@
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <!-- Booking -->
+  <div class="form-section form-section-border">
+    <div class="section-header">
+      {{ utilityService.language.booking | translate }}
+    </div>
+    <div class="section-body">
+      <!-- Pickup Time -->
+      <div class="form-section blue-section">
+        <div class="section-header">
+          {{ utilityService.language.pickupDateTime | translate }}
+        </div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputPickupDate">{{
+                    utilityService.language.pickupDate | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-datepicker
+                    class="form-control"
+                    id="inputPickupDate"
+                    formControlName="pickupDate"
+                  >
+                  </kendo-datepicker>
+                  <div
+                    *ngIf="
+                      !form.get('pickupDate').valid &&
+                      form.get('pickupDate').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    {{
+                      utilityService.language.pickupDateRequired || translate
+                    }}.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputPickupTime">{{
+                    utilityService.language.pickupTime | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-timepicker
+                    class="form-control"
+                    id="inputPickupTime"
+                    formControlName="pickupTime"
+                  >
+                  </kendo-timepicker>
+                  <div
+                    *ngIf="
+                      !form.get('pickupTime').valid &&
+                      form.get('pickupTime').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    {{ utilityService.language.pickupTimeRequired | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Notes -->
+  <div class="form-section">
+    <div class="section-header">
+      {{ utilityService.language.notes | translate }}
+    </div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="control">
+              <textarea
+                class="form-control form-text-area"
+                name=""
+                formControlName="notes"
+                id=""
+                cols="30"
+                rows="10"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Actions -->
+  <div class="form-section transparent-section">
+    <div class="section-body">
+      <div class="description sm-hide"></div>
+      <div class="fields">
+        <div class="form-group">
+          <button class="btn btn-primary mr-16" type="submit">
+            {{ utilityService.language.save | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

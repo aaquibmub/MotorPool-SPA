@@ -49,6 +49,7 @@ export class LanguageKeys {
   createIncidentCategory = "Create New Category";
 
   //D.
+  dateTime = "Date Time";
   daySunday = "Sunday";
   dayMonday = "Monday";
   dayTuesday = "Tuesday";
@@ -118,6 +119,7 @@ export class LanguageKeys {
   inactiveDrivers = "Inactive Drivers";
   inspectionBy = "Inspection By";
   incompleteInspections = "Incomplete Inspections";
+  information = "Information";
   inQueue = "In Queue";
   inDQ = "In DQ";
   idle = "Idle";

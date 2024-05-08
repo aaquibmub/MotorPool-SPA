@@ -15,7 +15,13 @@ import { TripJourneyModel } from './../../../../../helper/models/trips/trip-edit
 export class TripEditJourneyComponent implements OnInit {
 
   model: TripJourneyModel;
+  startDateTime = new Date();
+  odoStartDateTime = new Date();
   meterReadingStart?: number;
+
+  journeyItemDate: Date = new Date();
+
+  odoEndDateTime = new Date();
   meterReadingEnd?: number;
   nextStatus: TripStatus;
   actionLable: string;
@@ -43,7 +49,9 @@ export class TripEditJourneyComponent implements OnInit {
     this.tripService.getTripJourneyModel(id)
       .subscribe((model: TripJourneyModel) => {
         this.model = model;
+        this.odoStartDateTime = model.odoStartDateTime;
         this.meterReadingStart = model.odoMeterAtStart;
+        this.odoEndDateTime = model.odoEndDateTime;
         this.meterReadingEnd = model.odoMeterAtEnd;
         this.nextStatus = this.getNextTripStatus();
         this.actionLable = this.getTripEnrouteButtonText();
@@ -54,6 +62,7 @@ export class TripEditJourneyComponent implements OnInit {
     this.tripService.updateTripStatus({
       tripId: this.model.tripId,
       status: TripStatus.TripStarted,
+      time: this.startDateTime,
       remarks: ''
     }).subscribe((response: ResponseModel<string>) => {
       if (response.hasError) {
@@ -71,6 +80,7 @@ export class TripEditJourneyComponent implements OnInit {
     this.tripService.updateTripVehicleMeter({
       tripId: this.model.tripId,
       meterReading: this.meterReadingStart,
+      time: this.odoStartDateTime,
       status: TripStatus.OdoMeterAtStart,
     }).subscribe((response: ResponseModel<string>) => {
       if (response.hasError) {
@@ -80,6 +90,7 @@ export class TripEditJourneyComponent implements OnInit {
       this.tripService.updateTripStatus({
         tripId: this.model.tripId,
         status: TripStatus.VehicalDispatched,
+        time: this.odoStartDateTime,
         remarks: ''
       }).subscribe((response: ResponseModel<string>) => {
         if (response.hasError) {
@@ -110,6 +121,7 @@ export class TripEditJourneyComponent implements OnInit {
     this.tripService.updateTripStatus({
       tripId: this.model.tripId,
       status: tripStatus,
+      time: this.journeyItemDate,
       destinationId: this.getNextTripDestinationId(),
       addressId: this.getNextTripAddressId(),
       remarks: ''
@@ -153,15 +165,21 @@ export class TripEditJourneyComponent implements OnInit {
     this.tripService.updateTripVehicleMeter({
       tripId: this.model.tripId,
       meterReading: this.meterReadingEnd,
+      time: this.odoEndDateTime,
       status: TripStatus.OdoMeterAtEnd,
     }).subscribe((response: ResponseModel<string>) => {
       if (response.hasError) {
         this.alertService.setErrorAlert(response.msg);
         return;
       }
+      const seconds = this.odoEndDateTime.getSeconds() + 5;
+      const completeTime = this.odoEndDateTime;
+      completeTime.setSeconds(seconds);
+
       this.tripService.updateTripStatus({
         tripId: this.model.tripId,
         status: TripStatus.Completed,
+        time: completeTime,
         remarks: ''
       }).subscribe((response: ResponseModel<string>) => {
         if (response.hasError) {
@@ -188,6 +206,9 @@ export class TripEditJourneyComponent implements OnInit {
     var endTrip = nextDestination.completed;
 
     if (endTrip) {
+      if (status == TripStatus.Updated) {
+        return null;
+      }
       return TripStatus.OdoMeterAtEnd;
     }
 

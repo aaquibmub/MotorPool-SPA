@@ -19,6 +19,7 @@ import { TripBookingScheduledListComponent } from './components/trip-bookings/tr
 import { TripBookingStartNowListComponent } from './components/trip-bookings/trip-booking-start-now-list/trip-booking-start-now-list.component';
 import { TripBookingsComponent } from './components/trip-bookings/trip-bookings.component';
 import { TripEditDestinationListComponent } from './components/trip-edit/trip-edit-destination-list/trip-edit-destination-list.component';
+import { TripEditInfoComponent } from './components/trip-edit/trip-edit-info/trip-edit-info.component';
 import { TripEditJourneyComponent } from './components/trip-edit/trip-edit-journey/trip-edit-journey.component';
 import { TripEditPassengerListComponent } from './components/trip-edit/trip-edit-passenger-list/trip-edit-passenger-list.component';
 import { TripEditComponent } from './components/trip-edit/trip-edit.component';
@@ -72,6 +73,7 @@ import { TripComponent } from './trip.component';
     TripViewDriverComponent,
 
     TripEditComponent,
+    TripEditInfoComponent,
     TripEditJourneyComponent,
     TripEditPassengerListComponent,
     TripEditDestinationListComponent,

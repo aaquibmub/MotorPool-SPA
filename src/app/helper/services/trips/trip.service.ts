@@ -13,6 +13,7 @@ import { TripStatusDetailModel } from '../../models/trips/enroute/trip-status-de
 import { TripStatusModel } from '../../models/trips/enroute/trip-status-model';
 import { TripVehicleMeterModel } from '../../models/trips/enroute/trip-vehicle-meter-model';
 import { TripDestinationDetailModel } from '../../models/trips/trip-edit/trip-destination-detail-model';
+import { TripInformationModel } from '../../models/trips/trip-edit/trip-information-model';
 import { TripJourneyModel } from '../../models/trips/trip-edit/trip-journey-model';
 import { TripModel } from '../../models/trips/trip-edit/trip-model';
 import { TripPassengerGridModel } from '../../models/trips/trip-edit/trip-passenger-grid-model';
@@ -62,6 +63,14 @@ export class TripService {
 
   getTripModel(id: string): Observable<TripModel> {
     return this.http.get<TripModel>(this.baseUrl + 'get-trip-model/' + id);
+  }
+
+  getTripInformationModel(id: string): Observable<TripInformationModel> {
+    return this.http.get<TripInformationModel>(this.baseUrl + 'get-trip-information-model/' + id);
+  }
+
+  updateTripInformation(model: TripInformationModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-information', model);
   }
 
   getTripJourneyModel(id: string): Observable<TripJourneyModel> {

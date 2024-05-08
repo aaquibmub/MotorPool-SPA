@@ -7,7 +7,9 @@ export class TripJourneyModel {
   tripStatus: TripStatus;
   driver: string;
   vehicle: string;
+  odoStartDateTime?: Date;
   odoMeterAtStart?: number;
+  odoEndDateTime?: Date;
   odoMeterAtEnd?: number;
   items: TripJourneyItemModel[];
 }
@@ -16,6 +18,7 @@ export class TripJourneyItemModel {
   startTime?: Date;
   start: string;
   endTime?: Date;
+  dateTime?: Date;
   end: string;
   title: string;
   destinationId?: string;
