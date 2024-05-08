@@ -35,6 +35,7 @@ export enum OPM {
 export enum TripType {
   Scheduled = 10,
   StartsNow = 20,
+  Internal = 25,
   Refuelling = 30,
 
   Today = 400,
@@ -53,6 +54,10 @@ export function GetTripTypeForDropdownList():
     {
       value: TripType.StartsNow,
       text: 'New Trip'
+    },
+    {
+      value: TripType.Internal,
+      text: 'New Trip - Internal'
     },
     {
       value: TripType.Refuelling,

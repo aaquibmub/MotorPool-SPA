@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
+import { TripBookingInternalEditComponent } from './components/trip-booking/trip-booking-internal-edit/trip-booking-internal-edit.component';
 import { TripBookingRefuellingEditComponent } from './components/trip-booking/trip-booking-refuelling-edit/trip-booking-refuelling-edit.component';
 import { TripBookingScheduledEditComponent } from './components/trip-booking/trip-booking-scheduled-edit/trip-booking-scheduled-edit.component';
 import { TripBookingStartNowEditComponent } from './components/trip-booking/trip-booking-start-now-edit/trip-booking-start-now-edit.component';
 import { TripBookingComponent } from './components/trip-booking/trip-booking.component';
 import { TripBookingAllComponent } from './components/trip-bookings/trip-booking-all/trip-booking-all.component';
+import { TripBookingInternalListComponent } from './components/trip-bookings/trip-booking-internal-list/trip-booking-internal-list.component';
 import { TripBookingRefuellingListComponent } from './components/trip-bookings/trip-booking-refuelling-list/trip-booking-refuelling-list.component';
 import { TripBookingScheduledListComponent } from './components/trip-bookings/trip-booking-scheduled-list/trip-booking-scheduled-list.component';
 import { TripBookingStartNowListComponent } from './components/trip-bookings/trip-booking-start-now-list/trip-booking-start-now-list.component';
@@ -50,6 +52,7 @@ const routes: Routes = [
           },
           { path: 'new-scheduled', component: TripBookingScheduledEditComponent },
           { path: 'new-start-now', component: TripBookingStartNowEditComponent },
+          { path: 'new-internal', component: TripBookingInternalEditComponent },
           { path: 'new-refuelling', component: TripBookingRefuellingEditComponent },
         ]
       },
@@ -61,6 +64,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'all', pathMatch: 'full' },
           { path: 'all', component: TripBookingAllComponent },
           { path: 'start-now', component: TripBookingStartNowListComponent },
+          { path: 'internal', component: TripBookingInternalListComponent },
           { path: 'scheduled', component: TripBookingScheduledListComponent },
           { path: 'refuelling', component: TripBookingRefuellingListComponent }
         ]

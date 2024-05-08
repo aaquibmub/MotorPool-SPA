@@ -219,6 +219,17 @@ export const ROUTES: RouteInfo[] = [
           },
           {
             operation: UtilityRix.operations.opTripBookings,
+            path: '/trips/booking/new-internal',
+            title: 'New Trip - Internal',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            operation: UtilityRix.operations.opTripBookings,
             path: '/trips/booking/new-refuelling',
             title: 'New Refuelling',
             icon: 'bx bx-right-arrow-alt',

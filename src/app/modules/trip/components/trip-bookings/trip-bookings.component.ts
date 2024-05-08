@@ -23,6 +23,13 @@ export class TripBookingsComponent implements OnInit {
     },
     {
       handle: () => {
+        this.router.navigate(['/trips/booking/new-internal']);
+      },
+      icon: '',
+      label: 'New Trip - Internal'
+    },
+    {
+      handle: () => {
         this.router.navigate(['/trips/booking/new-scheduled']);
       },
       icon: '',
@@ -49,6 +56,9 @@ export class TripBookingsComponent implements OnInit {
       }
       if (path === '/trips/bookings/start-now') {
         this.pageTitle = 'New Trips';
+      }
+      if (path === '/trips/bookings/internal') {
+        this.pageTitle = 'New Trips - Internal';
       }
       if (path === '/trips/bookings/scheduled') {
         this.pageTitle = 'Scheduled Trips';

@@ -9,11 +9,13 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TripBookingInternalEditComponent } from './components/trip-booking/trip-booking-internal-edit/trip-booking-internal-edit.component';
 import { TripBookingRefuellingEditComponent } from './components/trip-booking/trip-booking-refuelling-edit/trip-booking-refuelling-edit.component';
 import { TripBookingScheduledEditComponent } from './components/trip-booking/trip-booking-scheduled-edit/trip-booking-scheduled-edit.component';
 import { TripBookingStartNowEditComponent } from './components/trip-booking/trip-booking-start-now-edit/trip-booking-start-now-edit.component';
 import { TripBookingComponent } from './components/trip-booking/trip-booking.component';
 import { TripBookingAllComponent } from './components/trip-bookings/trip-booking-all/trip-booking-all.component';
+import { TripBookingInternalListComponent } from './components/trip-bookings/trip-booking-internal-list/trip-booking-internal-list.component';
 import { TripBookingRefuellingListComponent } from './components/trip-bookings/trip-booking-refuelling-list/trip-booking-refuelling-list.component';
 import { TripBookingScheduledListComponent } from './components/trip-bookings/trip-booking-scheduled-list/trip-booking-scheduled-list.component';
 import { TripBookingStartNowListComponent } from './components/trip-bookings/trip-booking-start-now-list/trip-booking-start-now-list.component';
@@ -59,6 +61,9 @@ import { TripComponent } from './trip.component';
 
     TripBookingStartNowListComponent,
     TripBookingStartNowEditComponent,
+
+    TripBookingInternalListComponent,
+    TripBookingInternalEditComponent,
 
     TripBookingScheduledEditComponent,
     TripBookingScheduledListComponent,

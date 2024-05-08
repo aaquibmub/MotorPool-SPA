@@ -9,6 +9,7 @@ import { TripDestinationModel } from '../../models/trips/enroute/trip-destinatio
 import { TripDropoffModel } from '../../models/trips/enroute/trip-dropoff-model';
 import { TripPickupModel } from '../../models/trips/enroute/trip-pickup-model';
 import { TripStopModel } from '../../models/trips/enroute/trip-stop-model';
+import { TripBookingInternalModel } from '../../models/trips/trip-bookings/trip-booking-internal-model';
 import { TripBookingPassengerModel } from '../../models/trips/trip-bookings/trip-booking-passenger-model';
 import { TripBookingRefuelingModel } from '../../models/trips/trip-bookings/trip-booking-refueling-model';
 import { TripBookingScheduledModel } from '../../models/trips/trip-bookings/trip-booking-scheduled-model';
@@ -126,6 +127,41 @@ export class TripBookingService {
     index = 0;
     formValue.specialSevices.forEach(f => {
       this.utilityService.buildFormData(formData, f, 'specialSevices[' + index + ']');
+      index++;
+    });
+
+    return formData;
+
+  }
+
+  getInternalBooking(id: string): Observable<TripBookingInternalModel> {
+    return this.http.get<TripBookingInternalModel>(this.baseUrl + 'get-internal' + id);
+  }
+
+  getDefaultInternalBookingModel(): Observable<TripBookingInternalModel> {
+    const url = this.baseUrl + 'get-default-internal';
+    return this.http.get<TripBookingInternalModel>(url);
+  }
+
+  addUpdateInternal(model: any): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'internal', model);
+  }
+
+  prepareSaveTripBookingInternal(
+    id: string,
+    formValue: TripBookingInternalModel
+  ): FormData {
+
+    const formData = new FormData();
+    if (id) {
+      formData.append('id', id);
+    }
+
+    this.utilityService.buildFormData(formData, formValue);
+
+    let index = 0;
+    formValue.destinations.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'destinations[' + index + ']');
       index++;
     });
 

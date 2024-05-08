@@ -386,4 +386,9 @@ export class UtilityService {
     return roleBaseMenuItems;
   }
 
+  isTripWithPassenger(type: TripType): boolean {
+    return type != TripType.Refuelling
+      && type != TripType.Internal;
+  }
+
 }

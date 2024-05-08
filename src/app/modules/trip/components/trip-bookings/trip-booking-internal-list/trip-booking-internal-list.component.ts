@@ -13,11 +13,11 @@ import { GridToolbarService } from './../../../../../helper/services/common/grid
 import { TripService } from './../../../../../helper/services/trips/trip.service';
 
 @Component({
-  selector: 'app-trip-booking-start-now-list',
-  templateUrl: './trip-booking-start-now-list.component.html',
-  styleUrls: ['./trip-booking-start-now-list.component.css']
+  selector: 'app-trip-booking-internal-list',
+  templateUrl: './trip-booking-internal-list.component.html',
+  styleUrls: ['./trip-booking-internal-list.component.css']
 })
-export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
+export class TripBookingInternalListComponent implements OnInit, OnDestroy {
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
@@ -42,7 +42,7 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
     this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
       next: (flag: boolean) => {
         if (flag) {
-          this.tripService.fetchGridData(this.state, this.searchQuery, TripType.StartsNow);
+          this.tripService.fetchGridData(this.state, this.searchQuery, TripType.Internal);
         }
       },
       error: (err) => console.error(err)
@@ -57,7 +57,7 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
       .subscribe(
         (config: PopupConfigModel) => {
           if (!config.show) {
-            this.tripService.fetchGridData(this.state, this.searchQuery, TripType.StartsNow);
+            this.tripService.fetchGridData(this.state, this.searchQuery, TripType.Internal);
           }
         }
       );
@@ -66,7 +66,7 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
       .subscribe(
         (config: PopupConfigModel) => {
           if (!config.show) {
-            this.tripService.fetchGridData(this.state, this.searchQuery, TripType.StartsNow);
+            this.tripService.fetchGridData(this.state, this.searchQuery, TripType.Internal);
           }
         }
       );
@@ -75,7 +75,7 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
         (pageSize: number) => {
           this.state.take = pageSize;
           this.tripService.fetchGridData(
-            this.state, this.searchQuery, TripType.StartsNow);
+            this.state, this.searchQuery, TripType.Internal);
         }
       );
     this.gridToolbarService.getGridSearchQuery()
@@ -83,12 +83,12 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
         (query: string) => {
           this.searchQuery = query;
           this.tripService.fetchGridData(
-            this.state, this.searchQuery, TripType.StartsNow);
+            this.state, this.searchQuery, TripType.Internal);
         }
       );
 
     this.tripService.fetchGridData(
-      this.state, this.searchQuery, TripType.StartsNow);
+      this.state, this.searchQuery, TripType.Internal);
     this.tripService.getGridData()
       .subscribe(
         (data: any) => {
@@ -101,7 +101,7 @@ export class TripBookingStartNowListComponent implements OnInit, OnDestroy {
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
     this.tripService.fetchGridData(
-      state, this.searchQuery, TripType.StartsNow);
+      state, this.searchQuery, TripType.Internal);
   }
 
   getGridActionMenuState(): boolean[] {

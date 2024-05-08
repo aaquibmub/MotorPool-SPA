@@ -67,6 +67,7 @@
             >{{ utilityService.language.journey | translate }}</a
           >
           <a
+            *ngIf="utilityService.isTripWithPassenger(model.type)"
             class="tab-left-item"
             routerLinkActive="active"
             routerLink="/trips/edit/{{ model.id }}/passengers"

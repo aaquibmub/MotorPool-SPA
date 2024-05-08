@@ -172,6 +172,7 @@ export class LanguageKeys {
   newDriver = "New Driver";
   nationalId = "National ID #";
   newTrips = "New Trips";
+  newTripsInternal = "New Trips - Internal";
 
   //O
   oilChange = "Oil Change";

@@ -17,7 +17,8 @@
             popupClass: 'et-dropdown-menu'
           }"
         >
-          {{ utilityService.language.createTrip | translate }}<i class="k-button-icon k-icon k-i-arrow-s"></i>
+          {{ utilityService.language.createTrip | translate
+          }}<i class="k-button-icon k-icon k-i-arrow-s"></i>
           <ng-template kendoDropDownButtonItemTemplate let-dataItem>
             <div
               style="width: 100%"
@@ -43,6 +44,12 @@
           routerLinkActive="active"
           routerLink="/trips/bookings/start-now"
           >{{ utilityService.language.newTrips | translate }}</a
+        >
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/trips/bookings/internal"
+          >{{ utilityService.language.newTripsInternal | translate }}</a
         >
         <a
           class="tab-left-item"
