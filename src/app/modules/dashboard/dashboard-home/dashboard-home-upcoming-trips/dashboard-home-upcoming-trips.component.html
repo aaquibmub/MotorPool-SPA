@@ -1,11 +1,11 @@
 <div class="dashboard-widget">
   <div class="header">Upcoming Trips</div>
-  <div class="caption">Trips due in next 60 minutes</div>
+  <div class="caption">Trips due in next 6 hrs</div>
   <div class="table" *ngIf="list">
     <table>
       <thead>
         <tr>
-          <th>{{ utilityService.language.trips | translate }}</th>
+          <th>{{ utilityService.language.time | translate }}</th>
           <th>{{ utilityService.language.tripId | translate }}</th>
           <th>{{ utilityService.language.passanger | translate }}</th>
           <th>{{ utilityService.language.driver | translate }}</th>
@@ -15,7 +15,11 @@
       <tbody>
         <tr *ngFor="let item of list">
           <td>{{ item.time | dateformat : "hh:mm aa" }}</td>
-          <td>{{ item.tripId }}</td>
+          <td>
+            <a routerLink="/trips/view/{{ item.id }}/detail">{{
+              item.tripId
+            }}</a>
+          </td>
           <td>{{ item.passenger }}</td>
           <td>{{ item.driver }}</td>
           <td>{{ item.vehical }}</td>

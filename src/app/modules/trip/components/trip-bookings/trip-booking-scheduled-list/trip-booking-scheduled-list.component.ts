@@ -43,7 +43,7 @@ export class TripBookingScheduledListComponent implements OnInit, OnDestroy {
     this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
       next: (flag: boolean) => {
         if (flag) {
-          this.tripService.fetchGridData(this.state, this.searchQuery);
+          this.tripService.fetchGridData(this.state, this.searchQuery, TripType.Scheduled);
         }
       },
       error: (err) => console.error(err)
@@ -59,7 +59,7 @@ export class TripBookingScheduledListComponent implements OnInit, OnDestroy {
       .subscribe(
         (config: PopupConfigModel) => {
           if (!config.show) {
-            this.tripService.fetchGridData(this.state, this.searchQuery);
+            this.tripService.fetchGridData(this.state, this.searchQuery, TripType.Scheduled);
           }
         }
       );
@@ -68,7 +68,7 @@ export class TripBookingScheduledListComponent implements OnInit, OnDestroy {
       .subscribe(
         (config: PopupConfigModel) => {
           if (!config.show) {
-            this.tripService.fetchGridData(this.state, this.searchQuery);
+            this.tripService.fetchGridData(this.state, this.searchQuery, TripType.Scheduled);
           }
         }
       );
@@ -101,7 +101,7 @@ export class TripBookingScheduledListComponent implements OnInit, OnDestroy {
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
     this.tripService.fetchGridData(
-      state, this.searchQuery, TripType.StartsNow);
+      state, this.searchQuery, TripType.Scheduled);
   }
 
   getGridActionMenuState(): boolean[] {

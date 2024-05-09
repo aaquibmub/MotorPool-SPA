@@ -158,8 +158,7 @@ export class DriversAllComponent implements OnInit, OnDestroy {
         label: item.active ? 'Disable' : 'Enable'
       }
     ];
-    if (item.driverStatus != DriverStatus.Busy
-      && item.driverStatus != DriverStatus.OffDuty) {
+    if (item.driverStatus != DriverStatus.OffDuty) {
       actions.push({
         handle: () => {
           this.driverService.setAllocateVehicalPopup(true, item.id);

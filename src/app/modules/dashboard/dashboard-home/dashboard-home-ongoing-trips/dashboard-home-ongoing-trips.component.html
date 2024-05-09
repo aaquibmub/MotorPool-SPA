@@ -19,7 +19,11 @@
       <tbody>
         <tr *ngFor="let item of list">
           <td>{{ item.time | dateformat : "hh:mm aa" }}</td>
-          <td>{{ item.tripId }}</td>
+          <td>
+            <a routerLink="/trips/view/{{ item.id }}/detail">{{
+              item.tripId
+            }}</a>
+          </td>
           <td>{{ item.passenger }}</td>
           <td>{{ item.driver }}</td>
           <td>{{ item.vehical }}</td>

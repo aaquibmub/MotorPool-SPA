@@ -43,7 +43,7 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
     this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
       next: (flag: boolean) => {
         if (flag) {
-          this.tripService.fetchGridData(this.state, this.searchQuery);
+          this.tripService.fetchGridData(this.state, this.searchQuery, TripType.Refuelling);
         }
       },
       error: (err) => console.error(err)
@@ -59,7 +59,7 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
       .subscribe(
         (config: PopupConfigModel) => {
           if (!config.show) {
-            this.tripService.fetchGridData(this.state, this.searchQuery);
+            this.tripService.fetchGridData(this.state, this.searchQuery, TripType.Refuelling);
           }
         }
       );
@@ -68,7 +68,7 @@ export class TripBookingRefuellingListComponent implements OnInit, OnDestroy {
       .subscribe(
         (config: PopupConfigModel) => {
           if (!config.show) {
-            this.tripService.fetchGridData(this.state, this.searchQuery);
+            this.tripService.fetchGridData(this.state, this.searchQuery, TripType.Refuelling);
           }
         }
       );
