@@ -15,6 +15,7 @@ export class TripJourneyModel {
 }
 
 export class TripJourneyItemModel {
+  status: TripStatus;
   startTime?: Date;
   start: string;
   endTime?: Date;

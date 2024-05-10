@@ -51,6 +51,7 @@ export class DashboardHomeTripMilageChartComponent implements OnInit {
       .subscribe(
         (list: TripTypeMilageChartModel[]) => {
           let i = 0;
+          this.totalMilage = 0;
           list.forEach(f => {
             this.totalMilage += f.milage;
             f.color = i < this.colors.length ? this.colors[i] : undefined;

@@ -49,6 +49,8 @@ export class TripEditJourneyComponent implements OnInit {
     this.tripService.getTripJourneyModel(id)
       .subscribe((model: TripJourneyModel) => {
         this.model = model;
+        this.model.items = model.items.filter(f => f.status == null
+          || f.status > TripStatus.OdoMeterAtStart);
         this.odoStartDateTime = model.odoStartDateTime;
         this.meterReadingStart = model.odoMeterAtStart;
         this.odoEndDateTime = model.odoEndDateTime;
@@ -159,7 +161,7 @@ export class TripEditJourneyComponent implements OnInit {
   }
 
   endOdoMeter(): void {
-    if (!this.meterReadingStart) {
+    if (!this.odoEndDateTime) {
       return;
     }
     this.tripService.updateTripVehicleMeter({

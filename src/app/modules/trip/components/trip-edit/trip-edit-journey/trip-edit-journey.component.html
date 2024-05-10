@@ -128,7 +128,7 @@
       <!-- ODO Meter at Start -->
       <div
         class="form-section blue-section"
-        *ngIf="model.tripStatus == tripStatus.TripStarted"
+        *ngIf="model.tripStatus >= tripStatus.TripStarted"
       >
         <div class="section-header">
           {{ utilityService.language.startingOdoMeterReading | translate }}
@@ -168,6 +168,13 @@
                     [(ngModel)]="odoStartDateTime"
                   >
                   </kendo-datetimepicker>
+                  <input
+                    *ngIf="model.tripStatus > tripStatus.TripStarted"
+                    type="string"
+                    class="form-control"
+                    [value]="odoStartDateTime | dateformat : 'g'"
+                    readonly="true"
+                  />
                 </div>
               </div>
             </div>
@@ -188,51 +195,12 @@
         </div>
       </div>
       <!-- Journey -->
-      <div *ngIf="model.tripStatus >= tripStatus.OdoMeterAtStart">
+      <div *ngIf="model.tripStatus > tripStatus.OdoMeterAtStart">
         <div class="form-section blue-section" *ngFor="let item of model.items">
           <div class="section-header">
             {{ item.title | translate }}
           </div>
           <div class="section-body">
-            <!-- Meter Started -->
-            <div class="row" *ngIf="item.status == tripStatus.OdoMeterAtStart">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <div class="label">
-                    <label for="inputPickupDate">{{
-                      utilityService.language.odoMeter | translate
-                    }}</label>
-                  </div>
-                  <div class="control">
-                    <input
-                      type="number"
-                      class="form-control"
-                      [(ngModel)]="meterReadingStart"
-                      [readOnly]="
-                        model.tripStatus >= tripStatus.OdoMeterAtStart
-                      "
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="form-group">
-                  <div class="label">
-                    <label for="inputTripStartDate">{{
-                      utilityService.language.dateTime | translate
-                    }}</label>
-                  </div>
-                  <div class="control">
-                    <input
-                      type="string"
-                      class="form-control"
-                      [value]="odoStartDateTime | dateformat : 'g'"
-                      readonly="true"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
             <!-- Vehicle Dispatched -->
             <div
               class="row"
