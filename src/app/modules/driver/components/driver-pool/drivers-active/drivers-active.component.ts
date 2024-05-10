@@ -53,7 +53,7 @@ export class DriversActiveComponent implements OnInit {
     this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
       next: (flag: boolean) => {
         if (flag) {
-          this.driverService.fetchGridData(this.state, this.searchQuery);
+          this.driverService.fetchGridData(this.state, this.searchQuery, true);
         }
       },
       error: (err) => console.error(err)
@@ -76,14 +76,14 @@ export class DriversActiveComponent implements OnInit {
     this.driverService.getAllocateVehicalPopup().subscribe(
       (config: PopupConfigModel) => {
         if (!config.show) {
-          this.driverService.fetchGridData(this.state, this.searchQuery);
+          this.driverService.fetchGridData(this.state, this.searchQuery, true);
         }
       }
     );
     this.driverService.getDeallocateVehicalPopup().subscribe(
       (config: PopupConfigModel) => {
         if (!config.show) {
-          this.driverService.fetchGridData(this.state, this.searchQuery);
+          this.driverService.fetchGridData(this.state, this.searchQuery, true);
         }
       }
     );
@@ -91,11 +91,11 @@ export class DriversActiveComponent implements OnInit {
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.driverService.fetchGridData(this.state, this.searchQuery);
+          this.driverService.fetchGridData(this.state, this.searchQuery, true);
         }
       );
 
-    this.driverService.fetchGridData(this.state, this.searchQuery);
+    this.driverService.fetchGridData(this.state, this.searchQuery, true);
     this.driverService.getGridData()
       .subscribe(
         (data: any) => {
@@ -106,9 +106,8 @@ export class DriversActiveComponent implements OnInit {
   }
 
   dataStateChange(state: DataStateChangeEvent): void {
-    debugger;
     this.state = state;
-    this.driverService.fetchGridData(state, this.searchQuery);
+    this.driverService.fetchGridData(state, this.searchQuery, true);
   }
 
   getGridActionMenuState(): boolean[] {

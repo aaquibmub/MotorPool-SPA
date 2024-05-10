@@ -53,7 +53,7 @@ export class DriversInactiveComponent implements OnInit {
     this.refreshScreenSubscription = this.utilityService.refreshData.subscribe({
       next: (flag: boolean) => {
         if (flag) {
-          this.driverService.fetchGridData(this.state, this.searchQuery);
+          this.driverService.fetchGridData(this.state, this.searchQuery, false);
         }
       },
       error: (err) => console.error(err)
