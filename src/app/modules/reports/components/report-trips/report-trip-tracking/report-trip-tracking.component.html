@@ -1,0 +1,159 @@
+<div class="page-actions"></div>
+<div class="page-area">
+  <div class="page-header">
+    <div class="page-title">
+      <span>Trip Tracking</span>
+    </div>
+    <div class="page-breadcrum">
+      <span>Reports </span> / <span> Trip Tracking</span>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="grid-toolbar">
+      <div class="left"></div>
+      <div class="right" style="display: flex; justify-content: space-between">
+        <button class="btn btn-orange" (click)="exportToExcel()">
+          <i class="fa fa-file-excel-o"></i> Excel
+        </button>
+        <button
+          class="btn btn-orange"
+          [useExistingCss]="true"
+          [printTitle]="
+            'Trip Tracking - (' +
+            '-' +
+            (selectedDate | dateformat) +
+            '-' +
+            (selectedToDate | dateformat) +
+            ')'
+          "
+          printSectionId="print-section"
+          ngxPrint
+        >
+          <i class="fa fa-print"></i> Print
+        </button>
+      </div>
+    </div>
+    <div class="grid-content">
+      <!-- filetrs -->
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <div class="label">
+              <label for="tripRoute">Trip Route</label>
+            </div>
+            <div class="control">
+              <kendo-dropdownlist
+                class="form-control"
+                textField="text"
+                valueField="value"
+                [defaultItem]="utilityService.dropdownAllItem"
+                (valueChange)="handleTripRouteValueChange($event)"
+                [data]="tripRouteList"
+                [(ngModel)]="selectedTripRoute"
+              >
+                <ng-template kendoDropDownListItemTemplate let-dataItem>
+                  <span>{{ dataItem.text | translate }}</span>
+                </ng-template>
+              </kendo-dropdownlist>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <div class="label">
+              <label for="fromDate">From Date</label>
+            </div>
+            <div class="control">
+              <kendo-datepicker
+                class="form-control"
+                id="fromDate"
+                (valueChange)="handleDateValueChange($event)"
+                [(ngModel)]="selectedDate"
+              >
+              </kendo-datepicker>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <div class="label">
+              <label for="toDate">To Date</label>
+            </div>
+            <div class="control">
+              <kendo-datepicker
+                class="form-control"
+                id="toDate"
+                (valueChange)="handleToDateValueChange($event)"
+                [(ngModel)]="selectedToDate"
+              >
+              </kendo-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- empty data -->
+        <div class="col-12" *ngIf="!model">
+          <p class="p-24 text-center">No Data</p>
+        </div>
+        <div class="col-12" id="print-section" *ngIf="model">
+          <!-- Trips -->
+          <div class="row">
+            <div class="col-12">
+              <div style="width: 100%; overflow: auto">
+                <table class="table report-table">
+                  <thead>
+                    <tr>
+                      <th>Trip ID</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                      <th>Requester (Full Name)</th>
+                      <th>Passenger(s) (Full Name)</th>
+                      <th>No. Passengers</th>
+                      <th>OPM Side</th>
+                      <th>Driver Name</th>
+                      <th>Vehicle Plate Number</th>
+                      <th>Pickup(s)</th>
+                      <th>Stop(s)</th>
+                      <th>Dropoff(s)</th>
+                      <th>Pickup Time(s)</th>
+                      <th>Stop Time(s)</th>
+                      <th>Dropoff Time(s)</th>
+                      <th>Dispatcher</th>
+                      <th>Note</th>
+                      <th>IN/OUT</th>
+                      <th>Approval</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let t of model">
+                      <td>{{ t.tripId }}</td>
+                      <td>{{ t.time | dateformat }}</td>
+                      <td>{{ t.time | dateformat : "hh:ss a" }}</td>
+                      <td>{{ t.requester }}</td>
+                      <td>{{ t.passenger }}</td>
+                      <td>{{ t.numberOfPassengers }}</td>
+                      <td>{{ t.opm }}</td>
+                      <td>{{ t.driver }}</td>
+                      <td>{{ t.vehicle }}</td>
+                      <td>{{ t.pickups }}</td>
+                      <td>{{ t.stops }}</td>
+                      <td>{{ t.dropoffs }}</td>
+                      <td>{{ t.pickupTime }}</td>
+                      <td>{{ t.stopTime }}</td>
+                      <td>{{ t.dropoffTime }}</td>
+                      <td>{{ t.dispatcher }}</td>
+                      <td>{{ t.notes }}</td>
+                      <td>{{ t.destination }}</td>
+                      <td>{{ t.Approval }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

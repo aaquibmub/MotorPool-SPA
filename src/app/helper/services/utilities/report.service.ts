@@ -17,6 +17,7 @@ import { ReportTripDriverSheetModel } from '../../models/reports/trips/driver-sh
 import { ReportTripMilageGridModel } from '../../models/reports/trips/milages/report-trip-milage-grid-model';
 import { ReportTripPassengerSheetModel } from '../../models/reports/trips/passenger-sheet/report-trip-passenger-sheet-model';
 import { ReportTripSheetModel } from '../../models/reports/trips/trip-sheet/report-trip-sheet-model';
+import { ReportTripTrackingModel } from '../../models/reports/trips/trip-tracking/report-trip-tracking-model';
 import { ReportTripVehicleSheetModel } from '../../models/reports/trips/vehicle-sheet/report-trip-vehicle-sheet-model';
 import { ReportAllGeneralInspectionGridModel } from '../../models/reports/vehicles/all-vehicles/report-all-general-inspection-grid-model';
 import { ReportAllVehicleGridModel } from '../../models/reports/vehicles/all-vehicles/report-all-vehicle-grid-model';
@@ -148,6 +149,31 @@ export class ReportService {
     tripRoute?: number,
   ): Observable<any> {
     return this.http.post(`${this.baseUrl}get-report-trip-sheet-excel`, {
+      fromDate,
+      toDate,
+      tripRoute,
+    }, {
+      reportProgress: true,
+      observe: 'events',
+      responseType: 'blob'
+    });
+  }
+
+  getTripTrackingModel(
+    fromDate: Date,
+    toDate: Date,
+    tripRoute?: number,
+  ): Observable<ReportTripTrackingModel[]> {
+    return this.http.post<ReportTripTrackingModel[]>(
+      this.baseUrl + 'get-report-trip-tracking-model', { tripRoute, fromDate, toDate });
+  }
+
+  getTripTrackingExcel(
+    fromDate: Date,
+    toDate: Date,
+    tripRoute?: number,
+  ): Observable<any> {
+    return this.http.post(`${this.baseUrl}get-report-trip-tracking-excel`, {
       fromDate,
       toDate,
       tripRoute,

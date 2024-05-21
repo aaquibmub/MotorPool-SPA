@@ -206,6 +206,16 @@ export class ReportHomeComponent implements OnInit {
             isExternalLink: false,
             submenu: []
           },
+          {
+            path: '/reports/trips/trip-tracking',
+            title: 'Trip Tracking',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
         ]
       },
 

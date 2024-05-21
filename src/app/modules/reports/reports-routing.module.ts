@@ -16,6 +16,7 @@ import { ReportPassengersAllComponent } from './components/report-passengers/rep
 import { ReportPassengersComponent } from './components/report-passengers/report-passengers.component';
 import { ReportTripMilageComponent } from './components/report-trips/report-trip-milage/report-trip-milage.component';
 import { ReportTripSheetComponent } from './components/report-trips/report-trip-sheet/report-trip-sheet.component';
+import { ReportTripTrackingComponent } from './components/report-trips/report-trip-tracking/report-trip-tracking.component';
 import { ReportTripsAllComponent } from './components/report-trips/report-trips-all/report-trips-all.component';
 import { ReportTripsDriverSheetComponent } from './components/report-trips/report-trips-driver-sheet/report-trips-driver-sheet.component';
 import { ReportTripsMilageOpmCurrentMonthComponent } from './components/report-trips/report-trips-milage-opm-current-month/report-trips-milage-opm-current-month.component';
@@ -74,6 +75,7 @@ const routes: Routes = [
           { path: 'passenger-sheet', component: ReportTripsPassengerSheetComponent },
           { path: 'vehicle-sheet', component: ReportTripsVehicleSheetComponent },
           { path: 'trip-sheet', component: ReportTripSheetComponent },
+          { path: 'trip-tracking', component: ReportTripTrackingComponent },
         ]
       },
       // vehciles

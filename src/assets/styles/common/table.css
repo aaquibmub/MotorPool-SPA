@@ -34,3 +34,7 @@ tr {
 .table .form-group .control {
   min-width: 150px !important;
 }
+
+.report-table th {
+  min-width: 100px;
+}

@@ -22,7 +22,9 @@ import { ReportPassengerTripsComponent } from './components/report-passengers/re
 import { ReportPassengersAllComponent } from './components/report-passengers/report-passengers-all/report-passengers-all.component';
 import { ReportPassengersComponent } from './components/report-passengers/report-passengers.component';
 import { ReportTripMilageComponent } from './components/report-trips/report-trip-milage/report-trip-milage.component';
+import { ReportTripSheetTabularComponent } from './components/report-trips/report-trip-sheet/report-trip-sheet-tabular/report-trip-sheet-tabular.component';
 import { ReportTripSheetComponent } from './components/report-trips/report-trip-sheet/report-trip-sheet.component';
+import { ReportTripTrackingComponent } from './components/report-trips/report-trip-tracking/report-trip-tracking.component';
 import { ReportTripsAllComponent } from './components/report-trips/report-trips-all/report-trips-all.component';
 import { ReportTripsDriverSheetComponent } from './components/report-trips/report-trips-driver-sheet/report-trips-driver-sheet.component';
 import { ReportTripsMilageOpmCurrentMonthComponent } from './components/report-trips/report-trips-milage-opm-current-month/report-trips-milage-opm-current-month.component';
@@ -76,6 +78,8 @@ import { ReportsComponent } from './reports.component';
     ReportTripsPassengerSheetComponent,
     ReportTripsVehicleSheetComponent,
     ReportTripSheetComponent,
+    ReportTripSheetTabularComponent,
+    ReportTripTrackingComponent,
     ReportTripsAllComponent,
     ReportTripsTodayComponent,
     ReportTripsOngoingComponent,

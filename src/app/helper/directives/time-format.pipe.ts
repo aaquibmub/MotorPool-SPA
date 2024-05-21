@@ -6,7 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TimeFormatPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    return value != null ? getString(value.hours) + ':' + getString(value.minutes) : null;
+    if (value == null) {
+      return null;
+    }
+    return getString(value.hours) + ':' + getString(value.minutes);
   }
 
 }
