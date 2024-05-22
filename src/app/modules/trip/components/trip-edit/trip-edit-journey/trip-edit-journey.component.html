@@ -387,7 +387,13 @@
               </div>
             </div>
             <!-- Meter End -->
-            <div class="row" *ngIf="item.status == tripStatus.OdoMeterAtEnd">
+            <div
+              class="row"
+              *ngIf="
+                item.status == tripStatus.OdoMeterAtEnd ||
+                item.status == tripStatus.OdoMeterAtCancel
+              "
+            >
               <div class="col-md-4">
                 <div class="form-group">
                   <div class="label">
@@ -443,13 +449,36 @@
                 </div>
               </div>
             </div>
+            <!-- Cacncelled -->
+            <div class="row" *ngIf="item.status == tripStatus.Cancelled">
+              <div class="col-4">
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputTripStartDate">{{
+                      utilityService.language.dateTime | translate
+                    }}</label>
+                  </div>
+                  <div class="control">
+                    <input
+                      type="string"
+                      class="form-control"
+                      [value]="item.dateTime | dateformat : 'g'"
+                      readonly="true"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <!-- ODO Meter at End -->
       <div
         class="form-section blue-section"
-        *ngIf="nextStatus == tripStatus.OdoMeterAtEnd"
+        *ngIf="
+          nextStatus == tripStatus.OdoMeterAtEnd ||
+          nextStatus == tripStatus.OdoMeterAtCancel
+        "
       >
         <div class="section-header">
           {{ utilityService.language.endingOdoMeterReading | translate }}
@@ -468,7 +497,6 @@
                     type="number"
                     class="form-control"
                     [(ngModel)]="meterReadingEnd"
-                    [readOnly]="model.tripStatus >= tripStatus.OdoMeterAtEnd"
                   />
                 </div>
               </div>
@@ -492,7 +520,7 @@
               </div>
             </div>
           </div>
-          <div class="row" *ngIf="nextStatus == tripStatus.OdoMeterAtEnd">
+          <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <button

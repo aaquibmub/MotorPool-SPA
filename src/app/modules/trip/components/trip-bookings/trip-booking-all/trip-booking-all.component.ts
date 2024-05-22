@@ -121,13 +121,15 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
       label: 'View'
     });
 
-    actions.push({
-      handle: () => {
-        this.router.navigate(['/trips/edit/' + item.id + '/journey']);
-      },
-      icon: '',
-      label: 'Update'
-    });
+    if (item.onGoing && !item.cancelled) {
+      actions.push({
+        handle: () => {
+          this.router.navigate(['/trips/edit/' + item.id + '/journey']);
+        },
+        icon: '',
+        label: 'Update'
+      });
+    }
 
     if (!item.onGoing && !item.cancelled) {
       if (item.status < TripStatus.AssignedToDriver) {

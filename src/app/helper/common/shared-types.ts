@@ -262,6 +262,7 @@ export enum TripStatus {
   OdoMeterAtEnd = 80,
   Completed = 400,
   Cancelled = 500,
+  OdoMeterAtCancel = 550,
   Updated = 600
 }
 
@@ -340,6 +341,10 @@ export function GetTripStatusForDropdownList():
     {
       value: TripStatus.Cancelled,
       text: 'Cancelled'
+    },
+    {
+      value: TripStatus.OdoMeterAtCancel,
+      text: 'ODO Meter at Cancel'
     },
     {
       value: TripStatus.Updated,

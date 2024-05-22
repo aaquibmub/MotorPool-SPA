@@ -168,7 +168,7 @@ export class TripEditJourneyComponent implements OnInit {
       tripId: this.model.tripId,
       meterReading: this.meterReadingEnd,
       time: this.odoEndDateTime,
-      status: TripStatus.OdoMeterAtEnd,
+      status: this.nextStatus == TripStatus.OdoMeterAtCancel ? this.nextStatus : TripStatus.OdoMeterAtEnd,
     }).subscribe((response: ResponseModel<string>) => {
       if (response.hasError) {
         this.alertService.setErrorAlert(response.msg);
@@ -177,27 +177,37 @@ export class TripEditJourneyComponent implements OnInit {
       const seconds = this.odoEndDateTime.getSeconds() + 5;
       const completeTime = this.odoEndDateTime;
       completeTime.setSeconds(seconds);
+      if (this.nextStatus != TripStatus.OdoMeterAtCancel) {
 
-      this.tripService.updateTripStatus({
-        tripId: this.model.tripId,
-        status: TripStatus.Completed,
-        time: completeTime,
-        remarks: ''
-      }).subscribe((response: ResponseModel<string>) => {
-        if (response.hasError) {
-          this.alertService.setErrorAlert(response.msg);
-          return;
-        }
+        this.tripService.updateTripStatus({
+          tripId: this.model.tripId,
+          status: TripStatus.Completed,
+          time: completeTime,
+          remarks: ''
+        }).subscribe((response: ResponseModel<string>) => {
+          if (response.hasError) {
+            this.alertService.setErrorAlert(response.msg);
+            return;
+          }
+          this.getTripLatestStatus(this.model.tripId);
+        });
+      } else {
         this.getTripLatestStatus(this.model.tripId);
-      });
+      }
     });
   }
 
   getNextTripStatus(): TripStatus {
     var status = this.model.tripStatus;
 
-    if (status == TripStatus.Completed) {
+    if (status == TripStatus.Completed
+      || status == TripStatus.OdoMeterAtCancel
+    ) {
       return null;
+    }
+
+    if (status == TripStatus.Cancelled) {
+      return TripStatus.OdoMeterAtCancel;
     }
 
     if (status == TripStatus.OdoMeterAtEnd) {
