@@ -34,6 +34,13 @@
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         {{ dataItem.inspectionDate | dateformat : "g" }}
       </ng-template>
+      <!-- <ng-template kendoGridFilterCellTemplate let-value="value"
+        ><kendo-datetimepicker
+          (valueChange)="handleDateTimeFilterOnChange($event)"
+          [(ngModel)]="selectedVehicleInspectionStatus"
+        >
+        </kendo-datetimepicker>
+      </ng-template> -->
     </kendo-grid-column>
     <kendo-grid-column
       field="registrationPlate"

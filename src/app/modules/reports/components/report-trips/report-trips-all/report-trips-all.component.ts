@@ -70,13 +70,13 @@ export class ReportTripsAllComponent implements OnInit, OnDestroy {
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
+          this.state = UtilityRix.gridConfig.state;
           this.reportService.fetchAllTripGridData(this.state, this.searchQuery);
         }
       );
     this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
       .subscribe(
         (column: string) => {
-          debugger;
           this.hideColumn(column);
         }
       );

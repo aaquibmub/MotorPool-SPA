@@ -21,9 +21,9 @@ export class LogService {
   getGridDataForSystemLog(): Observable<GridDataResult> {
     return this.gridDataForSystemLog.asObservable();
   }
-  fetchGridDataForSystemLog(state: any): void {
+  fetchGridDataForSystemLog(state: any, search: string): void {
     this.http.post<GridList<SystemLogModel>>(
-      this.baseUrl + 'get-system-log-list', { gridFilters: state })
+      this.baseUrl + 'get-system-log-list', { gridFilters: state, search })
       .subscribe(
         (gridData: GridList<SystemLogModel>) => {
           this.gridDataForSystemLog.next(gridData);
@@ -35,9 +35,9 @@ export class LogService {
   }
   fetchGridDataForActivityLog(
     state: any,
-    query: string): void {
+    search: string): void {
     this.http.post<GridList<ActivityLogModel>>(
-      this.baseUrl + 'get-activity-log-list', { gridFilters: state })
+      this.baseUrl + 'get-activity-log-list', { gridFilters: state, search })
       .subscribe(
         (gridData: GridList<ActivityLogModel>) => {
           this.gridDataForActivityLog.next(gridData);

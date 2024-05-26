@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
+import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
@@ -14,6 +14,7 @@ import { ActionButton } from './../../../../../helper/models/common/grid/action-
   styleUrls: ['./actitvity-log.component.css']
 })
 export class ActitvityLogComponent implements OnInit, OnDestroy {
+  grid: GridComponent;
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
   pageable = UtilityRix.gridConfig.pageable;
@@ -56,6 +57,7 @@ export class ActitvityLogComponent implements OnInit, OnDestroy {
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
+          this.state = UtilityRix.gridConfig.state;
           this.logService.fetchGridDataForActivityLog(this.state, this.searchQuery);
         }
       );
@@ -82,6 +84,9 @@ export class ActitvityLogComponent implements OnInit, OnDestroy {
     this.getGridDataForActivityLogSub.unsubscribe();
     if (this.refreshScreenSubscription) {
       this.refreshScreenSubscription.unsubscribe();
+    }
+    if (this.gridFilterSubscription) {
+      this.gridFilterSubscription.unsubscribe();
     }
   }
 

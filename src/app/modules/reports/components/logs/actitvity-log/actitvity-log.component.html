@@ -1,10 +1,13 @@
 <div class="grid-content">
   <app-grid-toolbar
+    *ngIf="grid"
+    [grid]="grid"
     [numberOfRecords]="gridData?.total"
     entity="Activity Log"
     [hideColumnDropdown]="true"
   ></app-grid-toolbar>
   <kendo-grid
+    #grid="kendoGrid"
     [data]="gridData"
     [pageSize]="state.take"
     [skip]="state.skip"

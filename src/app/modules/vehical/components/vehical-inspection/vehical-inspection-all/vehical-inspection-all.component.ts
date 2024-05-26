@@ -28,6 +28,8 @@ export class VehicalInspectionAllComponent implements OnInit, OnDestroy {
   vehicleInspectionStatusList: DropdownItem<number>[] = [];
   selectedVehicleInspectionStatus: DropdownItem<number>;
 
+  selectedDateFilter: Date;
+
   pageSizeSubscription: Subscription;
   gridFilterSubscription: Subscription;
 
@@ -85,6 +87,23 @@ export class VehicalInspectionAllComponent implements OnInit, OnDestroy {
       filter.value = value.value;
     }
     this.selectedVehicleInspectionStatus = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
+  }
+
+  handleDateTimeFilterOnChange(value: Date): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "inspectionDate");
+    if (!filter) {
+      root.filters.push({
+        field: "inspectionDate",
+        operator: "eq",
+        value: value
+      });
+    } else {
+      filter.value = value;
+    }
+    this.selectedDateFilter = value;
     this.state.filter = root;
     this.dataStateChange(this.state as DataStateChangeEvent);
   }
