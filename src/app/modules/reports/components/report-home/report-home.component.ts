@@ -177,8 +177,8 @@ export class ReportHomeComponent implements OnInit {
             submenu: []
           },
           {
-            path: '/reports/trips/passenger-sheet',
-            title: 'Passenger Sheet',
+            path: '/reports/trips/trip-tracking',
+            title: 'Trip Tracking',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',
@@ -207,8 +207,8 @@ export class ReportHomeComponent implements OnInit {
             submenu: []
           },
           {
-            path: '/reports/trips/trip-tracking',
-            title: 'Trip Tracking',
+            path: '/reports/trips/passenger-sheet',
+            title: 'Passenger Sheet',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',

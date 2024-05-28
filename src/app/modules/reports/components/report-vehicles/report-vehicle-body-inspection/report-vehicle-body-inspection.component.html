@@ -204,10 +204,15 @@
                                         id="back"
                                         class="inspection-side-image center-content"
                                         *ngIf="s.side.value === side.backId"
-                                        src="./../../../../../../assets/images/vehicles/inspections/body-back.png"
+                                        [src]="
+                                          s.snapshot
+                                            ? 'data:image/png;base64, ' +
+                                              s.snapshot
+                                            : './../../../../../../assets/images/vehicles/inspections/body-back.png'
+                                        "
                                         alt=""
                                       />
-                                      <div
+                                      <!-- <div
                                         id="backSideOverlay"
                                         *ngIf="
                                           backSideOverlay &&
@@ -221,16 +226,21 @@
                                           [ngStyle]="getCoordinateStyle(item)"
                                           *ngFor="let item of s.items"
                                         ></div>
-                                      </div>
+                                      </div> -->
                                       <img
                                         id="left"
                                         class="inspection-side-image center-content"
                                         *ngIf="s.side.value === side.leftId"
                                         usemap="#left"
-                                        src="./../../../../../../assets/images/vehicles/inspections/body-left.png"
+                                        [src]="
+                                          s.snapshot
+                                            ? 'data:image/png;base64, ' +
+                                              s.snapshot
+                                            : './../../../../../../assets/images/vehicles/inspections/body-left.png'
+                                        "
                                         alt=""
                                       />
-                                      <div
+                                      <!-- <div
                                         id="leftSideOverlay"
                                         *ngIf="
                                           leftSideOverlay &&
@@ -244,16 +254,21 @@
                                           [ngStyle]="getCoordinateStyle(item)"
                                           *ngFor="let item of s.items"
                                         ></div>
-                                      </div>
+                                      </div> -->
                                       <img
                                         id="right"
                                         class="inspection-side-image center-content"
                                         *ngIf="s.side.value === side.rightId"
                                         usemap="#right"
-                                        src="./../../../../../../assets/images/vehicles/inspections/body-right.png"
+                                        [src]="
+                                          s.snapshot
+                                            ? 'data:image/png;base64, ' +
+                                              s.snapshot
+                                            : './../../../../../../assets/images/vehicles/inspections/body-right.png'
+                                        "
                                         alt=""
                                       />
-                                      <div
+                                      <!-- <div
                                         id="rightSideOverlay"
                                         *ngIf="
                                           rightSideOverlay &&
@@ -267,16 +282,21 @@
                                           [ngStyle]="getCoordinateStyle(item)"
                                           *ngFor="let item of s.items"
                                         ></div>
-                                      </div>
+                                      </div> -->
                                       <img
                                         id="front"
                                         class="inspection-side-image center-content mapper"
                                         *ngIf="s.side.value === side.frontId"
                                         usemap="#front"
-                                        src="./../../../../../../assets/images/vehicles/inspections/body-front.png"
+                                        [src]="
+                                          s.snapshot
+                                            ? 'data:image/png;base64, ' +
+                                              s.snapshot
+                                            : './../../../../../../assets/images/vehicles/inspections/body-front.png'
+                                        "
                                         alt=""
                                       />
-                                      <div
+                                      <!-- <div
                                         id="frontSideOverlay"
                                         *ngIf="
                                           frontSideOverlay &&
@@ -290,15 +310,20 @@
                                           [ngStyle]="getCoordinateStyle(item)"
                                           *ngFor="let item of s.items"
                                         ></div>
-                                      </div>
+                                      </div> -->
                                       <img
                                         id="roof"
                                         class="inspection-side-image center-content"
                                         *ngIf="s.side.value === side.roofId"
-                                        src="./../../../../../../assets/images/vehicles/inspections/body-roof.png"
+                                        [src]="
+                                          s.snapshot
+                                            ? 'data:image/png;base64, ' +
+                                              s.snapshot
+                                            : './../../../../../../assets/images/vehicles/inspections/body-roof.png'
+                                        "
                                         alt=""
                                       />
-                                      <div
+                                      <!-- <div
                                         id="roofSideOverlay"
                                         *ngIf="
                                           roofSideOverlay &&
@@ -312,7 +337,7 @@
                                           [ngStyle]="getCoordinateStyle(item)"
                                           *ngFor="let item of s.items"
                                         ></div>
-                                      </div>
+                                      </div> -->
                                     </div>
                                   </div>
                                 </div>
