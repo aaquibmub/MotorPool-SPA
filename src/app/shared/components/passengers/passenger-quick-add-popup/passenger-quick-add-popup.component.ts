@@ -76,7 +76,14 @@ export class PassengerQuickAddPopupComponent implements OnInit {
           this.alertService.setErrorAlert(response.msg);
           return;
         }
-        this.passengerService.setQuickAddPopup({ show: false, arg: this.arg, item: new DropdownItem<string>(this.model.name, response.result) });
+        this.passengerService.setQuickAddPopup({
+          show: false,
+          arg: this.arg,
+          passenger: {
+            ...this.model,
+            id: response.result
+          }
+        });
       });
   }
 

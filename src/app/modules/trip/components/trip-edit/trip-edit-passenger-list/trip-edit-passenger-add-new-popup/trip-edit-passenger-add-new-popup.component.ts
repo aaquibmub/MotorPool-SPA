@@ -61,7 +61,17 @@ export class TripEditPassengerAddNewPopupComponent implements OnInit {
           return;
         }
         this.tripService.setTripPassengerPopup({
-          show: false, arg: this.arg, item: new DropdownItem<string>(this.model.passengerName, response.result)
+          show: false,
+          arg: this.arg,
+          passenger: {
+            id: response.result,
+            name: this.model.passengerName,
+            opm: this.model.opm,
+            ageGroup: null,
+            gender: null,
+            address: null,
+            phoneNumber: null
+          }
         });
       });
   }

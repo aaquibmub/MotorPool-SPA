@@ -1,11 +1,34 @@
 <div class="grid-content">
   <div class="grid-toolbar">
-    <div class="left"></div>
-    <div class="right">
+    <div class="left">
+      <div class="form-group">
+        <kendo-dropdownlist
+          style="width: 200px; max-width: 200px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [filterable]="true"
+          [defaultItem]="utilityService.dropdownDefaultItem"
+          (filterChange)="handlePassengerFilter($event)"
+          (valueChange)="handlePassengerValueChange($event)"
+          [data]="passengerList"
+          [(ngModel)]="selectedPassenger"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text }}</span
+            ><span
+              *ngIf="dataItem.value == ''"
+              class="fa fa-plus-square quick-add-icon"
+              (click)="openPassengerQuickAddPopup(true)"
+            ></span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </div>
       <button class="btn btn-green" (click)="handleCreateNewButtonClick()">
         {{ utilityService.language.addPassanger | translate }}
       </button>
     </div>
+    <div class="right"></div>
   </div>
   <app-grid-toolbar
     [numberOfRecords]="gridData?.total"

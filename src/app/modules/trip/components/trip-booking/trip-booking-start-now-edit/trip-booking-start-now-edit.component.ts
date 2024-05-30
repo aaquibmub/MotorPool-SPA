@@ -156,15 +156,17 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
             this.passengerService.getDropdownList('')
               .subscribe((list: DropdownItem<string>[]) => {
                 this.requesterList = list;
-                this.form.get('requester').setValue(pcm.item);
-                this.handleRequesterValueChange(pcm.item);
+                const requesterValue = { value: pcm.passenger.id, text: pcm.passenger.name };
+                this.form.get('requester').setValue(requesterValue);
+                this.handleRequesterValueChange(requesterValue);
               });
           } else {
             this.passengerService.getDropdownList('')
               .subscribe((list: DropdownItem<string>[]) => {
                 this.requesterList = list;
-                (this.form.get('passengers') as FormArray).controls[pcm.arg].get('passenger').setValue(pcm.item);
-                this.handlePassengerValueChange(pcm.item, pcm.arg);
+                const passengerValue = { value: pcm.passenger.id, text: pcm.passenger.name };
+                (this.form.get('passengers') as FormArray).controls[pcm.arg].get('passenger').setValue(passengerValue);
+                this.handlePassengerValueChange(passengerValue, pcm.arg);
               });
           }
         }
