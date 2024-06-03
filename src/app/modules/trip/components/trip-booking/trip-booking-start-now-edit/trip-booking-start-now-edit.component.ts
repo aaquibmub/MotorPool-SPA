@@ -216,10 +216,12 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
 
     let bookedBy: DropdownItem<string> = null;
     let approvedBy: DropdownItem<string> = null;
+
     let requester: DropdownItem<string> = null;
     let requesterGender: DropdownItem<Gender> = null;
     let requesterAddress: DropdownItem<string> = null;
     let isRequesterTraveling = false;
+
     let passengers: UntypedFormGroup[] = [];
 
     let isSpecialServicesRequired = false;
@@ -287,6 +289,7 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
           bookedBy, [UtilityRix.dropdownRequired as ValidatorFn]),
         approvedBy: new UntypedFormControl(
           approvedBy, [UtilityRix.dropdownRequired as ValidatorFn]),
+
         requester: new UntypedFormControl(
           requester, [UtilityRix.dropdownRequired as ValidatorFn]),
         requesterGender: new UntypedFormControl(requesterGender),

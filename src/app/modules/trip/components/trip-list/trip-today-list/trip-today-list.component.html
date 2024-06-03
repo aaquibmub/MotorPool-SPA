@@ -21,7 +21,7 @@
       title="{{ utilityService.language.tripId | translate }}"
     >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <a routerLink="/trips/booking/{{ dataItem.saleID }}/view">{{
+        <a routerLink="/trips/view/{{ dataItem.id }}/detail">{{
           dataItem.tripId
         }}</a>
       </ng-template>

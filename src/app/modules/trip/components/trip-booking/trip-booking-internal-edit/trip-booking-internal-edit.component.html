@@ -65,6 +65,95 @@
           </div>
         </div>
       </div>
+      <!-- Trip Requester -->
+      <div class="form-section">
+        <div class="section-header">
+          {{ utilityService.language.tripRequester | translate }}
+        </div>
+        <div class="section-body">
+          <!-- Requester Info -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRequester">{{
+                    utilityService.language.requester | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [filterable]="true"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (filterChange)="handlePassengerFilter($event)"
+                    (valueChange)="handleRequesterValueChange($event)"
+                    [data]="requesterList"
+                    formControlName="requester"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text }}</span
+                      ><span
+                        *ngIf="dataItem.value == ''"
+                        class="fa fa-plus-square quick-add-icon"
+                        (click)="openPassengerQuickAddPopup(true)"
+                      ></span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <div
+                    *ngIf="
+                      !form.get('requester').valid &&
+                      form.get('requester').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    {{ utilityService.language.requesterRequired | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRequestPhone">{{
+                    utilityService.language.requesterPhone | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterPhone"
+                    [value]="requesterDetail?.phoneNumber"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRequestOpm">{{
+                    utilityService.language.opm | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterOpm"
+                    [value]="requesterDetail?.opm?.text"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Booking -->
       <div class="form-section">
         <div class="section-header">

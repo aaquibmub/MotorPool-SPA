@@ -5,9 +5,10 @@ import { guid } from '@progress/kendo-angular-common';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { Subscription } from 'rxjs';
-import { DropdownType } from 'src/app/helper/common/shared-types';
+import { DropdownType, Gender } from 'src/app/helper/common/shared-types';
 import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
+import { PassengerModel } from 'src/app/helper/models/passengers/passenger-model';
 import { TripDestinationModel } from 'src/app/helper/models/trips/enroute/trip-destination-model';
 import { TripBookingInternalModel } from 'src/app/helper/models/trips/trip-bookings/trip-booking-internal-model';
 import { VehicalModel } from 'src/app/helper/models/vehicals/vehical-model';
@@ -41,6 +42,9 @@ export class TripBookingInternalEditComponent implements OnInit, OnDestroy {
   form: UntypedFormGroup;
 
   approverList: DropdownItem<string>[];
+
+  requesterList: DropdownItem<string>[];
+  requesterDetail: PassengerModel;
 
   tripTypeList: DropdownItem<number>[];
   selectedTripRoute: DropdownItem<number>;
@@ -111,6 +115,20 @@ export class TripBookingInternalEditComponent implements OnInit, OnDestroy {
         }
       });
 
+    this.passengerService.getQuickAddPopup().subscribe(
+      (pcm: PopupConfigModel) => {
+        if (pcm && !pcm.show) {
+          this.passengerService.getDropdownList('')
+            .subscribe((list: DropdownItem<string>[]) => {
+              this.requesterList = list;
+              const requesterValue = { value: pcm.passenger.id, text: pcm.passenger.name };
+              this.form.get('requester').setValue(requesterValue);
+              this.handleRequesterValueChange(requesterValue);
+            });
+        }
+      }
+    );
+
     this.commonService.getDropdownList(DropdownType.TripRoute, '')
       .subscribe((list: DropdownItem<number>[]) => {
         this.tripTypeList = list;
@@ -124,6 +142,11 @@ export class TripBookingInternalEditComponent implements OnInit, OnDestroy {
     this.approverService.getDropdownList('')
       .subscribe((list: DropdownItem<string>[]) => {
         this.approverList = list;
+      });
+
+    this.passengerService.getDropdownList('')
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.requesterList = list;
       });
 
     this.addressService.getDropdownList('')
@@ -143,6 +166,10 @@ export class TripBookingInternalEditComponent implements OnInit, OnDestroy {
     let bookedBy: DropdownItem<string> = null;
     let approvedBy: DropdownItem<string> = null;
 
+    let requester: DropdownItem<string> = null;
+    let requesterGender: DropdownItem<Gender> = null;
+    let requesterAddress: DropdownItem<string> = null;
+
     let pickupDate = null;
     let pickupTime = null;
 
@@ -161,6 +188,10 @@ export class TripBookingInternalEditComponent implements OnInit, OnDestroy {
     if (this.model) {
       bookedBy = this.model.bookedBy;
       approvedBy = this.model.approvedBy;
+
+      requester = this.model.requester;
+      requesterGender = this.model.requesterGender;
+      requesterAddress = this.model.requesterAddress;
 
       pickupDate = this.model.pickupDate;
       pickupTime = this.model.pickupTime;
@@ -186,6 +217,11 @@ export class TripBookingInternalEditComponent implements OnInit, OnDestroy {
           bookedBy, [UtilityRix.dropdownRequired as ValidatorFn]),
         approvedBy: new UntypedFormControl(
           approvedBy, [UtilityRix.dropdownRequired as ValidatorFn]),
+
+        requester: new UntypedFormControl(
+          requester, [UtilityRix.dropdownRequired as ValidatorFn]),
+        requesterGender: new UntypedFormControl(requesterGender),
+        requesterAddress: new UntypedFormControl(requesterAddress),
 
         pickupDate: new UntypedFormControl(
           pickupDate ? new Date(pickupDate) : new Date(), [Validators.required]),
@@ -269,6 +305,27 @@ export class TripBookingInternalEditComponent implements OnInit, OnDestroy {
       .subscribe((list: DropdownItem<string>[]) => {
         this.approverList = list;
       });
+  }
+
+  handlePassengerFilter(text: string): void {
+    this.passengerService.getDropdownList(text)
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.requesterList = list;
+      });
+  }
+
+  handleRequesterValueChange(value: DropdownItem<string>): void {
+    if (value == null || value.value === '') {
+      this.requesterDetail = null;
+    }
+    this.passengerService.get(value.value)
+      .subscribe((requester: PassengerModel) => {
+        this.requesterDetail = requester;
+      });
+  }
+
+  openPassengerQuickAddPopup(flag: boolean): void {
+    this.passengerService.setQuickAddPopup({ show: true });
   }
 
   handleTripTypeValueChange(value: DropdownItem<number>): void {
