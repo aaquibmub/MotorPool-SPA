@@ -37,6 +37,7 @@
         (excelExport)="this.utilityService.onExcelExport($event, grid)"
         scrollable="none"
       >
+        <!-- Trip Id -->
         <kendo-grid-column
           field="tripSrNo"
           title="Trip ID رقم الرحلة"
@@ -52,6 +53,7 @@
             {{ dataItem.tripId }}
           </ng-template>
         </kendo-grid-column>
+        <!-- Trip Date -->
         <kendo-grid-column
           field="tripDate"
           title="Date تاريخ"
@@ -67,6 +69,7 @@
             {{ dataItem.tripDate | dateformat }}
           </ng-template>
         </kendo-grid-column>
+        <!-- Pickup Time -->
         <kendo-grid-column
           field="pickupTime"
           title="Pickup Time اخذ الراكب"
@@ -81,6 +84,7 @@
             {{ dataItem.pickupTime | dateformat : "hh:mm aa" }}
           </ng-template>
         </kendo-grid-column>
+        <!-- Trip Route -->
         <kendo-grid-column
           field="tripRoute"
           title="Trip Type نوع الرحلة"
@@ -113,6 +117,7 @@
             }}</span>
           </ng-template>
         </kendo-grid-column>
+        <!-- Passenger Name -->
         <kendo-grid-column
           field="passengerName"
           title="Passenger Name اسم الراكب"
@@ -150,6 +155,7 @@
             <span>{{ utilityService.getOpmLabel(dataItem.opm) }}</span>
           </ng-template>
         </kendo-grid-column>
+        <!-- Trip Destination -->
         <kendo-grid-column
           field="tripDestination"
           title="Destination مكان الوصول"
@@ -182,6 +188,7 @@
             }}</span>
           </ng-template>
         </kendo-grid-column>
+        <!-- Requested By -->
         <kendo-grid-column
           field="requestedBy"
           title="Requested By بتوصية من"

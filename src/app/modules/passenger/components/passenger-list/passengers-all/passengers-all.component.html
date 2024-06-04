@@ -16,13 +16,84 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="name" title="{{ utilityService.language.name | translate }}"> </kendo-grid-column>
-    <kendo-grid-column field="gender" title="{{ utilityService.language.gender | translate }}"> </kendo-grid-column>
-    <kendo-grid-column field="ageGroup" title="{{ utilityService.language.ageGroup | translate }}"> </kendo-grid-column>
-    <kendo-grid-column field="opm" title="{{ utilityService.language.opm | translate }}"> </kendo-grid-column>
-    <kendo-grid-column field="phoneNumber" title="{{ utilityService.language.phoneNumber | translate }}">
+    <kendo-grid-column
+      field="name"
+      title="{{ utilityService.language.name | translate }}"
+    >
     </kendo-grid-column>
-    <kendo-grid-column field="address" title="{{ utilityService.language.address | translate }}"> </kendo-grid-column>
+    <kendo-grid-column
+      field="gender"
+      title="{{ utilityService.language.gender | translate }}"
+    >
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 150px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleGenderValueChange($event)"
+          [data]="genderList"
+          [(ngModel)]="selectedGender"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="ageGroup"
+      title="{{ utilityService.language.ageGroup | translate }}"
+    >
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 150px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleAgeGroupValueChange($event)"
+          [data]="ageGroupList"
+          [(ngModel)]="selectedAgeGroup"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="opm"
+      title="{{ utilityService.language.opm | translate }}"
+    >
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 150px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleOpmValueChange($event)"
+          [data]="opmList"
+          [(ngModel)]="selectedOpm"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="phoneNumber"
+      title="{{ utilityService.language.phoneNumber | translate }}"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="address"
+      title="{{ utilityService.language.address | translate }}"
+    >
+    </kendo-grid-column>
     <kendo-grid-column headerClass="action-column">
       <ng-template kendoGridHeaderTemplate>
         <span><i class="action-column-icon"></i></span>
@@ -53,7 +124,9 @@
       </div>
     </ng-template>
     <kendo-grid-messages
-      pagerItemsPerPage="{{ utilityService.language.recordsPerPage | translate }}"
+      pagerItemsPerPage="{{
+        utilityService.language.recordsPerPage | translate
+      }}"
       pagerItems="rows"
     ></kendo-grid-messages>
   </kendo-grid>
