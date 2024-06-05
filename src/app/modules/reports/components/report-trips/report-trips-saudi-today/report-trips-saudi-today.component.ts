@@ -56,7 +56,7 @@ export class ReportTripsSaudiTodayComponent implements OnInit, OnDestroy {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
           this.state.filter = null;
           this.reportService.fetchAllTripGridData(
-            this.state, this.searchQuery, TripType.Today, OPM.SaudiSide);
+            this.state, this.searchQuery, null, null, TripType.Today, OPM.SaudiSide);
         }
       );
 
@@ -65,14 +65,14 @@ export class ReportTripsSaudiTodayComponent implements OnInit, OnDestroy {
         (pageSize: number) => {
           this.state.take = pageSize;
           this.reportService.fetchAllTripGridData(
-            this.state, this.searchQuery, TripType.Today, OPM.SaudiSide);
+            this.state, this.searchQuery, null, null, TripType.Today, OPM.SaudiSide);
         }
       );
     this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.Today, OPM.SaudiSide);
+          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.Today, OPM.SaudiSide);
         }
       );
     this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
@@ -82,7 +82,7 @@ export class ReportTripsSaudiTodayComponent implements OnInit, OnDestroy {
           this.hideColumn(column);
         }
       );
-    this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.Today, OPM.SaudiSide);
+    this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.Today, OPM.SaudiSide);
     this.gridDataSubscription = this.reportService.getAllTripGridData()
       .subscribe(
         (data: any) => {
@@ -95,7 +95,7 @@ export class ReportTripsSaudiTodayComponent implements OnInit, OnDestroy {
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.reportService.fetchAllTripGridData(state, this.searchQuery, TripType.Today, OPM.SaudiSide);
+    this.reportService.fetchAllTripGridData(state, this.searchQuery, null, null, TripType.Today, OPM.SaudiSide);
   }
 
   exportToExcel(grid: GridComponent): void {

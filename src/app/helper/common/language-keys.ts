@@ -98,6 +98,7 @@ export class LanguageKeys {
   firstName = "First Name";
   firstNameReq = "First Name is required";
   fail = "Fail";
+  fromDate = "From Date";
   fileRequired = "File is required";
   fileName = "File Name";
   fullName = "Full Name";
@@ -248,7 +249,8 @@ export class LanguageKeys {
 
   //T
   time = "Time";
-  today: "Today";
+  today = "Today";
+  toDate = "To Date";
   trip = "Trip";
   tripRequired = "Trip is required";
   tripRequester = "Trip Requester";

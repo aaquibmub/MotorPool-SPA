@@ -56,7 +56,7 @@ export class ReportTripsOpmCurrentMonthComponent implements OnInit, OnDestroy {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
           this.state.filter = null;
           this.reportService.fetchAllTripGridData(
-            this.state, this.searchQuery, TripType.CurrentMonth, OPM.USSide);
+            this.state, this.searchQuery, null, null, TripType.CurrentMonth, OPM.USSide);
         }
       );
 
@@ -65,14 +65,14 @@ export class ReportTripsOpmCurrentMonthComponent implements OnInit, OnDestroy {
         (pageSize: number) => {
           this.state.take = pageSize;
           this.reportService.fetchAllTripGridData(
-            this.state, this.searchQuery, TripType.CurrentMonth, OPM.USSide);
+            this.state, this.searchQuery, null, null, TripType.CurrentMonth, OPM.USSide);
         }
       );
     this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.CurrentMonth, OPM.USSide);
+          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.CurrentMonth, OPM.USSide);
         }
       );
     this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
@@ -82,7 +82,7 @@ export class ReportTripsOpmCurrentMonthComponent implements OnInit, OnDestroy {
           this.hideColumn(column);
         }
       );
-    this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.CurrentMonth, OPM.USSide);
+    this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.CurrentMonth, OPM.USSide);
     this.gridDataSubscription = this.reportService.getAllTripGridData()
       .subscribe(
         (data: any) => {
@@ -95,7 +95,7 @@ export class ReportTripsOpmCurrentMonthComponent implements OnInit, OnDestroy {
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.reportService.fetchAllTripGridData(state, this.searchQuery, TripType.CurrentMonth, OPM.USSide);
+    this.reportService.fetchAllTripGridData(state, this.searchQuery, null, null, TripType.CurrentMonth, OPM.USSide);
   }
 
   exportToExcel(grid: GridComponent): void {

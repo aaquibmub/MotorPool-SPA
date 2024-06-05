@@ -15,6 +15,47 @@
       </div>
     </div>
     <div class="grid-content">
+      <!-- filters -->
+      <div class="row">
+        <!-- from date -->
+        <div class="col-3">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputFromDate">{{
+                utilityService.language.fromDate | translate
+              }}</label>
+            </div>
+            <div class="control">
+              <kendo-datepicker
+                class="form-control"
+                id="inputFromDate"
+                [(ngModel)]="fromDate"
+                (valueChange)="handleFilterValueChange()"
+              >
+              </kendo-datepicker>
+            </div>
+          </div>
+        </div>
+        <!-- to date -->
+        <div class="col-3">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputToDate">{{
+                utilityService.language.toDate | translate
+              }}</label>
+            </div>
+            <div class="control">
+              <kendo-datepicker
+                class="form-control"
+                id="inputToDate"
+                [(ngModel)]="toDate"
+                (valueChange)="handleFilterValueChange()"
+              >
+              </kendo-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
       <app-grid-toolbar
         *ngIf="grid"
         [grid]="grid"

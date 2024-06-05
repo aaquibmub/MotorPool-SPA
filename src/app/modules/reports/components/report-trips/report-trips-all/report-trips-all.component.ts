@@ -22,6 +22,8 @@ export class ReportTripsAllComponent implements OnInit, OnDestroy {
   pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
+  fromDate: Date;
+  toDate: Date;
   hiddenColumns: string[] = [];
 
   tripRouteList: DropdownItem<TripRoute>[] = GetTripRouteForDropdownList();
@@ -50,12 +52,19 @@ export class ReportTripsAllComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    this.toDate = new Date();
+    this.fromDate = this.utilityService.addDays(this.toDate, -7);
+
     this.gridFilterSubscription = this.gridToolbarService.getGridFilter()
       .subscribe(
         (show: boolean) => {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
           this.state.filter = null;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery);
+          this.reportService.fetchAllTripGridData(
+            this.state,
+            this.searchQuery,
+            this.fromDate,
+            this.toDate);
         }
       );
 
@@ -63,7 +72,11 @@ export class ReportTripsAllComponent implements OnInit, OnDestroy {
       .subscribe(
         (pageSize: number) => {
           this.state.take = pageSize;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery);
+          this.reportService.fetchAllTripGridData(
+            this.state,
+            this.searchQuery,
+            this.fromDate,
+            this.toDate);
         }
       );
     this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
@@ -71,7 +84,11 @@ export class ReportTripsAllComponent implements OnInit, OnDestroy {
         (query: string) => {
           this.searchQuery = query;
           this.state = UtilityRix.gridConfig.state;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery);
+          this.reportService.fetchAllTripGridData(
+            this.state,
+            this.searchQuery,
+            this.fromDate,
+            this.toDate);
         }
       );
     this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
@@ -80,7 +97,11 @@ export class ReportTripsAllComponent implements OnInit, OnDestroy {
           this.hideColumn(column);
         }
       );
-    this.reportService.fetchAllTripGridData(this.state, this.searchQuery);
+    this.reportService.fetchAllTripGridData(
+      this.state,
+      this.searchQuery,
+      this.fromDate,
+      this.toDate);
     this.gridDataSubscription = this.reportService.getAllTripGridData()
       .subscribe(
         (data: any) => {
@@ -93,13 +114,24 @@ export class ReportTripsAllComponent implements OnInit, OnDestroy {
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.reportService.fetchAllTripGridData(state, this.searchQuery);
+    this.reportService.fetchAllTripGridData(
+      this.state,
+      this.searchQuery,
+      this.fromDate,
+      this.toDate);
+  }
+
+  handleFilterValueChange(): void {
+    this.reportService.fetchAllTripGridData(
+      this.state,
+      this.searchQuery,
+      this.fromDate,
+      this.toDate);
   }
 
   exportToExcel(grid: GridComponent): void {
     grid.saveAsExcel();
   }
-
 
   handleTripRouteValueChange(value: DropdownItem<TripRoute>): void {
     const root = { logic: 'and', filters: [], ...this.state.filter };

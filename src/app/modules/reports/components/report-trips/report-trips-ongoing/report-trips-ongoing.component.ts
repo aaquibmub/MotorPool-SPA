@@ -55,7 +55,7 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
         (show: boolean) => {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
           this.state.filter = null;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.Ongoing);
+          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.Ongoing);
         }
       );
 
@@ -65,14 +65,14 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
       .subscribe(
         (pageSize: number) => {
           this.state.take = pageSize;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.Ongoing);
+          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.Ongoing);
         }
       );
     this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.Ongoing);
+          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.Ongoing);
         }
       );
     this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
@@ -82,7 +82,7 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
           this.hideColumn(column);
         }
       );
-    this.reportService.fetchAllTripGridData(this.state, this.searchQuery, TripType.Ongoing);
+    this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.Ongoing);
     this.gridDataSubscription = this.reportService.getAllTripGridData()
       .subscribe(
         (data: any) => {
@@ -95,7 +95,7 @@ export class ReportTripsOngoingComponent implements OnInit, OnDestroy {
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.reportService.fetchAllTripGridData(state, this.searchQuery, TripType.Ongoing);
+    this.reportService.fetchAllTripGridData(state, this.searchQuery, null, null, TripType.Ongoing);
   }
 
   exportToExcel(grid: GridComponent): void {

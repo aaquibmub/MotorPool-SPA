@@ -78,6 +78,10 @@
   color: inherit !important;
 }
 
+.grid-toolbar .form-group label {
+  margin-left: 8px;
+}
+
 .grid-toolbar .form-control {
   margin-left: 8px;
   height: 32px;

@@ -191,12 +191,16 @@ export class ReportService {
   fetchAllTripGridData(
     state: any,
     search: string,
+    from: Date,
+    to: Date,
     type?: TripType,
     opm?: OPM): void {
     this.http.post<GridList<ReportAllTripGridModel>>(
       this.baseUrl + 'get-all-trip-gridlist', {
       gridFilters: state,
       search,
+      from,
+      to,
       type,
       opm
     }).subscribe(
