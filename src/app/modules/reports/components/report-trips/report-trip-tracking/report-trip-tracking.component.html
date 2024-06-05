@@ -110,19 +110,27 @@
                       <th>Requester (Full Name)</th>
                       <th>Passenger(s) (Full Name)</th>
                       <th>No. Passengers</th>
-                      <th>OPM Side</th>
+                      <th>PTC Side</th>
                       <th>Driver Name</th>
                       <th>Vehicle Plate Number</th>
                       <th>Pickup(s)</th>
                       <th>Stop(s)</th>
                       <th>Dropoff(s)</th>
-                      <th>Pickup Time(s)</th>
+                      <th>Trip Departure Time</th>
+                      <th>Arrival Time</th>
+                      <th>Schedule Pick Up time</th>
+                      <th>Waiting time</th>
+                      <th>Actual Pickup Time (s)</th>
+                      <th>Drop waiting time</th>
+                      <th>Depaeture from Waiting Place</th>
                       <th>Stop Time(s)</th>
                       <th>Dropoff Time(s)</th>
+                      <th>Back to Motorpool</th>
                       <th>Dispatcher</th>
                       <th>Note</th>
                       <th>IN/OUT</th>
                       <th>Approval</th>
+                      <th>Trip Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -139,13 +147,21 @@
                       <td>{{ t.pickups }}</td>
                       <td>{{ t.stops }}</td>
                       <td>{{ t.dropoffs }}</td>
+                      <td>{{ t.tripDepartureTime }}</td>
+                      <td>{{ t.arrivalTime }}</td>
+                      <td>{{ t.scheduledPickupTime }}</td>
+                      <td>{{ t.waitingTime }}</td>
                       <td>{{ t.pickupTime }}</td>
+                      <td>{{ t.dropWaitingTime }}</td>
+                      <td>{{ t.departureFromWaitingPlace }}</td>
                       <td>{{ t.stopTime }}</td>
                       <td>{{ t.dropoffTime }}</td>
+                      <td>{{ t.backToMotorPool }}</td>
                       <td>{{ t.dispatcher }}</td>
                       <td>{{ t.notes }}</td>
                       <td>{{ t.destination }}</td>
-                      <td>{{ t.Approval }}</td>
+                      <td>{{ t.approval }}</td>
+                      <td>{{ t.tripStatus }}</td>
                     </tr>
                   </tbody>
                 </table>
