@@ -318,4 +318,18 @@ export class TripEditJourneyComponent implements OnInit {
 
   }
 
+  updateOdoMeter(): void {
+    this.tripService.updateTripMeterReading({
+      tripId: this.model.tripId,
+      start: this.meterReadingStart,
+      end: this.meterReadingEnd,
+    }).subscribe((response: ResponseModel<string>) => {
+      if (response.hasError) {
+        this.alertService.setErrorAlert(response.msg);
+        return;
+      }
+      this.getTripLatestStatus(this.model.tripId);
+    });
+  }
+
 }

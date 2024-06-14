@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
@@ -42,6 +43,7 @@ export class TripEditPassengerListComponent implements OnInit {
     private tripService: TripService,
     private route: ActivatedRoute,
     private alertService: AlertService,
+    private dialogService: DialogService,
     private gridToolbarService: GridToolbarService
   ) { }
 
@@ -146,6 +148,38 @@ export class TripEditPassengerListComponent implements OnInit {
         this.resetPassengerValue();
         this.tripService.fetchTripPassengerGridData(this.state, this.searchQuery, this.id);
       });
+  }
+
+  removePassenger(id: string): void {
+    const primaryAction = 'Remove';
+    const successAction = 'Removed';
+    const primaryMsg = 'Do you want to remove passenger?';
+
+    const dialog: DialogRef = this.dialogService
+      .open(this.alertService.getConfirmDialougeConfig(
+        'Confirm ' + primaryAction, primaryMsg, primaryAction));
+
+    dialog.result.subscribe((result: any) => {
+      if (result.text === primaryAction) {
+        this.tripService.removePassenger(id)
+          .subscribe(
+            (response: ResponseModel<string>) => {
+              if (response.hasError) {
+                this.alertService.setErrorAlert(response.msg);
+                return;
+              }
+
+              this.alertService.setSuccessAlert(
+                'Trip Passenger is '
+                + successAction
+                + ' successfully');
+
+              this.tripService.fetchTripPassengerGridData(this.state, this.searchQuery, this.id);
+
+            }
+          );
+      }
+    });
   }
 
   ngOnDestroy(): void {

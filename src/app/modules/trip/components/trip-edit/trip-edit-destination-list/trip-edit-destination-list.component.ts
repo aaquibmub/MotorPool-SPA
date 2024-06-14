@@ -290,4 +290,12 @@ export class TripEditDestinationListComponent implements OnInit {
 
   }
 
+  handleAddressFilter(text: string): void {
+    this.addressService.getDropdownList(text)
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.addressList = list;
+      });
+  }
+
+
 }

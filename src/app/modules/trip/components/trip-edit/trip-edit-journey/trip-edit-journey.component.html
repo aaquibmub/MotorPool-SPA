@@ -66,6 +66,67 @@
       </div>
     </div>
   </div>
+  <!-- Trip Meter Reading -->
+  <div
+    class="form-section form-section-border"
+    *ngIf="model.tripStatus > tripStatus.OdoMeterAtStart"
+  >
+    <div class="section-header">
+      {{ utilityService.language.odoMeter | translate }}
+    </div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputOdoStart">{{
+                utilityService.language.startingOdoMeterReading | translate
+              }}</label>
+            </div>
+            <div class="control">
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="meterReadingStart"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-md-4"
+          *ngIf="model.tripStatus > tripStatus.OdoMeterAtEnd"
+        >
+          <div class="form-group">
+            <div class="label">
+              <label for="inputOdoEnd">{{
+                utilityService.language.endingOdoMeterReading | translate
+              }}</label>
+            </div>
+            <div class="control">
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="meterReadingEnd"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <button
+              class="btn btn-primary mr-16"
+              type="button"
+              (click)="updateOdoMeter()"
+            >
+              {{ utilityService.language.save | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Trip Journey -->
   <div
     class="form-section form-section-border"

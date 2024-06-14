@@ -108,6 +108,10 @@ export class TripService {
     this.showTripPassengerPopup.next(model);
   }
 
+  removePassenger(id: string): Observable<ResponseModel<string>> {
+    return this.http.delete<ResponseModel<string>>(this.baseUrl + 'remove-passenger/' + id);
+  }
+
   getTripDestinationDetailModel(id: string): Observable<TripDestinationDetailModel> {
     return this.http.get<TripDestinationDetailModel>(this.baseUrl + 'get-trip-destination-detail-model/' + id);
   }
@@ -174,6 +178,10 @@ export class TripService {
 
   updateTripVehicleMeter(model: TripVehicleMeterModel): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-vehical-meter', model);
+  }
+
+  updateTripMeterReading(model: any): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-meter-reading', model);
   }
 
   getTripLogGridData(): Observable<GridDataResult> {

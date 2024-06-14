@@ -9,6 +9,7 @@
     <table>
       <thead>
         <tr>
+          <th>{{ utilityService.language.date | translate }}</th>
           <th>{{ utilityService.language.time | translate }}</th>
           <th>{{ utilityService.language.tripId | translate }}</th>
           <th>{{ utilityService.language.passanger | translate }}</th>
@@ -18,6 +19,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of list">
+          <td>{{ item.time | dateformat }}</td>
           <td>{{ item.time | dateformat : "hh:mm aa" }}</td>
           <td>
             <a routerLink="/trips/view/{{ item.id }}/detail">{{

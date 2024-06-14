@@ -52,6 +52,14 @@
       title="{{ utilityService.language.name | translate }}"
     >
     </kendo-grid-column>
+    <kendo-grid-column headerClass="action-column">
+      <ng-template kendoGridHeaderTemplate>
+        <span><i class="action-column-icon"></i></span>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <span class="fa fa-times" (click)="removePassenger(dataItem.id)"></span>
+      </ng-template>
+    </kendo-grid-column>
     <ng-template
       kendoPagerTemplate
       let-totalPages="totalPages"
