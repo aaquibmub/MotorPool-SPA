@@ -1,6 +1,7 @@
 export class LanguageKeys {
 
   // A.
+  additionalNote = "Additional Note";
   address = "Address";
   addNewDestination = "Add New Destination";
   addPassanger = "Add Passenger";
@@ -35,6 +36,7 @@ export class LanguageKeys {
   create = "Create";
   cancel = "Cancel";
   createExecute = "Create & Execute";
+  createNote = "Create Note";
   color = "Color";
   colorRequired = "Color is required";
   comments = "Comments";
@@ -169,6 +171,7 @@ export class LanguageKeys {
   nextDue = "Next Due";
   noDateAvail = "No data available";
   no = "No";
+  note = "Note";
   notifications = "Notifications";
   newDriver = "New Driver";
   nationalId = "National ID #";

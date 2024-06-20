@@ -1,0 +1,85 @@
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <div class="page-actions"></div>
+  <div class="page-area">
+    <div class="page-header">
+      <div class="page-title">
+        <span>{{ utilityService.language.note | translate }}</span>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="form-section">
+        <div class="row">
+          <!-- Address -->
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputAddress">{{
+                  utilityService.language.note | translate
+                }}</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="inputName"
+                  formControlName="name"
+                  id="inputName"
+                />
+                <div
+                  *ngIf="!form.get('name').valid && form.get('name').touched"
+                  class="invalid-feedback"
+                >
+                  {{ utilityService.language.nameRequired | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Status -->
+          <div class="col-md-4 custom-state">
+            <div class="form-group">
+              <div class="control">
+                <div class="display-flex">
+                  <div class="checkbox-control">
+                    <kendo-switch
+                      [size]="'small'"
+                      id="inputStatus"
+                      formControlName="status"
+                    ></kendo-switch>
+                  </div>
+                  <div class="label">
+                    <label for="inputStatus">{{
+                      utilityService.language.isActive | translate
+                    }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="form-section transparent-section">
+        <div class="section-body">
+          <div class="description sm-hide"></div>
+          <div class="fields">
+            <div class="form-group">
+              <button
+                class="btn btn-default mr-16"
+                type="button"
+                (click)="cancel()"
+              >
+                {{ utilityService.language.cancel | translate }}
+              </button>
+              <button *ngIf="!editMode" class="btn btn-primary" type="submit">
+                {{ utilityService.language.create | translate }}
+              </button>
+              <button *ngIf="editMode" class="btn btn-primary" type="submit">
+                {{ utilityService.language.update | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

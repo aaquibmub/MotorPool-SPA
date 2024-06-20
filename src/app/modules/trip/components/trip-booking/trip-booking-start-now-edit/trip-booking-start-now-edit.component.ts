@@ -60,6 +60,8 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
   driverList: DropdownItem<string>[];
   vehicalList: DropdownItem<string>[];
 
+  noteList: DropdownItem<string>[];
+
   tripExecutePopupSubscription: Subscription;
 
   constructor(
@@ -210,6 +212,11 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
     //     this.vehicalList = list;
     //   });
 
+    this.tripBookingService.getDropdownBookingNoteList('')
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.noteList = list;
+      });
+
   }
 
   private initForm(): void {
@@ -240,6 +247,7 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
     let vehical: DropdownItem<string> = null;
     let registrationPlate = '';
 
+    let note: DropdownItem<string> = null;
     let notes: string = '';
 
     if (this.model) {
@@ -282,6 +290,7 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
       driver = this.model.driver;
       vehical = this.model.vehical;
       registrationPlate = this.model.registrationPlate;
+      note = this.model.note;
       notes = this.model.notes;
 
       this.form = new UntypedFormGroup({
@@ -316,6 +325,7 @@ export class TripBookingStartNowEditComponent implements OnInit, OnDestroy {
         driver: new UntypedFormControl(driver),
         vehical: new UntypedFormControl(vehical),
         registrationPlate: new UntypedFormControl(registrationPlate),
+        note: new UntypedFormControl(note),
         notes: new UntypedFormControl(notes)
       });
     }

@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ApproverListComponent } from '../approver/components/approver-list/approver-list.component';
 import { AuthGuard } from '../auth/auth.guard';
+import { BookingNoteEditComponent } from './components/booking-note/booking-note-forms/booking-note-edit/booking-note-edit.component';
+import { BookingNoteFormsComponent } from './components/booking-note/booking-note-forms/booking-note-forms.component';
+import { BookingNoteAllComponent } from './components/booking-note/booking-note-list/booking-note-all/booking-note-all.component';
 import { TripBookingInternalEditComponent } from './components/trip-booking/trip-booking-internal-edit/trip-booking-internal-edit.component';
 import { TripBookingRefuellingEditComponent } from './components/trip-booking/trip-booking-refuelling-edit/trip-booking-refuelling-edit.component';
 import { TripBookingScheduledEditComponent } from './components/trip-booking/trip-booking-scheduled-edit/trip-booking-scheduled-edit.component';
@@ -109,6 +113,29 @@ const routes: Routes = [
           { path: '', redirectTo: 'today', pathMatch: 'full' },
           { path: 'today', component: TripTodayListComponent },
           { path: 'on-going', component: TripOngoingListComponent },
+        ]
+      },
+
+      // booking note
+      {
+        path: 'booking-note',
+        component: BookingNoteFormsComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: '/booking-note/list/all',
+            pathMatch: 'full'
+          },
+          { path: 'new', component: BookingNoteEditComponent },
+          { path: ':id/edit', component: BookingNoteEditComponent },
+        ]
+      },
+      {
+        path: 'booking-note-list',
+        component: ApproverListComponent,
+        children: [
+          { path: '', redirectTo: 'all', pathMatch: 'full' },
+          { path: 'all', component: BookingNoteAllComponent },
         ]
       },
     ]

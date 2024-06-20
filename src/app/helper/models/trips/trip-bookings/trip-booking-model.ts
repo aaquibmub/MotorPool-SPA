@@ -29,6 +29,7 @@ export class TripBookingModel {
   vehical: DropdownItem<string>;
   registrationPlate: string;
 
+  note: DropdownItem<string>;
   notes: string;
 
 }

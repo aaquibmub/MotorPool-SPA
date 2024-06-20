@@ -2,13 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, ValidatorFn } from '@angular/forms';
 import { guid } from '@progress/kendo-angular-common';
-import { Observable } from 'rxjs';
+import { GridDataResult } from '@progress/kendo-angular-grid';
+import { Observable, Subject } from 'rxjs';
 import { UtilityRix } from '../../common/utility-rix';
+import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
+import { GridList } from '../../models/common/grid/grid-list';
 import { ResponseModel } from '../../models/common/response-model';
 import { TripDestinationModel } from '../../models/trips/enroute/trip-destination-model';
 import { TripDropoffModel } from '../../models/trips/enroute/trip-dropoff-model';
 import { TripPickupModel } from '../../models/trips/enroute/trip-pickup-model';
 import { TripStopModel } from '../../models/trips/enroute/trip-stop-model';
+import { TripBookingNoteGridModel } from '../../models/trips/trip-bookings/booking-note/trip-booking-note-grid-model';
+import { TripBookingNoteModel } from '../../models/trips/trip-bookings/booking-note/trip-booking-note-model';
 import { TripBookingInternalModel } from '../../models/trips/trip-bookings/trip-booking-internal-model';
 import { TripBookingPassengerModel } from '../../models/trips/trip-bookings/trip-booking-passenger-model';
 import { TripBookingRefuelingModel } from '../../models/trips/trip-bookings/trip-booking-refueling-model';
@@ -23,6 +28,8 @@ import { environment } from './../../../../environments/environment';
 })
 export class TripBookingService {
   baseUrl = environment.apiUrl + 'tripbooking/';
+
+  private gridDataBookingNote = new Subject<GridList<TripBookingNoteGridModel>>();
 
   constructor(
     private http: HttpClient,
@@ -269,4 +276,34 @@ export class TripBookingService {
     });
   }
 
+  getDropdownBookingNoteList(text: string): Observable<DropdownItem<string>[]> {
+    return this.http.get<DropdownItem<string>[]>(
+      this.baseUrl + 'get-dropdown-booking-note-list?text=' + text);
+  }
+
+  getBookingNote(id: string): Observable<TripBookingNoteModel> {
+    return this.http.get<TripBookingNoteModel>(this.baseUrl + 'get-booking-note/' + id);
+  }
+
+  addUpdateBookingNote(model: any): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl, model);
+  }
+
+  getGridDataBookingNote(): Observable<GridDataResult> {
+    return this.gridDataBookingNote.asObservable();
+  }
+  fetchGridDataBookingNote(
+    state: any,
+    query: string): void {
+    this.http.post<GridList<TripBookingNoteGridModel>>(
+      this.baseUrl + 'get-booking-note-gridlist', {
+      gridFilters: state,
+      search: query
+    }).subscribe(
+      (gridData: GridList<TripBookingNoteGridModel>) => {
+        this.gridDataBookingNote.next(gridData);
+      }
+    );
+  }
 }
+

@@ -9,6 +9,10 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BookingNoteEditComponent } from './components/booking-note/booking-note-forms/booking-note-edit/booking-note-edit.component';
+import { BookingNoteFormsComponent } from './components/booking-note/booking-note-forms/booking-note-forms.component';
+import { BookingNoteAllComponent } from './components/booking-note/booking-note-list/booking-note-all/booking-note-all.component';
+import { BookingNoteListComponent } from './components/booking-note/booking-note-list/booking-note-list.component';
 import { TripBookingInternalEditComponent } from './components/trip-booking/trip-booking-internal-edit/trip-booking-internal-edit.component';
 import { TripBookingRefuellingEditComponent } from './components/trip-booking/trip-booking-refuelling-edit/trip-booking-refuelling-edit.component';
 import { TripBookingScheduledEditComponent } from './components/trip-booking/trip-booking-scheduled-edit/trip-booking-scheduled-edit.component';
@@ -53,6 +57,11 @@ import { TripComponent } from './trip.component';
   ],
   declarations: [
     TripComponent,
+
+    BookingNoteFormsComponent,
+    BookingNoteEditComponent,
+    BookingNoteListComponent,
+    BookingNoteAllComponent,
 
     TripBookingComponent,
 

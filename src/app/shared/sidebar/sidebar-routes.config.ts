@@ -417,7 +417,6 @@ export const ROUTES: RouteInfo[] = [
         ]
       },
 
-
       // Approvers
       {
         operation: UtilityRix.operations.opApprovers,
@@ -444,6 +443,42 @@ export const ROUTES: RouteInfo[] = [
             operation: UtilityRix.operations.opApprovers,
             path: '/approvers/list/all',
             title: 'All Approvers',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
+
+      // Booking Notes
+      {
+        operation: UtilityRix.operations.opTripBookings,
+        path: '/trips/booking-note-list/',
+        title: 'Booking Notes',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            operation: UtilityRix.operations.opTripBookings,
+            path: '/trips/booking-note/new',
+            title: 'Add New Note',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            operation: UtilityRix.operations.opTripBookings,
+            path: '/trips/booking-note-list/all',
+            title: 'All Booking Notes',
             icon: 'bx bx-right-arrow-alt',
             class: '',
             badge: '',

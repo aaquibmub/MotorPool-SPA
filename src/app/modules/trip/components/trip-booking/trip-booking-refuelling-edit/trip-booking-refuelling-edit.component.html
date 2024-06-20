@@ -400,8 +400,49 @@
         </div>
         <div class="section-body">
           <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputApprovedBy">{{
+                    utilityService.language.note | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [filterable]="true"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (filterChange)="handleNoteFilter($event)"
+                    [data]="noteList"
+                    formControlName="note"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <!-- <div
+                    *ngIf="
+                      !form.get('approvedBy').valid &&
+                      form.get('approvedBy').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    {{ utilityService.language.approverRequired | translate }}
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-md-12">
               <div class="form-group">
+                <div class="label">
+                  <label for="inputOtherNotes">{{
+                    utilityService.language.additionalNote | translate
+                  }}</label>
+                </div>
                 <div class="control">
                   <textarea
                     class="form-control form-text-area"
