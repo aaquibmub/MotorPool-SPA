@@ -8,6 +8,7 @@ export class VehicalModel {
   vehicalIdStr: string;
   registrationPlate: string;
   status: DropdownItem<VehicalStatus>;
+  grippedBy: string;
   make: string;
   model: string;
   modelYear: number;

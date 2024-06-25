@@ -111,6 +111,7 @@ export class LanguageKeys {
   general = "General";
   generalInfo = "General Information";
   generalInspection = "General Inspection";
+  grippedBy = "Gripped By";
   grippedVehicals = "Gripped Vehicles";
 
   //I

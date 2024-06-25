@@ -117,7 +117,7 @@ export class TripOngoingListComponent implements OnInit, OnDestroy {
 
     actions.push({
       handle: () => {
-        this.router.navigate(['/trips/view/detail']);
+        this.router.navigate(['/trips/view/' + item.id + '/detail']);
       },
       icon: '',
       label: 'View'
