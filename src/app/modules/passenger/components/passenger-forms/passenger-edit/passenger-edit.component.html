@@ -67,6 +67,27 @@
               </div>
             </div>
           </div>
+          <!-- Status -->
+          <div class="col-md-4 custom-state">
+            <div class="form-group">
+              <div class="control">
+                <div class="display-flex">
+                  <div class="checkbox-control">
+                    <kendo-switch
+                      [size]="'small'"
+                      id="inputStatus"
+                      formControlName="isActive"
+                    ></kendo-switch>
+                  </div>
+                  <div class="label">
+                    <label for="inputStatus">{{
+                      utilityService.language.isActive | translate
+                    }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="row">
           <!-- Age Group -->

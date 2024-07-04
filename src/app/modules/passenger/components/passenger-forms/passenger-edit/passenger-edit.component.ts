@@ -78,14 +78,16 @@ export class PassengerEditComponent implements OnInit {
 
   private initForm(): void {
 
+    let isActive: boolean = false;
     let name: string = null;
     let gender: DropdownItem<Gender> = null;
     let ageGroup: DropdownItem<string> = null;
     let opm: DropdownItem<OPM> = null;
     let phoneNumber: string = null;
     let address: DropdownItem<string> = null;
-
+    debugger;
     if (this.model) {
+      isActive = this.model.isActive;
       name = this.model.name;
       gender = this.model.gender;
       ageGroup = this.model.ageGroup;
@@ -95,6 +97,8 @@ export class PassengerEditComponent implements OnInit {
     }
 
     this.form = new UntypedFormGroup({
+      isActive: new UntypedFormControl(
+        isActive, [Validators.required]),
       name: new UntypedFormControl(
         name, [Validators.required]),
       gender: new UntypedFormControl(

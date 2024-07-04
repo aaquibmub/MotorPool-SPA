@@ -65,6 +65,7 @@ export class TripEditPassengerAddNewPopupComponent implements OnInit {
           arg: this.arg,
           passenger: {
             id: response.result,
+            isActive: true,
             name: this.model.passengerName,
             opm: this.model.opm,
             ageGroup: null,
