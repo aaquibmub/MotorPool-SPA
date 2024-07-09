@@ -241,6 +241,17 @@ export const ROUTES: RouteInfo[] = [
           },
           {
             operation: UtilityRix.operations.opTripBookings,
+            path: '/trips/booking/new-vip',
+            title: 'New VIP Trip',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+          {
+            operation: UtilityRix.operations.opTripBookings,
             path: '/trips/bookings/all',
             title: 'All Trip Bookings',
             icon: 'bx bx-right-arrow-alt',

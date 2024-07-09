@@ -300,6 +300,7 @@ export class LanguageKeys {
   vehicleMileage = "Vehicle Mileage";
   vehicalName = "Vehicle Name";
   vehicalPlate = "Vehicle Plate";
+  vipTrips = "VIP Trips";
 
   //W
   wheelsTyres = "Wheels & Tires";

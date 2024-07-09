@@ -20,6 +20,7 @@ import { TripBookingRefuelingModel } from '../../models/trips/trip-bookings/trip
 import { TripBookingScheduledModel } from '../../models/trips/trip-bookings/trip-booking-scheduled-model';
 import { TripBookingSpecialServiceModel } from '../../models/trips/trip-bookings/trip-booking-special-service-model';
 import { TripBookingStartNowModel } from '../../models/trips/trip-bookings/trip-booking-start-now-model';
+import { TripBookingVipModel } from '../../models/trips/trip-bookings/trip-booking-vip-model';
 import { UtilityService } from '../common/utility.service';
 import { environment } from './../../../../environments/environment';
 
@@ -204,6 +205,54 @@ export class TripBookingService {
     let index = 0;
     formValue.destinations.forEach(f => {
       this.utilityService.buildFormData(formData, f, 'destinations[' + index + ']');
+      index++;
+    });
+
+    return formData;
+
+  }
+
+
+  getVipBooking(id: string): Observable<TripBookingVipModel> {
+    return this.http.get<TripBookingStartNowModel>(this.baseUrl + 'get-vip' + id);
+  }
+
+  getDefaultVipBookingModel(): Observable<TripBookingVipModel> {
+    const url = this.baseUrl + 'get-default-vip';
+    return this.http.get<TripBookingVipModel>(url);
+  }
+
+  addUpdateVip(model: any): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'vip', model);
+  }
+
+  prepareSaveTripBookingVip(
+    id: string,
+    formValue: TripBookingVipModel
+  ): FormData {
+
+    const formData = new FormData();
+    if (id) {
+      formData.append('id', id);
+    }
+
+    this.utilityService.buildFormData(formData, formValue);
+
+    let index = 0;
+    formValue.destinations.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'destinations[' + index + ']');
+      index++;
+    });
+
+    index = 0;
+    formValue.passengers.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'passengers[' + index + ']');
+      index++;
+    });
+
+    index = 0;
+    formValue.specialSevices.forEach(f => {
+      this.utilityService.buildFormData(formData, f, 'specialSevices[' + index + ']');
       index++;
     });
 

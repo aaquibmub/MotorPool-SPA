@@ -1,0 +1,962 @@
+<form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <div class="page-actions"></div>
+  <div class="page-area">
+    <div class="page-header">
+      <div class="page-title">
+        <span>New Trip</span>
+      </div>
+    </div>
+    <div class="page-body">
+      <!-- Booking Info -->
+      <div class="form-section">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputBookedBy">{{
+                  utilityService.language.bookedBy | translate
+                }}</label>
+              </div>
+              <div class="control">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="bookedBy"
+                  [value]="model.bookedBy?.text"
+                  readonly
+                  id=""
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="label">
+                <label for="inputApprovedBy">{{
+                  utilityService.language.approvedBy | translate
+                }}</label>
+              </div>
+              <div class="control">
+                <kendo-dropdownlist
+                  class="form-control"
+                  textField="text"
+                  valueField="value"
+                  [filterable]="true"
+                  [defaultItem]="utilityService.dropdownDefaultItem"
+                  (filterChange)="handleApproverFilter($event)"
+                  [data]="approverList"
+                  formControlName="approvedBy"
+                >
+                  <ng-template kendoDropDownListItemTemplate let-dataItem>
+                    <span>{{ dataItem.text }}</span>
+                  </ng-template>
+                </kendo-dropdownlist>
+                <div
+                  *ngIf="
+                    !form.get('approvedBy').valid &&
+                    form.get('approvedBy').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  {{ utilityService.language.approverRequired | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Trip Requester -->
+      <div class="form-section">
+        <div class="section-header">
+          {{ utilityService.language.tripRequester | translate }}
+        </div>
+        <div class="section-body">
+          <!-- Requester Info -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRequester">{{
+                    utilityService.language.requester | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [filterable]="true"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (filterChange)="handlePassengerFilter($event)"
+                    (valueChange)="handleRequesterValueChange($event)"
+                    [data]="requesterList"
+                    formControlName="requester"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text }}</span
+                      ><span
+                        *ngIf="dataItem.value == ''"
+                        class="fa fa-plus-square quick-add-icon"
+                        (click)="openPassengerQuickAddPopup(true)"
+                      ></span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <div
+                    *ngIf="
+                      !form.get('requester').valid &&
+                      form.get('requester').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    {{ utilityService.language.requesterRequired | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRequestPhone">{{
+                    utilityService.language.requesterPhone | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterPhone"
+                    [value]="requesterDetail?.phoneNumber"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRequestOpm">{{
+                    utilityService.language.opm | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="requesterOpm"
+                    [value]="requesterDetail?.opm?.text"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Is Requester Traveling -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="control">
+                  <div class="display-flex">
+                    <div class="checkbox-control">
+                      <kendo-switch
+                        [size]="'small'"
+                        id="inputRequesterTraveling"
+                        formControlName="isRequesterTraveling"
+                      ></kendo-switch>
+                    </div>
+                    <div class="label">
+                      <label for="inputRequesterTraveling">{{
+                        utilityService.language.isRequesterTravelling
+                          | translate
+                      }}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Passengers -->
+      <div class="form-section">
+        <div class="section-header">
+          {{ utilityService.language.passangers | translate }}
+        </div>
+        <div class="section-body">
+          <!-- Requester as Passenger -->
+          <div
+            class="form-section blue-section"
+            *ngIf="form.get('isRequesterTraveling').value"
+          >
+            <div class="section-header">
+              {{ utilityService.language.passanger1 | translate }}
+            </div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label [for]="'inputPassengerName'">{{
+                        utilityService.language.passangerName | translate
+                      }}</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="requesterPhone"
+                        [value]="requesterDetail?.name"
+                        readonly
+                        id=""
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label [for]="'inputPassengerGender'">{{
+                        utilityService.language.gender | translate
+                      }}</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="requesterPhone"
+                        [value]="requesterDetail?.gender?.text"
+                        readonly
+                        id=""
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label [for]="'inputPassengerAgeGroup'">{{
+                        utilityService.language.ageGroup | translate
+                      }}</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="requesterPhone"
+                        [value]="requesterDetail?.ageGroup?.text"
+                        readonly
+                        id=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Number of Extra Passengers -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputNumberOfPassengers"
+                    >Number of
+                    {{ form.get("isRequesterTraveling").value ? "Extra" : "" }}
+                    Passengers</label
+                  >
+                </div>
+                <div class="control">
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="inputNumberOfPassengers"
+                    [value]="0"
+                    min="0"
+                    max="10"
+                    (change)="handleNumberOfPassengerChange($event)"
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Passengers -->
+          <div formArrayName="passengers">
+            <div
+              class="form-section blue-section"
+              *ngFor="
+                let passenger of form.get('passengers').controls;
+                let j = index
+              "
+              [formGroupName]="j"
+            >
+              <div class="section-header">
+                Passenger
+                {{ j + (form.get("isRequesterTraveling").value ? 2 : 1) }}
+              </div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputPassengerName' + j">{{
+                          utilityService.language.passangerName | translate
+                        }}</label>
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [filterable]="true"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          (filterChange)="handlePassengerFilter($event)"
+                          (valueChange)="handlePassengerValueChange($event, j)"
+                          [data]="requesterList"
+                          formControlName="passenger"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text }}</span
+                            ><span
+                              *ngIf="dataItem.value == ''"
+                              class="fa fa-plus-square quick-add-icon"
+                              (click)="openPassengerQuickAddPopup(true)"
+                            ></span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !passenger.get('passenger').valid &&
+                            passenger.get('passenger').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          {{
+                            utilityService.language.passangerRequired
+                              | translate
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputPassengerGender' + j">{{
+                          utilityService.language.gender | translate
+                        }}</label>
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          [data]="genderList"
+                          formControlName="gender"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text | translate }}</span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !passenger.get('gender').valid &&
+                            passenger.get('gender').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          {{
+                            utilityService.language.genderRequired | translate
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputPassengerAgeGroup' + j">{{
+                          utilityService.language.ageGroup | translate
+                        }}</label>
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          [data]="ageGroupList"
+                          formControlName="ageGroup"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text | translate }}</span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !passenger.get('ageGroup').valid &&
+                            passenger.get('ageGroup').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          {{
+                            utilityService.language.ageGroupRequired | translate
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Special Services -->
+      <div class="form-section">
+        <div class="section-header">
+          {{ utilityService.language.specialServices | translate }}
+        </div>
+        <div class="section-body">
+          <!-- Is Special Service Required -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="control">
+                  <div class="display-flex">
+                    <div class="checkbox-control">
+                      <kendo-switch
+                        [size]="'small'"
+                        id="inputSpecialServiceRequired"
+                        formControlName="isSpecialServicesRequired"
+                      ></kendo-switch>
+                    </div>
+                    <div class="label">
+                      <label for="inputRequesterTraveling">{{
+                        utilityService.language.specialServiceRequired
+                          | translate
+                      }}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Special Services -->
+          <div
+            class="row"
+            formArrayName="specialSevices"
+            *ngIf="form.get('isSpecialServicesRequired').value"
+          >
+            <div
+              class="col-md-3"
+              *ngFor="
+                let specialService of form.get('specialSevices').controls;
+                let j = index
+              "
+              [formGroupName]="j"
+            >
+              <div class="form-group">
+                <div class="control" style="border: 1px solid; padding: 5px">
+                  <div class="display-flex">
+                    <div class="checkbox-control">
+                      <input
+                        type="checkbox"
+                        id="inputAlloDiscount"
+                        formControlName="required"
+                        [id]="'inputSpecialServiceRequired' + j"
+                        kendoCheckBox
+                      />
+                      <label for="inputAlloDiscount">{{
+                        specialService.get("specialService").value?.text
+                      }}</label>
+                    </div>
+                    <div class="control">
+                      <input
+                        type="number"
+                        class="form-control"
+                        name=""
+                        id=""
+                        formControlName="qty"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Booking -->
+      <div class="form-section">
+        <div class="section-header">
+          {{ utilityService.language.booking | translate }}
+        </div>
+        <div class="section-body">
+          <!-- Pickup Time -->
+          <div class="form-section blue-section">
+            <div class="section-header">
+              {{ utilityService.language.pickupDateTime | translate }}
+            </div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputPickupDate">{{
+                        utilityService.language.pickupDate | translate
+                      }}</label>
+                    </div>
+                    <div class="control">
+                      <kendo-datepicker
+                        class="form-control"
+                        id="inputPickupDate"
+                        formControlName="pickupDate"
+                      >
+                      </kendo-datepicker>
+                      <div
+                        *ngIf="
+                          !form.get('pickupDate').valid &&
+                          form.get('pickupDate').touched
+                        "
+                        class="invalid-feedback"
+                      >
+                        {{
+                          utilityService.language.pickupDateRequired ||
+                            translate
+                        }}.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputPickupTime">{{
+                        utilityService.language.pickupTime | translate
+                      }}</label>
+                    </div>
+                    <div class="control">
+                      <kendo-timepicker
+                        class="form-control"
+                        id="inputPickupTime"
+                        formControlName="pickupTime"
+                      >
+                      </kendo-timepicker>
+                      <div
+                        *ngIf="
+                          !form.get('pickupTime').valid &&
+                          form.get('pickupTime').touched
+                        "
+                        class="invalid-feedback"
+                      >
+                        {{
+                          utilityService.language.pickupTimeRequired | translate
+                        }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Trip Destination -->
+      <div class="form-section">
+        <div class="section-header">
+          {{ utilityService.language.tripDestination | translate }}
+        </div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputTripType">{{
+                    utilityService.language.trip | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (valueChange)="handleTripTypeValueChange($event)"
+                    [data]="tripTypeList"
+                    formControlName="tripRoute"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <div
+                    *ngIf="
+                      !form.get('tripRoute').valid &&
+                      form.get('tripRoute').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    {{ utilityService.language.tripRequired | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputTripDestination">{{
+                    utilityService.language.tripDestination | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    [data]="tripDestinationList"
+                    formControlName="tripDestination"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <div
+                    *ngIf="
+                      !form.get('tripDestination').valid &&
+                      form.get('tripDestination').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    {{
+                      utilityService.language.tripDestinationRequired
+                        | translate
+                    }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Starting Point -->
+          <div class="form-section green-section">
+            <div class="section-header">
+              {{ utilityService.language.defaultStartingPoint | translate }}
+            </div>
+            <div class="section-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <div class="label">
+                      <label for="inputStartingPointAddress">{{
+                        utilityService.language.address | translate
+                      }}</label>
+                    </div>
+                    <div class="control">
+                      <kendo-dropdownlist
+                        class="form-control"
+                        textField="text"
+                        valueField="value"
+                        [filterable]="true"
+                        [defaultItem]="utilityService.dropdownDefaultItem"
+                        (filterChange)="handleAddressFilter($event)"
+                        [data]="addressList"
+                        formControlName="startingPoint"
+                      >
+                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                          <span>{{ dataItem.text | translate }}</span>
+                        </ng-template>
+                      </kendo-dropdownlist>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Pickups -->
+          <div formArrayName="destinations">
+            <div
+              class="form-section blue-section"
+              *ngFor="
+                let destination of form.get('destinations').controls;
+                let j = index
+              "
+              [formGroupName]="j"
+            >
+              <div class="section-header">
+                <div class="header-title">
+                  {{ destination.get("type").value.text }}
+                  {{ getDestinationTypeCount(destination.value) + 1 }}
+                </div>
+                <div class="header-actions">
+                  <span
+                    class="clickable"
+                    (click)="removeDestination(j)"
+                    class="fa fa-times"
+                  ></span>
+                </div>
+              </div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <div class="label">
+                        <label [for]="'inputPickupAddress' + j">{{
+                          utilityService.language.address | translate
+                        }}</label>
+                      </div>
+                      <div class="control">
+                        <kendo-dropdownlist
+                          class="form-control"
+                          textField="text"
+                          valueField="value"
+                          [filterable]="true"
+                          [defaultItem]="utilityService.dropdownDefaultItem"
+                          (filterChange)="handleAddressFilter($event)"
+                          [data]="addressList"
+                          formControlName="address"
+                        >
+                          <ng-template
+                            kendoDropDownListItemTemplate
+                            let-dataItem
+                          >
+                            <span>{{ dataItem.text | translate }}</span>
+                            <span
+                              *ngIf="dataItem.value == ''"
+                              class="fa fa-plus-square quick-add-icon"
+                              (click)="openAddressQuickAddPopup(true, j)"
+                            ></span>
+                          </ng-template>
+                        </kendo-dropdownlist>
+                        <div
+                          *ngIf="
+                            !destination.get('address').valid &&
+                            destination.get('address').touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          {{
+                            utilityService.language.addressRequired | translate
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="display-flex justify-content-center">
+                      <kendo-dropdownbutton
+                        [data]="destinationButtons[j]"
+                        class="btn"
+                        style="margin-left: 8px"
+                        [popupSettings]="{
+                          popupClass: 'et-dropdown-menu'
+                        }"
+                      >
+                        {{
+                          utilityService.language.addNewDestination | translate
+                        }}<i class="k-button-icon k-icon k-i-arrow-s"></i>
+                        <ng-template
+                          kendoDropDownButtonItemTemplate
+                          let-dataItem
+                        >
+                          <div
+                            style="width: 100%"
+                            (click)="
+                              handleAddDestinationButtonClick(j, dataItem)
+                            "
+                          >
+                            <span
+                              class="{{ dataItem.icon }}"
+                              *ngIf="dataItem.icon"
+                            ></span>
+                            <span>{{ dataItem.label }}</span>
+                          </div>
+                        </ng-template>
+                      </kendo-dropdownbutton>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Driver and Transportation -->
+      <div class="form-section">
+        <div class="section-header">
+          {{ utilityService.language.driverAndTransportation | translate }}
+        </div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputDriver">{{
+                    utilityService.language.driver | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (valueChange)="handleDriverValueChange($event)"
+                    [data]="driverList"
+                    formControlName="driver"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputVehical">{{
+                    utilityService.language.vehical | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (valueChange)="handlVehicleValueChange($event)"
+                    [data]="vehicalList"
+                    formControlName="vehical"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text | translate }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputRegistrationPlate">{{
+                    utilityService.language.registrationPlate | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="inputRegistrationPlate"
+                    formControlName="registrationPlate"
+                    readonly
+                    id=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Notes -->
+      <div class="form-section">
+        <div class="section-header">
+          {{ utilityService.language.notes | translate }}
+        </div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputApprovedBy">{{
+                    utilityService.language.note | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-dropdownlist
+                    class="form-control"
+                    textField="text"
+                    valueField="value"
+                    [filterable]="true"
+                    [defaultItem]="utilityService.dropdownDefaultItem"
+                    (filterChange)="handleNoteFilter($event)"
+                    [data]="noteList"
+                    formControlName="note"
+                  >
+                    <ng-template kendoDropDownListItemTemplate let-dataItem>
+                      <span>{{ dataItem.text }}</span>
+                    </ng-template>
+                  </kendo-dropdownlist>
+                  <!-- <div
+                    *ngIf="
+                      !form.get('approvedBy').valid &&
+                      form.get('approvedBy').touched
+                    "
+                    class="invalid-feedback"
+                  >
+                    {{ utilityService.language.approverRequired | translate }}
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputOtherNotes">{{
+                    utilityService.language.additionalNote | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <textarea
+                    class="form-control form-text-area"
+                    name=""
+                    formControlName="notes"
+                    id=""
+                    cols="30"
+                    rows="10"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="form-section transparent-section">
+        <div class="section-body">
+          <div class="description sm-hide"></div>
+          <div class="fields">
+            <div class="form-group">
+              <button
+                class="btn btn-default mr-16"
+                type="button"
+                (click)="cancel()"
+              >
+                {{ utilityService.language.cancel | translate }}
+              </button>
+              <button class="btn btn-primary mr-16" type="submit">
+                {{ utilityService.language.createExecute | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

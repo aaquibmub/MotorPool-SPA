@@ -37,6 +37,7 @@ export enum TripType {
   StartsNow = 20,
   Internal = 25,
   Refuelling = 30,
+  VIP = 40,
 
   Today = 400,
   Ongoing = 500,
@@ -62,6 +63,10 @@ export function GetTripTypeForDropdownList():
     {
       value: TripType.Refuelling,
       text: 'Refuelling'
+    },
+    {
+      value: TripType.VIP,
+      text: 'VIP Trip'
     },
     {
       value: TripType.Today,

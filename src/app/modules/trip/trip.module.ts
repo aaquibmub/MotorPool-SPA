@@ -17,12 +17,14 @@ import { TripBookingInternalEditComponent } from './components/trip-booking/trip
 import { TripBookingRefuellingEditComponent } from './components/trip-booking/trip-booking-refuelling-edit/trip-booking-refuelling-edit.component';
 import { TripBookingScheduledEditComponent } from './components/trip-booking/trip-booking-scheduled-edit/trip-booking-scheduled-edit.component';
 import { TripBookingStartNowEditComponent } from './components/trip-booking/trip-booking-start-now-edit/trip-booking-start-now-edit.component';
+import { TripBookingVipEditComponent } from './components/trip-booking/trip-booking-vip-edit/trip-booking-vip-edit.component';
 import { TripBookingComponent } from './components/trip-booking/trip-booking.component';
 import { TripBookingAllComponent } from './components/trip-bookings/trip-booking-all/trip-booking-all.component';
 import { TripBookingInternalListComponent } from './components/trip-bookings/trip-booking-internal-list/trip-booking-internal-list.component';
 import { TripBookingRefuellingListComponent } from './components/trip-bookings/trip-booking-refuelling-list/trip-booking-refuelling-list.component';
 import { TripBookingScheduledListComponent } from './components/trip-bookings/trip-booking-scheduled-list/trip-booking-scheduled-list.component';
 import { TripBookingStartNowListComponent } from './components/trip-bookings/trip-booking-start-now-list/trip-booking-start-now-list.component';
+import { TripBookingVipListComponent } from './components/trip-bookings/trip-booking-vip-list/trip-booking-vip-list.component';
 import { TripBookingsComponent } from './components/trip-bookings/trip-bookings.component';
 import { TripEditDestinationListComponent } from './components/trip-edit/trip-edit-destination-list/trip-edit-destination-list.component';
 import { TripEditInfoComponent } from './components/trip-edit/trip-edit-info/trip-edit-info.component';
@@ -79,6 +81,9 @@ import { TripComponent } from './trip.component';
 
     TripBookingRefuellingListComponent,
     TripBookingRefuellingEditComponent,
+
+    TripBookingVipListComponent,
+    TripBookingVipEditComponent,
 
     TripViewComponent,
     TripViewDetailComponent,

@@ -63,6 +63,12 @@
           routerLink="/trips/bookings/refuelling"
           >{{ utilityService.language.refuelingTrips | translate }}</a
         >
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/trips/bookings/vip"
+          >{{ utilityService.language.vipTrips | translate }}</a
+        >
       </div>
       <div class="tab-content">
         <router-outlet></router-outlet>

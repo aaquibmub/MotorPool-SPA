@@ -41,7 +41,14 @@ export class TripBookingsComponent implements OnInit {
       },
       icon: '',
       label: 'Refuelling Trip'
-    }
+    },
+    {
+      handle: () => {
+        this.router.navigate(['/trips/booking/new-vip']);
+      },
+      icon: '',
+      label: 'New VIP Trip'
+    },
   ];
 
   constructor(
