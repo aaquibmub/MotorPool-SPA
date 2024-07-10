@@ -1,0 +1,75 @@
+<div class="grid-content">
+  <app-grid-toolbar
+    [numberOfRecords]="gridData?.total"
+    entity="odo meter history"
+    [hideColumnDropdown]="true"
+  ></app-grid-toolbar>
+  <kendo-grid
+    [data]="gridData"
+    [pageSize]="state.take"
+    [skip]="state.skip"
+    [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
+    scrollable="none"
+    (dataStateChange)="dataStateChange($event)"
+  >
+    <kendo-grid-column
+      field="dateTime"
+      title="{{ utilityService.language.dateCreated | translate }}"
+      filter="date"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        {{ dataItem.dateTime | dateformat : "g" }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="registrationPlate"
+      title="{{ utilityService.language.registrationPlate | translate }}"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="odoMeter"
+      title="{{ utilityService.language.meterReading | translate }}"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="user"
+      title="{{ utilityService.language.user | translate }}"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="comments"
+      title="{{ utilityService.language.comments | translate }}"
+    >
+    </kendo-grid-column>
+    <ng-template
+      kendoPagerTemplate
+      let-totalPages="totalPages"
+      let-currentPage="currentPage"
+    >
+      <div class="grid-toolbar">
+        <div class="left">
+          <kendo-pager-page-sizes
+            [pageSizes]="pageable.pageSizes"
+          ></kendo-pager-page-sizes>
+        </div>
+        <div class="right">
+          <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+          <kendo-pager-numeric-buttons
+            [buttonCount]="pageable.buttonCount"
+          ></kendo-pager-numeric-buttons>
+          <kendo-pager-next-buttons></kendo-pager-next-buttons>
+        </div>
+      </div>
+    </ng-template>
+    <kendo-grid-messages
+      pagerItemsPerPage="{{
+        utilityService.language.recordsPerPage | translate
+      }}"
+      pagerItems="rows"
+    ></kendo-grid-messages>
+  </kendo-grid>
+</div>

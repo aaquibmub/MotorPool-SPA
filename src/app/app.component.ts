@@ -13,6 +13,7 @@ import { DriverService } from './helper/services/drivers/driver.service';
 import { PassengerService } from './helper/services/trips/passenger.service';
 import { TripService } from './helper/services/trips/trip.service';
 import { NotificationConfigService } from './helper/services/utilities/notification-config.service';
+import { VehicalService } from './helper/services/vehicals/vehical.service';
 
 @Component({
   selector: 'app-root',
@@ -58,6 +59,8 @@ export class AppComponent implements OnInit {
   showDeallocateVehicalPopup: boolean;
   driverId: string;
 
+  showUpdateOdoMeterPopup: boolean;
+
 
   constructor(
     private authService: AuthService,
@@ -69,6 +72,7 @@ export class AppComponent implements OnInit {
     private notificationConfigService: NotificationConfigService,
     private tripService: TripService,
     private driverService: DriverService,
+    private vehicleService: VehicalService,
     private passengerService: PassengerService,
     private addressService: AddressService) {
     translate.setDefaultLang('en');
@@ -209,6 +213,14 @@ export class AppComponent implements OnInit {
         next: (flag: PopupConfigModel) => {
           this.showDeallocateVehicalPopup = flag.show;
           this.driverId = flag.arg;
+        }
+      }
+      );
+
+    this.vehicleService.getUpdateOdoMeterPopup()
+      .subscribe({
+        next: (flag: PopupConfigModel) => {
+          this.showUpdateOdoMeterPopup = flag.show;
         }
       }
       );

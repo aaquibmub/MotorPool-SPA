@@ -5,8 +5,11 @@ import { Observable, Subject } from 'rxjs';
 import { VehicalInspectionStatus, VehicalStatus } from '../../common/shared-types';
 import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
 import { GridList } from '../../models/common/grid/grid-list';
+import { PopupConfigModel } from '../../models/common/popup-config-model';
 import { ResponseModel } from '../../models/common/response-model';
 import { VehicalInspectionGridModel } from '../../models/vehicals/inspections/vehical-inspection-grid-model';
+import { VehicleOdoMeterHistoryGridModel } from '../../models/vehicals/odo-meter-history/vehicle-odo-meter-history-grid-model';
+import { VehicleOdoMeterHistoryModel } from '../../models/vehicals/odo-meter-history/vehicle-odo-meter-history-model';
 import { VehicalGridModel } from '../../models/vehicals/vehical-grid-model';
 import { VehicalModel } from '../../models/vehicals/vehical-model';
 import { VehicalViewDetailModel } from '../../models/vehicals/vehical-view-detail-model';
@@ -22,11 +25,14 @@ import { environment } from './../../../../environments/environment';
 export class VehicalService {
   baseUrl = environment.apiUrl + 'vehical/';
 
+  private showUpdateOdoMeterPopup = new Subject<PopupConfigModel>();
+
   private gridData = new Subject<GridList<VehicalGridModel>>();
   private gridInspectionData = new Subject<GridList<VehicalViewInspectionModel>>();
   private gridTripData = new Subject<GridList<VehicalViewTripModel>>();
   private gridDriverData = new Subject<GridList<VehicalViewDriverModel>>();
   private gridVehicalInspectionData = new Subject<GridList<VehicalInspectionGridModel>>();
+  private gridVehicleOdoMeterHistoryData = new Subject<GridList<VehicleOdoMeterHistoryGridModel>>();
 
   constructor(
     private http: HttpClient) { }
@@ -88,6 +94,28 @@ export class VehicalService {
 
   getVehicalViewDetailModel(id: string): Observable<VehicalViewDetailModel> {
     return this.http.get<VehicalViewDetailModel>(this.baseUrl + 'get-view-detail-model/' + id);
+  }
+
+  getVehicalOdoMeterHistoryGridData(): Observable<GridDataResult> {
+    return this.gridVehicleOdoMeterHistoryData.asObservable();
+  }
+
+  fetchVehicalOdoMeterHistoryGridData(
+    state: any,
+    query: string): void {
+    this.http.post<GridList<VehicleOdoMeterHistoryGridModel>>(
+      this.baseUrl + 'get-odo-meter-history-gridlist', {
+      gridFilters: state,
+      search: query
+    }).subscribe(
+      (gridOdoMeterHistoryData: GridList<VehicleOdoMeterHistoryGridModel>) => {
+        this.gridVehicleOdoMeterHistoryData.next(gridOdoMeterHistoryData);
+      }
+    );
+  }
+
+  updateOdoMeter(model: VehicleOdoMeterHistoryModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-odo-meter', model);
   }
 
   getVehicalInspectionByStatusGridData(): Observable<GridDataResult> {
@@ -167,5 +195,12 @@ export class VehicalService {
         this.gridDriverData.next(gridDriverData);
       }
     );
+  }
+
+  getUpdateOdoMeterPopup(): Observable<PopupConfigModel> {
+    return this.showUpdateOdoMeterPopup.asObservable();
+  }
+  setUpdateOdoMeterPopup(show: boolean, arg?: any): void {
+    this.showUpdateOdoMeterPopup.next({ show, arg });
   }
 }

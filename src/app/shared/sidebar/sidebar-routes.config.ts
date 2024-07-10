@@ -169,6 +169,31 @@ export const ROUTES: RouteInfo[] = [
           },
         ]
       },
+
+      // Vehicle ODO Meter
+      {
+        operation: UtilityRix.operations.opVehicals,
+        path: '/vehicals/odo-meter',
+        title: 'ODO Meter',
+        icon: 'bx bx-right-arrow-alt',
+        class: '',
+        badge: '',
+        badgeClass: '',
+        isExternalLink: false,
+        submenu: [
+          {
+            operation: UtilityRix.operations.opVehicals,
+            path: '/vehicals/odo-meter',
+            title: 'Update History',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
+        ]
+      },
     ]
   },
 

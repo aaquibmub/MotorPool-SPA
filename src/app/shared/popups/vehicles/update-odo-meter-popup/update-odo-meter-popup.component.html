@@ -1,0 +1,156 @@
+<div class="overlay" [perfectScrollbar]>
+  <div class="overlay-wrapper" style="width: 50%">
+    <div class="overlay-content bg-white p-24 sm-padding-10">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-transparent">
+            <div class="card-header">
+              <div class="card-title">Update ODO Meter</div>
+            </div>
+            <div class="card-block">
+              <form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+                <div class="form-section">
+                  <div class="section-body">
+                    <!-- Vehicle -->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="label">
+                            <label for="inputVehical">Vehicle</label>
+                          </div>
+                          <div class="control">
+                            <kendo-dropdownlist
+                              [data]="vehicalList"
+                              class="form-control"
+                              [filterable]="true"
+                              [defaultItem]="utilityService.dropdownDefaultItem"
+                              (filterChange)="handleVehicleFilter($event)"
+                              textField="registrationPlate"
+                              valueField="id"
+                              formControlName="vehicle"
+                            >
+                              <ng-template kendoDropDownListHeaderTemplate>
+                                <div
+                                  class="display-flex dropdown-header-padding"
+                                >
+                                  <div class="flex-1 k-font-weight-bold">
+                                    Make
+                                  </div>
+                                  <div class="flex-1 k-font-weight-bold">
+                                    Model
+                                  </div>
+                                  <div class="flex-1 k-font-weight-bold">
+                                    Model Year
+                                  </div>
+                                  <div class="flex-1 k-font-weight-bold">
+                                    Registration Plate
+                                  </div>
+                                  <div class="flex-1 k-font-weight-bold">
+                                    ODO Meter
+                                  </div>
+                                </div>
+                              </ng-template>
+                              <ng-template
+                                kendoDropDownListItemTemplate
+                                let-dataItem
+                              >
+                                <div class="flex-1 display-flex">
+                                  <div class="flex-1">
+                                    {{ dataItem.make }}
+                                  </div>
+                                  <div class="flex-1">
+                                    {{ dataItem.model }}
+                                  </div>
+                                  <div class="flex-1">
+                                    {{ dataItem.modelYear }}
+                                  </div>
+                                  <div class="flex-1">
+                                    {{ dataItem.registrationPlate }}
+                                  </div>
+                                  <div class="flex-1">
+                                    {{ dataItem.odoMeter }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                            </kendo-dropdownlist>
+                            <div
+                              *ngIf="
+                                !form.get('vehicle').valid &&
+                                form.get('vehicle').touched
+                              "
+                              class="invalid-feedback"
+                            >
+                              Vehicle is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Milage -->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="label">
+                            <label for="inputOdoMeter">{{
+                              utilityService.language.mileage | translate
+                            }}</label>
+                          </div>
+                          <div class="control">
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="inputOdoMeter"
+                              formControlName="odoMeter"
+                              id=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Comment -->
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="label">
+                            <label for="inputOdoComments">{{
+                              utilityService.language.comments | translate
+                            }}</label>
+                          </div>
+                          <div class="control">
+                            <textarea
+                              class="form-control form-text-area"
+                              name="inputOdoComments"
+                              formControlName="comments"
+                              id=""
+                              cols="30"
+                              rows="10"
+                            ></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="pull-right">
+                    <button
+                      type="button"
+                      (click)="close()"
+                      class="btn btn-default custombtn"
+                    >
+                      Cancel
+                    </button>
+                    <button type="submit" class="btn btn-green ml-8">
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

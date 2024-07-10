@@ -19,6 +19,7 @@ import { VehicalViewDriversComponent } from './components/vehical-view/vehical-v
 import { VehicalViewInspectionsComponent } from './components/vehical-view/vehical-view-inspections/vehical-view-inspections.component';
 import { VehicalViewTripsComponent } from './components/vehical-view/vehical-view-trips/vehical-view-trips.component';
 import { VehicalViewComponent } from './components/vehical-view/vehical-view.component';
+import { VehicleOdoMeterComponent } from './components/vehicle-odo-meter/vehicle-odo-meter.component';
 import { VehicalComponent } from './vehical.component';
 
 const routes: Routes = [
@@ -86,6 +87,10 @@ const routes: Routes = [
           { path: 'completed', component: VehicalInspectionCompletedComponent }
         ]
       },
+      {
+        path: 'odo-meter',
+        component: VehicleOdoMeterComponent,
+      }
     ]
   }
 ];

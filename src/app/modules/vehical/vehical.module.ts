@@ -26,6 +26,8 @@ import { VehicalViewDriversComponent } from './components/vehical-view/vehical-v
 import { VehicalViewInspectionsComponent } from './components/vehical-view/vehical-view-inspections/vehical-view-inspections.component';
 import { VehicalViewTripsComponent } from './components/vehical-view/vehical-view-trips/vehical-view-trips.component';
 import { VehicalViewComponent } from './components/vehical-view/vehical-view.component';
+import { VehicleOdoMeterHistoryComponent } from './components/vehicle-odo-meter/vehicle-odo-meter-history/vehicle-odo-meter-history.component';
+import { VehicleOdoMeterComponent } from './components/vehicle-odo-meter/vehicle-odo-meter.component';
 import { VehicalRoutingModule } from './vehical-routing.module';
 import { VehicalComponent } from './vehical.component';
 
@@ -67,6 +69,9 @@ import { VehicalComponent } from './vehical.component';
     VehicalInspectionDueComponent,
     VehicalInspectionIncompleteComponent,
     VehicalInspectionCompletedComponent,
+
+    VehicleOdoMeterComponent,
+    VehicleOdoMeterHistoryComponent,
 
   ]
 })

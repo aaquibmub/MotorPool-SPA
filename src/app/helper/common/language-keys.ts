@@ -152,6 +152,7 @@ export class LanguageKeys {
   middleNameReq = "Middle Name is required";
   make = "Make";
   makeRequired = "Make is required";
+  meterReading = "Meter Reading";
   model = "Model";
   modelRequired = "Model is required";
   modelYear = "Model Year";
@@ -283,7 +284,9 @@ export class LanguageKeys {
 
   //U
   update = "Update";
+  updateOdoMeter = "Update ODO Meter";
   unallocated = "Unallocated";
+  user = "User";
 
   //U
   userRole = "UserRole";

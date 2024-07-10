@@ -33,6 +33,7 @@ import { DeallocateVehicalPopupComponent } from './shared/popups/drivers/dealloc
 import { TripCancelPopupComponent } from './shared/popups/trips/trip-cancel-popup/trip-cancel-popup.component';
 import { TripExecutePopupComponent } from './shared/popups/trips/trip-execute-popup/trip-execute-popup.component';
 import { TripHandoverPopupComponent } from './shared/popups/trips/trip-handover-popup/trip-handover-popup.component';
+import { UpdateOdoMeterPopupComponent } from './shared/popups/vehicles/update-odo-meter-popup/update-odo-meter-popup.component';
 import { SharedModule } from './shared/shared.module';
 
 export function tokenGetter(): string {
@@ -61,6 +62,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 
     AllocateVehicalPopupComponent,
     DeallocateVehicalPopupComponent,
+
+    UpdateOdoMeterPopupComponent,
   ],
   imports: [
     BrowserModule,
