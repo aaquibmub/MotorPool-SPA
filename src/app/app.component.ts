@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
   showTripExecutePopup: boolean;
   showTripHandoverPopup: boolean;
   showTripCancelPopup: boolean;
+  showTripOdoMeterPopup: boolean;
   tripId: string;
 
   // allocate vehical
@@ -194,6 +195,15 @@ export class AppComponent implements OnInit {
       .subscribe({
         next: (flag: PopupConfigModel) => {
           this.showTripCancelPopup = flag.show;
+          this.tripId = flag.arg;
+        }
+      }
+      );
+
+    this.tripService.getTripOdoMeterPopup()
+      .subscribe({
+        next: (flag: PopupConfigModel) => {
+          this.showTripOdoMeterPopup = flag.show;
           this.tripId = flag.arg;
         }
       }

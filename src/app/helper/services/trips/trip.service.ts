@@ -18,6 +18,7 @@ import { TripJourneyModel } from '../../models/trips/trip-edit/trip-journey-mode
 import { TripModel } from '../../models/trips/trip-edit/trip-model';
 import { TripPassengerGridModel } from '../../models/trips/trip-edit/trip-passenger-grid-model';
 import { TripPassengerModel } from '../../models/trips/trip-edit/trip-passenger-model';
+import { TripOdoMeterModel } from '../../models/trips/trip-odo-meter-model';
 import { TripViewDetailModel } from '../../models/trips/trip-view/trip-view-detail-model';
 import { TripViewLogModel } from '../../models/trips/trip-view/trip-view-log-model';
 import { TripViewModel } from '../../models/trips/trip-view/trip-view-model';
@@ -33,6 +34,7 @@ export class TripService {
   private showTripExecutePopup = new Subject<PopupConfigModel>();
   private showTripHandoverPopup = new Subject<PopupConfigModel>();
   private showTripCancelPopup = new Subject<PopupConfigModel>();
+  private showTripOdoMeterPopup = new Subject<PopupConfigModel>();
 
   private gridLogData = new Subject<GridList<TripViewLogModel>>();
   private gridTripPassengerData = new Subject<GridList<TripPassengerGridModel>>();
@@ -142,6 +144,22 @@ export class TripService {
 
   executeTrip(model: TripExecuteModel): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'execute-trip', model);
+  }
+
+  getTripOdoMeterPopup(): Observable<PopupConfigModel> {
+    return this.showTripOdoMeterPopup.asObservable();
+  }
+  setTripOdoMeterPopup(show: boolean, arg?: any): void {
+    this.showTripOdoMeterPopup.next({ show, arg });
+  }
+
+  getTripOdoMeterModel(id: string): Observable<TripOdoMeterModel> {
+    return this.http.get<TripOdoMeterModel>(
+      this.baseUrl + 'get-trip-odo-meter-model?id=' + id);
+  }
+
+  updateOdoMeterTrip(model: TripOdoMeterModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-odo-meter', model);
   }
 
   getTripHandoverPopup(): Observable<PopupConfigModel> {

@@ -141,6 +141,15 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
           label: 'Execute'
         });
       }
+
+      actions.push({
+        handle: () => {
+          this.tripService.setTripOdoMeterPopup(true, item.id);
+        },
+        icon: '',
+        label: 'Update ODO Meter'
+      });
+
     } else {
       if (!item.cancelled) {
         actions.push({

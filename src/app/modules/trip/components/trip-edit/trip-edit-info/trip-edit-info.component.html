@@ -73,6 +73,50 @@
       </div>
     </div>
   </div>
+  <!-- Trip Destination -->
+  <div class="form-section">
+    <div class="section-header">
+      {{ utilityService.language.tripDestination | translate }}
+    </div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputTripDestination">{{
+                utilityService.language.tripDestination | translate
+              }}</label>
+            </div>
+            <div class="control">
+              <kendo-dropdownlist
+                class="form-control"
+                textField="text"
+                valueField="value"
+                [defaultItem]="utilityService.dropdownDefaultItem"
+                [data]="tripDestinationList"
+                formControlName="tripDestination"
+              >
+                <ng-template kendoDropDownListItemTemplate let-dataItem>
+                  <span>{{ dataItem.text | translate }}</span>
+                </ng-template>
+              </kendo-dropdownlist>
+              <div
+                *ngIf="
+                  !form.get('tripDestination').valid &&
+                  form.get('tripDestination').touched
+                "
+                class="invalid-feedback"
+              >
+                {{
+                  utilityService.language.tripDestinationRequired | translate
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Notes -->
   <div class="form-section">
     <div class="section-header">

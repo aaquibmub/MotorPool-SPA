@@ -46,6 +46,11 @@
   [tripId]="tripId"
 ></app-trip-cancel-popup>
 
+<app-trip-odo-meter-popup
+  *ngIf="showTripOdoMeterPopup"
+  [tripId]="tripId"
+></app-trip-odo-meter-popup>
+
 <app-allocate-vehical-popup
   *ngIf="showAllocateVehicalPopup"
   [driverId]="driverId"
