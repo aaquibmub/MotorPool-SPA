@@ -416,8 +416,8 @@ export class TripBookingVipEditComponent implements OnInit, OnDestroy {
       });
   }
 
-  openPassengerQuickAddPopup(flag: boolean): void {
-    this.passengerService.setQuickAddPopup({ show: true });
+  openPassengerQuickAddPopup(flag: boolean, index?: number): void {
+    this.passengerService.setQuickAddPopup({ show: true, arg: index });
   }
 
   handleNumberOfPassengerChange(control: any): void {

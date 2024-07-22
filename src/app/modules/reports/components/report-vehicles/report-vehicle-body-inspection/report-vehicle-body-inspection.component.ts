@@ -37,7 +37,7 @@ export class ReportVehicleBodyInspectionComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     debugger;
-    this.positionOverlays();
+    // this.positionOverlays();
   }
 
   ngOnInit() {
@@ -69,7 +69,7 @@ export class ReportVehicleBodyInspectionComponent implements OnInit {
         (model: ReportVehicleBodyInspectionModel[]) => {
           this.model = model;
 
-          this.positionOverlays();
+          // this.positionOverlays();
 
         }
       );

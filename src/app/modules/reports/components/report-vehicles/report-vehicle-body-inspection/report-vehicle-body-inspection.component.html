@@ -15,58 +15,6 @@
         <button
           class="btn btn-orange"
           [useExistingCss]="true"
-          [printStyle]="{
-            '#backSideOverlay': {
-              top:
-                (
-                  getNumberWithoutPx(backSideOverlay?.top) - printTop
-                ).toString() + 'px !important',
-              left:
-                (
-                  getNumberWithoutPx(backSideOverlay?.left) - printLeft
-                ).toString() + 'px !important'
-            },
-            '#leftSideOverlay': {
-              top:
-                (
-                  getNumberWithoutPx(leftSideOverlay?.top) - printTop
-                ).toString() + 'px !important',
-              left:
-                (
-                  getNumberWithoutPx(leftSideOverlay?.left) - printLeft
-                ).toString() + 'px !important'
-            },
-            '#rightSideOverlay': {
-              top:
-                (
-                  getNumberWithoutPx(rightSideOverlay?.top) - printTop
-                ).toString() + 'px !important',
-              left:
-                (
-                  getNumberWithoutPx(rightSideOverlay?.left) - printLeft
-                ).toString() + 'px !important'
-            },
-            '#frontSideOverlay': {
-              top:
-                (
-                  getNumberWithoutPx(frontSideOverlay?.top) - printTop
-                ).toString() + 'px !important',
-              left:
-                (
-                  getNumberWithoutPx(frontSideOverlay?.left) - printLeft
-                ).toString() + 'px !important'
-            },
-            '#roofSideOverlay': {
-              top:
-                (
-                  getNumberWithoutPx(roofSideOverlay?.top) - printTop
-                ).toString() + 'px !important',
-              left:
-                (
-                  getNumberWithoutPx(roofSideOverlay?.left) - printLeft
-                ).toString() + 'px !important'
-            }
-          }"
           [printTitle]="
             'Vehicle Sheet - (' +
             selectedVehicle?.text +
@@ -339,6 +287,55 @@
                                         ></div>
                                       </div> -->
                                     </div>
+                                  </div>
+                                  <div *ngIf="s.items && s.items.length > 0">
+                                    <table class="table" style="width: 100%">
+                                      <thead>
+                                        <tr>
+                                          <th>#</th>
+                                          <th>Color</th>
+                                          <th>Scratches</th>
+                                          <th>Dents</th>
+                                          <th>Damages</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr
+                                          *ngFor="
+                                            let i of s.items;
+                                            let j = index
+                                          "
+                                        >
+                                          <td class="text-center">
+                                            {{ j + 1 }}
+                                          </td>
+                                          <td
+                                            style="
+                                              display: flex;
+                                              justify-content: center;
+                                            "
+                                          >
+                                            <div
+                                              [ngStyle]="{
+                                                'background-color': i.hexColor,
+                                                width: '10px',
+                                                height: '10px',
+                                                'border-radius': '50%'
+                                              }"
+                                            ></div>
+                                          </td>
+                                          <td class="text-center">
+                                            {{ i.scratches }}
+                                          </td>
+                                          <td class="text-center">
+                                            {{ i.dents }}
+                                          </td>
+                                          <td class="text-center">
+                                            {{ i.damages }}
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
                                   </div>
                                 </div>
                               </div>
