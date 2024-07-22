@@ -70,6 +70,7 @@ export class PassengerQuickAddPopupComponent implements OnInit {
       return;
     }
     this.model = this.form.value;
+    this.model.isActive = true;
     this.passengerService.addUpdate(this.model)
       .subscribe((response: ResponseModel<string>) => {
         if (response.hasError) {
