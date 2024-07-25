@@ -23,6 +23,7 @@ import { ReportAllGeneralInspectionGridModel } from '../../models/reports/vehicl
 import { ReportAllVehicleGridModel } from '../../models/reports/vehicles/all-vehicles/report-all-vehicle-grid-model';
 import { ReportVehicleDueOilChangeGridModel } from '../../models/reports/vehicles/all-vehicles/report-vehicle-due-oil-change';
 import { ReportVehicleMilageGridModel } from '../../models/reports/vehicles/all-vehicles/report-vehicle-milage-grid-model';
+import { ReportVehicleGeneralInspectionByDateModel } from '../../models/reports/vehicles/inspections/general/report-vehicle-general-inspection-by-date-model';
 import { ReportVehicleBodyInspectionGridModel } from '../../models/reports/vehicles/inspections/report-vehicle-body-inspection-grid-model';
 import { ReportVehicleBodyInspectionModel } from '../../models/reports/vehicles/inspections/report-vehicle-body-inspection-model';
 import { environment } from './../../../../environments/environment';
@@ -107,6 +108,15 @@ export class ReportService {
   ): Observable<ReportVehicleBodyInspectionModel[]> {
     return this.http.post<ReportVehicleBodyInspectionModel[]>(
       this.baseUrl + 'get-report-vehicle-body-inspection-model', { vehicleId, date });
+  }
+
+  getVehicleGeneralInspectionByDateModel(
+    fromDate: Date,
+    toDate: Date,
+    vehicleId: string,
+  ): Observable<ReportVehicleGeneralInspectionByDateModel[]> {
+    return this.http.post<ReportVehicleGeneralInspectionByDateModel[]>(
+      this.baseUrl + 'get-report-vehicle-general-inspection-by-date-model', { vehicleId, fromDate, toDate });
   }
 
   getTripPassengerSheetModel(

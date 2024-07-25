@@ -289,6 +289,16 @@ export class ReportHomeComponent implements OnInit {
             isExternalLink: false,
             submenu: []
           },
+          {
+            path: '/reports/vehicles/general-inspection-by-date',
+            title: 'Vehicle General Inspections (By Date)',
+            icon: 'bx bx-right-arrow-alt',
+            class: '',
+            badge: '',
+            badgeClass: '',
+            isExternalLink: false,
+            submenu: []
+          },
         ]
       },
 
