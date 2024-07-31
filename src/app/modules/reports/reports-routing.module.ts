@@ -37,6 +37,7 @@ import { ReportAllGeneralInspectionComponent } from './components/report-vehicle
 import { ReportVehicleBodyInspectionComponent } from './components/report-vehicles/report-vehicle-body-inspection/report-vehicle-body-inspection.component';
 import { ReportVehicleDueOilChangeComponent } from './components/report-vehicles/report-vehicle-due-oil-change/report-vehicle-due-oil-change.component';
 import { ReportVehicleGeneralInspectionByDateComponent } from './components/report-vehicles/report-vehicle-general-inspection-by-date/report-vehicle-general-inspection-by-date.component';
+import { ReportVehicleGeneralInspectionByVehicleComponent } from './components/report-vehicles/report-vehicle-general-inspection-by-vehicle/report-vehicle-general-inspection-by-vehicle.component';
 import { ReportVehicleMilageComponent } from './components/report-vehicles/report-vehicle-milage/report-vehicle-milage.component';
 import { ReportVehiclesAllComponent } from './components/report-vehicles/report-vehicles-all/report-vehicles-all.component';
 import { ReportVehiclesComponent } from './components/report-vehicles/report-vehicles.component';
@@ -91,6 +92,7 @@ const routes: Routes = [
           { path: 'milage', component: ReportVehicleMilageComponent },
           { path: 'body-inspection', component: ReportVehicleBodyInspectionComponent },
           { path: 'general-inspection-by-date', component: ReportVehicleGeneralInspectionByDateComponent },
+          { path: 'general-inspection-by-vehicle', component: ReportVehicleGeneralInspectionByVehicleComponent },
         ]
       },
       {

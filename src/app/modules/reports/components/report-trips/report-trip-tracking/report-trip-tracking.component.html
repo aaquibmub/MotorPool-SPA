@@ -125,10 +125,11 @@
                       <th>Back to Motorpool</th>
                       <th>Dispatcher</th>
                       <th>Trip Note</th>
-                      <th>IN/OUT</th>
                       <th>Approval</th>
                       <th>Pickup(s)</th>
                       <th>Stop(s)</th>
+                      <th>IN/OUT</th>
+                      <th>Trip Type</th>
                       <th>Dropoff(s)</th>
                       <th>Status</th>
                       <th>Status Comments</th>
@@ -137,8 +138,8 @@
                   <tbody>
                     <tr *ngFor="let t of model">
                       <td>{{ t.tripId }}</td>
-                      <td>{{ t.time | dateformat }}</td>
-                      <td>{{ t.time | dateformat : "hh:ss a" }}</td>
+                      <td>{{ t.date | dateformat }}</td>
+                      <td>{{ t.time }}</td>
                       <td>{{ t.requester }}</td>
                       <td>{{ t.passenger }}</td>
                       <td>{{ t.numberOfPassengers }}</td>
@@ -157,10 +158,11 @@
                       <td>{{ t.backToMotorPool }}</td>
                       <td>{{ t.dispatcher }}</td>
                       <td>{{ t.notes }}</td>
-                      <td>{{ t.destination }}</td>
                       <td>{{ t.approval }}</td>
                       <td>{{ t.pickups }}</td>
                       <td>{{ t.stops }}</td>
+                      <td>{{ t.destination }}</td>
+                      <td>{{ t.type }}</td>
                       <td>{{ t.dropoffs }}</td>
                       <td>{{ t.tripStatus }}</td>
                       <td>{{ t.statusComments }}</td>

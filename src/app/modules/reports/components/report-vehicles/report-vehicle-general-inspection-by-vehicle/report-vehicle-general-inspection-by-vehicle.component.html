@@ -2,7 +2,7 @@
 <div class="page-area">
   <div class="page-header">
     <div class="page-title">
-      <span>Vehicle General Inspection (By Date)</span>
+      <span>Vehicle General Inspection (By Vehicles)</span>
     </div>
     <div class="page-breadcrum">
       <span>Reports </span> / <span> Vehicle General Inspection</span>
@@ -16,11 +16,7 @@
           class="btn btn-orange"
           [useExistingCss]="true"
           [printTitle]="
-            'Vehicle General Inspection - (' +
-            selectedVehicle?.text +
-            '-' +
-            (selectedDate | dateformat) +
-            ')'
+            'Vehicle General Inspection - (' + (selectedDate | dateformat) + ')'
           "
           printSectionId="print-section"
           ngxPrint
@@ -34,29 +30,7 @@
         <div class="col-3">
           <div class="form-group">
             <div class="label">
-              <label for="vehicle">Vehicle</label>
-            </div>
-            <div class="control">
-              <kendo-dropdownlist
-                class="form-control"
-                textField="text"
-                valueField="value"
-                [defaultItem]="utilityService.dropdownDefaultItem"
-                (valueChange)="handleVehicleValueChange($event)"
-                [data]="vehicleList"
-                [(ngModel)]="selectedVehicle"
-              >
-                <ng-template kendoDropDownListItemTemplate let-dataItem>
-                  <span>{{ dataItem.text | translate }}</span>
-                </ng-template>
-              </kendo-dropdownlist>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="form-group">
-            <div class="label">
-              <label for="date">From Date</label>
+              <label for="date">Date</label>
             </div>
             <div class="control">
               <kendo-datepicker
@@ -69,19 +43,23 @@
             </div>
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-6">
           <div class="form-group">
             <div class="label">
-              <label for="toDate">To Date</label>
+              <label for="vehicle">Vehicle (s)</label>
             </div>
             <div class="control">
-              <kendo-datepicker
+              <kendo-multiselect
+                style="height: auto"
                 class="form-control"
-                id="toDate"
-                (valueChange)="handleToDateValueChange($event)"
-                [(ngModel)]="selectedToDate"
+                placeholder="enter registeration plate number"
+                textField="text"
+                valueField="value"
+                (valueChange)="handleVehicleValueChange($event)"
+                [data]="vehicleList"
+                [(ngModel)]="selectedVehicle"
               >
-              </kendo-datepicker>
+              </kendo-multiselect>
             </div>
           </div>
         </div>
@@ -98,7 +76,7 @@
             <div class="">
               <div class="display-flex flex-column">
                 <div class="p-2">
-                  General Inspection {{ selectedVehicle?.text }}
+                  General Inspection {{ selectedDate | dateformat }}
                 </div>
                 <div
                   *ngFor="let i of itemsList"
@@ -112,7 +90,7 @@
             <div class="" *ngFor="let item of model">
               <div class="display-flex flex-column">
                 <div class="p-2 display-flex justify-content-center border-1">
-                  {{ item.date | dateformat : "MMM d" }} - {{ item.driverName }}
+                  {{ item.driverName }} - {{ item.vehicle }}
                 </div>
                 <div
                   *ngFor="let i of item.items"
