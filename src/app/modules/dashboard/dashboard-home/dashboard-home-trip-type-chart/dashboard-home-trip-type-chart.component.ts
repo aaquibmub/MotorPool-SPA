@@ -49,6 +49,7 @@ export class DashboardHomeTripTypeChartComponent implements OnInit {
       .subscribe(
         (list: TripTypeChartModel[]) => {
           let i = 0;
+          this.totalTrips = 0;
           list.forEach(f => {
             this.totalTrips += f.count;
             f.color = i < this.colors.length ? this.colors[i] : undefined;
