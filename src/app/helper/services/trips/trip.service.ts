@@ -162,6 +162,10 @@ export class TripService {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-odo-meter', model);
   }
 
+  updateTripStatusTime(model: TripStatusModel): Observable<ResponseModel<string>> {
+    return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-status-time', model);
+  }
+
   getTripHandoverPopup(): Observable<PopupConfigModel> {
     return this.showTripHandoverPopup.asObservable();
   }

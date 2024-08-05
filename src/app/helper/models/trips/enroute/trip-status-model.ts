@@ -1,4 +1,5 @@
 export class TripStatusModel {
+  id?: string;
   tripId: string;
   status: number;
   time?: Date;

@@ -10,6 +10,7 @@ import { DropDownListModule } from '@progress/kendo-angular-dropdowns';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { DateObjectPipe } from '../helper/directives/date-object.pipe';
 import { NumericFormatPipe } from '../helper/directives/numeric-format.pipe';
 import { TimeFormatPipe } from '../helper/directives/time-format.pipe';
 import { AlertComponent } from './components/alert/alert.component';
@@ -30,6 +31,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     GridToolbarComponent,
     GridActionDropdownComponent,
     DateFormatPipe,
+    DateObjectPipe,
     NumberSuffixPipe,
     TimeFormatPipe,
     AlertComponent,
@@ -53,6 +55,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     GridToolbarComponent,
     GridActionDropdownComponent,
     DateFormatPipe,
+    DateObjectPipe,
     NumberSuffixPipe,
     TimeFormatPipe,
     AlertComponent,

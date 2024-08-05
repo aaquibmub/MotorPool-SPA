@@ -229,13 +229,17 @@
                     [(ngModel)]="odoStartDateTime"
                   >
                   </kendo-datetimepicker>
-                  <input
+                  <kendo-datetimepicker
                     *ngIf="model.tripStatus > tripStatus.TripStarted"
-                    type="string"
                     class="form-control"
-                    [value]="odoStartDateTime | dateformat : 'g'"
-                    readonly="true"
-                  />
+                    id="inputTripStartDate"
+                    class="form-control"
+                    [value]="odoStartDateTime | dateobject"
+                    (valueChange)="
+                      updateTripStatusTime($event, null, tripStatus.TripStarted)
+                    "
+                  >
+                  </kendo-datetimepicker>
                 </div>
               </div>
             </div>
@@ -292,12 +296,16 @@
                     }}</label>
                   </div>
                   <div class="control">
-                    <input
-                      type="string"
+                    <kendo-datetimepicker
                       class="form-control"
-                      [value]="odoStartDateTime | dateformat : 'g'"
-                      readonly="true"
-                    />
+                      id="inputTripStartDate"
+                      class="form-control"
+                      [value]="item.dateTime | dateobject"
+                      (valueChange)="
+                        updateTripStatusTime($event, item.id, item.status)
+                      "
+                    >
+                    </kendo-datetimepicker>
                   </div>
                 </div>
               </div>
@@ -337,12 +345,16 @@
                     }}</label>
                   </div>
                   <div class="control">
-                    <input
-                      type="string"
+                    <kendo-datetimepicker
                       class="form-control"
-                      [value]="item.dateTime | dateformat : 'g'"
-                      readonly="true"
-                    />
+                      id="inputTripStartDate"
+                      class="form-control"
+                      [value]="item.dateTime | dateobject"
+                      (valueChange)="
+                        updateTripStatusTime($event, item.id, item.status)
+                      "
+                    >
+                    </kendo-datetimepicker>
                   </div>
                 </div>
               </div>
@@ -381,12 +393,16 @@
                     }}</label>
                   </div>
                   <div class="control">
-                    <input
-                      type="string"
+                    <kendo-datetimepicker
                       class="form-control"
-                      [value]="item.dateTime | dateformat : 'g'"
-                      readonly="true"
-                    />
+                      id="inputTripStartDate"
+                      class="form-control"
+                      [value]="item.dateTime | dateobject"
+                      (valueChange)="
+                        updateTripStatusTime($event, item.id, item.status)
+                      "
+                    >
+                    </kendo-datetimepicker>
                   </div>
                 </div>
               </div>
@@ -480,12 +496,16 @@
                     }}</label>
                   </div>
                   <div class="control">
-                    <input
-                      type="string"
+                    <kendo-datetimepicker
                       class="form-control"
-                      [value]="item.dateTime | dateformat : 'g'"
-                      readonly="true"
-                    />
+                      id="inputTripStartDate"
+                      class="form-control"
+                      [value]="item.dateTime | dateobject"
+                      (valueChange)="
+                        updateTripStatusTime($event, item.id, item.status)
+                      "
+                    >
+                    </kendo-datetimepicker>
                   </div>
                 </div>
               </div>
@@ -500,12 +520,16 @@
                     }}</label>
                   </div>
                   <div class="control">
-                    <input
-                      type="string"
+                    <kendo-datetimepicker
                       class="form-control"
-                      [value]="item.dateTime | dateformat : 'g'"
-                      readonly="true"
-                    />
+                      id="inputTripStartDate"
+                      class="form-control"
+                      [value]="item.dateTime | dateobject"
+                      (valueChange)="
+                        updateTripStatusTime($event, item.id, item.status)
+                      "
+                    >
+                    </kendo-datetimepicker>
                   </div>
                 </div>
               </div>
@@ -520,12 +544,16 @@
                     }}</label>
                   </div>
                   <div class="control">
-                    <input
-                      type="string"
+                    <kendo-datetimepicker
                       class="form-control"
-                      [value]="item.dateTime | dateformat : 'g'"
-                      readonly="true"
-                    />
+                      id="inputTripStartDate"
+                      class="form-control"
+                      [value]="item.dateTime | dateobject"
+                      (valueChange)="
+                        updateTripStatusTime($event, item.id, item.status)
+                      "
+                    >
+                    </kendo-datetimepicker>
                   </div>
                 </div>
               </div>

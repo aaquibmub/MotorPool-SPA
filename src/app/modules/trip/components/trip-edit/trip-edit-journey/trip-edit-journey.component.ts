@@ -332,4 +332,20 @@ export class TripEditJourneyComponent implements OnInit {
     });
   }
 
+  updateTripStatusTime(value: Date, id?: string, status?: TripStatus): void {
+    this.tripService.updateTripStatusTime({
+      id: id,
+      tripId: this.model.tripId,
+      status: status,
+      time: value,
+      remarks: ''
+    }).subscribe((response: ResponseModel<string>) => {
+      if (response.hasError) {
+        this.alertService.setErrorAlert(response.msg);
+        return;
+      }
+      this.getTripLatestStatus(this.model.tripId);
+    });
+  }
+
 }
