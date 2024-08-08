@@ -1,7 +1,7 @@
 <div class="notification-panel" *ngIf="notifications">
   <div class="notification-header">
     <h2>Notifications</h2>
-    <a>Mark all as read</a>
+    <a (click)="markAsRead()">Mark all as read</a>
   </div>
   <div class="notification-body scrollable">
     <div

@@ -27,4 +27,13 @@ export class NotificationTickerService {
     this.showHideNotificationTicker.next(flag);
   }
 
+  updateActivitiesToSeen(): void {
+    this.http.post(
+      this.notificationUrl + 'update-activities-to-seen',
+      {}
+    ).subscribe(() => {
+      this.setNotificationList();
+    });
+  }
+
 }
