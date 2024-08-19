@@ -10,7 +10,6 @@ import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { TripDestinationModel } from 'src/app/helper/models/trips/enroute/trip-destination-model';
 import { TripBookingVipModel } from 'src/app/helper/models/trips/trip-bookings/trip-booking-vip-model';
-import { VehicalModel } from 'src/app/helper/models/vehicals/vehical-model';
 import { TripService } from 'src/app/helper/services/trips/trip.service';
 import { DestinationType, Gender, GetDestinationTypeForDropdownList, TripDestination, TripRoute } from './../../../../../helper/common/shared-types';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
@@ -206,6 +205,14 @@ export class TripBookingVipEditComponent implements OnInit, OnDestroy {
       .subscribe((list: DropdownItem<string>[]) => {
         this.driverList = list;
       });
+
+    this.vehicalService.getDropdownList('')
+      .subscribe(
+        (list: DropdownItem<string>[]) => {
+
+          this.vehicalList = list;
+        }
+      );
 
     // this.vehicalService.getDropdownList('')
     //   .subscribe((list: DropdownItem<string>[]) => {
@@ -709,55 +716,18 @@ export class TripBookingVipEditComponent implements OnInit, OnDestroy {
       });
   }
 
-
-  handleDriverValueChange(value: DropdownItem<string>): void {
-    if (!value) {
-      return;
-    }
-
-    this.vehicalService.getVehicalByDriverId(value.value)
-      .subscribe(
-        (response: ResponseModel<VehicalModel[]>) => {
-          if (response.hasError) {
-            return;
-          }
-
-          const vList = [];
-          response.result?.forEach(v => {
-            vList.push({
-              text: v.make + ' '
-                + v.model + ' '
-                + v.modelYear.toString(),
-              value: v.id,
-              textEx: v.registrationPlate
-            });
-          });
-
-          this.vehicalList = vList;
-          const vehcial = response.result[0];
-          let vehicleVal = null;
-          if (vehcial) {
-            vehicleVal = {
-              text: vehcial.make + ' '
-                + vehcial.model + ' '
-                + vehcial.modelYear.toString(),
-              value: vehcial.id,
-              textEx: vehcial.registrationPlate
-            };
-            this.form.get('vehical').setValue(vehicleVal);
-          }
-          this.handlVehicleValueChange(vehicleVal);
-
-        }
-      );
+  handleDriverFilterChange(query: string): void {
+    this.driverService.getDropdownList(query)
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.driverList = list;
+      });
   }
 
-  handlVehicleValueChange(value: DropdownItem<string>): void {
-    let regPlateNumber = null;
-    if (value) {
-      regPlateNumber = value.textEx;
-    }
-    this.form.get('registrationPlate').setValue(regPlateNumber);
+  handleVehicleFilterChange(query: string): void {
+    this.vehicalService.getDropdownList(query)
+      .subscribe((list: DropdownItem<string>[]) => {
+        this.vehicalList = list;
+      });
   }
 
   getDestinationTypeCount(destination: TripDestinationModel): number {

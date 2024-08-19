@@ -103,7 +103,7 @@ const routes: Routes = [
             redirectTo: '/trips/edit/:id/journey',
             pathMatch: 'full'
           },
-          { path: 'information', component: TripEditInfoComponent },
+          { path: 'information/:status', component: TripEditInfoComponent },
           { path: 'journey', component: TripEditJourneyComponent },
           { path: 'passengers', component: TripEditPassengerListComponent },
           { path: 'destinations', component: TripEditDestinationListComponent },

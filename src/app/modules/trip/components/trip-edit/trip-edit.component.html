@@ -57,7 +57,9 @@
           <a
             class="tab-left-item"
             routerLinkActive="active"
-            routerLink="/trips/edit/{{ model.id }}/information"
+            routerLink="/trips/edit/{{ model.id }}/information/{{
+              model.status
+            }}"
             >{{ utilityService.language.information | translate }}</a
           >
           <a

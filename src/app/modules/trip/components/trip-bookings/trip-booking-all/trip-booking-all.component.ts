@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
+import { flatten } from '@progress/kendo-angular-grid/dist/es2015/filtering/base-filter-cell.component';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
-import { TripStatus } from 'src/app/helper/common/shared-types';
+import { GetTripDestinationForDropdownList, GetTripStatusForDropdownList, GetTripTypeForDropdownList, TripDestination, TripStatus, TripType } from 'src/app/helper/common/shared-types';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
+import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
 import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { TripGridModel } from 'src/app/helper/models/trips/enroute/trip-grid-model';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
@@ -23,6 +25,15 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
   pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
+
+  tripTypeList: DropdownItem<TripType>[] = GetTripTypeForDropdownList();
+  selectedTripType: DropdownItem<TripType>;
+
+  tripDestinationList: DropdownItem<TripDestination>[] = GetTripDestinationForDropdownList();
+  selectedTripDestination: DropdownItem<TripDestination>;
+
+  tripStatusList: DropdownItem<TripStatus>[] = GetTripStatusForDropdownList();
+  selectedTripStatus: DropdownItem<TripStatus>;
 
   pageSizeSubscription: Subscription;
   tripExecutePopupSubscription: Subscription;
@@ -95,6 +106,58 @@ export class TripBookingAllComponent implements OnInit, OnDestroy {
           this.gridData.total = data.total;
         }
       );
+  }
+
+
+  handleTripTypeValueChange(value: DropdownItem<TripType>): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "type");
+    if (!filter) {
+      root.filters.push({
+        field: "type",
+        operator: "eq",
+        value: value.value
+      });
+    } else {
+      filter.value = value.value;
+    }
+    this.selectedTripType = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
+  }
+
+  handleTripDestinationValueChange(value: DropdownItem<TripDestination>): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "destination");
+    if (!filter) {
+      root.filters.push({
+        field: "destination",
+        operator: "eq",
+        value: value.value
+      });
+    } else {
+      filter.value = value.value;
+    }
+    this.selectedTripDestination = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
+  }
+
+  handleTripStatusValueChange(value: DropdownItem<TripStatus>): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "status");
+    if (!filter) {
+      root.filters.push({
+        field: "status",
+        operator: "eq",
+        value: value.value
+      });
+    } else {
+      filter.value = value.value;
+    }
+    this.selectedTripStatus = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
   }
 
   dataStateChange(state: DataStateChangeEvent): void {

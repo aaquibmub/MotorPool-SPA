@@ -73,6 +73,39 @@
       </div>
     </div>
   </div>
+  <!-- Driver and Transportation -->
+  <div class="form-section" *ngIf="tripStatus == status.Completed">
+    <div class="section-header">
+      {{ utilityService.language.vehical | translate }}
+    </div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="label">
+              <label for="inputVehical">{{
+                utilityService.language.vehical | translate
+              }}</label>
+            </div>
+            <div class="control">
+              <kendo-dropdownlist
+                class="form-control"
+                textField="text"
+                valueField="value"
+                [defaultItem]="utilityService.dropdownDefaultItem"
+                [data]="vehicalList"
+                formControlName="vehicle"
+              >
+                <ng-template kendoDropDownListItemTemplate let-dataItem>
+                  <span>{{ dataItem.text | translate }}</span>
+                </ng-template>
+              </kendo-dropdownlist>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Trip Destination -->
   <div class="form-section">
     <div class="section-header">

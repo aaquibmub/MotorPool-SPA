@@ -16,33 +16,102 @@
     scrollable="none"
     (dataStateChange)="dataStateChange($event)"
   >
-    <kendo-grid-column field="serialNumber" title="{{ utilityService.language.tripId | translate }}">
+    <kendo-grid-column
+      field="serialNumber"
+      filter="numeric"
+      title="{{ utilityService.language.tripId | translate }}"
+    >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <a routerLink="/trips/view/{{ dataItem.id }}/detail">{{
           dataItem.tripId
         }}</a>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="requester" title="{{ utilityService.language.tripRequester | translate }}">
+    <kendo-grid-column
+      field="requester"
+      title="{{ utilityService.language.tripRequester | translate }}"
+    >
     </kendo-grid-column>
-    <kendo-grid-column field="type" title="{{ utilityService.language.tripType | translate }}">
+    <kendo-grid-column
+      field="type"
+      [width]="200"
+      title="{{ utilityService.language.tripType | translate }}"
+    >
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 150px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleTripTypeValueChange($event)"
+          [data]="tripTypeList"
+          [(ngModel)]="selectedTripType"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <span>{{ utilityService.getTripTypeLabel(dataItem.type) }}</span>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="destination" title="{{ utilityService.language.destination | translate }}">
+    <kendo-grid-column
+      field="destination"
+      title="{{ utilityService.language.destination | translate }}"
+    >
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 150px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleTripDestinationValueChange($event)"
+          [data]="tripDestinationList"
+          [(ngModel)]="selectedTripDestination"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <span>{{
           utilityService.getTripDestinationLabel(dataItem.destination)
         }}</span>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="createdDate" title="{{ utilityService.language.dateCreated | translate }}" filter="date">
+    <kendo-grid-column
+      field="createdDate"
+      title="{{ utilityService.language.dateCreated | translate }}"
+      filter="date"
+    >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         {{ dataItem.createdDate | dateformat : "g" }}
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="status" title="{{ utilityService.language.status | translate }}">
+    <kendo-grid-column
+      field="status"
+      title="{{ utilityService.language.status | translate }}"
+    >
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 150px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleTripStatusValueChange($event)"
+          [data]="tripStatusList"
+          [(ngModel)]="selectedTripStatus"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <span>{{ utilityService.getTripStatusLabel(dataItem.status) }}</span>
       </ng-template>
@@ -80,7 +149,9 @@
       </div>
     </ng-template>
     <kendo-grid-messages
-      pagerItemsPerPage="{{ utilityService.language.recordsPerPage | translate }}"
+      pagerItemsPerPage="{{
+        utilityService.language.recordsPerPage | translate
+      }}"
       pagerItems="rows"
     ></kendo-grid-messages>
   </kendo-grid>

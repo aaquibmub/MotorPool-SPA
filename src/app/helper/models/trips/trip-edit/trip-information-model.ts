@@ -9,5 +9,7 @@ export class TripInformationModel {
   pickupDate: Date;
   pickupTime: Date;
 
+  vehicle: DropdownItem<string>;
+
   notes: string;
 }

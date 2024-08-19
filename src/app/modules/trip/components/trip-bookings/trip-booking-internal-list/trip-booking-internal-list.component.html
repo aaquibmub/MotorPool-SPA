@@ -18,6 +18,7 @@
   >
     <kendo-grid-column
       field="serialNumber"
+      filter="numeric"
       title="{{ utilityService.language.tripId | translate }}"
     >
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -26,15 +27,26 @@
         }}</a>
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="type" title="Trip Type">
-      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-        <span>{{ utilityService.getTripTypeLabel(dataItem.type) }}</span>
-      </ng-template>
-    </kendo-grid-column>
     <kendo-grid-column
       field="destination"
       title="{{ utilityService.language.destination | translate }}"
     >
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 150px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleTripDestinationValueChange($event)"
+          [data]="tripDestinationList"
+          [(ngModel)]="selectedTripDestination"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
       <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
         <span>{{
           utilityService.getTripDestinationLabel(dataItem.destination)

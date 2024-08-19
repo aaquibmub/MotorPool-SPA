@@ -3,7 +3,7 @@
   <div class="page-area">
     <div class="page-header">
       <div class="page-title">
-        <span>New Trip</span>
+        <span>New Trip - VIP</span>
       </div>
     </div>
     <div class="page-body">
@@ -814,8 +814,9 @@
                     class="form-control"
                     textField="text"
                     valueField="value"
+                    [filterable]="true"
                     [defaultItem]="utilityService.dropdownDefaultItem"
-                    (valueChange)="handleDriverValueChange($event)"
+                    (filterChange)="handleDriverFilterChange($event)"
                     [data]="driverList"
                     formControlName="driver"
                   >
@@ -838,8 +839,9 @@
                     class="form-control"
                     textField="text"
                     valueField="value"
+                    [filterable]="true"
                     [defaultItem]="utilityService.dropdownDefaultItem"
-                    (valueChange)="handlVehicleValueChange($event)"
+                    (filterChange)="handleVehicleFilterChange($event)"
                     [data]="vehicalList"
                     formControlName="vehical"
                   >

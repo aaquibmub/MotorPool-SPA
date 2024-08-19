@@ -157,12 +157,22 @@
                             <label for="inputVehical">Vehical</label>
                           </div>
                           <div class="control" style="max-width: none">
-                            <input
-                              type="text"
+                            <kendo-dropdownlist
                               class="form-control"
-                              id="inputTripId"
-                              [value]="form.get('newVehical').value?.text"
-                            />
+                              textField="textEx"
+                              valueField="value"
+                              [defaultItem]="utilityService.dropdownDefaultItem"
+                              (valueChange)="handlVehicleValueChange($event)"
+                              [data]="vehicalList"
+                              formControlName="newVehical"
+                            >
+                              <ng-template
+                                kendoDropDownListItemTemplate
+                                let-dataItem
+                              >
+                                <span>{{ dataItem.textEx | translate }}</span>
+                              </ng-template>
+                            </kendo-dropdownlist>
                           </div>
                         </div>
                       </div>

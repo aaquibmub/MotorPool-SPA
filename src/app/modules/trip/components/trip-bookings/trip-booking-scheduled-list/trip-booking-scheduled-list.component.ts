@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataStateChangeEvent, GridDataResult } from '@progress/kendo-angular-grid';
+import { flatten } from '@progress/kendo-angular-grid/dist/es2015/filtering/base-filter-cell.component';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
-import { TripType } from 'src/app/helper/common/shared-types';
+import { GetTripDestinationForDropdownList, TripDestination, TripType } from 'src/app/helper/common/shared-types';
+import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { TripStatus } from './../../../../../helper/common/shared-types';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
@@ -24,6 +26,9 @@ export class TripBookingScheduledListComponent implements OnInit, OnDestroy {
   pageable = UtilityRix.gridConfig.pageable;
   filterable = UtilityRix.gridConfig.filterable;
   searchQuery: string;
+
+  tripDestinationList: DropdownItem<TripDestination>[] = GetTripDestinationForDropdownList();
+  selectedTripDestination: DropdownItem<TripDestination>;
 
   pageSizeSubscription: Subscription;
   tripExecutePopupSubscription: Subscription;
@@ -96,6 +101,23 @@ export class TripBookingScheduledListComponent implements OnInit, OnDestroy {
           this.gridData.total = data.total;
         }
       );
+  }
+
+  handleTripDestinationValueChange(value: DropdownItem<TripDestination>): void {
+    const root = { logic: 'and', filters: [], ...this.state.filter };
+    const [filter] = flatten(root).filter(x => x.field === "destination");
+    if (!filter) {
+      root.filters.push({
+        field: "destination",
+        operator: "eq",
+        value: value.value
+      });
+    } else {
+      filter.value = value.value;
+    }
+    this.selectedTripDestination = value;
+    this.state.filter = root;
+    this.dataStateChange(this.state as DataStateChangeEvent);
   }
 
   dataStateChange(state: DataStateChangeEvent): void {
