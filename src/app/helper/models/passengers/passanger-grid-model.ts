@@ -1,3 +1,4 @@
 export class PassangerGridModel {
-    id: string;
+  id: string;
+  active: boolean;
 }

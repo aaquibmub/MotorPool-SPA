@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Observable, Subject } from 'rxjs';
-import { VehicalStatus } from '../../common/shared-types';
 import { DropdownItem } from '../../models/common/dropdown/dropdown-item.model';
 import { GridList } from '../../models/common/grid/grid-list';
 import { ResponseModel } from '../../models/common/response-model';
@@ -40,7 +39,7 @@ export class PassangerService {
   fetchGridData(
     state: any,
     query: string,
-    status?: VehicalStatus): void {
+    status?: boolean): void {
     this.http.post<GridList<PassangerGridModel>>(
       this.baseUrl + 'get-gridlist', {
       gridFilters: state,
@@ -51,5 +50,11 @@ export class PassangerService {
         this.gridData.next(gridData);
       }
     );
+  }
+  enable(id: string): Observable<ResponseModel<string>> {
+    return this.http.delete<ResponseModel<string>>(this.baseUrl + 'enable/' + id);
+  }
+  disable(id: string): Observable<ResponseModel<string>> {
+    return this.http.delete<ResponseModel<string>>(this.baseUrl + 'disable/' + id);
   }
 }

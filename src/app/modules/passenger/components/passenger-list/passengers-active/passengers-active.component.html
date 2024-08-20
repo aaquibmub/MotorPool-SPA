@@ -1,0 +1,133 @@
+<div class="grid-content">
+  <app-grid-toolbar
+    [numberOfRecords]="gridData?.total"
+    entity="passenger"
+    [hideColumnDropdown]="true"
+  ></app-grid-toolbar>
+  <kendo-grid
+    [data]="gridData"
+    [pageSize]="state.take"
+    [skip]="state.skip"
+    [sort]="state.sort"
+    [sortable]="true"
+    [pageable]="pageable"
+    [filter]="state.filter"
+    [filterable]="filterable"
+    scrollable="none"
+    (dataStateChange)="dataStateChange($event)"
+  >
+    <kendo-grid-column
+      field="name"
+      title="{{ utilityService.language.name | translate }}"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="gender"
+      title="{{ utilityService.language.gender | translate }}"
+    >
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 150px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleGenderValueChange($event)"
+          [data]="genderList"
+          [(ngModel)]="selectedGender"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="ageGroup"
+      title="{{ utilityService.language.ageGroup | translate }}"
+    >
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 150px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleAgeGroupValueChange($event)"
+          [data]="ageGroupList"
+          [(ngModel)]="selectedAgeGroup"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="opm"
+      title="{{ utilityService.language.opm | translate }}"
+    >
+      <ng-template kendoGridFilterCellTemplate let-value="value">
+        <kendo-dropdownlist
+          style="width: 150px"
+          class="form-control"
+          textField="text"
+          valueField="value"
+          [defaultItem]="utilityService.dropdownAllItem"
+          (valueChange)="handleOpmValueChange($event)"
+          [data]="opmList"
+          [(ngModel)]="selectedOpm"
+        >
+          <ng-template kendoDropDownListItemTemplate let-dataItem>
+            <span>{{ dataItem.text | translate }}</span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="phoneNumber"
+      title="{{ utilityService.language.phoneNumber | translate }}"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column
+      field="address"
+      title="{{ utilityService.language.address | translate }}"
+    >
+    </kendo-grid-column>
+    <kendo-grid-column headerClass="action-column">
+      <ng-template kendoGridHeaderTemplate>
+        <span><i class="action-column-icon"></i></span>
+      </ng-template>
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        <app-grid-action-dropdown
+          [actions]="getGridActions(dataItem)"
+          [index]="rowIndex"
+          [states]="getGridActionMenuState()"
+        ></app-grid-action-dropdown>
+      </ng-template>
+    </kendo-grid-column>
+    <ng-template
+      kendoPagerTemplate
+      let-totalPages="totalPages"
+      let-currentPage="currentPage"
+    >
+      <div class="grid-toolbar">
+        <div class="left">
+          <kendo-pager-page-sizes
+            [pageSizes]="pageable.pageSizes"
+          ></kendo-pager-page-sizes>
+        </div>
+        <div class="right">
+          <kendo-pager-prev-buttons></kendo-pager-prev-buttons>
+          <kendo-pager-next-buttons></kendo-pager-next-buttons>
+        </div>
+      </div>
+    </ng-template>
+    <kendo-grid-messages
+      pagerItemsPerPage="{{
+        utilityService.language.recordsPerPage | translate
+      }}"
+      pagerItems="rows"
+    ></kendo-grid-messages>
+  </kendo-grid>
+</div>

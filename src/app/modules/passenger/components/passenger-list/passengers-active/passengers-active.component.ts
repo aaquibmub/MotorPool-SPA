@@ -18,11 +18,11 @@ import { PassangerService } from 'src/app/helper/services/passanger/passanger.se
 import { AgeGroupService } from 'src/app/helper/services/utilities/age-group.service';
 
 @Component({
-  selector: 'app-passengers-all',
-  templateUrl: './passengers-all.component.html',
-  styleUrls: ['./passengers-all.component.css']
+  selector: 'app-passengers-active',
+  templateUrl: './passengers-active.component.html',
+  styleUrls: ['./passengers-active.component.css']
 })
-export class PassengersAllComponent implements OnInit {
+export class PassengersActiveComponent implements OnInit {
 
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
@@ -69,18 +69,18 @@ export class PassengersAllComponent implements OnInit {
       .subscribe(
         (pageSize: number) => {
           this.state.take = pageSize;
-          this.passangerService.fetchGridData(this.state, this.searchQuery);
+          this.passangerService.fetchGridData(this.state, this.searchQuery, true);
         }
       );
     this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.passangerService.fetchGridData(this.state, this.searchQuery);
+          this.passangerService.fetchGridData(this.state, this.searchQuery, true);
         }
       );
 
-    this.passangerService.fetchGridData(this.state, this.searchQuery);
+    this.passangerService.fetchGridData(this.state, this.searchQuery, true);
     this.passangerService.getGridData()
       .subscribe(
         (data: any) => {
@@ -141,9 +141,10 @@ export class PassengersAllComponent implements OnInit {
     this.dataStateChange(this.state as DataStateChangeEvent);
   }
 
+
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.passangerService.fetchGridData(state, this.searchQuery);
+    this.passangerService.fetchGridData(state, this.searchQuery, true);
   }
 
   getGridActionMenuState(): boolean[] {
@@ -168,7 +169,7 @@ export class PassengersAllComponent implements OnInit {
                   }
                   this.notificationService.show(
                     UtilityRix.getSuccsessNotification('Passenger Deactivated'));
-                  this.passangerService.fetchGridData(this.state, this.searchQuery);
+                  this.passangerService.fetchGridData(this.state, this.searchQuery, true);
 
                 }
               );
@@ -183,7 +184,7 @@ export class PassengersAllComponent implements OnInit {
                   }
                   this.notificationService.show(
                     UtilityRix.getSuccsessNotification('Passenger Activated'));
-                  this.passangerService.fetchGridData(this.state, this.searchQuery);
+                  this.passangerService.fetchGridData(this.state, this.searchQuery, true);
 
                 }
               );

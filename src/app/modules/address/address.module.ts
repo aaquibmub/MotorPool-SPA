@@ -13,7 +13,9 @@ import { AddressComponent } from './address.component';
 import { AddressEditComponent } from './components/address-forms/address-edit/address-edit.component';
 import { AddressFormsComponent } from './components/address-forms/address-forms.component';
 import { AddressListComponent } from './components/address-list/address-list.component';
+import { AddressesActiveComponent } from './components/address-list/addresses-active/addresses-active.component';
 import { AddressesAllComponent } from './components/address-list/addresses-all/addresses-all.component';
+import { AddressesInactiveComponent } from './components/address-list/addresses-inactive/addresses-inactive.component';
 
 @NgModule({
   imports: [
@@ -35,6 +37,8 @@ import { AddressesAllComponent } from './components/address-list/addresses-all/a
 
     AddressListComponent,
     AddressesAllComponent,
+    AddressesActiveComponent,
+    AddressesInactiveComponent,
 
     AddressFormsComponent,
     AddressEditComponent,

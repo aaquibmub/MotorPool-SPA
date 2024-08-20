@@ -15,14 +15,26 @@
       </div>
     </div>
     <div class="tab-left">
-      <!-- <div class="tab-left-items">
+      <div class="tab-left-items">
         <a
           class="tab-left-item"
           routerLinkActive="active"
           routerLink="/passengers/list/all"
-          >All Passengers</a
+          >{{ utilityService.language.allPassangers | translate }}</a
         >
-      </div> -->
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/passengers/list/active"
+          >{{ utilityService.language.activePassengers | translate }}</a
+        >
+        <a
+          class="tab-left-item"
+          routerLinkActive="active"
+          routerLink="/passengers/list/inactive"
+          >{{ utilityService.language.inactivePassengers | translate }}</a
+        >
+      </div>
       <div class="tab-content">
         <router-outlet></router-outlet>
       </div>

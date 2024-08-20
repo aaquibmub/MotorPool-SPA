@@ -5,7 +5,9 @@ import { AddressComponent } from './address.component';
 import { AddressEditComponent } from './components/address-forms/address-edit/address-edit.component';
 import { AddressFormsComponent } from './components/address-forms/address-forms.component';
 import { AddressListComponent } from './components/address-list/address-list.component';
+import { AddressesActiveComponent } from './components/address-list/addresses-active/addresses-active.component';
 import { AddressesAllComponent } from './components/address-list/addresses-all/addresses-all.component';
+import { AddressesInactiveComponent } from './components/address-list/addresses-inactive/addresses-inactive.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,8 @@ const routes: Routes = [
         children: [
           { path: '', redirectTo: 'all', pathMatch: 'full' },
           { path: 'all', component: AddressesAllComponent },
+          { path: 'active', component: AddressesActiveComponent },
+          { path: 'inactive', component: AddressesInactiveComponent },
         ]
       },
     ]

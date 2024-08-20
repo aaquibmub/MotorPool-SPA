@@ -24,7 +24,12 @@ export class LanguageKeys {
   activityBy = "Activity By";
   activityLog = "Activity Log";
   allPassangers = "All Passengers";
+  activePassengers = "Active Passengers";
+  inactivePassengers = "Inactive Passengers";
   allTripBookings = "All Trip Bookings";
+  allAddresses = "All Addresses";
+  activeAddresses = "Active Addresses";
+  inactiveAddresses = "Inactive Addresses";
 
   // B.
   bookedBy = "Booked By";

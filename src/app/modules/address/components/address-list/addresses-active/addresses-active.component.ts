@@ -14,11 +14,11 @@ import { GridToolbarService } from 'src/app/helper/services/common/grid-toolbar.
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 
 @Component({
-  selector: 'app-addresses-all',
-  templateUrl: './addresses-all.component.html',
-  styleUrls: ['./addresses-all.component.css']
+  selector: 'app-addresses-active',
+  templateUrl: './addresses-active.component.html',
+  styleUrls: ['./addresses-active.component.css']
 })
-export class AddressesAllComponent implements OnInit {
+export class AddressesActiveComponent implements OnInit {
 
   gridData: GridDataResult = UtilityRix.gridConfig.gridData;
   state: State = UtilityRix.gridConfig.state;
@@ -49,18 +49,18 @@ export class AddressesAllComponent implements OnInit {
       .subscribe(
         (pageSize: number) => {
           this.state.take = pageSize;
-          this.addressService.fetchGridData(this.state, this.searchQuery);
+          this.addressService.fetchGridData(this.state, this.searchQuery, true);
         }
       );
     this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.addressService.fetchGridData(this.state, this.searchQuery);
+          this.addressService.fetchGridData(this.state, this.searchQuery, true);
         }
       );
 
-    this.addressService.fetchGridData(this.state, this.searchQuery);
+    this.addressService.fetchGridData(this.state, this.searchQuery, true);
     this.addressService.getGridData()
       .subscribe(
         (data: any) => {
@@ -72,7 +72,7 @@ export class AddressesAllComponent implements OnInit {
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.addressService.fetchGridData(state, this.searchQuery);
+    this.addressService.fetchGridData(state, this.searchQuery, true);
   }
 
   getGridActionMenuState(): boolean[] {
@@ -96,8 +96,8 @@ export class AddressesAllComponent implements OnInit {
                     return;
                   }
                   this.notificationService.show(
-                    UtilityRix.getSuccsessNotification('Passenger Deactivated'));
-                  this.addressService.fetchGridData(this.state, this.searchQuery);
+                    UtilityRix.getSuccsessNotification('Address Deactivated'));
+                  this.addressService.fetchGridData(this.state, this.searchQuery, true);
 
                 }
               );
@@ -111,8 +111,8 @@ export class AddressesAllComponent implements OnInit {
                     return;
                   }
                   this.notificationService.show(
-                    UtilityRix.getSuccsessNotification('Passenger Activated'));
-                  this.addressService.fetchGridData(this.state, this.searchQuery);
+                    UtilityRix.getSuccsessNotification('Address Activated'));
+                  this.addressService.fetchGridData(this.state, this.searchQuery, true);
 
                 }
               );

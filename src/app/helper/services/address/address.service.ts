@@ -45,11 +45,13 @@ export class AddressService {
   }
   fetchGridData(
     state: any,
-    query: string): void {
+    query: string,
+    status?: boolean): void {
     this.http.post<GridList<AddressGridModel>>(
       this.baseUrl + 'get-address-gridlist', {
       gridFilters: state,
-      search: query
+      search: query,
+      status
     }).subscribe(
       (gridData: GridList<AddressGridModel>) => {
         this.gridData.next(gridData);
@@ -62,5 +64,11 @@ export class AddressService {
   }
   setQuickAddPopup(model: PopupConfigModel): void {
     this.showQuickAddPopup.next(model);
+  }
+  enable(id: string): Observable<ResponseModel<string>> {
+    return this.http.delete<ResponseModel<string>>(this.baseUrl + 'enable/' + id);
+  }
+  disable(id: string): Observable<ResponseModel<string>> {
+    return this.http.delete<ResponseModel<string>>(this.baseUrl + 'disable/' + id);
   }
 }
