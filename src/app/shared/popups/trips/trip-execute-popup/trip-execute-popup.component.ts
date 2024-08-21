@@ -54,7 +54,7 @@ export class TripExecutePopupComponent implements OnInit {
   private initForm(): void {
 
     if (this.model.driver) {
-      this.handleDriverValueChange(this.model.driver);
+      this.handleDriverValueChange(this.model.driver, false);
     }
 
     this.form = new UntypedFormGroup({
@@ -68,7 +68,8 @@ export class TripExecutePopupComponent implements OnInit {
     });
   }
 
-  handleDriverValueChange(value: DropdownItem<string>): void {
+  handleDriverValueChange(value: DropdownItem<string>, selectFirstVehicle = true): void {
+    this.vehicalList = [];
     if (!value) {
       return;
     }
@@ -92,20 +93,23 @@ export class TripExecutePopupComponent implements OnInit {
           });
 
           this.vehicalList = vList;
-          const vehcial = response.result[0];
-          let vehicleVal = null;
-          if (vehcial) {
-            vehicleVal = {
-              text: vehcial.make + ' '
-                + vehcial.model + ' '
-                + vehcial.modelYear.toString(),
-              value: vehcial.id,
-              textEx: vehcial.registrationPlate
-            };
-            this.form.get('vehical').setValue(vehicleVal);
-          }
-          this.handlVehicleValueChange(vehicleVal);
 
+          if (selectFirstVehicle) {
+
+            const vehcial = response.result[0];
+            let vehicleVal = null;
+            if (vehcial) {
+              vehicleVal = {
+                text: vehcial.make + ' '
+                  + vehcial.model + ' '
+                  + vehcial.modelYear.toString(),
+                value: vehcial.id,
+                textEx: vehcial.registrationPlate
+              };
+              this.form.get('vehical').setValue(vehicleVal);
+            }
+            this.handlVehicleValueChange(vehicleVal);
+          }
         }
       );
   }

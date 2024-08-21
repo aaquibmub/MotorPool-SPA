@@ -24,7 +24,7 @@
                 : 'transparent'
           }"
         >
-          <td>{{ item.time | dateformat : "hh:mm aa" }}</td>
+          <td>{{ item.time | dateformat : "HH:mm" }}</td>
           <td>
             <a routerLink="/trips/view/{{ item.id }}/detail">{{
               item.tripId
