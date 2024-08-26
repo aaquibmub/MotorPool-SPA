@@ -280,7 +280,7 @@ export class UtilityService {
               break;
             }
             case 'pickupTime': {
-              row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue, 'hh:mm aa');
+              row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue, 'HH:mm');
               break;
             }
             case 'opm': {

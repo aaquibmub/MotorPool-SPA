@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogSettings } from '@progress/kendo-angular-dialog';
-import { CldrIntlService, IntlService } from '@progress/kendo-angular-intl';
+import { CldrIntlService, IntlService, Locale, localeData } from '@progress/kendo-angular-intl';
 import { ResponseAction } from './helper/common/shared-types';
 import { PopupConfigModel } from './helper/models/common/popup-config-model';
 import { AddressService } from './helper/services/address/address.service';
@@ -87,6 +87,10 @@ export class AppComponent implements OnInit {
     if (user) {
       // (this.intlService as CldrIntlService).localeId = 'ar-SA';
       (this.intlService as CldrIntlService).localeId = 'en-US';
+      const bgData: Locale = localeData("en-US");
+      bgData.calendar.patterns.g = "dd/MM/yyyy HH:mm";
+      bgData.calendar.patterns.d = "dd/MM/yyyy";
+      bgData.calendar.patterns.t = "HH:mm";
     }
 
     this.signalRService.connect();

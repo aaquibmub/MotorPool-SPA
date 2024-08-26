@@ -229,14 +229,10 @@
                                     <td>{{ d.type }}</td>
                                     <td>{{ d.address }}</td>
                                     <td>
-                                      {{
-                                        d.arrivalTime | dateformat : "hh:mm aa"
-                                      }}
+                                      {{ d.arrivalTime | dateformat : "HH:mm" }}
                                     </td>
                                     <td>
-                                      {{
-                                        d.pickupTime | dateformat : "hh:mm aa"
-                                      }}
+                                      {{ d.pickupTime | dateformat : "HH:mm" }}
                                     </td>
                                   </tr>
                                 </tbody>
