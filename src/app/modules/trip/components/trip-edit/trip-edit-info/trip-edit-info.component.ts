@@ -127,6 +127,7 @@ export class TripEditInfoComponent implements OnInit {
 
     dialog.result.subscribe((result: any) => {
       if (result.text === primaryAction) {
+        debugger;
         this.tripService.updateTripInformation(formValue)
           .subscribe(
             (response: ResponseModel<string>) => {

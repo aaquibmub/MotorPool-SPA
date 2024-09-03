@@ -268,7 +268,8 @@ export enum TripStatus {
   Completed = 400,
   Cancelled = 500,
   OdoMeterAtCancel = 550,
-  Updated = 600
+  Updated = 600,
+  BackToMotorPool = 700
 }
 
 

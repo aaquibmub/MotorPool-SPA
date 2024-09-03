@@ -234,7 +234,7 @@
                     class="form-control"
                     id="inputTripStartDate"
                     class="form-control"
-                    [value]="odoStartDateTime | dateobject"
+                    [value]="odoStartDateTime"
                     (valueChange)="
                       updateTripStatusTime($event, null, tripStatus.TripStarted)
                     "
@@ -540,6 +540,34 @@
                 <div class="form-group">
                   <div class="label">
                     <label for="inputTripStartDate">{{
+                      utilityService.language.dateTime | translate
+                    }}</label>
+                  </div>
+                  <div class="control">
+                    <kendo-datetimepicker
+                      class="form-control"
+                      id="inputTripStartDate"
+                      class="form-control"
+                      [value]="item.dateTime | dateobject"
+                      (valueChange)="
+                        updateTripStatusTime($event, item.id, item.status)
+                      "
+                    >
+                    </kendo-datetimepicker>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Completed/Back to Motorpool -->
+            <div
+              class="row"
+              *ngIf="item.status == tripStatus.BackToMotorPool
+              "
+            >
+              <div class="col-4">
+                <div class="form-group">
+                  <div class="label">
+                    <label for="inputBTMPDate">{{
                       utilityService.language.dateTime | translate
                     }}</label>
                   </div>

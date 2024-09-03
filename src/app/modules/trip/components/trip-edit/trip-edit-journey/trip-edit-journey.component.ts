@@ -51,9 +51,9 @@ export class TripEditJourneyComponent implements OnInit {
         this.model = model;
         this.model.items = model.items.filter(f => f.status == null
           || f.status > TripStatus.OdoMeterAtStart);
-        this.odoStartDateTime = model.odoStartDateTime;
+        this.odoStartDateTime = new Date(model.odoStartDateTime);
         this.meterReadingStart = model.odoMeterAtStart;
-        this.odoEndDateTime = model.odoEndDateTime;
+        this.odoEndDateTime = new Date(model.odoEndDateTime);
         this.meterReadingEnd = model.odoMeterAtEnd;
         this.nextStatus = this.getNextTripStatus();
         this.actionLable = this.getTripEnrouteButtonText();
@@ -200,10 +200,14 @@ export class TripEditJourneyComponent implements OnInit {
   getNextTripStatus(): TripStatus {
     var status = this.model.tripStatus;
 
-    if (status == TripStatus.Completed
+    if (status == TripStatus.BackToMotorPool
       || status == TripStatus.OdoMeterAtCancel
     ) {
       return null;
+    }
+
+    if (status == TripStatus.Completed) {
+      return TripStatus.BackToMotorPool;
     }
 
     if (status == TripStatus.Cancelled) {
@@ -282,6 +286,10 @@ export class TripEditJourneyComponent implements OnInit {
 
     if (status == TripStatus.OdoMeterAtEnd) {
       return "END TRIP";
+    }
+
+    if (status == TripStatus.Completed) {
+      return "Back to Motorpool";
     }
 
     var nextDestination = this.model.items[this.model.items.length - 1];
