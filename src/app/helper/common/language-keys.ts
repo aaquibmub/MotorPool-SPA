@@ -290,6 +290,8 @@ export class LanguageKeys {
   //U
   update = "Update";
   updateOdoMeter = "Update ODO Meter";
+  updateWholeSeries = "Update Whole Series";
+  updateWholeSeriesMsg = "This will update all upcoming trips which belongs to this trip booking";
   unallocated = "Unallocated";
   user = "User";
 

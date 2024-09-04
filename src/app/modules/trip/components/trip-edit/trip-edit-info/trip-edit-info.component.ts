@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { DialogRef, DialogService } from '@progress/kendo-angular-dialog';
-import { DropdownType, TripDestination, TripStatus } from 'src/app/helper/common/shared-types';
+import { DropdownType, TripDestination, TripStatus, TripType } from 'src/app/helper/common/shared-types';
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
 import { ResponseModel } from 'src/app/helper/models/common/response-model';
@@ -29,6 +29,8 @@ export class TripEditInfoComponent implements OnInit {
 
   status = TripStatus;
   tripStatus: TripStatus;
+
+  tripType = TripType;
 
   constructor(
     private el: ElementRef,
@@ -78,7 +80,7 @@ export class TripEditInfoComponent implements OnInit {
   private initForm(): void {
 
     let tripDestination: DropdownItem<TripDestination> = null;
-
+    let updateSeries = false;
     let pickupDate = null;
     let pickupTime = null;
 
@@ -89,7 +91,7 @@ export class TripEditInfoComponent implements OnInit {
     if (this.model) {
 
       tripDestination = this.model.tripDestination;
-
+      // updateSeries = this.model.type == TripType.Scheduled;
       pickupDate = this.model.pickupDate;
       pickupTime = this.model.pickupTime;
       vehicle = this.model.vehicle;
@@ -97,6 +99,7 @@ export class TripEditInfoComponent implements OnInit {
 
       this.form = new UntypedFormGroup({
         tripId: new UntypedFormControl(this.model.tripId),
+        updateSeries: new UntypedFormControl(updateSeries),
         tripDestination: new UntypedFormControl(
           tripDestination, [UtilityRix.dropdownRequired as ValidatorFn]),
         pickupDate: new UntypedFormControl(pickupDate ? new Date(pickupDate) : new Date(), [Validators.required]),

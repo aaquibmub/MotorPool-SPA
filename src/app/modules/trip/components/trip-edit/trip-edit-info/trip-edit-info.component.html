@@ -1,4 +1,37 @@
 <form (ngSubmit)="submit()" *ngIf="form" [formGroup]="form">
+  <!-- Scheduled Type -->
+  <div
+    class="form-section form-section-border"
+    *ngIf="model.type == tripType.Scheduled"
+  >
+    <div class="section-header">
+      {{ utilityService.language.updateWholeSeries | translate }}
+    </div>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="control">
+              <div class="display-flex">
+                <div class="checkbox-control">
+                  <kendo-switch
+                    [size]="'small'"
+                    id="inputUpdateSeries"
+                    formControlName="updateSeries"
+                  ></kendo-switch>
+                </div>
+                <div class="label">
+                  <label for="inputUpdateSeries">{{
+                    utilityService.language.updateWholeSeriesMsg | translate
+                  }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Booking -->
   <div class="form-section form-section-border">
     <div class="section-header">

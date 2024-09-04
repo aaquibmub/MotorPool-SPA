@@ -345,6 +345,10 @@ export function GetTripStatusForDropdownList():
       text: 'Completed'
     },
     {
+      value: TripStatus.BackToMotorPool,
+      text: 'Back to Motor Pool'
+    },
+    {
       value: TripStatus.Cancelled,
       text: 'Cancelled'
     },
