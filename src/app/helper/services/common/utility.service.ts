@@ -271,6 +271,10 @@ export class UtilityService {
               row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue);
               break;
             }
+            case 'stopLocation': {
+              row.cells[columnField.cellIndex].value = dataItem['stopLocation'] ?? dataItem['addressLocation'];
+              break;
+            }
             case 'dueDate': {
               row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue);
               break;

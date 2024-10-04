@@ -173,6 +173,20 @@
         >
         </kendo-grid-column>
         <kendo-grid-column
+          field="stopLocation"
+          title="Stop Location توقف الموقع"
+          [width]="200"
+          [hidden]="isHidden('stopLocation')"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            <span>{{ dataItem.stopLocation ?? dataItem.addressLocation }}</span>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
           field="dropoffLocation"
           title="Dropoff Location موقع الترجل"
           [width]="200"

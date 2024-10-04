@@ -134,6 +134,7 @@ export class TripBookingScheduledListComponent implements OnInit, OnDestroy {
     return actionMenuState;
   }
 
+
   getGridActions(item: TripGridModel): ActionButton[] {
     const actions: ActionButton[] = [];
 
@@ -145,6 +146,16 @@ export class TripBookingScheduledListComponent implements OnInit, OnDestroy {
       label: 'View'
     });
 
+    if (item.status >= TripStatus.AssignedToDriver && !item.cancelled) {
+      actions.push({
+        handle: () => {
+          this.router.navigate(['/trips/edit/' + item.id + '/journey']);
+        },
+        icon: '',
+        label: 'Update Trip'
+      });
+    }
+
     if (!item.onGoing && !item.cancelled) {
       if (item.status < TripStatus.AssignedToDriver) {
         actions.push({
@@ -154,7 +165,18 @@ export class TripBookingScheduledListComponent implements OnInit, OnDestroy {
           icon: '',
           label: 'Execute'
         });
+      } else {
+
+        actions.push({
+          handle: () => {
+            this.tripService.setTripOdoMeterPopup(true, item.id);
+          },
+          icon: '',
+          label: 'Update ODO Meter'
+        });
+
       }
+
     } else {
       if (!item.cancelled) {
         actions.push({

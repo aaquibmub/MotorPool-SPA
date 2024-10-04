@@ -7,6 +7,7 @@ import { DestinationType, GetDestinationTypeForDropdownList, TripRoute } from 's
 import { UtilityRix } from 'src/app/helper/common/utility-rix';
 import { DropdownItem } from 'src/app/helper/models/common/dropdown/dropdown-item.model';
 import { ActionButton } from 'src/app/helper/models/common/grid/action-button';
+import { PopupConfigModel } from 'src/app/helper/models/common/popup-config-model';
 import { ResponseModel } from 'src/app/helper/models/common/response-model';
 import { TripDestinationModel } from 'src/app/helper/models/trips/enroute/trip-destination-model';
 import { TripDestinationDetailModel } from 'src/app/helper/models/trips/trip-edit/trip-destination-detail-model';
@@ -54,6 +55,20 @@ export class TripEditDestinationListComponent implements OnInit {
                 this.initForm();
               }
             );
+
+          this.addressService.getQuickAddPopup().subscribe(
+            (pcm: PopupConfigModel) => {
+              if (pcm && !pcm.show) {
+                if (pcm.arg === null || pcm.arg === undefined) {
+                } else {
+                  this.addressService.getDropdownList('')
+                    .subscribe((list: DropdownItem<string>[]) => {
+                      (this.form.get('destinations') as FormArray).controls[pcm.arg].get('address').setValue(pcm.item);
+                    });
+                }
+              }
+            }
+          );
 
           this.addressService.getDropdownList('')
             .subscribe((list: DropdownItem<string>[]) => {
@@ -288,6 +303,10 @@ export class TripEditDestinationListComponent implements OnInit {
       count++;
     });
 
+  }
+
+  openAddressQuickAddPopup(flag: boolean, index?: number): void {
+    this.addressService.setQuickAddPopup({ show: true, arg: index });
   }
 
   handleAddressFilter(text: string): void {
