@@ -37,6 +37,7 @@ export class ReportService {
 
   // trips
   private allTripGridData = new Subject<GridList<ReportAllTripGridModel>>();
+  private upcomingTripGridData = new Subject<GridList<ReportAllTripGridModel>>();
   private tripMilageGridData = new Subject<GridList<ReportTripMilageGridModel>>();
   // vehicles
   private allVehicleGridData = new Subject<GridList<ReportAllVehicleGridModel>>();
@@ -225,6 +226,27 @@ export class ReportService {
     }).subscribe(
       (gridData: GridList<ReportAllTripGridModel>) => {
         this.allTripGridData.next(gridData);
+      }
+    );
+  }
+
+
+  getUpcomingTripGridData(): Observable<GridDataResult> {
+    return this.upcomingTripGridData.asObservable();
+  }
+
+  fetchUpcomingTripGridData(
+    state: any,
+    search: string,
+    opm?: OPM): void {
+    this.http.post<GridList<ReportAllTripGridModel>>(
+      this.baseUrl + 'get-upcoming-trip-gridlist', {
+      gridFilters: state,
+      search,
+      opm
+    }).subscribe(
+      (gridData: GridList<ReportAllTripGridModel>) => {
+        this.upcomingTripGridData.next(gridData);
       }
     );
   }

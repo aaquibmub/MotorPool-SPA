@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DashboardDriverListModel } from '../../models/dashboard/dashboard-driver-list-model';
 import { DashboardTripListModel } from '../../models/dashboard/dashboard-trip-list-model';
 import { TripCountModel } from '../../models/dashboard/trip-count-model';
 import { TripDetailCountModel } from '../../models/dashboard/trip-detail-count-model';
@@ -33,6 +34,10 @@ export class DashboardService {
   getOngoingTrips(): Observable<DashboardTripListModel[]> {
     return this.http.get<DashboardTripListModel[]>(
       this.baseUrl + 'get-ongoing-trip-list');
+  }
+  getActiveDrivers(): Observable<DashboardDriverListModel[]> {
+    return this.http.get<DashboardDriverListModel[]>(
+      this.baseUrl + 'get-active-driver-list');
   }
   getTripTypeChartListModel(): Observable<TripTypeChartModel[]> {
     return this.http.get<TripTypeChartModel[]>(

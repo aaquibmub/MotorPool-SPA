@@ -67,6 +67,15 @@
         {{ dataItem.createdDate | dateformat : "g" }}
       </ng-template>
     </kendo-grid-column>
+    <kendo-grid-column
+      field="bookingDate"
+      title="{{ utilityService.language.bookingDate | translate }}"
+      filter="date"
+    >
+      <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+        {{ dataItem.bookingDate | dateformat : "g" }}
+      </ng-template>
+    </kendo-grid-column>
     <kendo-grid-column headerClass="action-column">
       <ng-template kendoGridHeaderTemplate>
         <span><i class="action-column-icon"></i></span>

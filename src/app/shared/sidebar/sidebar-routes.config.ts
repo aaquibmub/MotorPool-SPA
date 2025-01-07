@@ -580,7 +580,7 @@ export const ROUTES: RouteInfo[] = [
   // reports
   {
     path: '/reports',
-    operation: null,
+    operation: UtilityRix.operations.opReports,
     title: 'Reports',
     icon: 'reports-icon',
     class: '',

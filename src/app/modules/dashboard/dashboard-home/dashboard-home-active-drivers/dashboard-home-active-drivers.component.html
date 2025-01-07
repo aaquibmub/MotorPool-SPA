@@ -1,0 +1,30 @@
+<div class="dashboard-widget">
+  <div class="header">
+    {{ utilityService.language.onDutyDrivers | translate }}
+  </div>
+  <div class="caption">
+    {{ utilityService.language.driversCurrentlyActive | translate }}
+  </div>
+  <div class="table" *ngIf="list">
+    <table>
+      <thead>
+        <tr>
+          <th>{{ utilityService.language.driverName | translate }}</th>
+          <th>{{ utilityService.language.vehicle | translate }}</th>
+          <th>{{ utilityService.language.status | translate }}</th>
+          <th>{{ utilityService.language.tripType | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list">
+          <td>{{ item.driverName }}</td>
+          <td>{{ item.vehicleNumber }}</td>
+          <td>{{ utilityService.getDriverStatusLabel(item.status) }}</td>
+          <td>
+            {{ utilityService.getTripDestinationLabel(item.tripType) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

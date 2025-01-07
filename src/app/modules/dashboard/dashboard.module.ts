@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard.component';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { ChartsModule } from "@progress/kendo-angular-charts";
+import { DashboardHomeActiveDriversComponent } from './dashboard-home/dashboard-home-active-drivers/dashboard-home-active-drivers.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { ChartsModule } from "@progress/kendo-angular-charts";
 
     DashboardHomeUpcomingTripsComponent,
     DashboardHomeOngoingTripsComponent,
+    DashboardHomeActiveDriversComponent,
 
     DashboardHomeTripTypeChartComponent,
     DashboardHomeTripMilageChartComponent,

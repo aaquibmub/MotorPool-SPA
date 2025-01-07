@@ -16,13 +16,14 @@ export class TripEditJourneyComponent implements OnInit {
 
   model: TripJourneyModel;
   startDateTime = new Date();
-  odoStartDateTime = new Date();
-  meterReadingStart?: number;
+  // odoStartDateTime = new Date();
+  // meterReadingStart?: number;
 
   journeyItemDate: Date = new Date();
 
-  odoEndDateTime = new Date();
-  meterReadingEnd?: number;
+  completeTripDateTime = new Date();
+  // odoEndDateTime = new Date();
+  // meterReadingEnd?: number;
   nextStatus: TripStatus;
   actionLable: string;
 
@@ -50,11 +51,11 @@ export class TripEditJourneyComponent implements OnInit {
       .subscribe((model: TripJourneyModel) => {
         this.model = model;
         this.model.items = model.items.filter(f => f.status == null
-          || f.status > TripStatus.OdoMeterAtStart);
-        this.odoStartDateTime = new Date(model.odoStartDateTime);
-        this.meterReadingStart = model.odoMeterAtStart;
-        this.odoEndDateTime = new Date(model.odoEndDateTime);
-        this.meterReadingEnd = model.odoMeterAtEnd;
+          || f.status > TripStatus.TripStarted);
+        // this.odoStartDateTime = new Date(model.odoStartDateTime);
+        // this.meterReadingStart = model.odoMeterAtStart;
+        // this.odoEndDateTime = new Date(model.odoEndDateTime);
+        // this.meterReadingEnd = model.odoMeterAtEnd;
         this.nextStatus = this.getNextTripStatus();
         this.actionLable = this.getTripEnrouteButtonText();
       });
@@ -75,34 +76,34 @@ export class TripEditJourneyComponent implements OnInit {
     });
   }
 
-  startOdoMeter(): void {
-    if (!this.meterReadingStart) {
-      return;
-    }
-    this.tripService.updateTripVehicleMeter({
-      tripId: this.model.tripId,
-      meterReading: this.meterReadingStart,
-      time: this.odoStartDateTime,
-      status: TripStatus.OdoMeterAtStart,
-    }).subscribe((response: ResponseModel<string>) => {
-      if (response.hasError) {
-        this.alertService.setErrorAlert(response.msg);
-        return;
-      }
-      this.tripService.updateTripStatus({
-        tripId: this.model.tripId,
-        status: TripStatus.VehicalDispatched,
-        time: this.odoStartDateTime,
-        remarks: ''
-      }).subscribe((response: ResponseModel<string>) => {
-        if (response.hasError) {
-          this.alertService.setErrorAlert(response.msg);
-          return;
-        }
-        this.getTripLatestStatus(this.model.tripId);
-      });
-    });
-  }
+  // startOdoMeter(): void {
+  //   if (!this.meterReadingStart) {
+  //     return;
+  //   }
+  //   this.tripService.updateTripVehicleMeter({
+  //     tripId: this.model.tripId,
+  //     meterReading: this.meterReadingStart,
+  //     time: this.odoStartDateTime,
+  //     status: TripStatus.OdoMeterAtStart,
+  //   }).subscribe((response: ResponseModel<string>) => {
+  //     if (response.hasError) {
+  //       this.alertService.setErrorAlert(response.msg);
+  //       return;
+  //     }
+  //     this.tripService.updateTripStatus({
+  //       tripId: this.model.tripId,
+  //       status: TripStatus.VehicalDispatched,
+  //       time: this.odoStartDateTime,
+  //       remarks: ''
+  //     }).subscribe((response: ResponseModel<string>) => {
+  //       if (response.hasError) {
+  //         this.alertService.setErrorAlert(response.msg);
+  //         return;
+  //       }
+  //       this.getTripLatestStatus(this.model.tripId);
+  //     });
+  //   });
+  // }
 
   dispatchVehicle(): void {
     this.tripService.updateTripStatus({
@@ -160,48 +161,62 @@ export class TripEditJourneyComponent implements OnInit {
     });
   }
 
-  endOdoMeter(): void {
-    if (!this.odoEndDateTime) {
-      return;
-    }
-    this.tripService.updateTripVehicleMeter({
+  completeTrip(): void {
+    this.tripService.updateTripStatus({
       tripId: this.model.tripId,
-      meterReading: this.meterReadingEnd,
-      time: this.odoEndDateTime,
-      status: this.nextStatus == TripStatus.OdoMeterAtCancel ? this.nextStatus : TripStatus.OdoMeterAtEnd,
+      status: TripStatus.Completed,
+      time: this.completeTripDateTime,
+      remarks: ''
     }).subscribe((response: ResponseModel<string>) => {
       if (response.hasError) {
         this.alertService.setErrorAlert(response.msg);
         return;
       }
-      const seconds = this.odoEndDateTime.getSeconds() + 5;
-      const completeTime = this.odoEndDateTime;
-      completeTime.setSeconds(seconds);
-      if (this.nextStatus != TripStatus.OdoMeterAtCancel) {
-
-        this.tripService.updateTripStatus({
-          tripId: this.model.tripId,
-          status: TripStatus.Completed,
-          time: completeTime,
-          remarks: ''
-        }).subscribe((response: ResponseModel<string>) => {
-          if (response.hasError) {
-            this.alertService.setErrorAlert(response.msg);
-            return;
-          }
-          this.getTripLatestStatus(this.model.tripId);
-        });
-      } else {
-        this.getTripLatestStatus(this.model.tripId);
-      }
+      this.getTripLatestStatus(this.model.tripId);
     });
   }
 
+  // endOdoMeter(): void {
+  //   if (!this.odoEndDateTime) {
+  //     return;
+  //   }
+  //   this.tripService.updateTripVehicleMeter({
+  //     tripId: this.model.tripId,
+  //     meterReading: this.meterReadingEnd,
+  //     time: this.odoEndDateTime,
+  //     status: this.nextStatus == TripStatus.OdoMeterAtCancel ? this.nextStatus : TripStatus.OdoMeterAtEnd,
+  //   }).subscribe((response: ResponseModel<string>) => {
+  //     if (response.hasError) {
+  //       this.alertService.setErrorAlert(response.msg);
+  //       return;
+  //     }
+  //     const seconds = this.odoEndDateTime.getSeconds() + 5;
+  //     const completeTime = this.odoEndDateTime;
+  //     completeTime.setSeconds(seconds);
+  //     if (this.nextStatus != TripStatus.OdoMeterAtCancel) {
+
+  //       this.tripService.updateTripStatus({
+  //         tripId: this.model.tripId,
+  //         status: TripStatus.Completed,
+  //         time: completeTime,
+  //         remarks: ''
+  //       }).subscribe((response: ResponseModel<string>) => {
+  //         if (response.hasError) {
+  //           this.alertService.setErrorAlert(response.msg);
+  //           return;
+  //         }
+  //         this.getTripLatestStatus(this.model.tripId);
+  //       });
+  //     } else {
+  //       this.getTripLatestStatus(this.model.tripId);
+  //     }
+  //   });
+  // }
+
   getNextTripStatus(): TripStatus {
     var status = this.model.tripStatus;
-
     if (status == TripStatus.BackToMotorPool
-      || status == TripStatus.OdoMeterAtCancel
+      // || status == TripStatus.OdoMeterAtCancel
     ) {
       return null;
     }
@@ -211,12 +226,12 @@ export class TripEditJourneyComponent implements OnInit {
     }
 
     if (status == TripStatus.Cancelled) {
-      return TripStatus.OdoMeterAtCancel;
+      return TripStatus.BackToMotorPool;
     }
 
-    if (status == TripStatus.OdoMeterAtEnd) {
-      return TripStatus.Completed;
-    }
+    // if (status == TripStatus.OdoMeterAtEnd) {
+    //   return TripStatus.Completed;
+    // }
 
     var nextDestination = this.model.items[this.model.items.length - 1];
     var endTrip = nextDestination.completed;
@@ -225,7 +240,7 @@ export class TripEditJourneyComponent implements OnInit {
       if (status == TripStatus.Updated) {
         return null;
       }
-      return TripStatus.OdoMeterAtEnd;
+      return TripStatus.Completed;
     }
 
     if (status == TripStatus.TripStarted) {
@@ -284,9 +299,9 @@ export class TripEditJourneyComponent implements OnInit {
   getTripEnrouteButtonText(): string {
     var status = this.model.tripStatus;
 
-    if (status == TripStatus.OdoMeterAtEnd) {
-      return "END TRIP";
-    }
+    // if (status == TripStatus.OdoMeterAtEnd) {
+    //   return "END TRIP";
+    // }
 
     if (status == TripStatus.Completed) {
       return "Back to Motorpool";
@@ -296,10 +311,10 @@ export class TripEditJourneyComponent implements OnInit {
     var endTrip = nextDestination.completed;
 
     if (endTrip) {
-      return "METER READING";
+      return "END TRIP";
     }
 
-    if (status == TripStatus.OdoMeterAtStart) {
+    if (status == TripStatus.TripStarted) {
       return "DISPATCH";
     }
     if (status == TripStatus.VehicalDispatched) {
@@ -326,19 +341,19 @@ export class TripEditJourneyComponent implements OnInit {
 
   }
 
-  updateOdoMeter(): void {
-    this.tripService.updateTripMeterReading({
-      tripId: this.model.tripId,
-      start: this.meterReadingStart,
-      end: this.meterReadingEnd,
-    }).subscribe((response: ResponseModel<string>) => {
-      if (response.hasError) {
-        this.alertService.setErrorAlert(response.msg);
-        return;
-      }
-      this.getTripLatestStatus(this.model.tripId);
-    });
-  }
+  // updateOdoMeter(): void {
+  //   this.tripService.updateTripMeterReading({
+  //     tripId: this.model.tripId,
+  //     start: this.meterReadingStart,
+  //     end: this.meterReadingEnd,
+  //   }).subscribe((response: ResponseModel<string>) => {
+  //     if (response.hasError) {
+  //       this.alertService.setErrorAlert(response.msg);
+  //       return;
+  //     }
+  //     this.getTripLatestStatus(this.model.tripId);
+  //   });
+  // }
 
   updateTripStatusTime(value: Date, id?: string, status?: TripStatus): void {
     this.tripService.updateTripStatusTime({

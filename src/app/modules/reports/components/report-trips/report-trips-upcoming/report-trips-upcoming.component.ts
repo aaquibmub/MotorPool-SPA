@@ -3,7 +3,7 @@ import { DataStateChangeEvent, GridComponent, GridDataResult } from '@progress/k
 import { flatten } from '@progress/kendo-angular-grid/dist/es2015/filtering/base-filter-cell.component';
 import { State } from '@progress/kendo-data-query';
 import { Subscription } from 'rxjs';
-import { GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, OPM, TripDestination, TripRoute, TripStatus, TripType } from 'src/app/helper/common/shared-types';
+import { GetOpmForDropdownList, GetTripDestinationForDropdownList, GetTripRouteForDropdownList, GetTripStatusForDropdownList, OPM, TripDestination, TripRoute, TripStatus } from 'src/app/helper/common/shared-types';
 import { UtilityService } from 'src/app/helper/services/common/utility.service';
 import { ReportService } from 'src/app/helper/services/utilities/report.service';
 import { UtilityRix } from './../../../../../helper/common/utility-rix';
@@ -55,24 +55,25 @@ export class ReportTripsUpcomingComponent implements OnInit, OnDestroy {
         (show: boolean) => {
           this.filterable = show ? UtilityRix.gridConfig.filterable : '';
           this.state.filter = null;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.Upcoming);
+          this.reportService.fetchUpcomingTripGridData(this.state, this.searchQuery);
         }
       );
 
-    this.tripStatusList = this.tripStatusList.filter(f => f.value >= TripStatus.Created && f.value <= TripStatus.AssignedToDriver);
+    this.tripStatusList = this.tripStatusList
+      .filter(f => f.value >= TripStatus.Created && f.value <= TripStatus.AssignedToDriver);
 
     this.pageSizeSubscription = this.gridToolbarService.getPageSize()
       .subscribe(
         (pageSize: number) => {
           this.state.take = pageSize;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.Upcoming);
+          this.reportService.fetchUpcomingTripGridData(this.state, this.searchQuery);
         }
       );
     this.gridSearchQuerySubscription = this.gridToolbarService.getGridSearchQuery()
       .subscribe(
         (query: string) => {
           this.searchQuery = query;
-          this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.Upcoming);
+          this.reportService.fetchUpcomingTripGridData(this.state, this.searchQuery);
         }
       );
     this.gridColumnsSubscription = this.gridToolbarService.getGridHiddenColumn()
@@ -82,8 +83,8 @@ export class ReportTripsUpcomingComponent implements OnInit, OnDestroy {
           this.hideColumn(column);
         }
       );
-    this.reportService.fetchAllTripGridData(this.state, this.searchQuery, null, null, TripType.Upcoming);
-    this.gridDataSubscription = this.reportService.getAllTripGridData()
+    this.reportService.fetchUpcomingTripGridData(this.state, this.searchQuery);
+    this.gridDataSubscription = this.reportService.getUpcomingTripGridData()
       .subscribe(
         (data: any) => {
           this.gridData.data = data.data;
@@ -95,7 +96,7 @@ export class ReportTripsUpcomingComponent implements OnInit, OnDestroy {
 
   dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.reportService.fetchAllTripGridData(state, this.searchQuery, null, null, TripType.Upcoming);
+    this.reportService.fetchUpcomingTripGridData(state, this.searchQuery);
   }
 
   exportToExcel(grid: GridComponent): void {

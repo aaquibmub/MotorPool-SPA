@@ -252,7 +252,7 @@ export enum TripStatus {
   Created = 10,
   AssignedToDriver = 20,
   TripStarted = 30,
-  OdoMeterAtStart = 35,
+  // OdoMeterAtStart = 35,
   VehicalDispatched = 40,
   ArrivedAtPickupLocation = 50,
   WaitingForPassenger = 52,
@@ -264,10 +264,10 @@ export enum TripStatus {
   WaitingForAddressActivity = 67,
   TripResumedAfterAddress = 68,
   ArrivedAtDropoff = 70,
-  OdoMeterAtEnd = 80,
+  // OdoMeterAtEnd = 80,
   Completed = 400,
   Cancelled = 500,
-  OdoMeterAtCancel = 550,
+  // OdoMeterAtCancel = 550,
   Updated = 600,
   BackToMotorPool = 700
 }
@@ -288,10 +288,10 @@ export function GetTripStatusForDropdownList():
       value: TripStatus.TripStarted,
       text: 'Trip Started'
     },
-    {
-      value: TripStatus.OdoMeterAtStart,
-      text: 'ODO Meter At Start'
-    },
+    // {
+    //   value: TripStatus.OdoMeterAtStart,
+    //   text: 'ODO Meter At Start'
+    // },
     {
       value: TripStatus.VehicalDispatched,
       text: 'Vehical Dispatched'
@@ -336,10 +336,10 @@ export function GetTripStatusForDropdownList():
       value: TripStatus.ArrivedAtDropoff,
       text: 'Arrived At Dropoff'
     },
-    {
-      value: TripStatus.OdoMeterAtEnd,
-      text: 'ODO Meter At End'
-    },
+    // {
+    //   value: TripStatus.OdoMeterAtEnd,
+    //   text: 'ODO Meter At End'
+    // },
     {
       value: TripStatus.Completed,
       text: 'Completed'
@@ -352,10 +352,10 @@ export function GetTripStatusForDropdownList():
       value: TripStatus.Cancelled,
       text: 'Cancelled'
     },
-    {
-      value: TripStatus.OdoMeterAtCancel,
-      text: 'ODO Meter at Cancel'
-    },
+    // {
+    //   value: TripStatus.OdoMeterAtCancel,
+    //   text: 'ODO Meter at Cancel'
+    // },
     {
       value: TripStatus.Updated,
       text: 'Updated'

@@ -6,11 +6,18 @@
       </div>
     </div>
     <div class="row pb-24" *ngIf="user?.roleType != roleType.Dashboard">
-      <div class="col-6">
+      <div class="col-12">
+        <app-dashboard-home-ongoing-trips></app-dashboard-home-ongoing-trips>
+      </div>
+    </div>
+    <div class="row pb-24" *ngIf="user?.roleType != roleType.Dashboard">
+      <div class="col-12">
         <app-dashboard-home-upcoming-trips></app-dashboard-home-upcoming-trips>
       </div>
-      <div class="col-6">
-        <app-dashboard-home-ongoing-trips></app-dashboard-home-ongoing-trips>
+    </div>
+    <div class="row pb-24" *ngIf="user?.roleType != roleType.Dashboard">
+      <div class="col-12">
+        <app-dashboard-home-active-drivers></app-dashboard-home-active-drivers>
       </div>
     </div>
     <div
@@ -20,12 +27,12 @@
         user?.roleType != roleType.Dashboard
       "
     >
-      <div class="col-6">
+      <div class="col-12">
         <app-dashboard-home-trip-type-chart></app-dashboard-home-trip-type-chart>
       </div>
-      <div class="col-6">
+      <!-- <div class="col-6">
         <app-dashboard-home-trip-milage-chart></app-dashboard-home-trip-milage-chart>
-      </div>
+      </div> -->
     </div>
     <div class="row pb-24" *ngIf="user?.roleType != roleType.Dispatcher">
       <div class="col-12">

@@ -17,6 +17,7 @@ export class UtilityRix {
 
     opTripBookings: "Trip Bookings",
     opNotifications: "Notifications",
+    opReports: "Reports",
   }
 
   static settingMenuItems: RouteInfo[] = [

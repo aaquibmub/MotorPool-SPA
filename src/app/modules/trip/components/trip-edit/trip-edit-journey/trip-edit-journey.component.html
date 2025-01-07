@@ -67,7 +67,7 @@
     </div>
   </div>
   <!-- Trip Meter Reading -->
-  <div
+  <!-- <div
     class="form-section form-section-border"
     *ngIf="model.tripStatus > tripStatus.OdoMeterAtStart"
   >
@@ -126,7 +126,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Trip Journey -->
   <div
     class="form-section form-section-border"
@@ -187,7 +187,7 @@
         </div>
       </div>
       <!-- ODO Meter at Start -->
-      <div
+      <!-- <div
         class="form-section blue-section"
         *ngIf="model.tripStatus >= tripStatus.TripStarted"
       >
@@ -258,9 +258,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- Journey -->
-      <div *ngIf="model.tripStatus > tripStatus.OdoMeterAtStart">
+      <div *ngIf="model.tripStatus >= tripStatus.TripStarted">
         <div class="form-section blue-section" *ngFor="let item of model.items">
           <div class="section-header">
             {{ item.title | translate }}
@@ -464,7 +464,7 @@
               </div>
             </div>
             <!-- Meter End -->
-            <div
+            <!-- <div
               class="row"
               *ngIf="
                 item.status == tripStatus.OdoMeterAtEnd ||
@@ -509,7 +509,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- Completed -->
             <div class="row" *ngIf="item.status == tripStatus.Completed">
               <div class="col-4">
@@ -559,11 +559,7 @@
               </div>
             </div>
             <!-- Completed/Back to Motorpool -->
-            <div
-              class="row"
-              *ngIf="item.status == tripStatus.BackToMotorPool
-              "
-            >
+            <div class="row" *ngIf="item.status == tripStatus.BackToMotorPool">
               <div class="col-4">
                 <div class="form-group">
                   <div class="label">
@@ -589,8 +585,53 @@
           </div>
         </div>
       </div>
-      <!-- ODO Meter at End -->
+      <!-- Complete Trip -->
       <div
+        class="form-section blue-section"
+        *ngIf="nextStatus == tripStatus.Completed"
+      >
+        <div class="section-header">
+          {{ utilityService.language.complete | translate }}
+        </div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-4">
+              <div class="form-group">
+                <div class="label">
+                  <label for="inputTripStartDate">{{
+                    utilityService.language.dateTime | translate
+                  }}</label>
+                </div>
+                <div class="control">
+                  <kendo-datetimepicker
+                    class="form-control"
+                    id="inputPickupDate"
+                    class="form-control"
+                    [(ngModel)]="completeTripDateTime"
+                  >
+                  </kendo-datetimepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <button
+                  class="btn btn-primary mr-16"
+                  type="button"
+                  (click)="completeTrip()"
+                >
+                  {{ utilityService.language.complete | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ODO Meter at End -->
+      <!-- <div
         class="form-section blue-section"
         *ngIf="
           nextStatus == tripStatus.OdoMeterAtEnd ||
@@ -658,7 +699,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

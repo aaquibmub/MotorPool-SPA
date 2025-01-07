@@ -11,24 +11,36 @@
         <tr>
           <th>{{ utilityService.language.date | translate }}</th>
           <th>{{ utilityService.language.time | translate }}</th>
+          <th>{{ utilityService.language.tripType | translate }}</th>
           <th>{{ utilityService.language.tripId | translate }}</th>
+          <th>{{ utilityService.language.tripDestination | translate }}</th>
           <th>{{ utilityService.language.passanger | translate }}</th>
           <th>{{ utilityService.language.driver | translate }}</th>
           <th>{{ utilityService.language.vehical | translate }}</th>
+          <th>{{ utilityService.language.pickup | translate }}</th>
+          <th>{{ utilityService.language.stop | translate }}</th>
+          <th>{{ utilityService.language.dropoff | translate }}</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of list">
           <td>{{ item.time | dateformat }}</td>
           <td>{{ item.time | dateformat : "HH:mm" }}</td>
+          <td>{{ utilityService.getTripTypeLabel(item.type) }}</td>
           <td>
             <a routerLink="/trips/view/{{ item.id }}/detail">{{
               item.tripId
             }}</a>
           </td>
+          <td>
+            {{ utilityService.getTripDestinationLabel(item.destination) }}
+          </td>
           <td>{{ item.passenger }}</td>
           <td>{{ item.driver }}</td>
           <td>{{ item.vehical }}</td>
+          <td>{{ item.pickups }}</td>
+          <td>{{ item.stops }}</td>
+          <td>{{ item.dropoffs }}</td>
         </tr>
       </tbody>
     </table>

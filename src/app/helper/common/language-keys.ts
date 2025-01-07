@@ -34,6 +34,7 @@ export class LanguageKeys {
   // B.
   bookedBy = "Booked By";
   booking = "Booking";
+  bookingDate = "Booking Date";
   body = "Body";
   busy = "Busy";
 
@@ -46,6 +47,7 @@ export class LanguageKeys {
   colorRequired = "Color is required";
   comments = "Comments";
   completedInspections = "Completed Inspections";
+  complete = "Complete";
   createNewVehical = "Create New Vehicle";
   createNewPass = "Create New Passenger";
   createNewDriver = "Create New Driver";
@@ -68,6 +70,8 @@ export class LanguageKeys {
   dispatch = "Dispatch";
   driverAndTransportation = "Driver & Transportation";
   driver = "Driver";
+  driversCurrentlyActive = "Drivers currently active";
+  dropoff = "Dropoff";
   destination = "Destination";
   destinations = "Destinations";
   dateCreated = "Date Created";
@@ -196,6 +200,7 @@ export class LanguageKeys {
   onDuty = "On-Duty";
   ongoingTrips = "Ongoing Trips";
   ongoing = "Ongoing";
+  onDutyDrivers = "On-Duty Drivers";
   outDQ = "Out DQ";
 
   //P
@@ -205,6 +210,7 @@ export class LanguageKeys {
   passangerName = "Passenger Name";
   passanger1 = "Passenger 1 (The Requester)";
   passangerRequired = "Passenger is required";
+  pickup = "Pickup";
   pickupTime = "Pickup Time";
   pickupTimeRequired = "Pickup time is required";
   pickupDateTime = "Pickup Date & Time";
@@ -251,6 +257,7 @@ export class LanguageKeys {
   save = "Save";
   startingPoint = "StartingPoint";
   startingPointReq = "StartingPoint is required";
+  stop = "Stop";
   systemLog = "System Log";
   scheduleTrips = "Scheduled Trips";
   startingOdoMeterReading = "Starting ODO Meter Reading";

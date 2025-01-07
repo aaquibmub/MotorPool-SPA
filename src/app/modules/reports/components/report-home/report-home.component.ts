@@ -106,66 +106,66 @@ export class ReportHomeComponent implements OnInit {
             isExternalLink: false,
             submenu: []
           },
-          {
-            path: '/reports/trips/milage',
-            title: 'Trips Mileage',
-            icon: 'bx bx-right-arrow-alt',
-            class: '',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            submenu: []
-          },
-          {
-            path: '',
-            title: '',
-            icon: 'bx bx-right-arrow-alt',
-            class: '',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            submenu: []
-          },
-          {
-            path: '/reports/trips/opm-milage-today',
-            title: 'PTC Mileage - Today',
-            icon: 'bx bx-right-arrow-alt',
-            class: '',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            submenu: []
-          },
-          {
-            path: '/reports/trips/opm-milage-current-month',
-            title: 'PTC Mileage - Current Month',
-            icon: 'bx bx-right-arrow-alt',
-            class: '',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            submenu: []
-          },
-          {
-            path: '/reports/trips/saudi-milage-today',
-            title: 'Saudi Mileage - Today',
-            icon: 'bx bx-right-arrow-alt',
-            class: '',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            submenu: []
-          },
-          {
-            path: '/reports/trips/saudi-milage-current-month',
-            title: 'Saudi Mileage - Current Month',
-            icon: 'bx bx-right-arrow-alt',
-            class: '',
-            badge: '',
-            badgeClass: '',
-            isExternalLink: false,
-            submenu: []
-          },
+          // {
+          //   path: '/reports/trips/milage',
+          //   title: 'Trips Mileage',
+          //   icon: 'bx bx-right-arrow-alt',
+          //   class: '',
+          //   badge: '',
+          //   badgeClass: '',
+          //   isExternalLink: false,
+          //   submenu: []
+          // },
+          // {
+          //   path: '',
+          //   title: '',
+          //   icon: 'bx bx-right-arrow-alt',
+          //   class: '',
+          //   badge: '',
+          //   badgeClass: '',
+          //   isExternalLink: false,
+          //   submenu: []
+          // },
+          // {
+          //   path: '/reports/trips/opm-milage-today',
+          //   title: 'PTC Mileage - Today',
+          //   icon: 'bx bx-right-arrow-alt',
+          //   class: '',
+          //   badge: '',
+          //   badgeClass: '',
+          //   isExternalLink: false,
+          //   submenu: []
+          // },
+          // {
+          //   path: '/reports/trips/opm-milage-current-month',
+          //   title: 'PTC Mileage - Current Month',
+          //   icon: 'bx bx-right-arrow-alt',
+          //   class: '',
+          //   badge: '',
+          //   badgeClass: '',
+          //   isExternalLink: false,
+          //   submenu: []
+          // },
+          // {
+          //   path: '/reports/trips/saudi-milage-today',
+          //   title: 'Saudi Mileage - Today',
+          //   icon: 'bx bx-right-arrow-alt',
+          //   class: '',
+          //   badge: '',
+          //   badgeClass: '',
+          //   isExternalLink: false,
+          //   submenu: []
+          // },
+          // {
+          //   path: '/reports/trips/saudi-milage-current-month',
+          //   title: 'Saudi Mileage - Current Month',
+          //   icon: 'bx bx-right-arrow-alt',
+          //   class: '',
+          //   badge: '',
+          //   badgeClass: '',
+          //   isExternalLink: false,
+          //   submenu: []
+          // },
           {
             path: '/reports/trips/driver-sheet',
             title: 'Driver Sheet',

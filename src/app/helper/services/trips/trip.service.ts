@@ -11,7 +11,6 @@ import { TripGridModel } from '../../models/trips/enroute/trip-grid-model';
 import { TripHandoverModel } from '../../models/trips/enroute/trip-handover-model';
 import { TripStatusDetailModel } from '../../models/trips/enroute/trip-status-detail-model';
 import { TripStatusModel } from '../../models/trips/enroute/trip-status-model';
-import { TripVehicleMeterModel } from '../../models/trips/enroute/trip-vehicle-meter-model';
 import { TripDestinationDetailModel } from '../../models/trips/trip-edit/trip-destination-detail-model';
 import { TripInformationModel } from '../../models/trips/trip-edit/trip-information-model';
 import { TripJourneyModel } from '../../models/trips/trip-edit/trip-journey-model';
@@ -198,9 +197,9 @@ export class TripService {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-status', model);
   }
 
-  updateTripVehicleMeter(model: TripVehicleMeterModel): Observable<ResponseModel<string>> {
-    return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-vehical-meter', model);
-  }
+  // updateTripVehicleMeter(model: TripVehicleMeterModel): Observable<ResponseModel<string>> {
+  //   return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-trip-vehical-meter', model);
+  // }
 
   updateTripMeterReading(model: any): Observable<ResponseModel<string>> {
     return this.http.post<ResponseModel<string>>(this.baseUrl + 'update-meter-reading', model);
