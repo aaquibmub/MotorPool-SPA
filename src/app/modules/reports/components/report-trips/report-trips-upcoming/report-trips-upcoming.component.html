@@ -53,8 +53,23 @@
           </ng-template>
         </kendo-grid-column>
         <kendo-grid-column
+          field="createDate"
+          title="Date Created تاريخ الإنشاء"
+          filter="date"
+          [width]="200"
+          [hidden]="isHidden('createDate')"
+        >
+          <ng-template
+            kendoGridCellTemplate
+            let-dataItem
+            let-rowIndex="rowIndex"
+          >
+            {{ dataItem.createDate | dateformat }}
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column
           field="tripDate"
-          title="Date تاريخ"
+          title="Trip Date تاريخ الرحلة"
           filter="date"
           [width]="200"
           [hidden]="isHidden('tripDate')"

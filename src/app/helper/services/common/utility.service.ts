@@ -283,6 +283,10 @@ export class UtilityService {
               row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue);
               break;
             }
+            case 'createDate': {
+              row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue);
+              break;
+            }
             case 'pickupTime': {
               row.cells[columnField.cellIndex].value = this.formatDate(dataItemValue, 'HH:mm');
               break;
