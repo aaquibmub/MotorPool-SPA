@@ -20,6 +20,7 @@
           <th>{{ utilityService.language.pickup | translate }}</th>
           <th>{{ utilityService.language.stop | translate }}</th>
           <th>{{ utilityService.language.dropoff | translate }}</th>
+          <th>{{ utilityService.language.status | translate }}</th>
         </tr>
       </thead>
       <tbody>
@@ -41,6 +42,7 @@
           <td>{{ item.pickups }}</td>
           <td>{{ item.stops }}</td>
           <td>{{ item.dropoffs }}</td>
+          <td>{{ utilityService.getTripStatusLabel(item.status) }}</td>
         </tr>
       </tbody>
     </table>
