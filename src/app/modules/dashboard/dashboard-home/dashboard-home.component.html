@@ -12,6 +12,11 @@
     </div>
     <div class="row pb-24" *ngIf="user?.roleType != roleType.Dashboard">
       <div class="col-12">
+        <app-dashboard-home-pending-trips></app-dashboard-home-pending-trips>
+      </div>
+    </div>
+    <div class="row pb-24" *ngIf="user?.roleType != roleType.Dashboard">
+      <div class="col-12">
         <app-dashboard-home-upcoming-trips></app-dashboard-home-upcoming-trips>
       </div>
     </div>

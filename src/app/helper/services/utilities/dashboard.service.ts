@@ -27,6 +27,10 @@ export class DashboardService {
     return this.http.get<TripDetailCountModel>(
       this.baseUrl + 'get-trip-detail-count-model');
   }
+  getPendingTrips(): Observable<DashboardTripListModel[]> {
+    return this.http.get<DashboardTripListModel[]>(
+      this.baseUrl + 'get-pending-trip-list');
+  }
   getUpcomingTrips(): Observable<DashboardTripListModel[]> {
     return this.http.get<DashboardTripListModel[]>(
       this.baseUrl + 'get-upcoming-trip-list');

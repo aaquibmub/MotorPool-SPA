@@ -256,6 +256,8 @@ export function GetDestinationTypeForDropdownList():
 export enum TripStatus {
   Created = 10,
   AssignedToDriver = 20,
+  AcceptedByDriver = 22,
+  RejectedByDriver = 25,
   TripStarted = 30,
   // OdoMeterAtStart = 35,
   VehicalDispatched = 40,
@@ -288,6 +290,14 @@ export function GetTripStatusForDropdownList():
     {
       value: TripStatus.AssignedToDriver,
       text: 'Assigned To Driver'
+    },
+    {
+      value: TripStatus.AcceptedByDriver,
+      text: 'Accepted By Driver'
+    },
+    {
+      value: TripStatus.RejectedByDriver,
+      text: 'Rejected By Driver'
     },
     {
       value: TripStatus.TripStarted,
